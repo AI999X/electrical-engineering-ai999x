@@ -4,7 +4,7 @@
 
 **[Install](https://pypi.org/project/electrical-engineering-ai999x/)** · **[Capability guide](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.0.2
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.0.3
 
 Field: **Engineering** · Tasks: Question Answering, Token Classification, Text Classification, Sentence Similarity, Feature Extraction
 
@@ -27,7 +27,7 @@ electrical-engineering-ai999x is an offline, deterministic Python solver that an
 
 | Property | Value |
 |---|---|
-| Package | `electrical-engineering-ai999x` 1.0.2 (import `electrical_engineering_ai999x`) |
+| Package | `electrical-engineering-ai999x` 1.0.3 (import `electrical_engineering_ai999x`) |
 | Type | Deterministic neuro-symbolic electrical engineering engine (rule-based reading + certified symbolic capabilities) |
 | Capabilities | 64 certified procedures |
 | Knowledge pack | version 1.0.0 |
@@ -61,7 +61,7 @@ electrical_engineering.ask("Who created you?").message
 # -> electrical-engineering-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-Command line: `electrical-engineering-ai999x "<question>"`, `electrical-engineering-ai999x --capabilities`. The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.0.2.
+Command line: `electrical-engineering-ai999x "<question>"`, `electrical-engineering-ai999x --capabilities`. The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.0.3.
 
 ## Find the right capability, and draw it
 
@@ -216,10 +216,10 @@ _Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R
 ## Citation
 
 ```bibtex
-@software{electrical_engineering_ai999x_1_0_2,
+@software{electrical_engineering_ai999x_1_0_3,
   title  = {electrical-engineering-ai999x: an offline, verified electrical engineering solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.0.2},
+  year   = {2026}, version = {1.0.3},
   url    = {https://huggingface.co/AI999X/electrical-engineering-ai999x}
 }
 ```
