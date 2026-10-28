@@ -4,7 +4,7 @@
 
 **[Install](https://pypi.org/project/electrical-engineering-ai999x/)** · **[Capability guide](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.0.0
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.0.1
 
 Field: **Engineering** · Tasks: Question Answering, Token Classification, Text Classification, Sentence Similarity, Feature Extraction
 
@@ -27,7 +27,7 @@ electrical-engineering-ai999x is an offline, deterministic Python solver that an
 
 | Property | Value |
 |---|---|
-| Package | `electrical-engineering-ai999x` 1.0.0 (import `electrical_engineering_ai999x`) |
+| Package | `electrical-engineering-ai999x` 1.0.1 (import `electrical_engineering_ai999x`) |
 | Type | Deterministic neuro-symbolic electrical engineering engine (rule-based reading + certified symbolic capabilities) |
 | Capabilities | 64 certified procedures |
 | Knowledge pack | version 1.0.0 |
@@ -61,7 +61,18 @@ electrical_engineering.ask("Who created you?").message
 # -> electrical-engineering-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-Command line: `electrical-engineering-ai999x "<question>"`, `electrical-engineering-ai999x --capabilities`. The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.0.0.
+Command line: `electrical-engineering-ai999x "<question>"`, `electrical-engineering-ai999x --capabilities`. The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.0.1.
+
+## Find the right capability, and draw it
+
+`electrical_engineering.search()` finds which certified capability a question is about — across **every** AI999X model, so a question for another model points you to it. It runs **[ai999x-encoder](https://huggingface.co/AI999X/ai999x-encoder)**, AI999X's own capability encoder (4.7M parameters, a 4.9 MB ONNX model, offline; the root `model.safetensors` of this repository): `pip install "electrical-engineering-ai999x[search]"`. `ask(question, suggest=True)` adds the same pointers to a question it does not answer; an answer itself never changes.
+
+```python
+import electrical_engineering_ai999x as electrical_engineering
+
+electrical_engineering.search("Solve x^2 - 5x + 6 = 0", k=2)
+# -> Roots of a quadratic equation (math-foundations-ai999x, 0.63); Roots of a cubic equation (math-foundations-ai999x, 0.59)
+```
 
 ## How every answer is verified
 
@@ -71,6 +82,116 @@ Command line: `electrical-engineering-ai999x "<question>"`, `electrical-engineer
 4. **Checking** — dimensions, substitution back into the defining equation, and agreement between independent readings; any disagreement becomes a refusal, never a number.
 
 Capabilities are certified before they ship: each must reproduce hand-worked reference cases, reject a deliberately wrong variant (a control), and leave every benchmark answer unchanged.
+
+## Worked examples
+
+Each question was put to `electrical-engineering-ai999x`; the answer is the one it returned, with the steps it took.
+
+**Thevenin equivalent of a DC circuit between two nodes** · _DC circuits_
+
+> Find the Thevenin equivalent between nodes 2 and 0 of the circuit: V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+
+→ **Vth = 8 V, Rth = 666.6666667 ohm**
+
+<details><summary>Steps</summary>
+
+- Thevenin equivalent of a DC circuit between two nodes: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000. → Vth = 8 V, Rth = 666.6666667 ohm
+
+</details>
+
+**Gain margin and phase-crossover frequency** · _Control systems_
+
+> Find the gain margin of G(s) = 10/(s(s+1)(s+5)).
+
+→ **gain_margin = 3, gain_margin_db = 9.542425094, phase_crossover = 2.236067977 rad/s**
+
+<details><summary>Steps</summary>
+
+- Gain margin and phase-crossover frequency: num = [10], den = [1, 6, 5, 0] → gain_margin = 3, gain_margin_db = 9.542425094, phase_crossover = 2.236067977 rad/s
+
+</details>
+
+**Minimal sum of products from minterms (with don't-cares)** · _Digital logic_
+
+> Simplify F(A,B,C) = Σm(0, 1, 2, 5, 6, 7).
+
+→ **minimal_sop = A'·B' + A·C + B·C', terms = 3, literals = 6, variables = A, B, C**
+
+<details><summary>Steps</summary>
+
+- Minimal sum of products from minterms (with don't-cares): minterms = [0, 1, 2, 5, 6, 7], variables = 3 → minimal_sop = A'·B' + A·C + B·C', terms = 3, literals = 6, variables = A, B, C
+
+</details>
+
+**Power-factor correction capacitor** · _AC circuits_
+
+> A load draws 10 kW at a power factor of 0.7 from a 230 V, 50 Hz supply. What capacitance corrects the power factor to 0.95?
+
+→ **C = 0.000416101396 F, C_uF = 416.101396, Qc = 6915.19956 W, Q_initial = 10202.04061 W, Q_final = 3286.841052 W**
+
+<details><summary>Steps</summary>
+
+- Power-factor correction capacitor: P = 10000 W, V = 230 V, f = 50 Hz, pf_initial = 0.7, pf_target = 0.95 → C = 0.000416101396 F, C_uF = 416.101396, Qc = 6915.19956 W, Q_initial = 10202.04061 W, Q_final = 3286.841052 W
+
+</details>
+
+**Impedance of a series RLC circuit** · _AC circuits_
+
+`m.solve("series_rlc_impedance", R="100 ohm", L="50 mH", C="10 uF", f="1 kHz")`
+
+→ **impedance = 314.5621512 ohm, phase_deg = 71.46389381, real = 100 ohm, imag = 298.243771 ohm, XL = 314.1592654 ohm, XC = 15.91549431 ohm**
+
+<details><summary>Steps</summary>
+
+- Impedance of a series RLC circuit: R = 100 ohm, L = 50 mH, C = 10 uF, f = 1 kHz → impedance = 314.5621512 ohm, phase_deg = 71.46389381 ohm, real = 100 ohm, imag = 298.243771 ohm, XL = 314.1592654 ohm, XC = 15.91549431 ohm
+
+</details>
+
+**DC operating point of a voltage-divider biased BJT** · _Diodes and transistors_
+
+> A voltage-divider biased BJT has VCC = 12 V, R1 = 10 kohm, R2 = 2.2 kohm, RC = 3.6 kohm, RE = 1 kohm, beta = 100 and VBE = 0.7 V. Find the collector current.
+
+→ **IC = 0.001424015309 A, IC_mA = 1.424015309, IB = 1.424015309e-05 A, IE = 0.001438255462 A, VB = 2.138255462 V, VE = 1.438255462 V, VC = 6.873544889 V, VCE = 5.435289428 V**
+
+<details><summary>Steps</summary>
+
+- DC operating point of a voltage-divider biased BJT: VCC = 12 V, VBE = 0.7 V, R1 = 10000 ohm, R2 = 2200 ohm, RC = 3600 ohm, RE = 1000 ohm, beta = 100 → IC = 0.001424015309 A, IC_mA = 1.424015309, IB = 1.424015309e-05 A, IE = 0.001438255462 A, VB = 2.138255462 V, VE = 1.438255462 V, VC = 6.873544889 V, VCE = 5.435289428 V
+
+</details>
+
+## Figures
+
+Every point was computed by `electrical-engineering-ai999x`.
+
+**Series RLC step response: under-, critically and over-damped**
+
+![Series RLC step response: under-, critically and over-damped — computed by electrical-engineering-ai999x](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/series-rlc-step-response.svg)
+
+_Capacitor voltage of a series RLC circuit switched onto V = 12 V (L = 0.1 H, C = 0.0001 F) for three resistances, 121 instants each computed by the package: R = 10 Ω: ζ = 0.158114, underdamped; R = 63.2456 Ω: ζ = 1, critically damped; R = 150 Ω: ζ = 2.37171, overdamped. Marked: t = 0.005 s, vC = 10.4144 V (R = 10 Ω)._
+
+**Bode magnitude and gain margin of a third-order loop**
+
+![Bode magnitude and gain margin of a third-order loop — computed by electrical-engineering-ai999x](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/bode-point-bode.svg)
+
+_Bode magnitude of G(s) = 10 / (s^3 + 6s^2 + 5s), 101 frequencies from 0.01 to 100 rad/s computed by the package. At the phase crossover ω = 2.23607 rad/s the gain is -9.54243 dB, so the gain margin returned by the package is 9.54243 dB (a factor 3); marked: ω = 2.23607 rad/s, |G| = -9.54243 dB._
+
+**Phasors and their sum on a polar chart**
+
+![Phasors and their sum on a polar chart — computed by electrical-engineering-ai999x](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/phasor-sum-phasor.svg)
+
+_Three phasors 3∠0°, 4∠90° and 2∠210° on a polar chart (each converted to rectangular form by the package; rings every 1 unit of amplitude) and their sum returned by the package: 3.25695 ∠ 67.0887° = 1.26795 + 3j. Marked: the tip of the sum, real = 1.26795, imaginary = 3._
+
+**Power triangle: real, reactive and apparent power**
+
+![Power triangle: real, reactive and apparent power — computed by electrical-engineering-ai999x](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/complex-power-triangle.svg)
+
+_Power triangle of a load with V = 230 V ∠ 0° and I = 10 A ∠ -30°, from the complex power the package returned: real power P = 1991.86 W, reactive power Q = 1150 var (lagging), apparent power S = 2300 VA, power factor 0.866025. Marked: the tip of S._
+
+**Mesh analysis as matrices: resistances, sources, currents**
+
+![Mesh analysis as matrices: resistances, sources, currents — computed by electrical-engineering-ai999x](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/mesh-currents-heatmap.svg)
+
+_Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R (self resistances on the diagonal, shared resistances negative off it) and the loop EMFs E are the stated circuit (R I = E); the mesh currents I are the solution returned by the package: I1 = 0.864914 A, I2 = 0.320943 A, I3 = -0.157752 A (a negative current flows against the assumed direction). Each panel is shaded by its own largest magnitude; negative values in the second colour._
 
 ## Capabilities
 
@@ -95,10 +216,10 @@ Capabilities are certified before they ship: each must reproduce hand-worked ref
 ## Citation
 
 ```bibtex
-@software{electrical_engineering_ai999x_1_0_0,
+@software{electrical_engineering_ai999x_1_0_1,
   title  = {electrical-engineering-ai999x: an offline, verified electrical engineering solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.0.0},
+  year   = {2026}, version = {1.0.1},
   url    = {https://huggingface.co/AI999X/electrical-engineering-ai999x}
 }
 ```
