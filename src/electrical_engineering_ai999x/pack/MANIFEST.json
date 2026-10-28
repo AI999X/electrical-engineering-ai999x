@@ -1,5 +1,5 @@
 {
- "package": "1.0.1",
+ "package": "1.0.2",
  "pack": "1.0.0",
  "knowledge_db": null,
  "files": {
@@ -9,7 +9,7 @@
   "knowledge/reference_cases.json": "7414a14e2c4202a7fae8cdd14e1a2ef7267f35a9665b0633001349c698d4e4e7",
   "capabilities/procedures.py": "20df816ae8e3e7d7cd64f7e4b07023b1e29b597890b7be66e4db43c9bfa17dc5",
   "capabilities/procedures_certified.json": "d3abb5310fc202ef4e0116eab0edbdeeda4566ad2ccefa35b39d3076a8f4dd9b",
-  "electrical_engineering_knowledge_public.sqlite": "373f1d4e55d4dd3b8160cd932efeac412dea4403797cdbeec90067c66dc83f49",
+  "electrical_engineering_knowledge_public.sqlite": "b4c382448403c7db06aab9b970c62c06d30b4cd038cb631ce26144b1fd68a079",
   "search/encoder.int8.onnx": "521452d928a72da4d241b1835ab0f46b0e81ff58ffff0367b9a7029bd129fbd9",
   "search/tokenizer.json": "b2f2deb461e6ad672b8e42aac29773e7a9be77d582cdf58808113ea43fda565e",
   "search/index.json": "d8f81d9706c9a0efa7d9643bcec3d39a6c3500766ce0f44937d85ad90f772507",

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "electrical-engineering-ai999x"
-version = "1.0.1"
+version = "1.0.2"
 description = "Offline electrical engineering solver: DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode), with steps, LaTeX and honest refusals"
 readme = "README.md"
 requires-python = ">=3.10"
