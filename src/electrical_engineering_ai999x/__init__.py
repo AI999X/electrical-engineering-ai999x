@@ -5,6 +5,10 @@
     m.ask("Find the gain margin of G(s) = 10/(s(s+1)(s+5)).").show()
     m.solve("series_rlc_impedance", R="100 ohm", L="50 mH", C="10 uF", f="1 kHz").show()
     m.capabilities()                   # every certified capability
+    m.figures("series_inductance", L="20, 28, 60", unit="mH")   # live figures (SVG), the schematic first
+
+On Windows and Linux (x86_64) the answers and figures come from the model's Rust engine, the one the website and the
+desktop app run (m.engine() == "rust"); elsewhere the same package computes with its Python engine.
 
 Covers DC circuits (series/parallel combinations, dividers, mesh and nodal analysis, netlists, Thevenin/Norton,
 bridges, delta-wye), AC circuits (impedance, phasors, complex power, power-factor correction, three-phase loads,
@@ -29,14 +33,15 @@ except ImportError:                        # the factory's source tree, during d
     from ai999x_factory.runtime import Answer
     from ai999x_factory.runtime.product import Product
 
-__version__ = "1.0.3"
+__version__ = "1.1.0"
 _P = Product("electrical_engineering", [Path(__file__).resolve().parent / "pack", Path(__file__).resolve().parents[3]])
 pack, ask, solve, compile_problem = _P.pack, _P.ask, _P.solve, _P.compile_problem
 formula, formulas, quantities, conditions, capabilities = _P.formula, _P.formulas, _P.quantities, _P.conditions, _P.capabilities
 examples, family_examples, structured_example, to_si = _P.examples, _P.family_examples, _P.structured_example, _P.to_si
 templates, procedure_examples = _P.templates, _P.procedure_examples
-prove, derivations, about = _P.prove, _P.derivations, (lambda: {**_P.about(), "version": __version__})
+prove, derivations, about = _P.prove, _P.derivations, (lambda: {**_P.about(), "version": __version__, "engine": _P.engine()})
 knowledge, lookup, related = _P.knowledge, _P.lookup, _P.related
 plot, plot_relation, search = _P.plot, _P.plot_relation, _P.search   # figures (SVG) and capability search ([search])
+figures, engine = _P.figures, _P.engine   # live figures and the engine in use: the Rust engine on Windows/Linux x86_64
 __all__ = ["ask", "solve", "prove", "derivations", "about", "formula", "formulas", "quantities", "conditions", "capabilities",
-           "compile_problem", "pack", "Answer", "plot", "plot_relation", "search", "__version__"]
+           "compile_problem", "pack", "Answer", "plot", "plot_relation", "search", "figures", "engine", "__version__"]

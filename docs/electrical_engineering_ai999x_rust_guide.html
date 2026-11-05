@@ -1,0 +1,1176 @@
+<!doctype html><html><head><meta charset="utf-8"><title>electrical-engineering — user guide (Rust build)</title>
+<script>window.MathJax={tex:{inlineMath:[['$','$']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js"></script>
+<style>
+@page{size:A4;margin:16mm 15mm}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:10.5pt;line-height:1.45;color:#1b1f24;max-width:880px;margin:auto}
+h1{font-size:22pt;border-bottom:2px solid #2b5c8a;padding-bottom:4px;margin-top:28px;page-break-before:always}
+h1:first-of-type{page-break-before:avoid}
+h2{font-size:15pt;color:#2b5c8a;margin-top:22px;page-break-after:avoid}
+h3{font-size:12pt;margin-top:16px;page-break-after:avoid}
+pre{background:#f4f6f8;border:1px solid #dde3e8;border-radius:4px;padding:8px 10px;font-size:8.8pt;white-space:pre-wrap;page-break-inside:avoid}
+code{font-family:Consolas,monospace;font-size:9pt;background:#f4f6f8;padding:0 2px}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;margin:8px 0;font-size:9pt;width:100%;page-break-inside:auto}
+th,td{border:1px solid #cfd6dd;padding:3px 6px;vertical-align:top;text-align:left}
+th{background:#eaf0f5}
+.math{margin:6px 0;overflow-x:auto}
+.badge{display:inline-block;color:#fff;border-radius:3px;padding:0 5px;font-size:8.5pt;white-space:nowrap}
+figure{margin:10px 0;text-align:center;page-break-inside:avoid}figure img{max-width:88%}.svgfig svg{max-width:88%;height:auto}
+figcaption{font-size:9pt;color:#555}
+.pb{page-break-after:always}
+</style></head><body>
+<h1>electrical-engineering: the Electrical Engineering program — user guide</h1>
+<p><strong>electrical-engineering-ai999x 1.0.3</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
+<p>Electrical Engineering covers DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode). This guide is about <code>electrical-engineering</code>, the model as a self-contained program for Windows and Linux: 64 capabilities in 7 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model&#x27;s page (https://www.ai999x.com/models/electrical-engineering-ai999x/); the Python package (<code>pip install electrical-engineering-ai999x</code>) has its own guide. Every command output printed here is what the program printed.</p>
+<h2>Contents</h2>
+<ul><li>1. Get it: desktop app, command line, browser, Python</li><li>2. Quick start</li><li>3. Writing inputs</li><li>4. Outcomes and exit codes</li><li>5. Scripts and agents: batch and JSON</li><li>6. Figures</li><li>7. In a web page or Node.js: WebAssembly</li><li>8. Every capability</li></ul>
+<h2>1. Get it</h2>
+<p>Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS; the newest version is always under https://www.ai999x.com/downloads/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
+<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Electrical Engineering</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Electrical Engineering</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz</td></tr></tbody></table>
+<h3>Desktop app</h3>
+<p>Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
+<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
+curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+sha256sum -c --ignore-missing SHA256SUMS
+tar xzf ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
+./ai999x-electrical-engineering-1.4.0-linux-x86_64/ai999x-electrical-engineering</code></pre>
+<p>It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
+<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
+curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+sha256sum -c --ignore-missing SHA256SUMS
+tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
+./ai999x-1.4.0-linux-x86_64/ai999x</code></pre>
+<h3>Command line — Linux</h3>
+<p>The bundle holds one program per model; <code>electrical-engineering</code> is this one. The checksum line should print OK.</p>
+<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+sha256sum -c --ignore-missing SHA256SUMS
+mkdir -p ~/.local/share &amp;&amp; tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
+echo &#x27;export PATH=&quot;$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
+electrical-engineering --version</code></pre>
+<h3>Command line — Windows (PowerShell)</h3>
+<p>The fourth line should print True.</p>
+<pre><code class="powershell">$F = &quot;ai999x-cli-1.4.0-windows-x86_64.zip&quot;
+Invoke-WebRequest &quot;https://www.ai999x.com/downloads/desktop/1.4.0/$F&quot; -OutFile $F
+Invoke-WebRequest &quot;https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS&quot; -OutFile SHA256SUMS
+(Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split &#x27; &#x27;)[0]
+Expand-Archive $F -DestinationPath &quot;$env:LOCALAPPDATA\AI999X&quot; -Force
+$D = &quot;$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64&quot;; $env:Path += &quot;;$D&quot;
+[Environment]::SetEnvironmentVariable(&quot;Path&quot;, [Environment]::GetEnvironmentVariable(&quot;Path&quot;, &quot;User&quot;) + &quot;;$D&quot;, &quot;User&quot;)
+electrical-engineering --version</code></pre>
+<h3>In your browser</h3>
+<p>Open https://www.ai999x.com/models/electrical-engineering-ai999x/, choose a capability and press Compute in your browser: the same program runs on your device as WebAssembly; nothing is sent anywhere.</p>
+<h3>Python</h3>
+<pre><code class="shell">pip install electrical-engineering-ai999x</code></pre>
+<h2>2. Quick start</h2>
+<h3>2.1 Check the install</h3>
+<p>Prints the model, its version and that this is the Rust build.</p>
+<pre><code class="shell">$ electrical-engineering --version
+electrical-engineering-ai999x 1.0.3 (Rust build, ax-engine 0.1.0)</code></pre>
+<h3>2.2 Ask in words</h3>
+<p>Write the question as you would say it: the program reads the quantities and their units, picks the capability and answers.</p>
+<pre><code class="shell">$ electrical-engineering ask &quot;Find the Thevenin equivalent between nodes 2 and 0 of the circuit: V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;
+Read as: Thevenin equivalent of a DC circuit between two nodes
+Vth = 8 V
+Rth = 666.6666667 ohm
+  by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
+  node_a = 2
+  node_b = 0
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)</code></pre>
+<h3>2.3 Find a capability</h3>
+<p>Search the capabilities by what you want to know; the first column is the id to pass to info and solve.</p>
+<pre><code class="shell">$ electrical-engineering search &quot;thevenin equivalent of a dc circuit between two nodes&quot;
+thevenin_equivalent                  Thevenin equivalent of a DC circuit between two nodes  (DC circuits / Thevenin and Norton equivalents)
+norton_equivalent                    Norton equivalent of a DC circuit between two nodes  (DC circuits / Thevenin and Norton equivalents)
+dc_node_voltages                     Node voltages of a DC resistive circuit from its netlist  (DC circuits / mesh and nodal analysis)
+boolean_equivalence                  Equivalence of two Boolean expressions  (digital logic / Boolean algebra)
+nodal_voltages                       Node voltages from the nodal equations (Kirchhoff&#x27;s current law)  (DC circuits / mesh and nodal analysis)
+max_power_transfer                   Maximum power transfer  (DC circuits / Thevenin and Norton equivalents)
+series_resistance                    Equivalent resistance of resistors in series  (DC circuits / series and parallel combinations)
+parallel_resistance                  Equivalent resistance of resistors in parallel  (DC circuits / series and parallel combinations)
+… 12 more</code></pre>
+<h3>2.4 List the capabilities</h3>
+<p>Every capability the program answers: its id (what you pass to solve) and its name.</p>
+<pre><code class="shell">$ electrical-engineering list
+adc_conversion                           Analog-to-digital conversion: output code and resolution
+base_conversion                          Number base conversion (binary, octal, decimal, hexadecimal)
+bjt_divider_bias                         DC operating point of a voltage-divider biased BJT
+bode_point                               Frequency response (Bode magnitude and phase) at one frequency
+boolean_equivalence                      Equivalence of two Boolean expressions
+boolean_evaluate                         Evaluate a Boolean expression
+closed_loop_poles                        Closed-loop poles with unity negative feedback
+complex_power                            Complex, real, reactive and apparent power from voltage and current phasors
+… 56 more</code></pre>
+<h3>2.5 What a capability needs</h3>
+<p>The equation or method, every input and output with its SI unit. Read this before solve: it tells you the input names.</p>
+<pre><code class="shell">$ electrical-engineering info thevenin_equivalent
+Thevenin equivalent of a DC circuit between two nodes
+  open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero
+  in   netlist  elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;volts&gt;, I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;amperes&gt;; node 0 is ground (text) []
+  in   node_a   the terminal node (the + side of the equivalent) (text) []
+  in   node_b   the reference terminal node (text) []
+  out  Vth      Thevenin (open-circuit) voltage, node a relative to node b [V]
+  out  Rth      Thevenin resistance [ohm]</code></pre>
+<h3>2.6 Solve</h3>
+<p>Inputs as name=value, each with any unit of the right kind. The answer lists every output, the method used, each input converted to SI, and the conditions the answer assumes.</p>
+<pre><code class="shell">$ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;
+Vth = 8 V
+Rth = 666.6666667 ohm
+  by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  node_a = 2
+  node_b = 0
+  assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)</code></pre>
+<h3>2.7 Machine-readable answer</h3>
+<p>--json prints the same answer as one line of JSON (values in SI): for scripts and other programs.</p>
+<pre><code class="shell">$ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot; --json
+{&quot;outcome&quot;:&quot;SOLVED&quot;,&quot;message&quot;:&quot;&quot;,&quot;value&quot;:8.0,&quot;unit&quot;:&quot;V&quot;,&quot;solved_for&quot;:&quot;Vth&quot;,&quot;values&quot;:[[&quot;Vth&quot;,8.0,&quot;V&quot;],[&quot;Rth&quot;,666.6666666666666,&quot;ohm&quot;]],&quot;target&quot;:&quot;Vth&quot;,&quot;phrase&quot;:&quot;Thevenin (open-circuit) voltage, node a relative to node b&quot;,&quot;assumptions&quot;:[&quot;both nodes in the circuit&quot;,&quot;no ideal voltage source directly across the terminals&quot;,&quot;a unique solution (no floating node)&quot;],&quot;name&quot;:&quot;Thevenin equivalent of a DC circuit between two nodes&quot;,&quot;equation&quot;:&quot;open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero&quot;}</code></pre>
+<h3>2.8 When an input is missing</h3>
+<p>No number is guessed: the answer names what is missing, shows a complete call, and the program exits with status 1.</p>
+<pre><code class="shell">$ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0
+NEEDS_INPUT: thevenin_equivalent needs netlist (elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;volts&gt;, I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;amperes&gt;; node 0 is ground). Example: solve(&#x27;thevenin_equivalent&#x27;, netlist=&#x27;V1 1 0 12; R1 1 2 1000; R2 2 0 2000&#x27;, node_a=&#x27;2&#x27;, node_b=&#x27;0&#x27;).</code></pre>
+<h3>2.9 Draw the figures</h3>
+<p>The live figures for your own inputs, written as SVG files into the folder given with --out (here the current folder); open them in any browser. Without --out the SVG text comes back as JSON.</p>
+<pre><code class="shell">$ electrical-engineering figures thevenin_equivalent node_a=2 node_b=0 &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot; --out .
+[
+  {
+    &quot;slug&quot;: &quot;thevenin-equivalent-schematic&quot;,
+    &quot;title&quot;: &quot;Thévenin equivalent between the two nodes&quot;,
+    &quot;caption&quot;: &quot;The Thévenin equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a source Vth = 8 V in series with Rth = 666.7 Ω. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....&quot;,
+    &quot;file&quot;: &quot;.\\thevenin-equivalent-schematic.svg&quot;
+  },
+  {
+    &quot;slug&quot;: &quot;thevenin-equivalent-live-1&quot;,
+    &quot;title&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number 0 in node_b (0) varies&quot;,
+    &quot;caption&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number in node_b runs from 0 to 1, every other input as you entered it (2 solutions). Marked: your the number in node_b = 0 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....&quot;,
+    &quot;file&quot;: &quot;.\\thevenin-equivalent-live-1.svg&quot;
+  },
+  {
+    &quot;slug&quot;: &quot;thevenin-equivalent-live-2&quot;,
+    &quot;title&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number 1 in netlist (V1 1 0 12; R1 1 2 100...) varies&quot;,
+    &quot;caption&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number in netlist runs from 1 to 5, every other input as you entered it (4 solutions). Values in this range where the inputs admit no answer (1 of 5) are left out. Marked: your the number in netlist = 1 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....&quot;,
+    &quot;file&quot;: &quot;.\\thevenin-equivalent-live-2.svg&quot;
+  }
+]</code></pre>
+<h3>2.10 Many questions at once</h3>
+<p>One JSON request per line in, one JSON answer per line out, in order: for scripts, notebooks and agents (the program starts once). In PowerShell: Get-Content cases.jsonl | electrical-engineering batch</p>
+<p><code>cases.jsonl</code>:</p>
+<pre><code class="json">{&quot;key&quot;: &quot;thevenin_equivalent&quot;, &quot;inputs&quot;: {&quot;node_a&quot;: &quot;2&quot;, &quot;node_b&quot;: &quot;0&quot;, &quot;netlist&quot;: &quot;V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;}}
+{&quot;key&quot;: &quot;gain_margin&quot;, &quot;inputs&quot;: {&quot;num&quot;: &quot;[10]&quot;, &quot;den&quot;: &quot;[1, 6, 5, 0]&quot;}}</code></pre>
+<pre><code class="shell">$ electrical-engineering batch &lt; cases.jsonl
+{&quot;outcome&quot;:&quot;SOLVED&quot;,&quot;message&quot;:&quot;&quot;,&quot;value&quot;:8.0,&quot;unit&quot;:&quot;V&quot;,&quot;solved_for&quot;:&quot;Vth&quot;,&quot;values&quot;:[[&quot;Vth&quot;,8.0,&quot;V&quot;],[&quot;Rth&quot;,666.6666666666666,&quot;ohm&quot;]],&quot;target&quot;:&quot;Vth&quot;,&quot;phrase&quot;:&quot;Thevenin (open-circuit) voltage, node a relative to node b&quot;,&quot;assumptions&quot;:[&quot;both nodes in the circuit&quot;,&quot;no ideal voltage source directly across the terminals&quot;,&quot;a unique solution (no floating node)&quot;],&quot;name&quot;:&quot;Thevenin equivalent of a DC circuit between two nodes&quot;,&quot;equation&quot;:&quot;open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero&quot;}
+{&quot;outcome&quot;:&quot;SOLVED&quot;,&quot;message&quot;:&quot;&quot;,&quot;value&quot;:3.0,&quot;unit&quot;:&quot;&quot;,&quot;solved_for&quot;:&quot;gain_margin&quot;,&quot;values&quot;:[[&quot;gain_margin&quot;,3.0,&quot;&quot;],[&quot;gain_margin_db&quot;,9.542425094393248,&quot;&quot;],[&quot;phase_crossover&quot;,2.23606797749979,&quot;rad/s&quot;]],&quot;target&quot;:&quot;gain_margin&quot;,&quot;phrase&quot;:&quot;gain margin as a ratio&quot;,&quot;assumptions&quot;:[&quot;a proper G(s)&quot;,&quot;exactly one phase crossover with G negative real&quot;],&quot;name&quot;:&quot;Gain margin and phase-crossover frequency&quot;,&quot;equation&quot;:&quot;the phase crossover as the positive real root of Im(N(jw) conj D(jw)) with Re G &lt; 0 (Aberth iteration, Newton-polished)&quot;}</code></pre>
+<h2>3. Writing inputs</h2>
+<p>Inputs are written <code>name=value</code>, one per argument; <code>electrical-engineering info &lt;capability&gt;</code> lists the names. Quote an argument that holds a space or brackets (bash, zsh and PowerShell all accept double quotes). The answer always states each input as it was read, converted to SI, so a misread unit is visible at once.</p>
+<table><thead><tr><th>kind</th><th>example</th><th>how it is read</th></tr></thead><tbody><tr><td>a number with a unit</td><td><code>&quot;R=0.128 nm&quot;</code></td><td>any unit of the same kind; converted to SI</td></tr><tr><td>a number in SI</td><td><code>R=1.28e-10</code></td><td>no unit means the SI unit shown by info</td></tr><tr><td>a choice</td><td><code>structure=FCC</code></td><td>one of the values info lists</td></tr><tr><td>a list or vector</td><td><code>&quot;v=[1, 2, 3]&quot; or &quot;v=1, 2, 3&quot;</code></td><td>brackets keep it a list</td></tr><tr><td>a matrix</td><td><code>&quot;A=[[1, 2], [3, 4]]&quot;</code></td><td>one list per row</td></tr><tr><td>true / false</td><td><code>inclusive=true</code></td><td>for yes/no options</td></tr></tbody></table>
+<p>An equation can be solved for any of its quantities: give the others and add <code>--target &lt;symbol&gt;</code>. Without <code>--target</code>, the program solves for the quantity the capability is named after.</p>
+<h2>4. Outcomes and exit codes</h2>
+<p>The program never guesses a number: when it cannot answer, it says why and exits with status 1, so a script can tell an answer from a refusal without reading the text.</p>
+<table><thead><tr><th>outcome</th><th>meaning</th><th>exit status</th></tr></thead><tbody><tr><td>SOLVED</td><td>the answer: every output with its unit, the method, the inputs in SI, the conditions assumed</td><td>0</td></tr><tr><td>NEEDS_INPUT</td><td>an input is missing; the message names it and shows a complete call</td><td>1</td></tr><tr><td>INVALID_INPUT</td><td>a value or unit of the wrong kind, an unknown input name, or a value outside the conditions</td><td>1</td></tr><tr><td>AMBIGUOUS</td><td>the inputs allow two different answers; say which one is meant</td><td>1</td></tr><tr><td>OUT_OF_SCOPE</td><td>the model has no capability for this, or the result would not be meaningful</td><td>1</td></tr><tr><td>(usage)</td><td>a command the program does not know: it prints its usage</td><td>2</td></tr></tbody></table>
+<h2>5. Scripts and agents: batch and JSON</h2>
+<p><code>electrical-engineering solve ... --json</code> prints one answer as one line of JSON. <code>electrical-engineering batch</code> reads one request per line on standard input and writes one JSON answer per line, in order, starting the program once for any number of requests. A request is <code>{&quot;key&quot;: &quot;&lt;capability&gt;&quot;, &quot;inputs&quot;: {&quot;name&quot;: &quot;value&quot;, ...}, &quot;target&quot;: null}</code>. In PowerShell, pipe the file in: <code>Get-Content cases.jsonl | electrical-engineering batch</code>. <code>electrical-engineering catalog</code> prints every capability with its inputs as JSON, to build forms or tool definitions.</p>
+<table><thead><tr><th>answer field</th><th>meaning</th></tr></thead><tbody><tr><td>outcome</td><td>one of the outcomes above</td></tr><tr><td>message</td><td>why there is no answer (empty when SOLVED)</td></tr><tr><td>value, unit</td><td>the main result in SI units</td></tr><tr><td>values</td><td>every output: [symbol, value, unit] (procedures)</td></tr><tr><td>target</td><td>the quantity solved for</td></tr><tr><td>si</td><td>each numeric input converted to SI: [symbol, value]</td></tr><tr><td>assumptions</td><td>the conditions the answer relies on</td></tr><tr><td>name, equation</td><td>the capability and its equation or method</td></tr></tbody></table>
+<pre><code class="python">import json, subprocess
+
+reqs = [{&quot;key&quot;: &quot;&lt;capability&gt;&quot;, &quot;inputs&quot;: {&quot;name&quot;: &quot;value&quot;}}]
+out = subprocess.run([&quot;electrical-engineering&quot;, &quot;batch&quot;], input=&quot;\n&quot;.join(map(json.dumps, reqs)),
+                     capture_output=True, text=True, check=True).stdout
+answers = [json.loads(line) for line in out.splitlines()]</code></pre>
+<h2>6. Figures</h2>
+<p><code>electrical-engineering figures &lt;capability&gt; name=value ... --out DIR</code> draws the live figures for those inputs and writes each as an SVG file into DIR (an existing folder); without <code>--out</code> the SVG text comes back as JSON. The desktop app and the model page draw the same figures as soon as you press Compute.</p>
+<pre><code class="shell">$ electrical-engineering figures thevenin_equivalent node_a=2 node_b=0 &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot; --out .
+[
+  {
+    &quot;slug&quot;: &quot;thevenin-equivalent-schematic&quot;,
+    &quot;title&quot;: &quot;Thévenin equivalent between the two nodes&quot;,
+    &quot;caption&quot;: &quot;The Thévenin equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a source Vth = 8 V in series with Rth = 666.7 Ω. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....&quot;,
+    &quot;file&quot;: &quot;.\\thevenin-equivalent-schematic.svg&quot;
+  },
+  {
+    &quot;slug&quot;: &quot;thevenin-equivalent-live-1&quot;,
+    &quot;title&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number 0 in node_b (0) varies&quot;,
+    &quot;caption&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number in node_b runs from 0 to 1, every other input as you entered it (2 solutions). Marked: your the number in node_b = 0 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....&quot;,
+    &quot;file&quot;: &quot;.\\thevenin-equivalent-live-1.svg&quot;
+  },
+  {
+    &quot;slug&quot;: &quot;thevenin-equivalent-live-2&quot;,
+    &quot;title&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number 1 in netlist (V1 1 0 12; R1 1 2 100...) varies&quot;,
+    &quot;caption&quot;: &quot;Thevenin (open-circuit) voltage, node a relat... as the number in netlist runs from 1 to 5, every other input as you entered it (4 solutions). Values in this range where the inputs admit no answer (1 of 5) are left out. Marked: your the number in netlist = 1 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....&quot;,
+    &quot;file&quot;: &quot;.\\thevenin-equivalent-live-2.svg&quot;
+  }
+]</code></pre>
+<h2>7. In a web page or Node.js: WebAssembly</h2>
+<p>The same model is a WebAssembly module, <code>electrical_engineering_ai999x.wasm</code> (https://www.ai999x.com/compute/rust/electrical_engineering_ai999x.wasm), with a small loader, <code>ax-wasm.js</code> (https://www.ai999x.com/compute/rust/ax-wasm.js). It runs in a browser, a Web Worker or Node.js, with no server.</p>
+<pre><code class="html">&lt;script src=&quot;ax-wasm.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  AXWasm.load(&quot;electrical_engineering_ai999x.wasm&quot;).then(function (m) {
+    var a = m.solve({key: &quot;&lt;capability&gt;&quot;, inputs: {name: &quot;value&quot;}});
+    console.log(a.outcome, a.values || a.value);
+    console.log(m.catalog().capabilities.length + &quot; capabilities&quot;);
+  });
+&lt;/script&gt;</code></pre>
+<h2>8. Every capability</h2>
+<p>By topic. For each: what it does, what it needs and gives, when it applies, and a command with what the program printed for it. <code>electrical-engineering info &lt;id&gt;</code> shows the same inputs and outputs in the terminal.</p>
+<h3>AC circuits (14)</h3>
+<h4 id="three_phase_load">Balanced three-phase load (wye or delta) — <code>three_phase_load</code></h4>
+<p>Phase voltage, phase and line currents, real, reactive and apparent power and the power factor of a balanced load with impedance R + jX per phase.</p>
+<div class="math">\[P = \sqrt{3}\,V_L I_L \cos\phi\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>VL</code></td><td>in</td><td>rms line-to-line voltage</td><td>V</td></tr><tr><td><code>R</code></td><td>in</td><td>resistance per phase</td><td>ohm</td></tr><tr><td><code>X</code></td><td>in</td><td>reactance per phase (positive inductive, negative capacitive)</td><td>ohm</td></tr><tr><td><code>connection</code></td><td>in</td><td>load connection</td><td>—</td></tr><tr><td><code>phase_voltage</code></td><td>out</td><td>voltage across each phase of the load</td><td>V</td></tr><tr><td><code>phase_current</code></td><td>out</td><td>current in each phase of the load</td><td>A</td></tr><tr><td><code>line_current</code></td><td>out</td><td>current in each line</td><td>A</td></tr><tr><td><code>P</code></td><td>out</td><td>total real power in W</td><td>W</td></tr><tr><td><code>Q</code></td><td>out</td><td>total reactive power in var</td><td>W</td></tr><tr><td><code>S</code></td><td>out</td><td>total apparent power in VA</td><td>W</td></tr><tr><td><code>power_factor</code></td><td>out</td><td>power factor R/|Z|</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> balanced load and supply; R &gt;= 0.</p>
+<pre><code class="shell">$ electrical-engineering solve three_phase_load connection=wye &quot;VL=400 V&quot; &quot;R=8 ohm&quot; &quot;X=6 ohm&quot;
+phase_voltage = 230.9401077 V
+phase_current = 23.09401077 A
+line_current = 23.09401077 A
+P = 12800 W
+Q = 9600 W
+S = 16000 W
+power_factor = 0.8
+  by: Balanced three-phase load (wye or delta)  (wye: V_ph = V_L/sqrt(3), I_L = I_ph; delta: V_ph = V_L, I_L = sqrt(3) I_ph; P = 3 I_ph^2 R)
+  VL = 400 V
+  R = 8 ohm
+  X = 6 ohm
+  connection = wye
+  assumes: balanced load and supply; R &gt;= 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the electrical characteristics of a balanced three-phase load connected in a wye configuration. Using a line-to-line voltage of 400 V and per-phase impedance defined by resistance 8 ohm and reactance 6 ohm, it computes the phase voltage as 230.94 V, phase current as 23.094 A, and line current as 23.094 A. The resulting total real power is 12800 W, reactive power is 9600 W, apparent power is 16000 W, and the power factor is 0.8. These values indicate how much useful work is performed versus how much energy oscillates between source and load.</p>
+<h4 id="complex_power">Complex, real, reactive and apparent power from voltage and current phasors — <code>complex_power</code></h4>
+<p>S = V I* for rms phasors: real power P, reactive power Q, apparent power |S|, the power factor and whether it lags or leads.</p>
+<div class="math">\[S = V I^* = P + jQ,\quad \mathrm{pf} = \frac{P}{|S|}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>rms voltage magnitude</td><td>V</td></tr><tr><td><code>V_phase</code></td><td>in</td><td>voltage phase angle in degrees</td><td>—</td></tr><tr><td><code>I</code></td><td>in</td><td>rms current magnitude</td><td>A</td></tr><tr><td><code>I_phase</code></td><td>in</td><td>current phase angle in degrees</td><td>—</td></tr><tr><td><code>P</code></td><td>out</td><td>real (active) power in W</td><td>W</td></tr><tr><td><code>Q</code></td><td>out</td><td>reactive power in var (positive: inductive)</td><td>W</td></tr><tr><td><code>S</code></td><td>out</td><td>apparent power in VA</td><td>W</td></tr><tr><td><code>power_factor</code></td><td>out</td><td>power factor P/|S|</td><td>—</td></tr><tr><td><code>nature</code></td><td>out</td><td>lagging (inductive), leading (capacitive) or unity</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> rms phasors; sinusoidal steady state.</p>
+<pre><code class="shell">$ electrical-engineering solve complex_power &quot;V=230 V&quot; V_phase=0 &quot;I=10 A&quot; I_phase=-30
+P = 1991.858429 W
+Q = 1150 W
+S = 2300 W
+power_factor = 0.8660254038
+nature = lagging
+  by: Complex, real, reactive and apparent power from voltage and current phasors  (S = V I* (complex conjugate of the current))
+  V = 230 V
+  V_phase = 0
+  I = 10 A
+  I_phase = -30
+  assumes: rms phasors; sinusoidal steady state</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the total electrical power flow using voltage and current phasors. Multiplying the voltage phasor by the conjugate of the current phasor gives the complex power 2300 W. The real component represents active power 1991.86 W, which performs useful work, while the imaginary component indicates reactive power 1150 W, associated with energy storage in magnetic or electric fields. The ratio of active to apparent power defines the power factor 0.866025, indicating how efficiently the circuit utilizes the supplied energy.</p>
+<h4 id="inductor_energy">Energy stored in an inductor — <code>inductor_energy</code></h4>
+<p>The magnetic energy L I^2/2 and the flux linkage L I of an inductor carrying current I.</p>
+<div class="math">\[W = \tfrac{1}{2}LI^2\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>L</code></td><td>in</td><td>inductance</td><td>H</td></tr><tr><td><code>I</code></td><td>in</td><td>current</td><td>A</td></tr><tr><td><code>energy</code></td><td>out</td><td>stored energy</td><td>J</td></tr><tr><td><code>flux_linkage</code></td><td>out</td><td>flux linkage L I in weber-turns</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a linear inductor (no saturation).</p>
+<pre><code class="shell">$ electrical-engineering solve inductor_energy &quot;L=0.05 H&quot; &quot;I=2 A&quot;
+energy = 0.1 J
+flux_linkage = 0.1
+  by: Energy stored in an inductor  (W = L I^2 / 2)
+  L = 0.05 H
+  I = 2 A
+  assumes: a linear inductor (no saturation)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the magnetic energy stored in an inductor and its flux linkage based on the given inductance of 0.05 H and current of 2 A. The resulting energy of 0.1 J represents the work done to establish the magnetic field, while the flux linkage of 0.1 indicates the total magnetic flux coupled with the coil turns. These values are critical for analyzing circuit transients and power conversion efficiency.</p>
+<h4 id="rc_filter">First-order RC filter: cutoff, gain and phase — <code>rc_filter</code></h4>
+<p>The cutoff frequency 1/(2 pi R C) of an RC low-pass or high-pass filter and its gain (ratio and dB) and phase at a frequency.</p>
+<div class="math">\[f_c = \frac{1}{2\pi RC},\quad H_{LP} = \frac{1}{1 + j f/f_c}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>f</code></td><td>in</td><td>signal frequency</td><td>Hz</td></tr><tr><td><code>filter</code></td><td>in</td><td>first-order low-pass or high-pass</td><td>—</td></tr><tr><td><code>fc</code></td><td>out</td><td>cutoff (-3 dB) frequency</td><td>Hz</td></tr><tr><td><code>gain</code></td><td>out</td><td>|Vout/Vin| at f</td><td>—</td></tr><tr><td><code>gain_db</code></td><td>out</td><td>gain in decibels</td><td>—</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase of Vout relative to Vin, degrees</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> unloaded output; R, C, f &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve rc_filter &quot;R=1000 ohm&quot; &quot;C=1e-07 F&quot; &quot;f=2000 Hz&quot; filter=lowpass
+fc = 1591.549431 Hz
+gain = 0.6226769923
+gain_db = -4.11474362
+phase_deg = -51.48811275
+  by: First-order RC filter: cutoff, gain and phase  (H = 1/(1 + j f/fc) (low-pass) or (j f/fc)/(1 + j f/fc) (high-pass))
+  R = 1000 ohm
+  C = 1e-07 F
+  f = 2000 Hz
+  filter = lowpass
+  assumes: unloaded output; R, C, f &gt; 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the cutoff frequency, magnitude gain, decibel gain, and phase shift for a first-order RC filter. Using resistance 1000 ohm, capacitance 1e-07 F, and signal frequency 2000 Hz, it finds that the cutoff frequency is 1591.55 Hz. The resulting voltage gain ratio is 0.622677, which corresponds to -4.11474 in decibels, with a phase shift of -51.4881 degrees between output and input.</p>
+<h4 id="transformer">Ideal transformer: voltages, currents and reflected resistance — <code>transformer</code></h4>
+<p>Secondary voltage and current, primary current and the load resistance seen from the primary for an ideal transformer with a resistive load.</p>
+<div class="math">\[\frac{V_s}{V_p} = \frac{N_s}{N_p},\quad R_{in} = R_L\left(\frac{N_p}{N_s}\right)^2\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Np</code></td><td>in</td><td>primary turns</td><td>—</td></tr><tr><td><code>Ns</code></td><td>in</td><td>secondary turns</td><td>—</td></tr><tr><td><code>Vp</code></td><td>in</td><td>primary (rms) voltage</td><td>V</td></tr><tr><td><code>RL</code></td><td>in</td><td>load resistance on the secondary</td><td>ohm</td></tr><tr><td><code>Vs</code></td><td>out</td><td>secondary voltage</td><td>V</td></tr><tr><td><code>Is</code></td><td>out</td><td>secondary (load) current</td><td>A</td></tr><tr><td><code>Ip</code></td><td>out</td><td>primary current</td><td>A</td></tr><tr><td><code>Rin</code></td><td>out</td><td>load resistance reflected to the primary</td><td>ohm</td></tr><tr><td><code>turns_ratio</code></td><td>out</td><td>Np/Ns</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal transformer (no losses, no magnetizing current).</p>
+<pre><code class="shell">$ electrical-engineering solve transformer Np=500 Ns=50 &quot;Vp=230 V&quot; &quot;RL=10 ohm&quot;
+Vs = 23 V
+Is = 2.3 A
+Ip = 0.23 A
+Rin = 1000 ohm
+turns_ratio = 10
+  by: Ideal transformer: voltages, currents and reflected resistance  (Vs = Vp Ns/Np, Ip = Is Ns/Np, Rin = RL (Np/Ns)^2)
+  Np = 500
+  Ns = 50
+  Vp = 230 V
+  RL = 10 ohm
+  assumes: ideal transformer (no losses, no magnetizing current)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the electrical behavior of an ideal transformer based on its turns ratio and connected load. Given a primary voltage of 230 V and a load resistance of 10 ohm, the system computes the resulting secondary voltage as 23 V and the secondary current as 2.3 A. The primary current required to supply this load is found to be 0.23 A, while the resistance seen from the primary side, known as the reflected resistance, is calculated as 1000 ohm. These values illustrate how the transformer scales voltage and impedance between its windings without energy loss.</p>
+<h4 id="parallel_rlc_impedance">Impedance of a parallel RLC circuit — <code>parallel_rlc_impedance</code></h4>
+<p>The complex impedance of R, L and C in parallel at a frequency: magnitude, phase angle and the two reactances.</p>
+<div class="math">\[\frac{1}{Z} = \frac{1}{R} + j\left(\omega C - \frac{1}{\omega L}\right)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>L</code></td><td>in</td><td>inductance</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>f</code></td><td>in</td><td>frequency of the source in Hz</td><td>Hz</td></tr><tr><td><code>impedance</code></td><td>out</td><td>magnitude of the impedance |Z|</td><td>ohm</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase angle of Z in degrees (positive: inductive)</td><td>—</td></tr><tr><td><code>real</code></td><td>out</td><td>real part of Z</td><td>ohm</td></tr><tr><td><code>imag</code></td><td>out</td><td>imaginary part of Z (net reactance)</td><td>ohm</td></tr><tr><td><code>XL</code></td><td>out</td><td>inductive reactance wL</td><td>ohm</td></tr><tr><td><code>XC</code></td><td>out</td><td>capacitive reactance 1/(wC)</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> R, L, C, f &gt; 0; sinusoidal steady state.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_rlc_impedance &quot;R=1000 ohm&quot; &quot;L=0.01 H&quot; &quot;C=1e-06 F&quot; &quot;f=1000 Hz&quot;
+impedance = 103.2622772 ohm
+phase_deg = 84.07294187
+real = 10.66309789 ohm
+imag = 102.7102538 ohm
+XL = 62.83185307 ohm
+XC = 159.1549431 ohm
+  by: Impedance of a parallel RLC circuit  (Y = 1/R + j(wC - 1/(wL)), Z = 1/Y with w = 2 pi f)
+  R = 1000 ohm
+  L = 0.01 H
+  C = 1e-06 F
+  f = 1000 Hz
+  assumes: R, L, C, f &gt; 0; sinusoidal steady state</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the total complex impedance for a resistor, inductor, and capacitor connected in parallel. Combining the reciprocal of resistance with the susceptances of the reactive components shows that the real part of the impedance is 10.6631 ohm and the imaginary net reactance is 102.71 ohm. The resulting magnitude of 103.262 ohm indicates how much the circuit opposes alternating current flow, while the phase angle of 84.0729 shows whether the current leads or lags the voltage.</p>
+<h4 id="series_rlc_impedance">Impedance of a series RLC circuit — <code>series_rlc_impedance</code></h4>
+<p>The complex impedance of R, L and C in series at a frequency: magnitude, phase angle and the two reactances.</p>
+<div class="math">\[Z = R + j\left(\omega L - \frac{1}{\omega C}\right)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>L</code></td><td>in</td><td>inductance</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>f</code></td><td>in</td><td>frequency of the source in Hz</td><td>Hz</td></tr><tr><td><code>impedance</code></td><td>out</td><td>magnitude of the impedance |Z|</td><td>ohm</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase angle of Z in degrees (positive: inductive)</td><td>—</td></tr><tr><td><code>real</code></td><td>out</td><td>real part of Z</td><td>ohm</td></tr><tr><td><code>imag</code></td><td>out</td><td>imaginary part of Z (net reactance)</td><td>ohm</td></tr><tr><td><code>XL</code></td><td>out</td><td>inductive reactance wL</td><td>ohm</td></tr><tr><td><code>XC</code></td><td>out</td><td>capacitive reactance 1/(wC)</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> R &gt;= 0, L &gt; 0, C &gt; 0, f &gt; 0; sinusoidal steady state.</p>
+<pre><code class="shell">$ electrical-engineering solve series_rlc_impedance &quot;R=100 ohm&quot; &quot;L=0.05 H&quot; &quot;C=1e-05 F&quot; &quot;f=1000 Hz&quot;
+impedance = 314.5621512 ohm
+phase_deg = 71.46389381
+real = 100 ohm
+imag = 298.243771 ohm
+XL = 314.1592654 ohm
+XC = 15.91549431 ohm
+  by: Impedance of a series RLC circuit  (Z = R + j(wL - 1/(wC)) with w = 2 pi f)
+  R = 100 ohm
+  L = 0.05 H
+  C = 1e-05 F
+  f = 1000 Hz
+  assumes: R &gt;= 0, L &gt; 0, C &gt; 0, f &gt; 0; sinusoidal steady state</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the total opposition to alternating current in a series circuit containing resistance, inductance, and capacitance. Using the source frequency 1000 Hz, it computes the inductive reactance as 314.159 ohm and the capacitive reactance as 15.9155 ohm. The resulting complex impedance has a real part of 100 ohm and an imaginary part of 298.244 ohm, yielding a total magnitude of 314.562 ohm and a phase angle of 71.4639. A positive phase angle indicates the circuit behaves inductively at this frequency.</p>
+<h4 id="polar_to_rectangular">Phasor from polar to rectangular form — <code>polar_to_rectangular</code></h4>
+<p>The real and imaginary parts of a phasor given as a magnitude and an angle in degrees.</p>
+<div class="math">\[M\angle\theta = M\cos\theta + jM\sin\theta\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>magnitude</code></td><td>in</td><td>magnitude (non-negative)</td><td>—</td></tr><tr><td><code>angle_deg</code></td><td>in</td><td>angle in degrees</td><td>—</td></tr><tr><td><code>real</code></td><td>out</td><td>real part</td><td>—</td></tr><tr><td><code>imag</code></td><td>out</td><td>imaginary part</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> magnitude &gt;= 0.</p>
+<pre><code class="shell">$ electrical-engineering solve polar_to_rectangular magnitude=10 angle_deg=30
+real = 8.660254038
+imag = 5
+  by: Phasor from polar to rectangular form  (x = M cos(theta), y = M sin(theta))
+  magnitude = 10
+  angle_deg = 30
+  assumes: magnitude &gt;= 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation transforms a phasor defined by its magnitude and phase angle into rectangular coordinates. Using the magnitude 10 and the angle 30, the real component is determined as 8.66025 and the imaginary component as 5. These values represent the horizontal and vertical projections of the phasor vector on the complex plane, which are essential for performing arithmetic operations like addition and subtraction on alternating current quantities.</p>
+<h4 id="rectangular_to_polar">Phasor from rectangular to polar form — <code>rectangular_to_polar</code></h4>
+<p>The magnitude and angle (degrees, in (-180, 180]) of a phasor given as real + j imaginary.</p>
+<div class="math">\[x + jy = \sqrt{x^2+y^2}\,\angle\,\operatorname{atan2}(y, x)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>real</code></td><td>in</td><td>real part</td><td>—</td></tr><tr><td><code>imag</code></td><td>in</td><td>imaginary part</td><td>—</td></tr><tr><td><code>magnitude</code></td><td>out</td><td>magnitude</td><td>—</td></tr><tr><td><code>angle_deg</code></td><td>out</td><td>angle in degrees</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> not both parts zero.</p>
+<pre><code class="shell">$ electrical-engineering solve rectangular_to_polar real=3 imag=4
+magnitude = 5
+angle_deg = 53.13010235
+  by: Phasor from rectangular to polar form  (M = hypot(x, y), theta = atan2(y, x) (the quadrant kept))
+  real = 3
+  imag = 4
+  assumes: not both parts zero</code></pre>
+<p><strong>What the worked example means:</strong> This calculation converts a complex number from rectangular form to polar form. Given the real component 3 and the imaginary component 4, it determines the vector&#x27;s length and direction. The resulting magnitude is 5, representing the amplitude of the signal, while the angle is 53.1301, indicating its phase relative to the reference axis.</p>
+<h4 id="power_factor_correction">Power-factor correction capacitor — <code>power_factor_correction</code></h4>
+<p>The shunt capacitance (and its reactive power) that raises a lagging load&#x27;s power factor to a target value.</p>
+<div class="math">\[C = \frac{P(\tan\phi_1 - \tan\phi_2)}{2\pi f V^2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>P</code></td><td>in</td><td>real power of the load</td><td>W</td></tr><tr><td><code>V</code></td><td>in</td><td>rms supply voltage across the capacitor</td><td>V</td></tr><tr><td><code>f</code></td><td>in</td><td>supply frequency</td><td>Hz</td></tr><tr><td><code>pf_initial</code></td><td>in</td><td>present (lagging) power factor</td><td>—</td></tr><tr><td><code>pf_target</code></td><td>in</td><td>target (lagging) power factor</td><td>—</td></tr><tr><td><code>C</code></td><td>out</td><td>correction capacitance</td><td>F</td></tr><tr><td><code>C_uF</code></td><td>out</td><td>correction capacitance in microfarads</td><td>—</td></tr><tr><td><code>Qc</code></td><td>out</td><td>reactive power the capacitor supplies, in var</td><td>W</td></tr><tr><td><code>Q_initial</code></td><td>out</td><td>reactive power before correction, in var</td><td>W</td></tr><tr><td><code>Q_final</code></td><td>out</td><td>reactive power after correction, in var</td><td>W</td></tr></tbody></table>
+<p><strong>Applies when:</strong> single-phase, sinusoidal; both power factors lagging; target &gt; present.</p>
+<pre><code class="shell">$ electrical-engineering solve power_factor_correction &quot;P=10000 W&quot; &quot;V=230 V&quot; &quot;f=50 Hz&quot; pf_initial=0.7 pf_target=0.95
+C = 0.000416101396 F
+C_uF = 416.101396
+Qc = 6915.19956 W
+Q_initial = 10202.04061 W
+Q_final = 3286.841052 W
+  by: Power-factor correction capacitor  (Qc = P (tan acos pf1 - tan acos pf2), C = Qc / (2 pi f V^2))
+  P = 10000 W
+  V = 230 V
+  f = 50 Hz
+  pf_initial = 0.7
+  pf_target = 0.95
+  assumes: single-phase, sinusoidal; both power factors lagging; target &gt; present</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the shunt capacitor value needed to improve the power factor of an inductive load. Comparing the initial lagging power factor of 0.7 with the target of 0.95 shows that the capacitor must provide 6915.2 W of reactive power. Given the real power of 10000 W and supply voltage of 230 V, the resulting capacitance is 0.000416101 F. This reduction in reactive demand helps lower line losses and improves overall system efficiency.</p>
+<h4 id="parallel_rlc_resonance">Resonance, Q factor and bandwidth of a parallel RLC circuit — <code>parallel_rlc_resonance</code></h4>
+<p>The resonant frequency, quality factor, half-power bandwidth and half-power frequencies of a parallel RLC circuit.</p>
+<div class="math">\[f_0 = \frac{1}{2\pi\sqrt{LC}},\ Q = R\sqrt{\frac{C}{L}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>L</code></td><td>in</td><td>inductance</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>f0</code></td><td>out</td><td>resonant frequency</td><td>Hz</td></tr><tr><td><code>Q</code></td><td>out</td><td>quality factor</td><td>—</td></tr><tr><td><code>bandwidth</code></td><td>out</td><td>half-power bandwidth</td><td>Hz</td></tr><tr><td><code>f_low</code></td><td>out</td><td>lower half-power frequency</td><td>Hz</td></tr><tr><td><code>f_high</code></td><td>out</td><td>upper half-power frequency</td><td>Hz</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal R, L, C.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_rlc_resonance &quot;R=10 ohm&quot; &quot;L=0.01 H&quot; &quot;C=1e-06 F&quot;
+f0 = 1591.549431 Hz
+Q = 0.1
+bandwidth = 15915.49431 Hz
+f_low = 157.5944505 Hz
+f_high = 16073.08876 Hz
+  by: Resonance, Q factor and bandwidth of a parallel RLC circuit  (Q = R sqrt(C/L), bandwidth = 1/(2 pi R C))
+  R = 10 ohm
+  L = 0.01 H
+  C = 1e-06 F
+  assumes: ideal R, L, C</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the key frequency response characteristics of an ideal parallel RLC circuit based on its component values. Given a resistance of 10 ohm, an inductance of 0.01 H, and a capacitance of 1e-06 F, the system resonates at 1591.55 Hz. The sharpness of this resonance, known as the quality factor, is calculated to be 0.1, which directly dictates the half-power bandwidth of 15915.5 Hz. Consequently, the frequencies where the power drops to half are found at 157.594 Hz and 16073.1 Hz. These metrics are critical for designing filters and tuned circuits that require specific selectivity.</p>
+<h4 id="series_rlc_resonance">Resonance, Q factor and bandwidth of a series RLC circuit — <code>series_rlc_resonance</code></h4>
+<p>The resonant frequency, quality factor, half-power bandwidth and half-power frequencies of a series RLC circuit.</p>
+<div class="math">\[f_0 = \frac{1}{2\pi\sqrt{LC}},\ Q = \frac{1}{R}\sqrt{\frac{L}{C}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>L</code></td><td>in</td><td>inductance</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>f0</code></td><td>out</td><td>resonant frequency</td><td>Hz</td></tr><tr><td><code>Q</code></td><td>out</td><td>quality factor</td><td>—</td></tr><tr><td><code>bandwidth</code></td><td>out</td><td>half-power bandwidth</td><td>Hz</td></tr><tr><td><code>f_low</code></td><td>out</td><td>lower half-power frequency</td><td>Hz</td></tr><tr><td><code>f_high</code></td><td>out</td><td>upper half-power frequency</td><td>Hz</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal R, L, C.</p>
+<pre><code class="shell">$ electrical-engineering solve series_rlc_resonance &quot;R=10 ohm&quot; &quot;L=0.01 H&quot; &quot;C=1e-06 F&quot;
+f0 = 1591.549431 Hz
+Q = 10
+bandwidth = 159.1549431 Hz
+f_low = 1513.960154 Hz
+f_high = 1673.115097 Hz
+  by: Resonance, Q factor and bandwidth of a series RLC circuit  (Q = (1/R) sqrt(L/C), bandwidth = R/(2 pi L))
+  R = 10 ohm
+  L = 0.01 H
+  C = 1e-06 F
+  assumes: ideal R, L, C</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the key frequency response characteristics of a series RLC circuit using the input resistance 10 ohm, inductance 0.01 H, and capacitance 1e-06 F. The resonant frequency 1591.55 Hz is where the inductive and capacitive reactances cancel each other out. The quality factor 10 quantifies the sharpness of this resonance, while the half-power bandwidth 159.155 Hz defines the range of frequencies over which the circuit delivers significant power. These values are derived from ideal component assumptions and steady-state sinusoidal operation.</p>
+<h4 id="rms_waveform">RMS and average value of a periodic waveform — <code>rms_waveform</code></h4>
+<p>The rms value (with DC offset), average, AC rms and crest factor of a sine, square, triangle or sawtooth wave.</p>
+<div class="math">\[V_{rms} = \sqrt{\frac{1}{T}\int_0^T v^2\,dt}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>shape</code></td><td>in</td><td>waveform shape</td><td>—</td></tr><tr><td><code>amplitude</code></td><td>in</td><td>peak amplitude about the average</td><td>V</td></tr><tr><td><code>offset</code></td><td>in</td><td>DC offset (average value); 0 when not given (optional)</td><td>V</td></tr><tr><td><code>rms</code></td><td>out</td><td>rms value including the offset</td><td>V</td></tr><tr><td><code>average</code></td><td>out</td><td>average value</td><td>V</td></tr><tr><td><code>ac_rms</code></td><td>out</td><td>rms of the AC part</td><td>V</td></tr><tr><td><code>crest_factor</code></td><td>out</td><td>peak over rms</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> symmetric waveform of the stated shape about its offset.</p>
+<pre><code class="shell">$ electrical-engineering solve rms_waveform &quot;amplitude=5 V&quot; &quot;offset=0 V&quot; shape=square
+rms = 5 V
+average = 0 V
+ac_rms = 5 V
+crest_factor = 1
+  by: RMS and average value of a periodic waveform  (Vrms = sqrt(offset^2 + k A^2) with k = 1/2 (sine), 1 (square), 1/3 (triangle, sawtooth))
+  amplitude = 5 V
+  offset = 0 V
+  shape = square
+  assumes: symmetric waveform of the stated shape about its offset</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the effective voltage, DC offset, and peak stress for a periodic waveform. Given a shape with amplitude 5 V and offset 0 V, the total root mean square is 5 V, while the AC component alone is 5 V. The average value equals the offset at 0 V. The crest factor, which indicates how spiky the signal is relative to its heating power, results in 1. This helps engineers select components that can handle both the continuous thermal load and transient voltage peaks.</p>
+<h4 id="phasor_sum">Sum of sinusoids by phasor addition — <code>phasor_sum</code></h4>
+<p>The amplitude and phase of the sum of sinusoids of one frequency, A_k cos(wt + phi_k), by adding their phasors.</p>
+<div class="math">\[\sum_k A_k\angle\phi_k = \sum_k A_k e^{j\phi_k}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>amplitudes</code></td><td>in</td><td>amplitudes (non-negative)</td><td>—</td></tr><tr><td><code>phases_deg</code></td><td>in</td><td>phase angles in degrees</td><td>—</td></tr><tr><td><code>amplitude</code></td><td>out</td><td>amplitude of the sum</td><td>—</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase of the sum in degrees</td><td>—</td></tr><tr><td><code>real</code></td><td>out</td><td>real part of the resultant phasor</td><td>—</td></tr><tr><td><code>imag</code></td><td>out</td><td>imaginary part of the resultant phasor</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> one phase per amplitude; one common frequency.</p>
+<pre><code class="shell">$ electrical-engineering solve phasor_sum &quot;amplitudes=[3, 4, 2]&quot; &quot;phases_deg=[0, 90, 180]&quot;
+amplitude = 4.123105626
+phase_deg = 75.96375653
+real = 1
+imag = 4
+  by: Sum of sinusoids by phasor addition  (complex addition of the phasors A_k e^{j phi_k})
+  assumes: one phase per amplitude; one common frequency</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the single sinusoid that results from adding multiple sinusoids of the same frequency. Converting each input amplitude [3, 4, 2] and phase angle [0, 90, 180] into complex phasors, summing them, and converting back gives the final amplitude 4.12311 and phase 75.9638. The real part of this resultant vector is 1 and the imaginary part is 4, representing the combined effect in the time domain.</p>
+<h3>Control systems (11)</h3>
+<h4 id="closed_loop_poles">Closed-loop poles with unity negative feedback — <code>closed_loop_poles</code></h4>
+<p>The poles of K*G(s)/(1 + K*G(s)): the roots of den(s) + K*num(s), and whether the closed loop is stable.</p>
+<div class="math">\[1 + K\,G(s) = 0 \iff \mathrm{den}(s) + K\,\mathrm{num}(s) = 0\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>num</code></td><td>in</td><td>numerator coefficients of the open-loop G(s), highest power of s first</td><td>—</td></tr><tr><td><code>den</code></td><td>in</td><td>denominator coefficients of G(s), highest power of s first</td><td>—</td></tr><tr><td><code>K</code></td><td>in</td><td>loop gain multiplying G(s) (default 1) (optional)</td><td>—</td></tr><tr><td><code>poles</code></td><td>out</td><td>closed-loop poles (real first by real part, conjugate pairs together)</td><td>—</td></tr><tr><td><code>max_real_part</code></td><td>out</td><td>largest real part of the poles (negative when stable)</td><td>—</td></tr><tr><td><code>stable</code></td><td>out</td><td>true when every pole has a negative real part</td><td>—</td></tr><tr><td><code>characteristic</code></td><td>out</td><td>closed-loop characteristic polynomial den + K num</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a proper G(s); unity negative feedback.</p>
+<pre><code class="shell">$ electrical-engineering solve closed_loop_poles &quot;num=[2]&quot; &quot;den=[1, 3, 0]&quot;
+poles = [-2.0,-1.0000000000000002]
+max_real_part = -1
+stable = true
+characteristic = [1.0,3.0,2.0]
+  by: Closed-loop poles with unity negative feedback  (roots of den(s) + K num(s) by the Aberth-Ehrlich iteration)
+  assumes: a proper G(s); unity negative feedback</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the poles of a unity negative feedback control system by finding the roots of the characteristic polynomial formed by adding the open-loop denominator to the product of the gain and the open-loop numerator. The resulting pole locations, listed as [-2, -1], define the dynamic behavior of the system. The stability is assessed by examining the real parts of these poles; specifically, if the maximum real part -1 is negative, the system is considered stable. The characteristic polynomial itself is given by [1, 3, 2].</p>
+<h4 id="controllability_observability">Controllability and observability of a single-input single-output system — <code>controllability_observability</code></h4>
+<p>The ranks of the controllability matrix [B AB ... A^(n-1)B] and the observability matrix [C; CA; ...; CA^(n-1)], and whether the system is controllable and observable.</p>
+<div class="math">\[\mathcal{C} = [B\ AB\ \cdots\ A^{n-1}B],\ \mathcal{O} = [C;\ CA;\ \cdots;\ CA^{n-1}]\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>A</code></td><td>in</td><td>state matrix (n x n)</td><td>—</td></tr><tr><td><code>B</code></td><td>in</td><td>input vector</td><td>—</td></tr><tr><td><code>C</code></td><td>in</td><td>output vector</td><td>—</td></tr><tr><td><code>controllability_rank</code></td><td>out</td><td>rank of the controllability matrix</td><td>—</td></tr><tr><td><code>observability_rank</code></td><td>out</td><td>rank of the observability matrix</td><td>—</td></tr><tr><td><code>controllable</code></td><td>out</td><td>full controllability rank</td><td>—</td></tr><tr><td><code>observable</code></td><td>out</td><td>full observability rank</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> small integer or well-scaled entries (rank decided at a relative tolerance of 1e-9).</p>
+<pre><code class="shell">$ electrical-engineering solve controllability_observability &quot;A=[[0, 1], [-2, -3]]&quot; &quot;B=[0, 1]&quot; &quot;C=[1, 0]&quot;
+controllability_rank = 2
+observability_rank = 2
+controllable = true
+observable = true
+  by: Controllability and observability of a single-input single-output system  (Kalman rank tests by Gaussian elimination with partial pivoting)
+  assumes: small integer or well-scaled entries (rank decided at a relative tolerance of 1e-9)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the structural properties of a linear dynamic system by constructing the controllability and observability matrices from the state matrix A, input vector B, and output vector C. The rank of the controllability matrix, found to be 2, indicates how many independent states can be influenced by the input. Similarly, the rank of the observability matrix, which is 2, shows how many independent states can be inferred from the output. Based on these ranks compared to the system dimension, the system is classified as yes and yes, which are essential conditions for designing full-state feedback controllers and state observers.</p>
+<h4 id="bode_point">Frequency response (Bode magnitude and phase) at one frequency — <code>bode_point</code></h4>
+<p>|G(jw)| as a ratio and in decibels, and the phase of G(jw), for a transfer function at an angular frequency w.</p>
+<div class="math">\[G(j\omega) = \frac{N(j\omega)}{D(j\omega)},\quad 20\log_{10}|G(j\omega)|\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>num</code></td><td>in</td><td>numerator coefficients of the open-loop G(s), highest power of s first</td><td>—</td></tr><tr><td><code>den</code></td><td>in</td><td>denominator coefficients of G(s), highest power of s first</td><td>—</td></tr><tr><td><code>w</code></td><td>in</td><td>angular frequency in rad/s</td><td>rad/s</td></tr><tr><td><code>magnitude</code></td><td>out</td><td>|G(jw)|</td><td>—</td></tr><tr><td><code>magnitude_db</code></td><td>out</td><td>20 log10 |G(jw)| in decibels</td><td>—</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase of G(jw) in degrees, in (-180, 180]</td><td>—</td></tr><tr><td><code>real</code></td><td>out</td><td>real part of G(jw)</td><td>—</td></tr><tr><td><code>imag</code></td><td>out</td><td>imaginary part of G(jw)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> no pole of G on the imaginary axis at w; w &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve bode_point &quot;num=[10]&quot; &quot;den=[1, 1]&quot; &quot;w=1 rad/s&quot;
+magnitude = 7.071067812
+magnitude_db = 16.98970004
+phase_deg = -45
+real = 5
+imag = -5
+  by: Frequency response (Bode magnitude and phase) at one frequency  (Horner evaluation of numerator and denominator at s = jw)
+  w = 1 rad/s
+  assumes: no pole of G on the imaginary axis at w; w &gt; 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the frequency response of a system at the specific angular frequency 1 rad/s rad/s. Substituting this value into the transfer function defined by numerator coefficients [10] and denominator coefficients [1, 1] gives the complex gain. The resulting magnitude is 7.07107, which corresponds to 16.9897 on a decibel scale. The phase shift introduced by the system is -45 degrees, while the real and imaginary components are 5 and -5 respectively.</p>
+<h4 id="gain_margin">Gain margin and phase-crossover frequency — <code>gain_margin</code></h4>
+<p>The gain margin of a unity-feedback loop with open-loop G(s): 1/|G(jw)| at the frequency where the phase is -180 degrees.</p>
+<div class="math">\[\angle G(j\omega_{pc}) = -180^\circ,\quad \mathrm{GM} = \frac{1}{|G(j\omega_{pc})|}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>num</code></td><td>in</td><td>numerator coefficients of the open-loop G(s), highest power of s first</td><td>—</td></tr><tr><td><code>den</code></td><td>in</td><td>denominator coefficients of G(s), highest power of s first</td><td>—</td></tr><tr><td><code>gain_margin</code></td><td>out</td><td>gain margin as a ratio</td><td>—</td></tr><tr><td><code>gain_margin_db</code></td><td>out</td><td>gain margin in decibels</td><td>—</td></tr><tr><td><code>phase_crossover</code></td><td>out</td><td>phase-crossover frequency (phase -180 degrees)</td><td>rad/s</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a proper G(s); exactly one phase crossover with G negative real.</p>
+<pre><code class="shell">$ electrical-engineering solve gain_margin &quot;num=[10]&quot; &quot;den=[1, 6, 5, 0]&quot;
+gain_margin = 3
+gain_margin_db = 9.542425094
+phase_crossover = 2.236067977 rad/s
+  by: Gain margin and phase-crossover frequency  (the phase crossover as the positive real root of Im(N(jw) conj D(jw)) with Re G &lt; 0 (Aberth iteration, Newton-polished))
+  assumes: a proper G(s); exactly one phase crossover with G negative real</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the gain margin and phase crossover frequency for a unity feedback system with open-loop transfer function G(s). The phase crossover frequency, 2.23607 rad/s, is the positive real root where the imaginary part of the numerator times the conjugate of the denominator equals zero and the real part of G is negative. At this frequency, the phase angle is minus one hundred eighty degrees. The gain margin, expressed as 3 or 9.54243, represents the factor by which the open-loop gain can be increased before the closed-loop system becomes unstable.</p>
+<h4 id="lead_compensator">Maximum phase lead of a lead compensator — <code>lead_compensator</code></h4>
+<p>For C(s) = (s + z)/(s + p) with p &gt; z: the maximum phase lead, the frequency where it occurs, and the gain there.</p>
+<div class="math">\[\phi_{max} = \sin^{-1}\frac{p - z}{p + z},\ \omega_m = \sqrt{zp}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>z</code></td><td>in</td><td>zero (corner) frequency</td><td>rad/s</td></tr><tr><td><code>p</code></td><td>in</td><td>pole (corner) frequency, p &gt; z</td><td>rad/s</td></tr><tr><td><code>phase_max_deg</code></td><td>out</td><td>maximum phase lead in degrees</td><td>—</td></tr><tr><td><code>w_max</code></td><td>out</td><td>frequency of maximum phase, sqrt(z p)</td><td>rad/s</td></tr><tr><td><code>gain_at_w_max_db</code></td><td>out</td><td>gain of (s+z)/(s+p) there, in dB</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> p &gt; z &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve lead_compensator &quot;z=1 rad/s&quot; &quot;p=10 rad/s&quot;
+phase_max_deg = 54.90319877
+w_max = 3.16227766 rad/s
+gain_at_w_max_db = -10
+  by: Maximum phase lead of a lead compensator  (phi_max = asin((p - z)/(p + z)) at w = sqrt(z p))
+  z = 1 rad/s
+  p = 10 rad/s
+  assumes: p &gt; z &gt; 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the peak phase contribution of a lead compensator defined by a zero at 1 rad/s and a pole at 10 rad/s. The maximum phase lead occurs at the geometric mean frequency 3.16228 rad/s, yielding a phase shift of 54.9032. At this specific frequency, the magnitude of the transfer function is -10, which reflects the attenuation introduced by the network.</p>
+<h4 id="phase_margin">Phase margin and gain-crossover frequency — <code>phase_margin</code></h4>
+<p>The phase margin of a unity-feedback loop with open-loop G(s): 180 degrees plus the phase of G at the frequency where |G(jw)| = 1.</p>
+<div class="math">\[|G(j\omega_c)| = 1,\quad \mathrm{PM} = 180^\circ + \angle G(j\omega_c)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>num</code></td><td>in</td><td>numerator coefficients of the open-loop G(s), highest power of s first</td><td>—</td></tr><tr><td><code>den</code></td><td>in</td><td>denominator coefficients of G(s), highest power of s first</td><td>—</td></tr><tr><td><code>phase_margin</code></td><td>out</td><td>phase margin in degrees</td><td>—</td></tr><tr><td><code>gain_crossover</code></td><td>out</td><td>gain-crossover frequency (|G| = 1)</td><td>rad/s</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a proper G(s); exactly one gain crossover.</p>
+<pre><code class="shell">$ electrical-engineering solve phase_margin &quot;num=[4]&quot; &quot;den=[1, 2, 0]&quot;
+phase_margin = 51.82729237
+gain_crossover = 1.572302756 rad/s
+  by: Phase margin and gain-crossover frequency  (the gain crossover as the positive real root of |N(jw)|^2 - |D(jw)|^2 (Aberth iteration, Newton-polished); PM = (arg G(jw_c) mod 360) - 180)
+  assumes: a proper G(s); exactly one gain crossover</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the stability margins for a unity feedback system defined by the numerator coefficients [4] and denominator coefficients [1, 2, 0]. The gain crossover frequency, where the open-loop magnitude equals one, is found to be 1.5723 rad/s rad/s. At this specific frequency, the phase margin is computed as 51.8273 degrees, representing the amount of additional phase lag required to bring the system to the verge of instability.</p>
+<h4 id="routh_hurwitz">Routh-Hurwitz stability test — <code>routh_hurwitz</code></h4>
+<p>The Routh array&#x27;s first column, the number of roots in the right half plane and whether a characteristic polynomial is stable.</p>
+<div class="math">\[b_i = \frac{a_{1}\,a_{0,i+1} - a_{0}\,a_{1,i+1}}{a_{1}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>coefficients</code></td><td>in</td><td>characteristic polynomial coefficients, highest power of s first</td><td>—</td></tr><tr><td><code>rhp_roots</code></td><td>out</td><td>number of roots with positive real part (sign changes in the first column)</td><td>—</td></tr><tr><td><code>stable</code></td><td>out</td><td>true when every root has a negative real part</td><td>—</td></tr><tr><td><code>first_column</code></td><td>out</td><td>the first column of the Routh array</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> no zero in the first column of the Routh array (the special cases are not handled).</p>
+<pre><code class="shell">$ electrical-engineering solve routh_hurwitz &quot;coefficients=[1, 2, 3, 4, 5]&quot;
+rhp_roots = 2
+stable = false
+first_column = [1.0,2.0,1.0,-6.0,5.0]
+  by: Routh-Hurwitz stability test  (Routh array built row by row; sign changes of its first column counted)
+  assumes: no zero in the first column of the Routh array (the special cases are not handled)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation constructs the Routh array from the characteristic polynomial coefficients provided as input. Examining the signs of the elements in the first column gives the number of sign changes. The result shows that the first column contains values [1, 2, 1, -6, 5]. There are 2 sign changes, which indicates the number of poles with positive real parts. Consequently, the system is determined to be stable if no is true.</p>
+<h4 id="steady_state_error">Steady-state error of a unity-feedback system — <code>steady_state_error</code></h4>
+<p>The system type, the error constant (Kp, Kv or Ka) and the steady-state error for a unit step, ramp or parabola input.</p>
+<div class="math">\[e_{ss} = \lim_{s\to 0} \frac{s\,R(s)}{1 + G(s)}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>num</code></td><td>in</td><td>numerator coefficients of the open-loop G(s), highest power of s first</td><td>—</td></tr><tr><td><code>den</code></td><td>in</td><td>denominator coefficients of G(s), highest power of s first</td><td>—</td></tr><tr><td><code>input</code></td><td>in</td><td>the test input: unit step 1/s, unit ramp 1/s^2 or unit parabola t^2/2 (1/s^3)</td><td>—</td></tr><tr><td><code>steady_state_error</code></td><td>out</td><td>steady-state error (or &#x27;infinite&#x27;)</td><td>—</td></tr><tr><td><code>error_constant</code></td><td>out</td><td>position (Kp), velocity (Kv) or acceleration (Ka) error constant</td><td>—</td></tr><tr><td><code>system_type</code></td><td>out</td><td>number of open-loop poles at the origin</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a stable closed loop; unity negative feedback; unit-amplitude test input.</p>
+<pre><code class="shell">$ electrical-engineering solve steady_state_error &quot;num=[10]&quot; &quot;den=[1, 3, 2]&quot; input=step
+steady_state_error = 0.1666666667
+error_constant = 5
+system_type = 0
+  by: Steady-state error of a unity-feedback system  (system type from the poles at the origin; error constant lim s^k G(s); e_ss = 1/(1+Kp) for a step, 1/Kv for a ramp, 1/Ka for a parabola)
+  input = step
+  assumes: a stable closed loop; unity negative feedback; unit-amplitude test input</code></pre>
+<p>In the worked example, num = [10], den = [1, 3, 2], input = step go through the equation above and give steady_state_error = 0.1666666667, error_constant = 5, system_type = 0. It applies only when a stable closed loop; unity negative feedback; unit-amplitude test input: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="dc_motor">Steady-state speed and current of a permanent-magnet DC motor — <code>dc_motor</code></h4>
+<p>Speed, current, powers and efficiency of a DC motor with armature resistance R, torque constant Kt, back-emf constant Ke, viscous friction b and load torque T at supply voltage V.</p>
+<div class="math">\[\omega = \frac{K_tV - RT}{K_tK_e + Rb}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>armature supply voltage</td><td>V</td></tr><tr><td><code>R</code></td><td>in</td><td>armature resistance</td><td>ohm</td></tr><tr><td><code>Kt</code></td><td>in</td><td>torque constant in N*m/A</td><td>—</td></tr><tr><td><code>Ke</code></td><td>in</td><td>back-emf constant in V*s/rad</td><td>—</td></tr><tr><td><code>T</code></td><td>in</td><td>load torque</td><td>N*m</td></tr><tr><td><code>b</code></td><td>in</td><td>viscous friction in N*m*s/rad</td><td>—</td></tr><tr><td><code>speed</code></td><td>out</td><td>steady-state speed</td><td>rad/s</td></tr><tr><td><code>rpm</code></td><td>out</td><td>speed in revolutions per minute</td><td>—</td></tr><tr><td><code>current</code></td><td>out</td><td>armature current</td><td>A</td></tr><tr><td><code>input_power</code></td><td>out</td><td>electrical input power</td><td>W</td></tr><tr><td><code>output_power</code></td><td>out</td><td>mechanical output power to the load</td><td>W</td></tr><tr><td><code>efficiency</code></td><td>out</td><td>output over input power</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> steady state; linear model (no saturation, constant parameters).</p>
+<pre><code class="shell">$ electrical-engineering solve dc_motor &quot;V=12 V&quot; &quot;R=1 ohm&quot; Kt=0.05 Ke=0.05 &quot;T=0.02 N*m&quot; b=0.0001
+speed = 223.0769231 rad/s
+rpm = 2130.2277
+current = 0.8461538462 A
+input_power = 10.15384615 W
+output_power = 4.461538462 W
+efficiency = 0.4393939394
+  by: Steady-state speed and current of a permanent-magnet DC motor  (solve V = R I + Ke w and Kt I = b w + T)
+  V = 12 V
+  R = 1 ohm
+  Kt = 0.05
+  Ke = 0.05
+  T = 0.02 N*m
+  b = 0.0001
+  assumes: steady state; linear model (no saturation, constant parameters)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the operating point of a permanent-magnet DC motor by solving the coupled electrical and mechanical equations. Given the supply voltage, resistance, torque constant, back-emf constant, friction, and load torque, the model computes the resulting angular velocity in radians per second and revolutions per minute, alongside the drawn current. The final speed of 223.077 rad/s and current of 0.846154 A indicate how the motor balances electromagnetic torque against mechanical losses and external load at equilibrium.</p>
+<h4 id="second_order_step">Step-response specifications of a standard second-order system — <code>second_order_step</code></h4>
+<p>Percent overshoot, peak time, 10-90% rise time and exact 2% settling time of wn^2/(s^2 + 2 zeta wn s + wn^2) for a unit step.</p>
+<div class="math">\[M_p = e^{-\zeta\pi/\sqrt{1-\zeta^2}},\quad t_p = \frac{\pi}{\omega_n\sqrt{1-\zeta^2}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>zeta</code></td><td>in</td><td>damping ratio (0 &lt; zeta &lt; 1)</td><td>—</td></tr><tr><td><code>wn</code></td><td>in</td><td>undamped natural frequency</td><td>rad/s</td></tr><tr><td><code>percent_overshoot</code></td><td>out</td><td>maximum overshoot in percent</td><td>—</td></tr><tr><td><code>overshoot</code></td><td>out</td><td>maximum overshoot as a fraction of the final value</td><td>—</td></tr><tr><td><code>peak_time</code></td><td>out</td><td>time of the first peak</td><td>s</td></tr><tr><td><code>rise_time</code></td><td>out</td><td>10% to 90% rise time</td><td>s</td></tr><tr><td><code>t10</code></td><td>out</td><td>time to reach 10% of the final value</td><td>s</td></tr><tr><td><code>t90</code></td><td>out</td><td>time to reach 90% of the final value</td><td>s</td></tr><tr><td><code>settling_time</code></td><td>out</td><td>exact 2% settling time (last time the response leaves the band)</td><td>s</td></tr><tr><td><code>damped_frequency</code></td><td>out</td><td>damped natural frequency wn sqrt(1 - zeta^2)</td><td>rad/s</td></tr></tbody></table>
+<p><strong>Applies when:</strong> 0 &lt; zeta &lt; 1 (underdamped); unit step from rest; unity DC gain.</p>
+<pre><code class="shell">$ electrical-engineering solve second_order_step zeta=0.5 &quot;wn=4 rad/s&quot;
+percent_overshoot = 16.30335348
+overshoot = 0.1630335348
+peak_time = 0.9068996821 s
+rise_time = 0.4093932368 s
+t10 = 0.122057324 s
+t90 = 0.5314505608 s
+settling_time = 2.019087243 s
+damped_frequency = 3.464101615 rad/s
+  by: Step-response specifications of a standard second-order system  (closed-form overshoot and peak time; rise and settling times by bisection on the exact response (the last 2% crossing lies between the last peak above the band and the following zero of the error))
+  zeta = 0.5
+  wn = 4 rad/s
+  assumes: 0 &lt; zeta &lt; 1 (underdamped); unit step from rest; unity DC gain</code></pre>
+<p><strong>What the worked example means:</strong> The system response to a unit step input is characterized by its transient performance metrics. With a damping ratio of 0.5 and an undamped natural frequency of 4 rad/s, the maximum overshoot reaches 0.163034 of the final value, corresponding to 16.3034 percent. The first peak occurs at 0.9069 s, while the rise time from ten to ninety percent is 0.409393 s. The exact two percent settling time is calculated as 2.01909 s, indicating when the response permanently stays within the error band.</p>
+<h4 id="state_space_to_tf">Transfer function of a single-input single-output state-space model — <code>state_space_to_tf</code></h4>
+<p>G(s) = C (sI - A)^-1 B + D as numerator and denominator coefficients for x&#x27; = Ax + Bu, y = Cx + Du.</p>
+<div class="math">\[G(s) = C(sI - A)^{-1}B + D\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>A</code></td><td>in</td><td>state matrix (n x n)</td><td>—</td></tr><tr><td><code>B</code></td><td>in</td><td>input vector (n entries)</td><td>—</td></tr><tr><td><code>C</code></td><td>in</td><td>output vector (n entries)</td><td>—</td></tr><tr><td><code>D</code></td><td>in</td><td>feedthrough</td><td>—</td></tr><tr><td><code>num</code></td><td>out</td><td>numerator coefficients (highest power first, length n + 1)</td><td>—</td></tr><tr><td><code>den</code></td><td>out</td><td>denominator coefficients det(sI - A), monic</td><td>—</td></tr><tr><td><code>order</code></td><td>out</td><td>system order n</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a square A with B and C of matching size; coefficients below 1e-12 of the largest are written as 0.</p>
+<pre><code class="shell">$ electrical-engineering solve state_space_to_tf &quot;B=[0, 1]&quot; &quot;C=[1, 0]&quot; &quot;A=[[0, 1], [-2, -3]]&quot; D=0
+num = [0.0,0.0,1.0]
+den = [1.0,3.0,2.0]
+order = 2
+  by: Transfer function of a single-input single-output state-space model  (Faddeev-LeVerrier recursion for det(sI - A) and adj(sI - A))
+  D = 0
+  assumes: a square A with B and C of matching size; coefficients below 1e-12 of the largest are written as 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation derives the single-input single-output transfer function from the state-space matrices A, B, C, and D. The resulting numerator coefficients are [0, 0, 1] and the denominator coefficients are [1, 3, 2], which define the poles of the system. This representation allows for frequency-domain analysis of the dynamics described by the state matrix A with dimension 2.</p>
+<h3>DC circuits (18)</h3>
+<h4 id="current_divider">Current divider — <code>current_divider</code></h4>
+<p>How a current I splits between two resistors in parallel.</p>
+<div class="math">\[I_1 = I\frac{R_2}{R_1 + R_2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>I</code></td><td>in</td><td>total current into the parallel pair</td><td>A</td></tr><tr><td><code>R1</code></td><td>in</td><td>first branch resistor</td><td>ohm</td></tr><tr><td><code>R2</code></td><td>in</td><td>second branch resistor</td><td>ohm</td></tr><tr><td><code>I1</code></td><td>out</td><td>current through R1</td><td>A</td></tr><tr><td><code>I2</code></td><td>out</td><td>current through R2</td><td>A</td></tr></tbody></table>
+<p><strong>Applies when:</strong> R1, R2 &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve current_divider &quot;I=6 A&quot; &quot;R1=4 ohm&quot; &quot;R2=2 ohm&quot;
+I1 = 2 A
+I2 = 4 A
+  by: Current divider  (I1 = I R2/(R1 + R2))
+  I = 6 A
+  R1 = 4 ohm
+  R2 = 2 ohm
+  assumes: R1, R2 &gt; 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines how the total input current of 6 A divides between two parallel resistors. The branch containing the first resistor with a value of 4 ohm carries 2 A, and the branch with the second resistor valued at 2 ohm carries 4 A. These results show that higher resistance in a specific branch leads to lower current flow through that path, consistent with the principles of parallel circuits.</p>
+<h4 id="delta_to_wye">Delta-to-wye (Pi-to-T) resistor transformation — <code>delta_to_wye</code></h4>
+<p>The three wye (star) resistances equivalent to a delta (triangle) of resistances between terminals a, b, c.</p>
+<div class="math">\[R_a = \frac{R_{ab}R_{ca}}{R_{ab}+R_{bc}+R_{ca}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Rab</code></td><td>in</td><td>delta resistance between terminals a and b</td><td>ohm</td></tr><tr><td><code>Rbc</code></td><td>in</td><td>delta resistance between terminals b and c</td><td>ohm</td></tr><tr><td><code>Rca</code></td><td>in</td><td>delta resistance between terminals c and a</td><td>ohm</td></tr><tr><td><code>Ra</code></td><td>out</td><td>wye arm at terminal a</td><td>ohm</td></tr><tr><td><code>Rb</code></td><td>out</td><td>wye arm at terminal b</td><td>ohm</td></tr><tr><td><code>Rc</code></td><td>out</td><td>wye arm at terminal c</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every resistance positive.</p>
+<pre><code class="shell">$ electrical-engineering solve delta_to_wye &quot;Rab=10 ohm&quot; &quot;Rbc=20 ohm&quot; &quot;Rca=30 ohm&quot;
+Ra = 5 ohm
+Rb = 3.333333333 ohm
+Rc = 10 ohm
+  by: Delta-to-wye (Pi-to-T) resistor transformation  (each arm is the product of the two adjacent delta resistances over their sum)
+  Rab = 10 ohm
+  Rbc = 20 ohm
+  Rca = 30 ohm
+  assumes: every resistance positive</code></pre>
+<p><strong>What the worked example means:</strong> This calculation converts a delta network with resistances 10 ohm, 20 ohm, and 30 ohm into an equivalent star network. The resulting wye arms are 5 ohm at terminal a, 3.33333 ohm at terminal b, and 10 ohm at terminal c. Each wye resistance represents the equivalent value seen from its respective terminal to the common neutral point when viewed against the other two terminals.</p>
+<h4 id="parallel_capacitance">Equivalent capacitance of capacitors in parallel — <code>parallel_capacitance</code></h4>
+<p>The single capacitance equivalent to two or more capacitors connected in parallel.</p>
+<div class="math">\[C_{eq} = \sum_i C_i\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>C</code></td><td>in</td><td>the capacitance values, all in one unit (F, mF, uF, nF ...; a list, e.g. &#x27;10, 22, 47&#x27;)</td><td>—</td></tr><tr><td><code>unit</code></td><td>in</td><td>the unit the values are written in (the result is in the same unit) (optional)</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent capacitance, in the unit of the inputs</td><td>—</td></tr><tr><td><code>count</code></td><td>out</td><td>number of capacitors</td><td>—</td></tr><tr><td><code>unit</code></td><td>out</td><td>the unit of the result</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every value positive; at least two values.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_capacitance &quot;C=[3, 6]&quot; unit=uF
+equivalent = 9
+count = 2
+unit = uF
+  by: Equivalent capacitance of capacitors in parallel  (the sum of the values)
+  unit = uF
+  assumes: every value positive; at least two values</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the single equivalent capacitance for two or more capacitors connected in parallel. Adding the individual capacitance values together gives a total capacitance that represents the combined effect of all components sharing common terminals. The result, 9, is expressed in the same unit as the input values, ensuring consistency across the calculation.</p>
+<h4 id="series_capacitance">Equivalent capacitance of capacitors in series — <code>series_capacitance</code></h4>
+<p>The single capacitance equivalent to two or more capacitors connected in series.</p>
+<div class="math">\[\frac{1}{C_{eq}} = \sum_i \frac{1}{C_i}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>C</code></td><td>in</td><td>the capacitance values, all in one unit (F, mF, uF, nF ...; a list, e.g. &#x27;10, 22, 47&#x27;)</td><td>—</td></tr><tr><td><code>unit</code></td><td>in</td><td>the unit the values are written in (the result is in the same unit) (optional)</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent capacitance, in the unit of the inputs</td><td>—</td></tr><tr><td><code>count</code></td><td>out</td><td>number of capacitors</td><td>—</td></tr><tr><td><code>unit</code></td><td>out</td><td>the unit of the result</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every value positive; at least two values.</p>
+<pre><code class="shell">$ electrical-engineering solve series_capacitance &quot;C=[3, 6]&quot; unit=uF
+equivalent = 2
+count = 2
+unit = uF
+  by: Equivalent capacitance of capacitors in series  (the reciprocal of the sum of reciprocals)
+  unit = uF
+  assumes: every value positive; at least two values</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the single equivalent capacitance for capacitors connected in a series configuration. Taking the reciprocal of the sum of the reciprocals of each individual capacitance value shows that the total effective capacitance is 2. This result indicates that the combined storage capacity is lower than that of any individual capacitor in the chain, which is essential for designing timing circuits and filters where reduced charge storage is required.</p>
+<h4 id="parallel_inductance">Equivalent inductance of inductors in parallel — <code>parallel_inductance</code></h4>
+<p>The single inductance equivalent to two or more inductors connected in parallel.</p>
+<div class="math">\[\frac{1}{L_{eq}} = \sum_i \frac{1}{L_i}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>L</code></td><td>in</td><td>the inductance values, all in one unit (H, mH, uH, nH ...; a list, e.g. &#x27;10, 22, 47&#x27;)</td><td>—</td></tr><tr><td><code>unit</code></td><td>in</td><td>the unit the values are written in (the result is in the same unit) (optional)</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent inductance, in the unit of the inputs</td><td>—</td></tr><tr><td><code>count</code></td><td>out</td><td>number of inductors</td><td>—</td></tr><tr><td><code>unit</code></td><td>out</td><td>the unit of the result</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every value positive; at least two values.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_inductance &quot;L=[10, 40]&quot; unit=mH
+equivalent = 8
+count = 2
+unit = mH
+  by: Equivalent inductance of inductors in parallel  (the reciprocal of the sum of reciprocals)
+  unit = mH
+  assumes: every value positive; at least two values</code></pre>
+<p>In the worked example, L = [10, 40], unit = mH go through the equation above and give equivalent = 8, count = 2, unit = mH. It applies only when every value positive; at least two values: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="series_inductance">Equivalent inductance of inductors in series — <code>series_inductance</code></h4>
+<p>The single inductance equivalent to two or more inductors connected in series.</p>
+<div class="math">\[L_{eq} = \sum_i L_i\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>L</code></td><td>in</td><td>the inductance values, all in one unit (H, mH, uH, nH ...; a list, e.g. &#x27;10, 22, 47&#x27;)</td><td>—</td></tr><tr><td><code>unit</code></td><td>in</td><td>the unit the values are written in (the result is in the same unit) (optional)</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent inductance, in the unit of the inputs</td><td>—</td></tr><tr><td><code>count</code></td><td>out</td><td>number of inductors</td><td>—</td></tr><tr><td><code>unit</code></td><td>out</td><td>the unit of the result</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every value positive; at least two values.</p>
+<pre><code class="shell">$ electrical-engineering solve series_inductance &quot;L=[10, 22]&quot; unit=mH
+equivalent = 32
+count = 2
+unit = mH
+  by: Equivalent inductance of inductors in series  (the sum of the values)
+  unit = mH
+  assumes: every value positive; at least two values</code></pre>
+<p>In the worked example, L = [10, 22], unit = mH go through the equation above and give equivalent = 32, count = 2, unit = mH. It applies only when every value positive; at least two values: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="resistor_network">Equivalent resistance of a series-parallel resistor network — <code>resistor_network</code></h4>
+<p>The equivalent resistance of a network written with + for series and || for parallel, e.g. 10 + (20 || 30).</p>
+<div class="math">\[R_s = R_1 + R_2,\quad R_p = \left(\frac{1}{R_1} + \frac{1}{R_2}\right)^{-1}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>network</code></td><td>in</td><td>the network in ohms: + joins in series, || joins in parallel (&#x27;||&#x27; binds tighter than &#x27;+&#x27;), parentheses group</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent resistance</td><td>ohm</td></tr><tr><td><code>resistors</code></td><td>out</td><td>number of resistors in the network</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every resistance positive; at least two resistors; &#x27;||&#x27; binds tighter than &#x27;+&#x27;.</p>
+<pre><code class="shell">$ electrical-engineering solve resistor_network &quot;network=10 + (20 || 30)&quot;
+equivalent = 22 ohm
+resistors = 3
+  by: Equivalent resistance of a series-parallel resistor network  (recursive reduction of the expression tree: series groups add, parallel groups add reciprocally)
+  network = 10 + (20 || 30)
+  assumes: every resistance positive; at least two resistors; &#x27;||&#x27; binds tighter than &#x27;+&#x27;</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the total resistance seen by a source connected to the resistor network defined as 10 + (20 || 30). By recursively combining series elements through addition and parallel elements through reciprocal addition, the complex arrangement reduces to a single value. The result, 22 ohm, represents the effective opposition to current flow for the entire circuit, while the count of individual components involved in this reduction is 3.</p>
+<h4 id="parallel_resistance">Equivalent resistance of resistors in parallel — <code>parallel_resistance</code></h4>
+<p>The single resistance equivalent to two or more resistors connected in parallel.</p>
+<div class="math">\[\frac{1}{R_{eq}} = \sum_i \frac{1}{R_i}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>the resistance values in ohms (a list, e.g. &#x27;10, 20, 30&#x27;)</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent resistance</td><td>ohm</td></tr><tr><td><code>count</code></td><td>out</td><td>number of resistors</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every value positive; at least two values.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_resistance &quot;R=[10, 40]&quot;
+equivalent = 8 ohm
+count = 2
+  by: Equivalent resistance of resistors in parallel  (the reciprocal of the sum of reciprocals)
+  assumes: every value positive; at least two values</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the single resistance value that replaces multiple resistors connected in parallel. By applying the reciprocal of the sum of reciprocals method to the input values, the model computes an equivalent resistance of 8 ohm. This result represents the total opposition to current flow across the shared nodes, which is always lower than the smallest individual resistor in the group.</p>
+<h4 id="series_resistance">Equivalent resistance of resistors in series — <code>series_resistance</code></h4>
+<p>The single resistance equivalent to two or more resistors connected in series.</p>
+<div class="math">\[R_{eq} = \sum_i R_i\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>the resistance values in ohms (a list, e.g. &#x27;10, 20, 30&#x27;)</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>equivalent resistance</td><td>ohm</td></tr><tr><td><code>count</code></td><td>out</td><td>number of resistors</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every value positive; at least two values.</p>
+<pre><code class="shell">$ electrical-engineering solve series_resistance &quot;R=[10, 20, 30]&quot;
+equivalent = 60 ohm
+count = 3
+  by: Equivalent resistance of resistors in series  (the sum of the values)
+  assumes: every value positive; at least two values</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the single resistance value that replaces a series of resistors. It sums the individual resistance values provided in [10, 20, 30] to produce the total equivalent resistance, reported as 60 ohm. This result represents the total opposition to current flow in a circuit where components are connected end-to-end.</p>
+<h4 id="max_power_transfer">Maximum power transfer — <code>max_power_transfer</code></h4>
+<p>The load resistance that draws the most power from a source with Thevenin voltage Vth and resistance Rth, and that power.</p>
+<div class="math">\[P_{max} = \frac{V_{th}^2}{4R_{th}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vth</code></td><td>in</td><td>Thevenin (open-circuit) voltage</td><td>V</td></tr><tr><td><code>Rth</code></td><td>in</td><td>Thevenin resistance</td><td>ohm</td></tr><tr><td><code>RL</code></td><td>out</td><td>load resistance for maximum power (= Rth)</td><td>ohm</td></tr><tr><td><code>Pmax</code></td><td>out</td><td>maximum power delivered to the load</td><td>W</td></tr><tr><td><code>efficiency</code></td><td>out</td><td>fraction of the source power reaching the load at that point</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a resistive load; Rth &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve max_power_transfer &quot;Vth=12 V&quot; &quot;Rth=6 ohm&quot;
+RL = 6 ohm
+Pmax = 6 W
+efficiency = 0.5
+  by: Maximum power transfer  (RL = Rth, Pmax = Vth^2/(4 Rth))
+  Vth = 12 V
+  Rth = 6 ohm
+  assumes: a resistive load; Rth &gt; 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the optimal load resistance for extracting the greatest possible power from a source defined by its Thevenin voltage and resistance. By setting the load resistance equal to the Thevenin resistance, the system achieves maximum power transfer, resulting in a power output of 6 W at a load value of 6 ohm. At this specific operating point, the efficiency of power transfer is fixed at 0.5, meaning half of the total power generated is dissipated within the source itself rather than delivered to the load.</p>
+<h4 id="mesh_currents">Mesh currents from the mesh equations (Kirchhoff&#x27;s voltage law) — <code>mesh_currents</code></h4>
+<p>Solve the mesh equations R i = v of a circuit: the resistance matrix and the source-voltage vector give every mesh current.</p>
+<div class="math">\[\mathbf{R}\,\mathbf{i} = \mathbf{v}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>A</code></td><td>in</td><td>mesh resistance matrix in ohms (self-resistances on the diagonal, minus the shared resistances off it)</td><td>—</td></tr><tr><td><code>b</code></td><td>in</td><td>net source voltage around each mesh in volts, in the mesh-current direction</td><td>—</td></tr><tr><td><code>currents</code></td><td>out</td><td>the mesh currents in amperes, in the order of the rows</td><td>—</td></tr><tr><td><code>first</code></td><td>out</td><td>the first mesh current</td><td>A</td></tr></tbody></table>
+<p><strong>Applies when:</strong> square matrix; one source voltage per mesh; a non-singular matrix.</p>
+<pre><code class="shell">$ electrical-engineering solve mesh_currents &quot;A=[[10, -4], [-4, 8]]&quot; &quot;b=[12, 0]&quot;
+currents = [1.5,0.7500000000000001]
+first = 1.5 A
+  by: Mesh currents from the mesh equations (Kirchhoff&#x27;s voltage law)  (Gaussian elimination with partial pivoting)
+  assumes: square matrix; one source voltage per mesh; a non-singular matrix</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the individual loop currents in a planar circuit by solving the system of linear equations formed from Kirchhoff&#x27;s voltage law. The resistance matrix and source voltage vector define how electrical energy drives current through each independent path. The resulting values represent the magnitude and direction of flow for every mesh, expressed as [1.5, 0.75] amperes.</p>
+<h4 id="nodal_voltages">Node voltages from the nodal equations (Kirchhoff&#x27;s current law) — <code>nodal_voltages</code></h4>
+<p>Solve the nodal equations G v = i of a circuit: the conductance matrix and the injected-current vector give every node voltage.</p>
+<div class="math">\[\mathbf{G}\,\mathbf{v} = \mathbf{i}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>A</code></td><td>in</td><td>nodal conductance matrix in siemens (sums of conductances on the diagonal, minus the shared conductances off it)</td><td>—</td></tr><tr><td><code>b</code></td><td>in</td><td>current injected into each node by sources, in amperes</td><td>—</td></tr><tr><td><code>voltages</code></td><td>out</td><td>the node voltages in volts, in the order of the rows</td><td>—</td></tr><tr><td><code>first</code></td><td>out</td><td>the first node voltage</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> square matrix; one injected current per node; a non-singular matrix.</p>
+<pre><code class="shell">$ electrical-engineering solve nodal_voltages &quot;A=[[0.5, -0.25], [-0.25, 0.75]]&quot; &quot;b=[2, 0]&quot;
+voltages = [4.8,1.6]
+first = 4.8 V
+  by: Node voltages from the nodal equations (Kirchhoff&#x27;s current law)  (Gaussian elimination with partial pivoting)
+  assumes: square matrix; one injected current per node; a non-singular matrix</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the electrical potential at each node in a circuit by solving a system of linear equations based on Kirchhoff&#x27;s Current Law. The inputs consist of the nodal conductance matrix, which represents how easily current flows between nodes, and the vector of injected currents from sources. By applying Gaussian elimination with partial pivoting to these values, the method computes the steady-state voltage at every node. The resulting voltages, such as 4.8 V for the first node, indicate the electric potential relative to the reference ground, allowing for the analysis of current flow through individual branches.</p>
+<h4 id="dc_node_voltages">Node voltages of a DC resistive circuit from its netlist — <code>dc_node_voltages</code></h4>
+<p>Every node voltage, every voltage-source current and the power delivered, for a circuit of resistors and independent sources written as a netlist.</p>
+<div class="math">\[\begin{bmatrix} G &amp; B \\ B^T &amp; 0 \end{bmatrix}\begin{bmatrix} v \\ i \end{bmatrix} = \begin{bmatrix} i_s \\ e \end{bmatrix}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>netlist</code></td><td>in</td><td>elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;volts&gt;, I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;amperes&gt; (flowing from the first node through the source to the second); node 0 is ground</td><td>—</td></tr><tr><td><code>node_voltages</code></td><td>out</td><td>voltage of every node relative to node 0, in volts</td><td>—</td></tr><tr><td><code>source_currents</code></td><td>out</td><td>current through each voltage source from its + node to its - node, in amperes</td><td>—</td></tr><tr><td><code>power_delivered</code></td><td>out</td><td>total power delivered by the sources (= power dissipated in the resistors)</td><td>W</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a ground node 0; every resistance positive; a unique solution (no floating node, no loop of voltage sources).</p>
+<pre><code class="shell">$ electrical-engineering solve dc_node_voltages &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;
+node_voltages = {&quot;1&quot;:12.0,&quot;2&quot;:8.0}
+source_currents = {&quot;V1&quot;:-0.004}
+power_delivered = 0.048 W
+  by: Node voltages of a DC resistive circuit from its netlist  (modified nodal analysis solved by Gaussian elimination)
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  assumes: a ground node 0; every resistance positive; a unique solution (no floating node, no loop of voltage sources)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the electrical state of a DC resistive circuit defined by its netlist. By applying modified nodal analysis, it solves for the voltage at every node relative to ground, represented as {1: 12, 2: 8}. It also computes the current flowing through each independent voltage source, given by {V1: -0.004}, and sums the energy supplied by all sources, which equals the total dissipation in the resistors, shown as 0.048 W. These values provide a complete description of how the circuit distributes potential and current under steady-state conditions.</p>
+<h4 id="norton_equivalent">Norton equivalent of a DC circuit between two nodes — <code>norton_equivalent</code></h4>
+<p>The Norton current and resistance seen between two nodes of a resistive circuit with independent sources.</p>
+<div class="math">\[I_N = \frac{V_{th}}{R_{th}},\quad R_N = R_{th}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>netlist</code></td><td>in</td><td>elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;volts&gt;, I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;amperes&gt;; node 0 is ground</td><td>—</td></tr><tr><td><code>node_a</code></td><td>in</td><td>the terminal node (the + side of the equivalent)</td><td>—</td></tr><tr><td><code>node_b</code></td><td>in</td><td>the reference terminal node</td><td>—</td></tr><tr><td><code>In</code></td><td>out</td><td>Norton (short-circuit) current from node a to node b</td><td>A</td></tr><tr><td><code>Rn</code></td><td>out</td><td>Norton resistance (equal to the Thevenin resistance)</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node).</p>
+<pre><code class="shell">$ electrical-engineering solve norton_equivalent node_a=2 node_b=0 &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;
+In = 0.012 A
+Rn = 666.6666667 ohm
+  by: Norton equivalent of a DC circuit between two nodes  (Thevenin voltage and resistance by modified nodal analysis, then I_N = V_th / R_th)
+  node_a = 2
+  node_b = 0
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)</code></pre>
+<p>In the worked example, node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000. go through the equation above and give In = 0.012 A, Rn = 666.6666667 ohm. It applies only when both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node): outside that it says what is wrong instead of returning a number.</p>
+<h4 id="thevenin_equivalent">Thevenin equivalent of a DC circuit between two nodes — <code>thevenin_equivalent</code></h4>
+<p>The Thevenin voltage and resistance seen between two nodes of a resistive circuit with independent sources.</p>
+<div class="math">\[V_{th} = v_a - v_b\big|_{open},\quad R_{th} = \frac{v_a - v_b}{1\,\mathrm{A}}\big|_{sources\ off}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>netlist</code></td><td>in</td><td>elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;volts&gt;, I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;amperes&gt;; node 0 is ground</td><td>—</td></tr><tr><td><code>node_a</code></td><td>in</td><td>the terminal node (the + side of the equivalent)</td><td>—</td></tr><tr><td><code>node_b</code></td><td>in</td><td>the reference terminal node</td><td>—</td></tr><tr><td><code>Vth</code></td><td>out</td><td>Thevenin (open-circuit) voltage, node a relative to node b</td><td>V</td></tr><tr><td><code>Rth</code></td><td>out</td><td>Thevenin resistance</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node).</p>
+<pre><code class="shell">$ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 &quot;netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;
+Vth = 8 V
+Rth = 666.6666667 ohm
+  by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
+  node_b = 0
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  node_a = 2
+  assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation finds the Thevenin equivalent circuit seen from two specific terminals. It determines the open-circuit voltage between node a and node b, denoted as 8 V, and the equivalent resistance, 666.667 ohm, by deactivating independent sources and applying a test current. The result represents a simplified linear model of the complex network, allowing easy analysis of how any load connected to these terminals will behave.</p>
+<h4 id="voltage_divider">Voltage divider — <code>voltage_divider</code></h4>
+<p>The output voltage across R2 of two resistors in series across Vin (R1 on top, R2 to ground), and the current.</p>
+<div class="math">\[V_{out} = V_{in}\frac{R_2}{R_1 + R_2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vin</code></td><td>in</td><td>input voltage</td><td>V</td></tr><tr><td><code>R1</code></td><td>in</td><td>top resistor (from the input to the output)</td><td>ohm</td></tr><tr><td><code>R2</code></td><td>in</td><td>bottom resistor (from the output to ground)</td><td>ohm</td></tr><tr><td><code>Vout</code></td><td>out</td><td>output voltage across R2 (unloaded)</td><td>V</td></tr><tr><td><code>I</code></td><td>out</td><td>current through the divider</td><td>A</td></tr></tbody></table>
+<p><strong>Applies when:</strong> no load on the output; R1, R2 &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve voltage_divider &quot;Vin=12 V&quot; &quot;R1=1000 ohm&quot; &quot;R2=2000 ohm&quot;
+Vout = 8 V
+I = 0.004 A
+  by: Voltage divider  (Vout = Vin R2 / (R1 + R2))
+  Vin = 12 V
+  R1 = 1000 ohm
+  R2 = 2000 ohm
+  assumes: no load on the output; R1, R2 &gt; 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the voltage at the node between two series resistors connected across an input source. Using the input voltage of 12 V and resistor values of 1000 ohm for the top element and 2000 ohm for the bottom element, the resulting output voltage is 8 V. The total current flowing through this path is 0.004 A. This result assumes no external load is connected to the output node, meaning the measured voltage represents the ideal potential difference across the lower resistor.</p>
+<h4 id="wheatstone_bridge">Wheatstone bridge output — <code>wheatstone_bridge</code></h4>
+<p>The output voltage of a Wheatstone bridge (left arm R1 over R2, right arm R3 over R4, supply Vs), whether it is balanced, and the R4 that balances it.</p>
+<div class="math">\[V_{out} = V_s\left(\frac{R_2}{R_1+R_2} - \frac{R_4}{R_3+R_4}\right)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vs</code></td><td>in</td><td>bridge supply voltage</td><td>V</td></tr><tr><td><code>R1</code></td><td>in</td><td>left arm, top</td><td>ohm</td></tr><tr><td><code>R2</code></td><td>in</td><td>left arm, bottom</td><td>ohm</td></tr><tr><td><code>R3</code></td><td>in</td><td>right arm, top</td><td>ohm</td></tr><tr><td><code>R4</code></td><td>in</td><td>right arm, bottom</td><td>ohm</td></tr><tr><td><code>Vout</code></td><td>out</td><td>voltage of the left midpoint relative to the right midpoint</td><td>V</td></tr><tr><td><code>balanced</code></td><td>out</td><td>true when R1 R4 = R2 R3</td><td>—</td></tr><tr><td><code>R4_balance</code></td><td>out</td><td>the R4 that would balance the bridge</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> an unloaded output (ideal voltmeter).</p>
+<pre><code class="shell">$ electrical-engineering solve wheatstone_bridge &quot;Vs=10 V&quot; &quot;R1=100 ohm&quot; &quot;R2=200 ohm&quot; &quot;R3=150 ohm&quot; &quot;R4=250 ohm&quot;
+Vout = 0.4166666667 V
+balanced = false
+R4_balance = 300 ohm
+  by: Wheatstone bridge output  (difference of the two divider outputs)
+  Vs = 10 V
+  R1 = 100 ohm
+  R2 = 200 ohm
+  R3 = 150 ohm
+  R4 = 250 ohm
+  assumes: an unloaded output (ideal voltmeter)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the voltage difference between the midpoints of a Wheatstone bridge using the supply voltage and four resistor values. The result, 0.416667 V, represents the potential at the left midpoint relative to the right midpoint. If this value is zero, the bridge is balanced, meaning the ratio of resistors in the left arm matches the ratio in the right arm. When unbalanced, the magnitude of 0.416667 V indicates the degree of deviation from equilibrium.</p>
+<h4 id="wye_to_delta">Wye-to-delta (T-to-Pi) resistor transformation — <code>wye_to_delta</code></h4>
+<p>The three delta (triangle) resistances equivalent to a wye (star) of resistances at terminals a, b, c.</p>
+<div class="math">\[R_{ab} = \frac{R_aR_b + R_bR_c + R_cR_a}{R_c}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Ra</code></td><td>in</td><td>wye arm at terminal a</td><td>ohm</td></tr><tr><td><code>Rb</code></td><td>in</td><td>wye arm at terminal b</td><td>ohm</td></tr><tr><td><code>Rc</code></td><td>in</td><td>wye arm at terminal c</td><td>ohm</td></tr><tr><td><code>Rab</code></td><td>out</td><td>delta resistance between a and b</td><td>ohm</td></tr><tr><td><code>Rbc</code></td><td>out</td><td>delta resistance between b and c</td><td>ohm</td></tr><tr><td><code>Rca</code></td><td>out</td><td>delta resistance between c and a</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every resistance positive.</p>
+<pre><code class="shell">$ electrical-engineering solve wye_to_delta &quot;Ra=5 ohm&quot; &quot;Rb=10 ohm&quot; &quot;Rc=20 ohm&quot;
+Rab = 17.5 ohm
+Rbc = 70 ohm
+Rca = 35 ohm
+  by: Wye-to-delta (T-to-Pi) resistor transformation  (each delta resistance is the sum of pairwise products of the arms over the opposite arm)
+  Ra = 5 ohm
+  Rb = 10 ohm
+  Rc = 20 ohm
+  assumes: every resistance positive</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the equivalent delta resistances for a given star configuration. Using the wye arm values 5 ohm, 10 ohm, and 20 ohm, the method computes each line-to-line resistance by summing the pairwise products of the arms and dividing by the opposite arm. For instance, the resistance between terminals a and b results in 17.5 ohm, representing the direct connection in the triangular topology that behaves identically to the original star arrangement at these three nodes.</p>
+<h3>Digital logic (9)</h3>
+<h4 id="adc_conversion">Analog-to-digital conversion: output code and resolution — <code>adc_conversion</code></h4>
+<p>The output code (truncating converter), its binary form, the LSB size and the quantized voltage of an ideal n-bit ADC with reference Vref.</p>
+<div class="math">\[\mathrm{code} = \left\lfloor \frac{V_{in}}{V_{ref}/2^n} \right\rfloor\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vin</code></td><td>in</td><td>input voltage (0 to Vref)</td><td>V</td></tr><tr><td><code>Vref</code></td><td>in</td><td>full-scale reference voltage</td><td>V</td></tr><tr><td><code>bits</code></td><td>in</td><td>resolution in bits</td><td>—</td></tr><tr><td><code>code</code></td><td>out</td><td>output code</td><td>—</td></tr><tr><td><code>binary</code></td><td>out</td><td>code in binary</td><td>—</td></tr><tr><td><code>lsb</code></td><td>out</td><td>LSB size Vref/2^n</td><td>V</td></tr><tr><td><code>lsb_mV</code></td><td>out</td><td>LSB in millivolts</td><td>—</td></tr><tr><td><code>quantized</code></td><td>out</td><td>voltage of the code, code x LSB</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> 0 &lt;= Vin &lt;= Vref; truncating (floor) quantizer; Vref itself gives the top code.</p>
+<pre><code class="shell">$ electrical-engineering solve adc_conversion &quot;Vin=1.2 V&quot; &quot;Vref=5 V&quot; bits=8
+code = 61
+binary = 00111101
+lsb = 0.01953125 V
+lsb_mV = 19.53125
+quantized = 1.19140625 V
+  by: Analog-to-digital conversion: output code and resolution  (code = floor(Vin / LSB), capped at 2^n - 1)
+  Vin = 1.2 V
+  Vref = 5 V
+  assumes: 0 &lt;= Vin &lt;= Vref; truncating (floor) quantizer; Vref itself gives the top code</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the digital representation of an analog input voltage using an ideal n-bit truncating converter. Given an input voltage of 1.2 V and a reference voltage of 5 V, the least significant bit size is calculated as 0.0195312 V. The resulting output code is 61, which corresponds to a quantized voltage of 1.19141 V. This process maps the continuous input signal to discrete digital levels, illustrating the resolution limits inherent in analog-to-digital conversion.</p>
+<h4 id="gray_code">Binary to Gray code and Gray code to binary — <code>gray_code</code></h4>
+<p>The reflected binary (Gray) code of a binary word, or the binary word of a Gray code, with the same width.</p>
+<div class="math">\[g = b \oplus (b \gg 1)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>value</code></td><td>in</td><td>the bits</td><td>—</td></tr><tr><td><code>direction</code></td><td>in</td><td>conversion direction</td><td>—</td></tr><tr><td><code>result</code></td><td>out</td><td>the converted bits</td><td>—</td></tr><tr><td><code>decimal</code></td><td>out</td><td>the result read as an unsigned number</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> 1 to 32 bits.</p>
+<pre><code class="shell">$ electrical-engineering solve gray_code value=1011 direction=to_gray
+result = 1110
+decimal = 14
+  by: Binary to Gray code and Gray code to binary  (g = b XOR (b &gt;&gt; 1); back: b = g XOR (g &gt;&gt; 1) XOR (g &gt;&gt; 2) ...)
+  value = 1011
+  direction = to_gray
+  assumes: 1 to 32 bits</code></pre>
+<p><strong>What the worked example means:</strong> This calculation converts the provided bit pattern 1011 into its corresponding reflected binary Gray code 1110. The conversion applies an exclusive OR operation between the original binary word and a version shifted right by one position. This method ensures that the resulting sequence maintains the property where consecutive numbers differ by exactly one bit, which is essential for minimizing errors in state transitions. The output 14 represents this converted bit pattern interpreted as an unsigned integer value.</p>
+<h4 id="boolean_equivalence">Equivalence of two Boolean expressions — <code>boolean_equivalence</code></h4>
+<p>Whether two Boolean expressions are equal for every input, with a counterexample row when they are not.</p>
+<div class="math">\[F_1 \equiv F_2 \iff F_1 \oplus F_2 = 0\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>expression1</code></td><td>in</td><td>first expression (same notation as boolean_evaluate)</td><td>—</td></tr><tr><td><code>expression2</code></td><td>in</td><td>second expression</td><td>—</td></tr><tr><td><code>equivalent</code></td><td>out</td><td>true when the two agree on every row</td><td>—</td></tr><tr><td><code>counterexample</code></td><td>out</td><td>the first row where they differ (&#x27;none&#x27; if equivalent)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> at most 12 variables.</p>
+<pre><code class="shell">$ electrical-engineering solve boolean_equivalence &quot;expression1=(A·B)&#x27;&quot; &quot;expression2=A&#x27; + B&#x27;&quot;
+equivalent = true
+counterexample = none
+  by: Equivalence of two Boolean expressions  (exhaustive comparison over the truth table)
+  expression2 = A&#x27; + B&#x27;
+  expression1 = (A·B)&#x27;
+  assumes: at most 12 variables</code></pre>
+<p><strong>What the worked example means:</strong> This calculation checks whether the two provided Boolean expressions, (A·B)&#x27; and A&#x27; + B&#x27;, yield identical results for every possible combination of their variables. The method involves an exhaustive comparison over the truth table, verifying that the exclusive OR of the two functions equals zero. The final determination is recorded as yes, which indicates if the expressions are logically equal. If they are not equivalent, the system identifies a specific input row where they differ, reported as none. This process ensures that circuit simplifications or design changes preserve the original logical behavior.</p>
+<h4 id="boolean_evaluate">Evaluate a Boolean expression — <code>boolean_evaluate</code></h4>
+<p>The value (0 or 1) of a Boolean expression for given values of its variables.</p>
+<div class="math">\[F(A, B, \dots) \in \{0, 1\}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>expression</code></td><td>in</td><td>the expression: AND (&amp;, ·, *), OR (|, +), XOR (^), NOT (~, !, NOT, or a postfix &#x27;), parentheses; NOT &gt; AND &gt; XOR &gt; OR</td><td>—</td></tr><tr><td><code>values</code></td><td>in</td><td>the variables&#x27; values, e.g. &#x27;A=1, B=0, C=1&#x27;</td><td>—</td></tr><tr><td><code>value</code></td><td>out</td><td>value of the expression (0 or 1)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> every variable given 0 or 1; products written with an operator (A·B, not AB).</p>
+<pre><code class="shell">$ electrical-engineering solve boolean_evaluate &quot;expression=A AND (B OR NOT C)&quot; &quot;values=A=1, B=0, C=0&quot;
+value = 1
+  by: Evaluate a Boolean expression  (recursive-descent parse with NOT &gt; AND &gt; XOR &gt; OR, then evaluation)
+  expression = A AND (B OR NOT C)
+  values = A=1, B=0, C=0
+  assumes: every variable given 0 or 1; products written with an operator (A·B, not AB)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the final logical state of a Boolean expression by applying standard precedence rules, where NOT operations are processed before AND, which precedes XOR, and finally OR. The process begins with the input expression A AND (B OR NOT C) and the specific binary values assigned to its variables, provided as A=1, B=0, C=0. Each variable is substituted with its given value, and the expression is parsed recursively to resolve parentheses and operators in the correct order. The resulting single bit, either zero or one, is reported as 1, representing the definitive truth value of the entire logic circuit or statement under those specific conditions.</p>
+<h4 id="minterms_to_sop">Minimal sum of products from minterms (with don&#x27;t-cares) — <code>minterms_to_sop</code></h4>
+<p>A minimal sum of products (fewest terms, then fewest literals) of F(A, B, C, D) = Σm(...) + d(...), the Karnaugh-map result.</p>
+<div class="math">\[F = \sum m(\dots) + \sum d(\dots)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>minterms</code></td><td>in</td><td>minterm numbers (A is the most significant bit)</td><td>—</td></tr><tr><td><code>variables</code></td><td>in</td><td>number of variables (1 to 4)</td><td>—</td></tr><tr><td><code>dont_cares</code></td><td>in</td><td>don&#x27;t-care rows (optional)</td><td>—</td></tr><tr><td><code>minimal_sop</code></td><td>out</td><td>a minimal sum of products in A, B, C, D (A&#x27; = NOT A)</td><td>—</td></tr><tr><td><code>terms</code></td><td>out</td><td>number of product terms</td><td>—</td></tr><tr><td><code>literals</code></td><td>out</td><td>number of literals</td><td>—</td></tr><tr><td><code>variables</code></td><td>out</td><td>the variables</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> 1 to 4 variables; minterms and don&#x27;t-cares disjoint and in range.</p>
+<pre><code class="shell">$ electrical-engineering solve minterms_to_sop &quot;minterms=[0, 1, 2, 5, 6, 7]&quot; variables=3
+minimal_sop = A&#x27;·B&#x27; + A·C + B·C&#x27;
+terms = 3
+literals = 6
+variables = A, B, C
+  by: Minimal sum of products from minterms (with don&#x27;t-cares)  (Quine-McCluskey prime implicants over minterms and don&#x27;t-cares; exact minimum cover of the minterms)
+  assumes: 1 to 4 variables; minterms and don&#x27;t-cares disjoint and in range</code></pre>
+<p>In the worked example, minterms = [0, 1, 2, 5, 6, 7], variables = 3 go through the equation above and give minimal_sop = A&#x27;·B&#x27; + A·C + B·C&#x27;, terms = 3, literals = 6, variables = A, B, C. It applies only when 1 to 4 variables; minterms and don&#x27;t-cares disjoint and in range: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="base_conversion">Number base conversion (binary, octal, decimal, hexadecimal) — <code>base_conversion</code></h4>
+<p>A whole number written in base 2, 8, 10 or 16, given in all four bases.</p>
+<div class="math">\[N = \sum_i d_i\, b^i\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>value</code></td><td>in</td><td>the digits (0b, 0o, 0x prefixes allowed)</td><td>—</td></tr><tr><td><code>base</code></td><td>in</td><td>the base the value is written in</td><td>—</td></tr><tr><td><code>decimal</code></td><td>out</td><td>value in base 10</td><td>—</td></tr><tr><td><code>binary</code></td><td>out</td><td>base 2</td><td>—</td></tr><tr><td><code>octal</code></td><td>out</td><td>base 8</td><td>—</td></tr><tr><td><code>hexadecimal</code></td><td>out</td><td>base 16 (upper-case digits)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a non-negative whole number below 2^53; digits valid for the base.</p>
+<pre><code class="shell">$ electrical-engineering solve base_conversion value=1011 base=2
+decimal = 11
+binary = 1011
+octal = 13
+hexadecimal = B
+  by: Number base conversion (binary, octal, decimal, hexadecimal)  (positional value, then repeated division by the target base)
+  base = 2
+  value = 1011
+  assumes: a non-negative whole number below 2^53; digits valid for the base</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the equivalent representation of a non-negative integer across four common numerical bases. Starting with the input value 1011 defined in base 2, the algorithm first computes its positional decimal value using the sum of digits multiplied by powers of the base. This decimal result 11 is then converted into binary, octal, and hexadecimal formats through repeated division by the target bases. The final outputs provide the same magnitude expressed as 1011, 13, and B, allowing engineers to view data at different levels of hardware abstraction.</p>
+<h4 id="truth_table_sop">Truth table and minimal sum of products of a Boolean expression — <code>truth_table_sop</code></h4>
+<p>The minterms (truth table), the canonical sum of products and a minimal sum of products (fewest terms, then fewest literals) of an expression in up to 4 variables.</p>
+<div class="math">\[F = \sum m(\dots)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>expression</code></td><td>in</td><td>the expression: AND (&amp;, ·, *), OR (|, +), XOR (^), NOT (~, !, NOT, or a postfix &#x27;), parentheses; NOT &gt; AND &gt; XOR &gt; OR</td><td>—</td></tr><tr><td><code>variables</code></td><td>out</td><td>the variables in truth-table order (first = most significant bit)</td><td>—</td></tr><tr><td><code>minterms</code></td><td>out</td><td>rows where the expression is 1</td><td>—</td></tr><tr><td><code>maxterms</code></td><td>out</td><td>rows where it is 0</td><td>—</td></tr><tr><td><code>canonical_sop</code></td><td>out</td><td>sum of all minterms</td><td>—</td></tr><tr><td><code>minimal_sop</code></td><td>out</td><td>a minimal sum of products (A&#x27; means NOT A, · means AND)</td><td>—</td></tr><tr><td><code>terms</code></td><td>out</td><td>number of product terms in the minimal form</td><td>—</td></tr><tr><td><code>literals</code></td><td>out</td><td>number of literals in the minimal form</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> 1 to 4 variables.</p>
+<pre><code class="shell">$ electrical-engineering solve truth_table_sop &quot;expression=A·B + A·B&#x27; + A&#x27;·B&quot;
+variables = A, B
+minterms = [1.0,2.0,3.0]
+maxterms = [0.0]
+canonical_sop = A&#x27;·B + A·B&#x27; + A·B
+minimal_sop = A + B
+terms = 2
+literals = 2
+  by: Truth table and minimal sum of products of a Boolean expression  (truth table; Quine-McCluskey prime implicants; essential primes, then an exact search for the smallest cover)
+  expression = A·B + A·B&#x27; + A&#x27;·B
+  assumes: 1 to 4 variables</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the simplest logical form for the input expression A·B + A·B&#x27; + A&#x27;·B. It first generates a truth table to identify all rows where the output is one, listed as [1, 2, 3]. Using these values, it constructs the canonical sum of products and then applies the Quine-McCluskey algorithm to find prime implicants. The result is a minimized expression A + B that uses the fewest possible product terms 2 and literals 2, providing an efficient implementation for digital logic design.</p>
+<h4 id="twos_complement_encode">Two&#x27;s complement representation of a signed integer — <code>twos_complement_encode</code></h4>
+<p>The n-bit two&#x27;s complement bit pattern (and its hexadecimal form) of a signed whole number.</p>
+<div class="math">\[x_{2c} = x \bmod 2^n\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>value</code></td><td>in</td><td>the signed whole number</td><td>—</td></tr><tr><td><code>bits</code></td><td>in</td><td>word width in bits</td><td>—</td></tr><tr><td><code>pattern</code></td><td>out</td><td>the bit pattern, most significant bit first</td><td>—</td></tr><tr><td><code>hexadecimal</code></td><td>out</td><td>the pattern in hexadecimal</td><td>—</td></tr><tr><td><code>unsigned</code></td><td>out</td><td>the pattern read as an unsigned number</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> -2^(n-1) &lt;= value &lt; 2^(n-1).</p>
+<pre><code class="shell">$ electrical-engineering solve twos_complement_encode value=-5 bits=8
+pattern = 11111011
+hexadecimal = FB
+unsigned = 251
+  by: Two&#x27;s complement representation of a signed integer  (value modulo 2^n (for a negative number: invert the bits of |value| and add 1))
+  assumes: -2^(n-1) &lt;= value &lt; 2^(n-1)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the fixed-width binary representation of a signed integer using the two&#x27;s complement system. Given the input value -5 and a word width of 8 bits, the resulting bit pattern is 11111011. When this specific sequence of bits is interpreted as an unsigned number, it yields the value 251. This method ensures that positive and negative integers share the same arithmetic rules at the hardware level, allowing subtraction to be performed via addition of the negated operand.</p>
+<h4 id="twos_complement_decode">Value of a two&#x27;s complement bit pattern — <code>twos_complement_decode</code></h4>
+<p>The signed value of an n-bit two&#x27;s complement pattern (n = the number of digits written).</p>
+<div class="math">\[x = -b_{n-1}2^{n-1} + \sum_{i&lt;n-1} b_i 2^i\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>pattern</code></td><td>in</td><td>the bits, most significant first</td><td>—</td></tr><tr><td><code>value</code></td><td>out</td><td>signed value</td><td>—</td></tr><tr><td><code>bits</code></td><td>out</td><td>word width</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> only 0 and 1; at most 64 bits.</p>
+<pre><code class="shell">$ electrical-engineering solve twos_complement_decode pattern=11111011
+value = -5
+bits = 8
+  by: Value of a two&#x27;s complement bit pattern  (unsigned value minus 2^n when the sign bit is 1)
+  pattern = 11111011
+  assumes: only 0 and 1; at most 64 bits</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the signed integer represented by the binary sequence 11111011 using two&#x27;s complement notation. The method interprets the most significant bit as the sign indicator; if it is one, the unsigned magnitude is reduced by twice the weight of that bit position to yield the negative result. The final output, -5, reflects this signed interpretation over a word width of 8 bits.</p>
+<h3>Diodes and transistors (4)</h3>
+<h4 id="bjt_divider_bias">DC operating point of a voltage-divider biased BJT — <code>bjt_divider_bias</code></h4>
+<p>Base, collector and emitter currents and the node voltages of an NPN transistor with divider bias (R1 to VCC, R2 to ground), collector resistor RC and emitter resistor RE.</p>
+<div class="math">\[I_B = \frac{V_{TH} - V_{BE}}{R_{TH} + (\beta+1)R_E},\quad V_{TH} = V_{CC}\frac{R_2}{R_1+R_2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>VCC</code></td><td>in</td><td>supply voltage</td><td>V</td></tr><tr><td><code>R1</code></td><td>in</td><td>divider resistor from VCC to the base</td><td>ohm</td></tr><tr><td><code>R2</code></td><td>in</td><td>divider resistor from the base to ground</td><td>ohm</td></tr><tr><td><code>RC</code></td><td>in</td><td>collector resistor</td><td>ohm</td></tr><tr><td><code>RE</code></td><td>in</td><td>emitter resistor</td><td>ohm</td></tr><tr><td><code>beta</code></td><td>in</td><td>DC current gain</td><td>—</td></tr><tr><td><code>VBE</code></td><td>in</td><td>base-emitter voltage in conduction (e.g. 0.7 V)</td><td>V</td></tr><tr><td><code>IC</code></td><td>out</td><td>collector current</td><td>A</td></tr><tr><td><code>IC_mA</code></td><td>out</td><td>collector current in milliamperes</td><td>—</td></tr><tr><td><code>IB</code></td><td>out</td><td>base current</td><td>A</td></tr><tr><td><code>IE</code></td><td>out</td><td>emitter current</td><td>A</td></tr><tr><td><code>VB</code></td><td>out</td><td>base voltage</td><td>V</td></tr><tr><td><code>VE</code></td><td>out</td><td>emitter voltage</td><td>V</td></tr><tr><td><code>VC</code></td><td>out</td><td>collector voltage</td><td>V</td></tr><tr><td><code>VCE</code></td><td>out</td><td>collector-emitter voltage</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> NPN in the forward-active region (VCE &gt;= 0.2 V); constant VBE and beta.</p>
+<pre><code class="shell">$ electrical-engineering solve bjt_divider_bias &quot;VCC=12 V&quot; &quot;VBE=0.7 V&quot; &quot;R1=10000 ohm&quot; &quot;R2=2200 ohm&quot; &quot;RC=3600 ohm&quot; &quot;RE=1000 ohm&quot; beta=100
+IC = 0.001424015309 A
+IC_mA = 1.424015309
+IB = 1.424015309e-05 A
+IE = 0.001438255462 A
+VB = 2.138255462 V
+VE = 1.438255462 V
+VC = 6.873544889 V
+VCE = 5.435289428 V
+  by: DC operating point of a voltage-divider biased BJT  (Thevenin equivalent of the divider, then IB = (VTH - VBE)/(RTH + (beta+1) RE) (the exact analysis, base current included))
+  VCC = 12 V
+  VBE = 0.7 V
+  R1 = 10000 ohm
+  R2 = 2200 ohm
+  RC = 3600 ohm
+  RE = 1000 ohm
+  beta = 100
+  assumes: NPN in the forward-active region (VCE &gt;= 0.2 V); constant VBE and beta</code></pre>
+<p><strong>What the worked example means:</strong> This analysis determines the steady-state voltages and currents for an NPN transistor using voltage-divider bias. Finding the Thevenin equivalent of the resistor network gives the base current as 1.42402e-05 A, which sets the collector current to 0.00142402 A and the emitter current to 0.00143826 A. The resulting node voltages are base at 2.13826 V, emitter at 1.43826 V, and collector at 6.87354 V, confirming the device operates in the forward-active region with a collector-emitter voltage of 5.43529 V.</p>
+<h4 id="mosfet_saturation">MOSFET drain current in saturation (square law) — <code>mosfet_saturation</code></h4>
+<p>Drain current, overdrive voltage and transconductance of an n-channel MOSFET in saturation.</p>
+<div class="math">\[I_D = \tfrac{1}{2}k_n&#x27;\frac{W}{L}(V_{GS} - V_{TH})^2\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>kn</code></td><td>in</td><td>process transconductance parameter mu_n Cox in A/V^2</td><td>—</td></tr><tr><td><code>WL</code></td><td>in</td><td>aspect ratio W/L</td><td>—</td></tr><tr><td><code>VGS</code></td><td>in</td><td>gate-source voltage</td><td>V</td></tr><tr><td><code>VTH</code></td><td>in</td><td>threshold voltage</td><td>V</td></tr><tr><td><code>VDS</code></td><td>in</td><td>drain-source voltage</td><td>V</td></tr><tr><td><code>ID</code></td><td>out</td><td>drain current</td><td>A</td></tr><tr><td><code>ID_mA</code></td><td>out</td><td>drain current in milliamperes</td><td>—</td></tr><tr><td><code>VOV</code></td><td>out</td><td>overdrive VGS - VTH</td><td>V</td></tr><tr><td><code>gm</code></td><td>out</td><td>transconductance in A/V (siemens)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> saturation: VGS &gt; VTH and VDS &gt;= VGS - VTH; no channel-length modulation.</p>
+<pre><code class="shell">$ electrical-engineering solve mosfet_saturation kn=0.0002 WL=10 &quot;VGS=2 V&quot; &quot;VTH=0.7 V&quot; &quot;VDS=5 V&quot;
+ID = 0.00169 A
+ID_mA = 1.69
+VOV = 1.3 V
+gm = 0.0026
+  by: MOSFET drain current in saturation (square law)  (ID = (1/2) kn (W/L) (VGS - VTH)^2)
+  kn = 0.0002
+  WL = 10
+  VGS = 2 V
+  VTH = 0.7 V
+  VDS = 5 V
+  assumes: saturation: VGS &gt; VTH and VDS &gt;= VGS - VTH; no channel-length modulation</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the operating point of an n-channel MOSFET in saturation. Using the process parameter 0.0002 and aspect ratio 10, along with gate-source voltage 2 V and threshold voltage 0.7 V, the overdrive voltage is found to be 1.3 V. Consequently, the drain current is 0.00169 A (1.69), and the small-signal transconductance is 0.0026. These values indicate how strongly the transistor conducts and responds to input changes under these bias conditions.</p>
+<h4 id="diode_circuit">Operating point of a diode in series with a resistor (Shockley equation) — <code>diode_circuit</code></h4>
+<p>The current and the diode voltage of a forward-biased diode I = Is (exp(VD/(n VT)) - 1) in series with a resistor across a DC source.</p>
+<div class="math">\[V_s = IR + nV_T\ln\left(1 + \frac{I}{I_s}\right)\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vs</code></td><td>in</td><td>source voltage (forward)</td><td>V</td></tr><tr><td><code>R</code></td><td>in</td><td>series resistor</td><td>ohm</td></tr><tr><td><code>Is</code></td><td>in</td><td>saturation current</td><td>A</td></tr><tr><td><code>n</code></td><td>in</td><td>ideality factor</td><td>—</td></tr><tr><td><code>VT</code></td><td>in</td><td>thermal voltage kT/q (about 25.85 mV at 300 K)</td><td>V</td></tr><tr><td><code>I</code></td><td>out</td><td>circuit current</td><td>A</td></tr><tr><td><code>I_mA</code></td><td>out</td><td>current in milliamperes</td><td>—</td></tr><tr><td><code>VD</code></td><td>out</td><td>diode voltage</td><td>V</td></tr><tr><td><code>VR</code></td><td>out</td><td>resistor voltage</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> forward bias (Vs &gt; 0); the Shockley model without series resistance or breakdown.</p>
+<pre><code class="shell">$ electrical-engineering solve diode_circuit &quot;Vs=5 V&quot; &quot;R=1000 ohm&quot; &quot;Is=1e-14 A&quot; n=1 &quot;VT=0.02585 V&quot;
+I = 0.004307509625 A
+I_mA = 4.307509625
+VD = 0.6924903752 V
+VR = 4.307509625 V
+  by: Operating point of a diode in series with a resistor (Shockley equation)  (bisection then Newton on Vs = I R + n VT ln(1 + I/Is))
+  Vs = 5 V
+  R = 1000 ohm
+  Is = 1e-14 A
+  n = 1
+  VT = 0.02585 V
+  assumes: forward bias (Vs &gt; 0); the Shockley model without series resistance or breakdown</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the steady-state operating point for a forward-biased diode in series with a resistor. By solving the nonlinear circuit equation, it finds that the current through the branch is 4.30751 when driven by a source voltage of 5 V. The resulting voltage across the diode is 0.69249 V, while the remaining potential difference of 4.30751 V appears across the series resistance. This result reflects the balance between the exponential current-voltage characteristic of the semiconductor junction and the linear ohmic behavior of the resistor.</p>
+<h4 id="zener_regulator">Zener diode shunt regulator — <code>zener_regulator</code></h4>
+<p>Load voltage and the currents of a Zener shunt regulator (series resistor R from the input, Zener and load in parallel).</p>
+<div class="math">\[I_Z = \frac{V_{in} - V_Z}{R} - \frac{V_Z}{R_L}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vin</code></td><td>in</td><td>input voltage</td><td>V</td></tr><tr><td><code>R</code></td><td>in</td><td>series resistor</td><td>ohm</td></tr><tr><td><code>Vz</code></td><td>in</td><td>Zener (breakdown) voltage</td><td>V</td></tr><tr><td><code>RL</code></td><td>in</td><td>load resistance</td><td>ohm</td></tr><tr><td><code>VL</code></td><td>out</td><td>load voltage</td><td>V</td></tr><tr><td><code>IR</code></td><td>out</td><td>current in the series resistor</td><td>A</td></tr><tr><td><code>IL</code></td><td>out</td><td>load current</td><td>A</td></tr><tr><td><code>IZ</code></td><td>out</td><td>Zener current</td><td>A</td></tr><tr><td><code>IZ_mA</code></td><td>out</td><td>Zener current in milliamperes</td><td>—</td></tr><tr><td><code>PZ</code></td><td>out</td><td>power dissipated in the Zener</td><td>W</td></tr></tbody></table>
+<p><strong>Applies when:</strong> the Zener is in breakdown (ideal: constant Vz); positive values.</p>
+<pre><code class="shell">$ electrical-engineering solve zener_regulator &quot;Vin=20 V&quot; &quot;R=1000 ohm&quot; &quot;Vz=12 V&quot; &quot;RL=2000 ohm&quot;
+VL = 12 V
+IR = 0.008 A
+IL = 0.006 A
+IZ = 0.002 A
+IZ_mA = 2
+PZ = 0.024 W
+  by: Zener diode shunt regulator  (I_R = (Vin - Vz)/R, I_L = Vz/RL, I_Z = I_R - I_L)
+  Vin = 20 V
+  R = 1000 ohm
+  Vz = 12 V
+  RL = 2000 ohm
+  assumes: the Zener is in breakdown (ideal: constant Vz); positive values</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the operating point of a Zener diode shunt regulator. The series resistor current 0.008 A A is derived from the difference between the input voltage 20 V and the Zener breakdown voltage 12 V, divided by the resistance 1000 ohm. The load current 0.006 A A flows through the load resistance 2000 ohm, resulting in a stable load voltage 12 V. The remaining current, 0.002 A A or 2 mA, passes through the Zener diode, dissipating power of 0.024 W W to maintain regulation.</p>
+<h3>Operational amplifiers (5)</h3>
+<h4 id="difference_amplifier">Difference amplifier output (four-resistor op-amp circuit) — <code>difference_amplifier</code></h4>
+<p>The output of the classic difference amplifier: V1 through R1 to the inverting input, R2 from output to that input, V2 through R3 to the non-inverting input, R4 from it to ground.</p>
+<div class="math">\[V_{out} = \frac{R_4}{R_3+R_4}\left(1+\frac{R_2}{R_1}\right)V_2 - \frac{R_2}{R_1}V_1\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V1</code></td><td>in</td><td>voltage at the inverting side</td><td>V</td></tr><tr><td><code>V2</code></td><td>in</td><td>voltage at the non-inverting side</td><td>V</td></tr><tr><td><code>R1</code></td><td>in</td><td>input resistor to the inverting input</td><td>ohm</td></tr><tr><td><code>R2</code></td><td>in</td><td>feedback resistor</td><td>ohm</td></tr><tr><td><code>R3</code></td><td>in</td><td>input resistor to the non-inverting input</td><td>ohm</td></tr><tr><td><code>R4</code></td><td>in</td><td>resistor from the non-inverting input to ground</td><td>ohm</td></tr><tr><td><code>Vout</code></td><td>out</td><td>output voltage</td><td>V</td></tr><tr><td><code>gain_inverting</code></td><td>out</td><td>gain from V1, -R2/R1</td><td>—</td></tr><tr><td><code>gain_noninverting</code></td><td>out</td><td>gain from V2, R4/(R3+R4) (1 + R2/R1)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal op-amp (infinite gain, no saturation).</p>
+<pre><code class="shell">$ electrical-engineering solve difference_amplifier &quot;R1=10000 ohm&quot; &quot;R2=100000 ohm&quot; &quot;R3=10000 ohm&quot; &quot;R4=100000 ohm&quot; &quot;V1=1 V&quot; &quot;V2=1.5 V&quot;
+Vout = 5 V
+gain_inverting = -10
+gain_noninverting = 10
+  by: Difference amplifier output (four-resistor op-amp circuit)  (superposition with v+ = v-)
+  R1 = 10000 ohm
+  R2 = 100000 ohm
+  R3 = 10000 ohm
+  R4 = 100000 ohm
+  V1 = 1 V
+  V2 = 1.5 V
+  assumes: ideal op-amp (infinite gain, no saturation)</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the output voltage of a four-resistor difference amplifier using superposition. The result, 5 V, combines the scaled input from the inverting side and the non-inverting side. The effective amplification for the first signal is -10, while the second signal sees a gain of 10. These values indicate how strongly each input influences the final output relative to their respective source voltages.</p>
+<h4 id="inverting_amplifier">Inverting amplifier gain and output — <code>inverting_amplifier</code></h4>
+<p>The voltage gain -Rf/Rin of an ideal inverting amplifier and its output for an input voltage.</p>
+<div class="math">\[A_v = -\frac{R_f}{R_{in}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Rin</code></td><td>in</td><td>input resistor</td><td>ohm</td></tr><tr><td><code>Rf</code></td><td>in</td><td>feedback resistor</td><td>ohm</td></tr><tr><td><code>Vin</code></td><td>in</td><td>input voltage</td><td>V</td></tr><tr><td><code>gain</code></td><td>out</td><td>closed-loop voltage gain</td><td>—</td></tr><tr><td><code>Vout</code></td><td>out</td><td>output voltage</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal op-amp, no saturation.</p>
+<pre><code class="shell">$ electrical-engineering solve inverting_amplifier &quot;Rin=10000 ohm&quot; &quot;Rf=47000 ohm&quot; &quot;Vin=0.5 V&quot;
+gain = -4.7
+Vout = -2.35 V
+  by: Inverting amplifier gain and output  (gain = -Rf/Rin)
+  Rin = 10000 ohm
+  Rf = 47000 ohm
+  Vin = 0.5 V
+  assumes: ideal op-amp, no saturation</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the closed-loop voltage gain and the resulting output voltage for an ideal inverting operational amplifier. The gain is derived from the ratio of the feedback resistor to the input resistor, specifically negative Rf divided by Rin. Using the provided input voltage, the final output is computed as the product of this gain and the input signal. For example, with an input resistor of 10000 ohm, a feedback resistor of 47000 ohm, and an input voltage of 0.5 V, the system yields a gain of -4.7 and an output voltage of -2.35 V. This configuration effectively scales and inverts the input signal.</p>
+<h4 id="summing_amplifier">Inverting summing amplifier output — <code>summing_amplifier</code></h4>
+<p>The output of an ideal inverting summing amplifier: Vout = -Rf (V1/R1 + V2/R2 + ...).</p>
+<div class="math">\[V_{out} = -R_f\sum_k \frac{V_k}{R_k}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>input voltages in volts</td><td>—</td></tr><tr><td><code>R</code></td><td>in</td><td>input resistors in ohms (one per input)</td><td>—</td></tr><tr><td><code>Rf</code></td><td>in</td><td>feedback resistor</td><td>ohm</td></tr><tr><td><code>Vout</code></td><td>out</td><td>output voltage</td><td>V</td></tr><tr><td><code>gains</code></td><td>out</td><td>gain of each input, -Rf/R_k</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal op-amp (infinite gain, no saturation); non-inverting input grounded.</p>
+<pre><code class="shell">$ electrical-engineering solve summing_amplifier &quot;Rf=100000 ohm&quot; &quot;V=[1, 2, -0.5]&quot; &quot;R=[10000, 20000, 10000]&quot;
+Vout = -15 V
+gains = [-10.0,-5.0,-10.0]
+  by: Inverting summing amplifier output  (virtual ground at the inverting input; Kirchhoff&#x27;s current law there)
+  Rf = 100000 ohm
+  assumes: ideal op-amp (infinite gain, no saturation); non-inverting input grounded</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the output voltage of an ideal inverting summing amplifier using the feedback resistor and individual input resistors. The result, -15 V, represents the negative sum of each input voltage divided by its corresponding resistance, scaled by the feedback resistor value. This configuration effectively performs analog addition where each signal contributes according to its specific gain factor defined by the ratio of the feedback resistor to the input resistor.</p>
+<h4 id="noninverting_amplifier">Non-inverting amplifier gain and output — <code>noninverting_amplifier</code></h4>
+<p>The voltage gain 1 + Rf/Rg of an ideal non-inverting amplifier and its output.</p>
+<div class="math">\[A_v = 1 + \frac{R_f}{R_g}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Rg</code></td><td>in</td><td>resistor from the inverting input to ground</td><td>ohm</td></tr><tr><td><code>Rf</code></td><td>in</td><td>feedback resistor</td><td>ohm</td></tr><tr><td><code>Vin</code></td><td>in</td><td>input voltage (at the non-inverting input)</td><td>V</td></tr><tr><td><code>gain</code></td><td>out</td><td>closed-loop voltage gain</td><td>—</td></tr><tr><td><code>Vout</code></td><td>out</td><td>output voltage</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal op-amp, no saturation.</p>
+<pre><code class="shell">$ electrical-engineering solve noninverting_amplifier &quot;Rg=10000 ohm&quot; &quot;Rf=90000 ohm&quot; &quot;Vin=0.2 V&quot;
+gain = 10
+Vout = 2 V
+  by: Non-inverting amplifier gain and output  (gain = 1 + Rf/Rg)
+  Rg = 10000 ohm
+  Rf = 90000 ohm
+  Vin = 0.2 V
+  assumes: ideal op-amp, no saturation</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the closed-loop voltage gain and the final output voltage for an ideal non-inverting amplifier. By using the feedback resistor value of 90000 ohm and the ground resistor value of 10000 ohm, the system computes a gain of 10. When this gain is applied to the input signal of 0.2 V, the predicted output voltage becomes 2 V. This result indicates how much the input signal is amplified without any phase inversion.</p>
+<h4 id="opamp_integrator">Op-amp integrator output for a constant input — <code>opamp_integrator</code></h4>
+<p>The output of an ideal inverting integrator (R in, C feedback) after a constant input Vin has been applied for time t, from an initial output V0.</p>
+<div class="math">\[V_{out}(t) = V_0 - \frac{1}{RC}\int_0^t V_{in}\,dt\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>input resistor</td><td>ohm</td></tr><tr><td><code>C</code></td><td>in</td><td>feedback capacitor</td><td>F</td></tr><tr><td><code>Vin</code></td><td>in</td><td>constant input voltage</td><td>V</td></tr><tr><td><code>t</code></td><td>in</td><td>integration time</td><td>s</td></tr><tr><td><code>V0</code></td><td>in</td><td>output voltage at t = 0</td><td>V</td></tr><tr><td><code>Vout</code></td><td>out</td><td>output voltage at t</td><td>V</td></tr><tr><td><code>slope</code></td><td>out</td><td>output slope dVout/dt in V/s</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> ideal op-amp, no saturation; constant input.</p>
+<pre><code class="shell">$ electrical-engineering solve opamp_integrator &quot;R=10000 ohm&quot; &quot;C=1e-06 F&quot; &quot;Vin=0.5 V&quot; &quot;t=0.005 s&quot; &quot;V0=0 V&quot;
+Vout = -0.25 V
+slope = -50
+  by: Op-amp integrator output for a constant input  (Vout = V0 - Vin t/(RC))
+  R = 10000 ohm
+  C = 1e-06 F
+  Vin = 0.5 V
+  t = 0.005 s
+  V0 = 0 V
+  assumes: ideal op-amp, no saturation; constant input</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the final output voltage of an ideal inverting integrator after a constant input has been applied for a specific duration. Starting from an initial voltage, the circuit accumulates the input signal over time, producing a linear ramp at the output. The computed result shows that with an input resistor and feedback capacitor creating a specific time constant, the output reaches -0.25 V while changing at a rate of -50. This reflects how the capacitor charges or discharges in response to the steady input current generated by the voltage across the input resistor.</p>
+<h3>Transients (3)</h3>
+<h4 id="first_order_transient">First-order (RC or RL) transient response — <code>first_order_transient</code></h4>
+<p>The value at time t of any voltage in a first-order circuit going from its initial value V0 toward its final value Vf with time constant tau.</p>
+<div class="math">\[v(t) = V_f + (V_0 - V_f)e^{-t/\tau}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V0</code></td><td>in</td><td>initial value (at t = 0+)</td><td>V</td></tr><tr><td><code>Vf</code></td><td>in</td><td>final (steady-state) value</td><td>V</td></tr><tr><td><code>tau</code></td><td>in</td><td>time constant (RC or L/R)</td><td>s</td></tr><tr><td><code>t</code></td><td>in</td><td>time after the switching</td><td>s</td></tr><tr><td><code>v</code></td><td>out</td><td>value at time t</td><td>V</td></tr><tr><td><code>fraction_complete</code></td><td>out</td><td>fraction of the change completed, 1 - exp(-t/tau)</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a single time constant; a step change at t = 0.</p>
+<pre><code class="shell">$ electrical-engineering solve first_order_transient &quot;V0=0 V&quot; &quot;Vf=10 V&quot; &quot;tau=0.001 s&quot; &quot;t=0.002 s&quot;
+v = 8.646647168 V
+fraction_complete = 0.8646647168
+  by: First-order (RC or RL) transient response  (v(t) = Vf + (V0 - Vf) exp(-t/tau))
+  V0 = 0 V
+  Vf = 10 V
+  tau = 0.001 s
+  t = 0.002 s
+  assumes: a single time constant; a step change at t = 0</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the instantaneous voltage in a first-order circuit during its transient response. Using the initial value 0 V, the final steady-state value 10 V, and the time constant 0.001 s, it computes the voltage at the specific time 0.002 s. The result, 8.64665 V, indicates the potential difference across the component at that moment. Additionally, the fraction of the transition completed is 0.864665, showing how close the system is to reaching its final state relative to the start point.</p>
+<h4 id="series_rlc_step">Step response of a series RLC circuit — <code>series_rlc_step</code></h4>
+<p>Capacitor voltage and loop current at time t after a DC step V is applied to a series RLC circuit at rest, with the damping classification.</p>
+<div class="math">\[LC\,\ddot v_C + RC\,\dot v_C + v_C = V,\quad \alpha = \frac{R}{2L},\ \omega_0 = \frac{1}{\sqrt{LC}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>L</code></td><td>in</td><td>inductance</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>V</code></td><td>in</td><td>step voltage applied at t = 0</td><td>V</td></tr><tr><td><code>t</code></td><td>in</td><td>time after the step</td><td>s</td></tr><tr><td><code>vC</code></td><td>out</td><td>capacitor voltage at t</td><td>V</td></tr><tr><td><code>i</code></td><td>out</td><td>loop current at t</td><td>A</td></tr><tr><td><code>i_mA</code></td><td>out</td><td>loop current in milliamperes</td><td>—</td></tr><tr><td><code>alpha</code></td><td>out</td><td>neper frequency R/(2L) in 1/s</td><td>—</td></tr><tr><td><code>omega0</code></td><td>out</td><td>undamped resonant frequency 1/sqrt(LC)</td><td>rad/s</td></tr><tr><td><code>zeta</code></td><td>out</td><td>damping ratio alpha/omega0</td><td>—</td></tr><tr><td><code>response</code></td><td>out</td><td>underdamped, critically damped or overdamped</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> circuit at rest before the step (vC = 0, i = 0); ideal components.</p>
+<pre><code class="shell">$ electrical-engineering solve series_rlc_step &quot;R=10 ohm&quot; &quot;L=0.1 H&quot; &quot;C=0.0001 F&quot; &quot;V=12 V&quot; &quot;t=0.005 s&quot;
+vC = 10.41435345 V
+i = 0.2992853965 A
+i_mA = 299.2853965
+alpha = 50
+omega0 = 316.227766 rad/s
+zeta = 0.158113883
+response = underdamped
+  by: Step response of a series RLC circuit  (closed-form solution of L C vC&#x27;&#x27; + R C vC&#x27; + vC = V by the roots of the characteristic equation)
+  R = 10 ohm
+  L = 0.1 H
+  C = 0.0001 F
+  V = 12 V
+  t = 0.005 s
+  assumes: circuit at rest before the step (vC = 0, i = 0); ideal components</code></pre>
+<p><strong>What the worked example means:</strong> This calculation determines the transient behavior of a series RLC circuit after a DC step voltage is applied. Using the component values, it computes the neper frequency as 50 per second and the undamped resonant frequency as 316.228 rad/s radians per second. The resulting damping ratio is 0.158114. Based on these parameters, the system exhibits an underdamped response. At time 0.005 s, the capacitor voltage reaches 10.4144 V volts and the loop current is 0.299285 A amperes, which corresponds to 299.285 milliamperes.</p>
+<h4 id="first_order_time_to_value">Time for a first-order response to reach a value — <code>first_order_time_to_value</code></h4>
+<p>How long a first-order (RC or RL) response from V0 toward Vf with time constant tau takes to reach a value v.</p>
+<div class="math">\[t = \tau\ln\frac{V_f - V_0}{V_f - v}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V0</code></td><td>in</td><td>initial value</td><td>V</td></tr><tr><td><code>Vf</code></td><td>in</td><td>final value</td><td>V</td></tr><tr><td><code>tau</code></td><td>in</td><td>time constant</td><td>s</td></tr><tr><td><code>v</code></td><td>in</td><td>value to reach</td><td>V</td></tr><tr><td><code>t</code></td><td>out</td><td>time to reach v</td><td>s</td></tr><tr><td><code>time_constants</code></td><td>out</td><td>the same time in time constants</td><td>—</td></tr></tbody></table>
+<p><strong>Applies when:</strong> v between V0 and Vf.</p>
+<pre><code class="shell">$ electrical-engineering solve first_order_time_to_value &quot;V0=0 V&quot; &quot;Vf=10 V&quot; &quot;tau=0.002 s&quot; &quot;v=5 V&quot;
+t = 0.001386294361 s
+time_constants = 0.6931471806
+  by: Time for a first-order response to reach a value  (t = -tau ln(1 - (v - V0)/(Vf - V0)))
+  V0 = 0 V
+  Vf = 10 V
+  tau = 0.002 s
+  v = 5 V
+  assumes: v between V0 and Vf</code></pre>
+<p><strong>What the worked example means:</strong> This calculation finds the elapsed time for a first-order response starting at 0 V and ending at 10 V with a time constant of 0.002 s to reach the target value 5 V. The result is 0.00138629 s, meaning the circuit takes this duration to achieve that specific level. Expressed in normalized units, this corresponds to 0.693147 time constants, indicating how far along the exponential curve the target lies.</p>
+<p>Questions and reports: support@ai999x.com. AI999X — The Future Is Self-Improving.</p></body></html>
