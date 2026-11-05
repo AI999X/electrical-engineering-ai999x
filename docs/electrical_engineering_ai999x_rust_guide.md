@@ -1,6 +1,6 @@
 # electrical-engineering: the Electrical Engineering program — user guide
 
-**electrical-engineering-ai999x 1.0.3**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
+**electrical-engineering-ai999x 1.1.0**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
 
 Electrical Engineering covers DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode). This guide is about `electrical-engineering`, the model as a self-contained program for Windows and Linux: 64 capabilities in 7 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model's page (https://www.ai999x.com/models/electrical-engineering-ai999x/); the Python package (`pip install electrical-engineering-ai999x`) has its own guide. Every command output printed here is what the program printed.
 
@@ -17,24 +17,24 @@ Electrical Engineering covers DC and AC circuits, transients, phasors and power,
 
 ## 1. Get it
 
-Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS; the newest version is always under https://www.ai999x.com/downloads/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
+Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
 
 | what | system | download |
 |---|---|---|
-| Desktop app: Electrical Engineering | Windows x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip |
-| Desktop app: Electrical Engineering | Linux x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz |
-| Desktop app: all models | Windows x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip |
-| Desktop app: all models | Linux x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz |
-| Command line | Windows x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip |
-| Command line | Linux x86-64 | https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz |
+| Desktop app: Electrical Engineering | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip |
+| Desktop app: Electrical Engineering | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz |
+| Desktop app: all models | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip |
+| Desktop app: all models | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz |
+| Command line | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip |
+| Command line | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz |
 
 ### Desktop app
 
 Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
 ./ai999x-electrical-engineering-1.4.0-linux-x86_64/ai999x-electrical-engineering
@@ -43,8 +43,8 @@ tar xzf ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
 It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
 ./ai999x-1.4.0-linux-x86_64/ai999x
@@ -55,8 +55,8 @@ tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
 The bundle holds one program per model; `electrical-engineering` is this one. The checksum line should print OK.
 
 ```shell
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 mkdir -p ~/.local/share && tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
 echo 'export PATH="$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
@@ -69,8 +69,8 @@ The fourth line should print True.
 
 ```powershell
 $F = "ai999x-cli-1.4.0-windows-x86_64.zip"
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.4.0/$F" -OutFile $F
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
 $D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64"; $env:Path += ";$D"
@@ -109,9 +109,9 @@ Read as: Thevenin equivalent of a DC circuit between two nodes
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_a = 2
   node_b = 0
-  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 ```
 
@@ -173,8 +173,8 @@ $ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 "netlist=V1
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
-  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_a = 2
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_b = 0
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 ```
@@ -2037,8 +2037,8 @@ binary = 1011
 octal = 13
 hexadecimal = B
   by: Number base conversion (binary, octal, decimal, hexadecimal)  (positional value, then repeated division by the target base)
-  base = 2
   value = 1011
+  base = 2
   assumes: a non-negative whole number below 2^53; digits valid for the base
 ```
 

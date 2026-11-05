@@ -21,30 +21,30 @@ figcaption{font-size:9pt;color:#555}
 .pb{page-break-after:always}
 </style></head><body>
 <h1>electrical-engineering: the Electrical Engineering program — user guide</h1>
-<p><strong>electrical-engineering-ai999x 1.0.3</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
+<p><strong>electrical-engineering-ai999x 1.1.0</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
 <p>Electrical Engineering covers DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode). This guide is about <code>electrical-engineering</code>, the model as a self-contained program for Windows and Linux: 64 capabilities in 7 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model&#x27;s page (https://www.ai999x.com/models/electrical-engineering-ai999x/); the Python package (<code>pip install electrical-engineering-ai999x</code>) has its own guide. Every command output printed here is what the program printed.</p>
 <h2>Contents</h2>
 <ul><li>1. Get it: desktop app, command line, browser, Python</li><li>2. Quick start</li><li>3. Writing inputs</li><li>4. Outcomes and exit codes</li><li>5. Scripts and agents: batch and JSON</li><li>6. Figures</li><li>7. In a web page or Node.js: WebAssembly</li><li>8. Every capability</li></ul>
 <h2>1. Get it</h2>
-<p>Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS; the newest version is always under https://www.ai999x.com/downloads/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
-<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Electrical Engineering</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Electrical Engineering</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz</td></tr></tbody></table>
+<p>Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
+<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Electrical Engineering</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Electrical Engineering</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz</td></tr></tbody></table>
 <h3>Desktop app</h3>
 <p>Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
-<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
 ./ai999x-electrical-engineering-1.4.0-linux-x86_64/ai999x-electrical-engineering</code></pre>
 <p>It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
-<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
 ./ai999x-1.4.0-linux-x86_64/ai999x</code></pre>
 <h3>Command line — Linux</h3>
 <p>The bundle holds one program per model; <code>electrical-engineering</code> is this one. The checksum line should print OK.</p>
-<pre><code class="shell">curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
 mkdir -p ~/.local/share &amp;&amp; tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
 echo &#x27;export PATH=&quot;$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
@@ -52,8 +52,8 @@ electrical-engineering --version</code></pre>
 <h3>Command line — Windows (PowerShell)</h3>
 <p>The fourth line should print True.</p>
 <pre><code class="powershell">$F = &quot;ai999x-cli-1.4.0-windows-x86_64.zip&quot;
-Invoke-WebRequest &quot;https://www.ai999x.com/downloads/desktop/1.4.0/$F&quot; -OutFile $F
-Invoke-WebRequest &quot;https://www.ai999x.com/downloads/desktop/1.4.0/SHA256SUMS&quot; -OutFile SHA256SUMS
+Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.4.0/$F&quot; -OutFile $F
+Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS&quot; -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split &#x27; &#x27;)[0]
 Expand-Archive $F -DestinationPath &quot;$env:LOCALAPPDATA\AI999X&quot; -Force
 $D = &quot;$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64&quot;; $env:Path += &quot;;$D&quot;
@@ -75,9 +75,9 @@ Read as: Thevenin equivalent of a DC circuit between two nodes
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_a = 2
   node_b = 0
-  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)</code></pre>
 <h3>2.3 Find a capability</h3>
 <p>Search the capabilities by what you want to know; the first column is the id to pass to info and solve.</p>
@@ -119,8 +119,8 @@ Thevenin equivalent of a DC circuit between two nodes
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
-  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_a = 2
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_b = 0
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)</code></pre>
 <h3>2.7 Machine-readable answer</h3>
@@ -921,8 +921,8 @@ binary = 1011
 octal = 13
 hexadecimal = B
   by: Number base conversion (binary, octal, decimal, hexadecimal)  (positional value, then repeated division by the target base)
-  base = 2
   value = 1011
+  base = 2
   assumes: a non-negative whole number below 2^53; digits valid for the base</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines the equivalent representation of a non-negative integer across four common numerical bases. Starting with the input value 1011 defined in base 2, the algorithm first computes its positional decimal value using the sum of digits multiplied by powers of the base. This decimal result 11 is then converted into binary, octal, and hexadecimal formats through repeated division by the target bases. The final outputs provide the same magnitude expressed as 1011, 13, and B, allowing engineers to view data at different levels of hardware abstraction.</p>
 <h4 id="truth_table_sop">Truth table and minimal sum of products of a Boolean expression — <code>truth_table_sop</code></h4>

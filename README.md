@@ -4,7 +4,7 @@
 
 **[Desktop app & command line](https://www.ai999x.com/desktop-cli/)** · **[Compute in your browser](https://www.ai999x.com/models/electrical-engineering-ai999x/#try)** · **[Install (Python)](https://pypi.org/project/electrical-engineering-ai999x/)** · **[Guides](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.0.3
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.1.0
 
 Field: **Engineering** · Tasks: Question Answering, Token Classification, Text Classification, Sentence Similarity, Feature Extraction
 
@@ -20,26 +20,13 @@ electrical-engineering-ai999x is an offline, deterministic Python solver that an
 
 | Way to run it | For | Get it |
 |---|---|---|
-| **AI999X Electrical Engineering desktop app** 1.2.0 | Windows, Linux — this model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-electrical-engineering-1.2.0-windows-x86_64.zip) · [Linux (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz) |
-| **AI999X desktop app** 1.2.0 | Windows, Linux — every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-1.2.0-windows-x86_64.zip) · [Linux (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-1.2.0-linux-x86_64.tar.gz) |
-| **Command line** (`electrical-engineering`) | Windows, Linux — one program per model, offline, no Python | [Windows (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-windows-x86_64.zip) · [Linux (x86-64)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-linux-x86_64.tar.gz) |
+| **AI999X Electrical Engineering desktop app** 1.4.0 | Windows, Linux — this model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz) |
+| **AI999X desktop app** 1.4.0 | Windows, Linux — every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz) |
+| **Command line** (`electrical-engineering`) | Windows, Linux — one program per model, offline, no Python | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz) |
 | **In your browser** | any device — nothing to install | [Compute on the model page](https://www.ai999x.com/models/electrical-engineering-ai999x/#try) |
 | **Python** | Python 3.10+ | `pip install electrical-engineering-ai999x` |
 
-Checksums: [SHA256SUMS](https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS) · every version: [https://www.ai999x.com/downloads/desktop/latest/](https://www.ai999x.com/downloads/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
-
-## Rust versions
-
-Electrical Engineering also comes as native programs compiled from Rust, version 1.2.0 of the AI999X desktop app and command line: they run offline on your computer and need no Python. Each file is in this repository's `rust/` folder, on the [GitHub release v1.0.3](https://github.com/AI999X/electrical-engineering-ai999x/releases/tag/v1.0.3) and on the website.
-
-| Program | System | File | Size | Download | Use |
-|---|---|---|---|---|---|
-| Desktop app (Electrical Engineering) | Windows x86-64 | `ai999x-electrical-engineering-1.2.0-windows-x86_64.zip` | 7.4 MB | [Hub](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/rust/ai999x-electrical-engineering-1.2.0-windows-x86_64.zip) · [GitHub](https://github.com/AI999X/electrical-engineering-ai999x/releases/download/v1.0.3/ai999x-electrical-engineering-1.2.0-windows-x86_64.zip) · [website](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-electrical-engineering-1.2.0-windows-x86_64.zip) | unzip, then double-click `ai999x-electrical-engineering.exe` (no installer) |
-| Desktop app (Electrical Engineering) | Linux x86-64 | `ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz` | 8.3 MB | [Hub](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/rust/ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz) · [GitHub](https://github.com/AI999X/electrical-engineering-ai999x/releases/download/v1.0.3/ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz) · [website](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz) | extract, then run `./ai999x-electrical-engineering` (X11 or Wayland desktop) |
-| Command line (`electrical-engineering`) | Windows x86-64 | `ai999x-electrical-engineering-cli-1.2.0-windows-x86_64.zip` | 3.1 MB | [Hub](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/rust/ai999x-electrical-engineering-cli-1.2.0-windows-x86_64.zip) · [GitHub](https://github.com/AI999X/electrical-engineering-ai999x/releases/download/v1.0.3/ai999x-electrical-engineering-cli-1.2.0-windows-x86_64.zip) · [website (all models)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-windows-x86_64.zip) | unzip, then `electrical-engineering.exe ask "<question>"` or `electrical-engineering.exe solve <capability> name=value` |
-| Command line (`electrical-engineering`) | Linux x86-64 | `ai999x-electrical-engineering-cli-1.2.0-linux-x86_64.tar.gz` | 3.1 MB | [Hub](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/rust/ai999x-electrical-engineering-cli-1.2.0-linux-x86_64.tar.gz) · [GitHub](https://github.com/AI999X/electrical-engineering-ai999x/releases/download/v1.0.3/ai999x-electrical-engineering-cli-1.2.0-linux-x86_64.tar.gz) · [website (all models)](https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-linux-x86_64.tar.gz) | extract, then `./electrical-engineering ask "<question>"` or `./electrical-engineering solve <capability> name=value` |
-
-The command-line archive holds `electrical-engineering` with a README of its commands and examples, the licence and the notice. Checksums: [`rust/SHA256SUMS`](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/rust/SHA256SUMS) (`sha256sum -c SHA256SUMS`).
+Checksums: [SHA256SUMS](https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS) · every version: [https://downloads.ai999x.com/desktop/latest/](https://downloads.ai999x.com/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
 
 ## Quick start
 
@@ -50,11 +37,11 @@ Download **AI999X Electrical Engineering** for your system (above), unpack it an
 Linux, from a terminal:
 
 ```bash
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz
-./ai999x-electrical-engineering-1.2.0-linux-x86_64/ai999x-electrical-engineering
+tar xzf ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
+./ai999x-electrical-engineering-1.4.0-linux-x86_64/ai999x-electrical-engineering
 ```
 
 ### Command line
@@ -62,23 +49,23 @@ tar xzf ai999x-electrical-engineering-1.2.0-linux-x86_64.tar.gz
 Linux:
 
 ```bash
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/ai999x-cli-1.2.0-linux-x86_64.tar.gz
-curl -LO https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share && tar xzf ai999x-cli-1.2.0-linux-x86_64.tar.gz -C ~/.local/share
-echo 'export PATH="$HOME/.local/share/ai999x-cli-1.2.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
+mkdir -p ~/.local/share && tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
+echo 'export PATH="$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
 electrical-engineering --version
 ```
 
 Windows (PowerShell):
 
 ```powershell
-$F = "ai999x-cli-1.2.0-windows-x86_64.zip"
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.2.0/$F" -OutFile $F
-Invoke-WebRequest "https://www.ai999x.com/downloads/desktop/1.2.0/SHA256SUMS" -OutFile SHA256SUMS
+$F = "ai999x-cli-1.4.0-windows-x86_64.zip"
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
-$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.2.0-windows-x86_64"; $env:Path += ";$D"
+$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64"; $env:Path += ";$D"
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$D", "User")
 electrical-engineering --version
 ```
@@ -93,8 +80,8 @@ Read as: Thevenin equivalent of a DC circuit between two nodes
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
-  node_a = 2
   node_b = 0
+  node_a = 2
   netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 ```
@@ -119,30 +106,10 @@ $ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 "netlist=V1
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
-  node_a = 2
-  node_b = 0
   netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  node_b = 0
+  node_a = 2
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
-```
-
-**Draw the figures** — The live figures for your own inputs, written as SVG files into the folder given with --out (here the current folder); open them in any browser. Without --out the SVG text comes back as JSON.
-
-```console
-$ electrical-engineering figures thevenin_equivalent node_a=2 node_b=0 "netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000." --out .
-[
-  {
-    "slug": "thevenin-equivalent-live-1",
-    "title": "Thevenin (open-circuit) voltage, node a relat... as the number 0 in node_b (0) varies",
-    "caption": "Thevenin (open-circuit) voltage, node a relat... as the number in node_b runs from 0 to 1, every other input as you entered it (2 solutions). Marked: your the number in node_b = 0 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": "./thevenin-equivalent-live-1.svg"
-  },
-  {
-    "slug": "thevenin-equivalent-live-2",
-    "title": "Thevenin (open-circuit) voltage, node a relat... as the number 1 in netlist (V1 1 0 12; R1 1 2 100...) varies",
-    "caption": "Thevenin (open-circuit) voltage, node a relat... as the number in netlist runs from 1 to 5, every other input as you entered it (4 solutions). Values in this range where the inputs admit no answer (1 of 5) are left out. Marked: your the number in netlist = 1 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": "./thevenin-equivalent-live-2.svg"
-  }
-]
 ```
 
 **Many questions at once** — One JSON request per line in, one JSON answer per line out, in order: for scripts, notebooks and agents (the program starts once). In PowerShell: Get-Content cases.jsonl | electrical-engineering batch
@@ -329,7 +296,7 @@ _What this means:_ This calculation determines the cutoff frequency, magnitude g
 
 | Property | Value |
 |---|---|
-| Package | `electrical-engineering-ai999x` 1.0.3 (import `electrical_engineering_ai999x`) |
+| Package | `electrical-engineering-ai999x` 1.1.0 (import `electrical_engineering_ai999x`) |
 | Type | Deterministic neuro-symbolic electrical engineering engine (rule-based reading + certified symbolic capabilities) |
 | Capabilities | 64 certified procedures |
 | Knowledge pack | version 1.0.0 |
@@ -363,7 +330,7 @@ electrical_engineering.ask("Who created you?").message
 # -> electrical-engineering-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-The Python package also installs a Python command, `electrical-engineering-ai999x "<question>"`; for the native program use `electrical-engineering` (above). The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.0.3.
+The Python package also installs a Python command, `electrical-engineering-ai999x "<question>"`; for the native program use `electrical-engineering` (above). The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.1.0.
 
 ## Find the right capability, and draw it
 
@@ -518,10 +485,10 @@ _Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R
 ## Citation
 
 ```bibtex
-@software{electrical_engineering_ai999x_1_0_3,
+@software{electrical_engineering_ai999x_1_1_0,
   title  = {electrical-engineering-ai999x: an offline, verified electrical engineering solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.0.3},
+  year   = {2026}, version = {1.1.0},
   url    = {https://huggingface.co/AI999X/electrical-engineering-ai999x}
 }
 ```
