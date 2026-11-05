@@ -1,4 +1,4 @@
-# electrical-engineering: the Electrical Engineering program — user guide
+# electrical-engineering: the Electrical Engineering program, user guide
 
 **electrical-engineering-ai999x 1.1.0**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
 
@@ -17,63 +17,63 @@ Electrical Engineering covers DC and AC circuits, transients, phasors and power,
 
 ## 1. Get it
 
-Version 1.4.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
+Version 1.5.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/
 
 | what | system | download |
 |---|---|---|
-| Desktop app: Electrical Engineering | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-windows-x86_64.zip |
-| Desktop app: Electrical Engineering | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz |
-| Desktop app: all models | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-windows-x86_64.zip |
-| Desktop app: all models | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz |
-| Command line | Windows x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-windows-x86_64.zip |
-| Command line | Linux x86-64 | https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz |
+| Desktop app: Electrical Engineering | Windows x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-windows-x86_64.zip |
+| Desktop app: Electrical Engineering | Linux x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz |
+| Desktop app: all models | Windows x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-windows-x86_64.zip |
+| Desktop app: all models | Linux x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz |
+| Command line | Windows x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-windows-x86_64.zip |
+| Command line | Linux x86-64 | https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz |
 
 ### Desktop app
 
-Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
+Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.5.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-electrical-engineering-1.4.0-linux-x86_64.tar.gz
-./ai999x-electrical-engineering-1.4.0-linux-x86_64/ai999x-electrical-engineering
+tar xzf ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
+./ai999x-electrical-engineering-1.5.0-linux-x86_64/ai999x-electrical-engineering
 ```
 
-It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.4.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
+It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.5.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:
 
 ```shell
-curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-1.4.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-1.4.0-linux-x86_64.tar.gz
-./ai999x-1.4.0-linux-x86_64/ai999x
+tar xzf ai999x-1.5.0-linux-x86_64.tar.gz
+./ai999x-1.5.0-linux-x86_64/ai999x
 ```
 
-### Command line — Linux
+### Command line: Linux
 
 The bundle holds one program per model; `electrical-engineering` is this one. The checksum line should print OK.
 
 ```shell
-curl -LO https://downloads.ai999x.com/desktop/1.4.0/ai999x-cli-1.4.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share && tar xzf ai999x-cli-1.4.0-linux-x86_64.tar.gz -C ~/.local/share
-echo 'export PATH="$HOME/.local/share/ai999x-cli-1.4.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
+mkdir -p ~/.local/share && tar xzf ai999x-cli-1.5.0-linux-x86_64.tar.gz -C ~/.local/share
+echo 'export PATH="$HOME/.local/share/ai999x-cli-1.5.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
 electrical-engineering --version
 ```
 
-### Command line — Windows (PowerShell)
+### Command line: Windows (PowerShell)
 
 The fourth line should print True.
 
 ```powershell
-$F = "ai999x-cli-1.4.0-windows-x86_64.zip"
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/$F" -OutFile $F
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.4.0/SHA256SUMS" -OutFile SHA256SUMS
+$F = "ai999x-cli-1.5.0-windows-x86_64.zip"
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
-$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.4.0-windows-x86_64"; $env:Path += ";$D"
+$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.5.0-windows-x86_64"; $env:Path += ";$D"
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$D", "User")
 electrical-engineering --version
 ```
@@ -96,7 +96,7 @@ Prints the model, its version and that this is the Rust build.
 
 ```shell
 $ electrical-engineering --version
-electrical-engineering-ai999x 1.0.3 (Rust build, ax-engine 0.1.0)
+electrical-engineering-ai999x 1.5.0 (Rust build, ax-engine 1.5.0)
 ```
 
 ### 2.2 Ask in words
@@ -173,8 +173,8 @@ $ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 "netlist=V1
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
-  node_a = 2
   netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
+  node_a = 2
   node_b = 0
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 ```
@@ -197,35 +197,7 @@ $ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0
 NEEDS_INPUT: thevenin_equivalent needs netlist (elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes>; node 0 is ground). Example: solve('thevenin_equivalent', netlist='V1 1 0 12; R1 1 2 1000; R2 2 0 2000', node_a='2', node_b='0').
 ```
 
-### 2.9 Draw the figures
-
-The live figures for your own inputs, written as SVG files into the folder given with --out (here the current folder); open them in any browser. Without --out the SVG text comes back as JSON.
-
-```shell
-$ electrical-engineering figures thevenin_equivalent node_a=2 node_b=0 "netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000." --out .
-[
-  {
-    "slug": "thevenin-equivalent-schematic",
-    "title": "Thévenin equivalent between the two nodes",
-    "caption": "The Thévenin equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a source Vth = 8 V in series with Rth = 666.7 Ω. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": ".\\thevenin-equivalent-schematic.svg"
-  },
-  {
-    "slug": "thevenin-equivalent-live-1",
-    "title": "Thevenin (open-circuit) voltage, node a relat... as the number 0 in node_b (0) varies",
-    "caption": "Thevenin (open-circuit) voltage, node a relat... as the number in node_b runs from 0 to 1, every other input as you entered it (2 solutions). Marked: your the number in node_b = 0 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": ".\\thevenin-equivalent-live-1.svg"
-  },
-  {
-    "slug": "thevenin-equivalent-live-2",
-    "title": "Thevenin (open-circuit) voltage, node a relat... as the number 1 in netlist (V1 1 0 12; R1 1 2 100...) varies",
-    "caption": "Thevenin (open-circuit) voltage, node a relat... as the number in netlist runs from 1 to 5, every other input as you entered it (4 solutions). Values in this range where the inputs admit no answer (1 of 5) are left out. Marked: your the number in netlist = 1 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": ".\\thevenin-equivalent-live-2.svg"
-  }
-]
-```
-
-### 2.10 Many questions at once
+### 2.9 Many questions at once
 
 One JSON request per line in, one JSON answer per line out, in order: for scripts, notebooks and agents (the program starts once). In PowerShell: Get-Content cases.jsonl | electrical-engineering batch
 
@@ -298,30 +270,6 @@ answers = [json.loads(line) for line in out.splitlines()]
 
 `electrical-engineering figures <capability> name=value ... --out DIR` draws the live figures for those inputs and writes each as an SVG file into DIR (an existing folder); without `--out` the SVG text comes back as JSON. The desktop app and the model page draw the same figures as soon as you press Compute.
 
-```shell
-$ electrical-engineering figures thevenin_equivalent node_a=2 node_b=0 "netlist=V1 1 0 12; R1 1 2 1000; R2 2 0 2000." --out .
-[
-  {
-    "slug": "thevenin-equivalent-schematic",
-    "title": "Thévenin equivalent between the two nodes",
-    "caption": "The Thévenin equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a source Vth = 8 V in series with Rth = 666.7 Ω. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": ".\\thevenin-equivalent-schematic.svg"
-  },
-  {
-    "slug": "thevenin-equivalent-live-1",
-    "title": "Thevenin (open-circuit) voltage, node a relat... as the number 0 in node_b (0) varies",
-    "caption": "Thevenin (open-circuit) voltage, node a relat... as the number in node_b runs from 0 to 1, every other input as you entered it (2 solutions). Marked: your the number in node_b = 0 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": ".\\thevenin-equivalent-live-1.svg"
-  },
-  {
-    "slug": "thevenin-equivalent-live-2",
-    "title": "Thevenin (open-circuit) voltage, node a relat... as the number 1 in netlist (V1 1 0 12; R1 1 2 100...) varies",
-    "caption": "Thevenin (open-circuit) voltage, node a relat... as the number in netlist runs from 1 to 5, every other input as you entered it (4 solutions). Values in this range where the inputs admit no answer (1 of 5) are left out. Marked: your the number in netlist = 1 gives Vth = 8. Your inputs: node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000; R....",
-    "file": ".\\thevenin-equivalent-live-2.svg"
-  }
-]
-```
-
 ## 7. In a web page or Node.js: WebAssembly
 
 The same model is a WebAssembly module, `electrical_engineering_ai999x.wasm` (https://www.ai999x.com/compute/rust/electrical_engineering_ai999x.wasm), with a small loader, `ax-wasm.js` (https://www.ai999x.com/compute/rust/ax-wasm.js). It runs in a browser, a Web Worker or Node.js, with no server.
@@ -345,7 +293,7 @@ By topic. For each: what it does, what it needs and gives, when it applies, and 
 
 <a id="three_phase_load"></a>
 
-#### Balanced three-phase load (wye or delta) — `three_phase_load`
+#### Balanced three-phase load (wye or delta): `three_phase_load`
 
 Phase voltage, phase and line currents, real, reactive and apparent power and the power factor of a balanced load with impedance R + jX per phase.
 
@@ -358,14 +306,14 @@ $$
 | `VL` | in | rms line-to-line voltage | V |
 | `R` | in | resistance per phase | ohm |
 | `X` | in | reactance per phase (positive inductive, negative capacitive) | ohm |
-| `connection` | in | load connection | — |
+| `connection` | in | load connection | - |
 | `phase_voltage` | out | voltage across each phase of the load | V |
 | `phase_current` | out | current in each phase of the load | A |
 | `line_current` | out | current in each line | A |
 | `P` | out | total real power in W | W |
 | `Q` | out | total reactive power in var | W |
 | `S` | out | total apparent power in VA | W |
-| `power_factor` | out | power factor R/\|Z\| | — |
+| `power_factor` | out | power factor R/\|Z\| | - |
 
 **Applies when:** balanced load and supply; R >= 0.
 
@@ -390,7 +338,7 @@ power_factor = 0.8
 
 <a id="complex_power"></a>
 
-#### Complex, real, reactive and apparent power from voltage and current phasors — `complex_power`
+#### Complex, real, reactive and apparent power from voltage and current phasors, `complex_power`
 
 S = V I* for rms phasors: real power P, reactive power Q, apparent power |S|, the power factor and whether it lags or leads.
 
@@ -401,14 +349,14 @@ $$
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
 | `V` | in | rms voltage magnitude | V |
-| `V_phase` | in | voltage phase angle in degrees | — |
+| `V_phase` | in | voltage phase angle in degrees | - |
 | `I` | in | rms current magnitude | A |
-| `I_phase` | in | current phase angle in degrees | — |
+| `I_phase` | in | current phase angle in degrees | - |
 | `P` | out | real (active) power in W | W |
 | `Q` | out | reactive power in var (positive: inductive) | W |
 | `S` | out | apparent power in VA | W |
-| `power_factor` | out | power factor P/\|S\| | — |
-| `nature` | out | lagging (inductive), leading (capacitive) or unity | — |
+| `power_factor` | out | power factor P/\|S\| | - |
+| `nature` | out | lagging (inductive), leading (capacitive) or unity | - |
 
 **Applies when:** rms phasors; sinusoidal steady state.
 
@@ -431,7 +379,7 @@ nature = lagging
 
 <a id="inductor_energy"></a>
 
-#### Energy stored in an inductor — `inductor_energy`
+#### Energy stored in an inductor: `inductor_energy`
 
 The magnetic energy L I^2/2 and the flux linkage L I of an inductor carrying current I.
 
@@ -444,7 +392,7 @@ $$
 | `L` | in | inductance | H |
 | `I` | in | current | A |
 | `energy` | out | stored energy | J |
-| `flux_linkage` | out | flux linkage L I in weber-turns | — |
+| `flux_linkage` | out | flux linkage L I in weber-turns | - |
 
 **Applies when:** a linear inductor (no saturation).
 
@@ -462,7 +410,7 @@ flux_linkage = 0.1
 
 <a id="rc_filter"></a>
 
-#### First-order RC filter: cutoff, gain and phase — `rc_filter`
+#### First-order RC filter: cutoff, gain and phase, `rc_filter`
 
 The cutoff frequency 1/(2 pi R C) of an RC low-pass or high-pass filter and its gain (ratio and dB) and phase at a frequency.
 
@@ -475,11 +423,11 @@ $$
 | `R` | in | resistance | ohm |
 | `C` | in | capacitance | F |
 | `f` | in | signal frequency | Hz |
-| `filter` | in | first-order low-pass or high-pass | — |
+| `filter` | in | first-order low-pass or high-pass | - |
 | `fc` | out | cutoff (-3 dB) frequency | Hz |
-| `gain` | out | \|Vout/Vin\| at f | — |
-| `gain_db` | out | gain in decibels | — |
-| `phase_deg` | out | phase of Vout relative to Vin, degrees | — |
+| `gain` | out | \|Vout/Vin\| at f | - |
+| `gain_db` | out | gain in decibels | - |
+| `phase_deg` | out | phase of Vout relative to Vin, degrees | - |
 
 **Applies when:** unloaded output; R, C, f > 0.
 
@@ -501,7 +449,7 @@ phase_deg = -51.48811275
 
 <a id="transformer"></a>
 
-#### Ideal transformer: voltages, currents and reflected resistance — `transformer`
+#### Ideal transformer: voltages, currents and reflected resistance, `transformer`
 
 Secondary voltage and current, primary current and the load resistance seen from the primary for an ideal transformer with a resistive load.
 
@@ -511,15 +459,15 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `Np` | in | primary turns | — |
-| `Ns` | in | secondary turns | — |
+| `Np` | in | primary turns | - |
+| `Ns` | in | secondary turns | - |
 | `Vp` | in | primary (rms) voltage | V |
 | `RL` | in | load resistance on the secondary | ohm |
 | `Vs` | out | secondary voltage | V |
 | `Is` | out | secondary (load) current | A |
 | `Ip` | out | primary current | A |
 | `Rin` | out | load resistance reflected to the primary | ohm |
-| `turns_ratio` | out | Np/Ns | — |
+| `turns_ratio` | out | Np/Ns | - |
 
 **Applies when:** ideal transformer (no losses, no magnetizing current).
 
@@ -542,7 +490,7 @@ turns_ratio = 10
 
 <a id="parallel_rlc_impedance"></a>
 
-#### Impedance of a parallel RLC circuit — `parallel_rlc_impedance`
+#### Impedance of a parallel RLC circuit: `parallel_rlc_impedance`
 
 The complex impedance of R, L and C in parallel at a frequency: magnitude, phase angle and the two reactances.
 
@@ -557,7 +505,7 @@ $$
 | `C` | in | capacitance | F |
 | `f` | in | frequency of the source in Hz | Hz |
 | `impedance` | out | magnitude of the impedance \|Z\| | ohm |
-| `phase_deg` | out | phase angle of Z in degrees (positive: inductive) | — |
+| `phase_deg` | out | phase angle of Z in degrees (positive: inductive) | - |
 | `real` | out | real part of Z | ohm |
 | `imag` | out | imaginary part of Z (net reactance) | ohm |
 | `XL` | out | inductive reactance wL | ohm |
@@ -585,7 +533,7 @@ XC = 159.1549431 ohm
 
 <a id="series_rlc_impedance"></a>
 
-#### Impedance of a series RLC circuit — `series_rlc_impedance`
+#### Impedance of a series RLC circuit: `series_rlc_impedance`
 
 The complex impedance of R, L and C in series at a frequency: magnitude, phase angle and the two reactances.
 
@@ -600,7 +548,7 @@ $$
 | `C` | in | capacitance | F |
 | `f` | in | frequency of the source in Hz | Hz |
 | `impedance` | out | magnitude of the impedance \|Z\| | ohm |
-| `phase_deg` | out | phase angle of Z in degrees (positive: inductive) | — |
+| `phase_deg` | out | phase angle of Z in degrees (positive: inductive) | - |
 | `real` | out | real part of Z | ohm |
 | `imag` | out | imaginary part of Z (net reactance) | ohm |
 | `XL` | out | inductive reactance wL | ohm |
@@ -628,7 +576,7 @@ XC = 15.91549431 ohm
 
 <a id="polar_to_rectangular"></a>
 
-#### Phasor from polar to rectangular form — `polar_to_rectangular`
+#### Phasor from polar to rectangular form: `polar_to_rectangular`
 
 The real and imaginary parts of a phasor given as a magnitude and an angle in degrees.
 
@@ -638,10 +586,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `magnitude` | in | magnitude (non-negative) | — |
-| `angle_deg` | in | angle in degrees | — |
-| `real` | out | real part | — |
-| `imag` | out | imaginary part | — |
+| `magnitude` | in | magnitude (non-negative) | - |
+| `angle_deg` | in | angle in degrees | - |
+| `real` | out | real part | - |
+| `imag` | out | imaginary part | - |
 
 **Applies when:** magnitude >= 0.
 
@@ -659,7 +607,7 @@ imag = 5
 
 <a id="rectangular_to_polar"></a>
 
-#### Phasor from rectangular to polar form — `rectangular_to_polar`
+#### Phasor from rectangular to polar form: `rectangular_to_polar`
 
 The magnitude and angle (degrees, in (-180, 180]) of a phasor given as real + j imaginary.
 
@@ -669,10 +617,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `real` | in | real part | — |
-| `imag` | in | imaginary part | — |
-| `magnitude` | out | magnitude | — |
-| `angle_deg` | out | angle in degrees | — |
+| `real` | in | real part | - |
+| `imag` | in | imaginary part | - |
+| `magnitude` | out | magnitude | - |
+| `angle_deg` | out | angle in degrees | - |
 
 **Applies when:** not both parts zero.
 
@@ -690,7 +638,7 @@ angle_deg = 53.13010235
 
 <a id="power_factor_correction"></a>
 
-#### Power-factor correction capacitor — `power_factor_correction`
+#### Power-factor correction capacitor: `power_factor_correction`
 
 The shunt capacitance (and its reactive power) that raises a lagging load's power factor to a target value.
 
@@ -703,10 +651,10 @@ $$
 | `P` | in | real power of the load | W |
 | `V` | in | rms supply voltage across the capacitor | V |
 | `f` | in | supply frequency | Hz |
-| `pf_initial` | in | present (lagging) power factor | — |
-| `pf_target` | in | target (lagging) power factor | — |
+| `pf_initial` | in | present (lagging) power factor | - |
+| `pf_target` | in | target (lagging) power factor | - |
 | `C` | out | correction capacitance | F |
-| `C_uF` | out | correction capacitance in microfarads | — |
+| `C_uF` | out | correction capacitance in microfarads | - |
 | `Qc` | out | reactive power the capacitor supplies, in var | W |
 | `Q_initial` | out | reactive power before correction, in var | W |
 | `Q_final` | out | reactive power after correction, in var | W |
@@ -733,7 +681,7 @@ Q_final = 3286.841052 W
 
 <a id="parallel_rlc_resonance"></a>
 
-#### Resonance, Q factor and bandwidth of a parallel RLC circuit — `parallel_rlc_resonance`
+#### Resonance, Q factor and bandwidth of a parallel RLC circuit, `parallel_rlc_resonance`
 
 The resonant frequency, quality factor, half-power bandwidth and half-power frequencies of a parallel RLC circuit.
 
@@ -747,7 +695,7 @@ $$
 | `L` | in | inductance | H |
 | `C` | in | capacitance | F |
 | `f0` | out | resonant frequency | Hz |
-| `Q` | out | quality factor | — |
+| `Q` | out | quality factor | - |
 | `bandwidth` | out | half-power bandwidth | Hz |
 | `f_low` | out | lower half-power frequency | Hz |
 | `f_high` | out | upper half-power frequency | Hz |
@@ -772,7 +720,7 @@ f_high = 16073.08876 Hz
 
 <a id="series_rlc_resonance"></a>
 
-#### Resonance, Q factor and bandwidth of a series RLC circuit — `series_rlc_resonance`
+#### Resonance, Q factor and bandwidth of a series RLC circuit, `series_rlc_resonance`
 
 The resonant frequency, quality factor, half-power bandwidth and half-power frequencies of a series RLC circuit.
 
@@ -786,7 +734,7 @@ $$
 | `L` | in | inductance | H |
 | `C` | in | capacitance | F |
 | `f0` | out | resonant frequency | Hz |
-| `Q` | out | quality factor | — |
+| `Q` | out | quality factor | - |
 | `bandwidth` | out | half-power bandwidth | Hz |
 | `f_low` | out | lower half-power frequency | Hz |
 | `f_high` | out | upper half-power frequency | Hz |
@@ -811,7 +759,7 @@ f_high = 1673.115097 Hz
 
 <a id="rms_waveform"></a>
 
-#### RMS and average value of a periodic waveform — `rms_waveform`
+#### RMS and average value of a periodic waveform, `rms_waveform`
 
 The rms value (with DC offset), average, AC rms and crest factor of a sine, square, triangle or sawtooth wave.
 
@@ -821,13 +769,13 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `shape` | in | waveform shape | — |
+| `shape` | in | waveform shape | - |
 | `amplitude` | in | peak amplitude about the average | V |
 | `offset` | in | DC offset (average value); 0 when not given (optional) | V |
 | `rms` | out | rms value including the offset | V |
 | `average` | out | average value | V |
 | `ac_rms` | out | rms of the AC part | V |
-| `crest_factor` | out | peak over rms | — |
+| `crest_factor` | out | peak over rms | - |
 
 **Applies when:** symmetric waveform of the stated shape about its offset.
 
@@ -848,7 +796,7 @@ crest_factor = 1
 
 <a id="phasor_sum"></a>
 
-#### Sum of sinusoids by phasor addition — `phasor_sum`
+#### Sum of sinusoids by phasor addition: `phasor_sum`
 
 The amplitude and phase of the sum of sinusoids of one frequency, A_k cos(wt + phi_k), by adding their phasors.
 
@@ -858,12 +806,12 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `amplitudes` | in | amplitudes (non-negative) | — |
-| `phases_deg` | in | phase angles in degrees | — |
-| `amplitude` | out | amplitude of the sum | — |
-| `phase_deg` | out | phase of the sum in degrees | — |
-| `real` | out | real part of the resultant phasor | — |
-| `imag` | out | imaginary part of the resultant phasor | — |
+| `amplitudes` | in | amplitudes (non-negative) | - |
+| `phases_deg` | in | phase angles in degrees | - |
+| `amplitude` | out | amplitude of the sum | - |
+| `phase_deg` | out | phase of the sum in degrees | - |
+| `real` | out | real part of the resultant phasor | - |
+| `imag` | out | imaginary part of the resultant phasor | - |
 
 **Applies when:** one phase per amplitude; one common frequency.
 
@@ -883,7 +831,7 @@ imag = 4
 
 <a id="closed_loop_poles"></a>
 
-#### Closed-loop poles with unity negative feedback — `closed_loop_poles`
+#### Closed-loop poles with unity negative feedback, `closed_loop_poles`
 
 The poles of K*G(s)/(1 + K*G(s)): the roots of den(s) + K*num(s), and whether the closed loop is stable.
 
@@ -893,13 +841,13 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | — |
-| `den` | in | denominator coefficients of G(s), highest power of s first | — |
-| `K` | in | loop gain multiplying G(s) (default 1) (optional) | — |
-| `poles` | out | closed-loop poles (real first by real part, conjugate pairs together) | — |
-| `max_real_part` | out | largest real part of the poles (negative when stable) | — |
-| `stable` | out | true when every pole has a negative real part | — |
-| `characteristic` | out | closed-loop characteristic polynomial den + K num | — |
+| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | - |
+| `den` | in | denominator coefficients of G(s), highest power of s first | - |
+| `K` | in | loop gain multiplying G(s) (default 1) (optional) | - |
+| `poles` | out | closed-loop poles (real first by real part, conjugate pairs together) | - |
+| `max_real_part` | out | largest real part of the poles (negative when stable) | - |
+| `stable` | out | true when every pole has a negative real part | - |
+| `characteristic` | out | closed-loop characteristic polynomial den + K num | - |
 
 **Applies when:** a proper G(s); unity negative feedback.
 
@@ -917,7 +865,7 @@ characteristic = [1.0,3.0,2.0]
 
 <a id="controllability_observability"></a>
 
-#### Controllability and observability of a single-input single-output system — `controllability_observability`
+#### Controllability and observability of a single-input single-output system, `controllability_observability`
 
 The ranks of the controllability matrix [B AB ... A^(n-1)B] and the observability matrix [C; CA; ...; CA^(n-1)], and whether the system is controllable and observable.
 
@@ -927,13 +875,13 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `A` | in | state matrix (n x n) | — |
-| `B` | in | input vector | — |
-| `C` | in | output vector | — |
-| `controllability_rank` | out | rank of the controllability matrix | — |
-| `observability_rank` | out | rank of the observability matrix | — |
-| `controllable` | out | full controllability rank | — |
-| `observable` | out | full observability rank | — |
+| `A` | in | state matrix (n x n) | - |
+| `B` | in | input vector | - |
+| `C` | in | output vector | - |
+| `controllability_rank` | out | rank of the controllability matrix | - |
+| `observability_rank` | out | rank of the observability matrix | - |
+| `controllable` | out | full controllability rank | - |
+| `observable` | out | full observability rank | - |
 
 **Applies when:** small integer or well-scaled entries (rank decided at a relative tolerance of 1e-9).
 
@@ -951,7 +899,7 @@ observable = true
 
 <a id="bode_point"></a>
 
-#### Frequency response (Bode magnitude and phase) at one frequency — `bode_point`
+#### Frequency response (Bode magnitude and phase) at one frequency, `bode_point`
 
 |G(jw)| as a ratio and in decibels, and the phase of G(jw), for a transfer function at an angular frequency w.
 
@@ -961,14 +909,14 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | — |
-| `den` | in | denominator coefficients of G(s), highest power of s first | — |
+| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | - |
+| `den` | in | denominator coefficients of G(s), highest power of s first | - |
 | `w` | in | angular frequency in rad/s | rad/s |
-| `magnitude` | out | \|G(jw)\| | — |
-| `magnitude_db` | out | 20 log10 \|G(jw)\| in decibels | — |
-| `phase_deg` | out | phase of G(jw) in degrees, in (-180, 180] | — |
-| `real` | out | real part of G(jw) | — |
-| `imag` | out | imaginary part of G(jw) | — |
+| `magnitude` | out | \|G(jw)\| | - |
+| `magnitude_db` | out | 20 log10 \|G(jw)\| in decibels | - |
+| `phase_deg` | out | phase of G(jw) in degrees, in (-180, 180] | - |
+| `real` | out | real part of G(jw) | - |
+| `imag` | out | imaginary part of G(jw) | - |
 
 **Applies when:** no pole of G on the imaginary axis at w; w > 0.
 
@@ -988,7 +936,7 @@ imag = -5
 
 <a id="gain_margin"></a>
 
-#### Gain margin and phase-crossover frequency — `gain_margin`
+#### Gain margin and phase-crossover frequency: `gain_margin`
 
 The gain margin of a unity-feedback loop with open-loop G(s): 1/|G(jw)| at the frequency where the phase is -180 degrees.
 
@@ -998,10 +946,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | — |
-| `den` | in | denominator coefficients of G(s), highest power of s first | — |
-| `gain_margin` | out | gain margin as a ratio | — |
-| `gain_margin_db` | out | gain margin in decibels | — |
+| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | - |
+| `den` | in | denominator coefficients of G(s), highest power of s first | - |
+| `gain_margin` | out | gain margin as a ratio | - |
+| `gain_margin_db` | out | gain margin in decibels | - |
 | `phase_crossover` | out | phase-crossover frequency (phase -180 degrees) | rad/s |
 
 **Applies when:** a proper G(s); exactly one phase crossover with G negative real.
@@ -1019,7 +967,7 @@ phase_crossover = 2.236067977 rad/s
 
 <a id="lead_compensator"></a>
 
-#### Maximum phase lead of a lead compensator — `lead_compensator`
+#### Maximum phase lead of a lead compensator: `lead_compensator`
 
 For C(s) = (s + z)/(s + p) with p > z: the maximum phase lead, the frequency where it occurs, and the gain there.
 
@@ -1031,9 +979,9 @@ $$
 |---|---|---|---|
 | `z` | in | zero (corner) frequency | rad/s |
 | `p` | in | pole (corner) frequency, p > z | rad/s |
-| `phase_max_deg` | out | maximum phase lead in degrees | — |
+| `phase_max_deg` | out | maximum phase lead in degrees | - |
 | `w_max` | out | frequency of maximum phase, sqrt(z p) | rad/s |
-| `gain_at_w_max_db` | out | gain of (s+z)/(s+p) there, in dB | — |
+| `gain_at_w_max_db` | out | gain of (s+z)/(s+p) there, in dB | - |
 
 **Applies when:** p > z > 0.
 
@@ -1052,7 +1000,7 @@ gain_at_w_max_db = -10
 
 <a id="phase_margin"></a>
 
-#### Phase margin and gain-crossover frequency — `phase_margin`
+#### Phase margin and gain-crossover frequency: `phase_margin`
 
 The phase margin of a unity-feedback loop with open-loop G(s): 180 degrees plus the phase of G at the frequency where |G(jw)| = 1.
 
@@ -1062,9 +1010,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | — |
-| `den` | in | denominator coefficients of G(s), highest power of s first | — |
-| `phase_margin` | out | phase margin in degrees | — |
+| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | - |
+| `den` | in | denominator coefficients of G(s), highest power of s first | - |
+| `phase_margin` | out | phase margin in degrees | - |
 | `gain_crossover` | out | gain-crossover frequency (\|G\| = 1) | rad/s |
 
 **Applies when:** a proper G(s); exactly one gain crossover.
@@ -1081,7 +1029,7 @@ gain_crossover = 1.572302756 rad/s
 
 <a id="routh_hurwitz"></a>
 
-#### Routh-Hurwitz stability test — `routh_hurwitz`
+#### Routh-Hurwitz stability test: `routh_hurwitz`
 
 The Routh array's first column, the number of roots in the right half plane and whether a characteristic polynomial is stable.
 
@@ -1091,10 +1039,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `coefficients` | in | characteristic polynomial coefficients, highest power of s first | — |
-| `rhp_roots` | out | number of roots with positive real part (sign changes in the first column) | — |
-| `stable` | out | true when every root has a negative real part | — |
-| `first_column` | out | the first column of the Routh array | — |
+| `coefficients` | in | characteristic polynomial coefficients, highest power of s first | - |
+| `rhp_roots` | out | number of roots with positive real part (sign changes in the first column) | - |
+| `stable` | out | true when every root has a negative real part | - |
+| `first_column` | out | the first column of the Routh array | - |
 
 **Applies when:** no zero in the first column of the Routh array (the special cases are not handled).
 
@@ -1111,7 +1059,7 @@ first_column = [1.0,2.0,1.0,-6.0,5.0]
 
 <a id="steady_state_error"></a>
 
-#### Steady-state error of a unity-feedback system — `steady_state_error`
+#### Steady-state error of a unity-feedback system, `steady_state_error`
 
 The system type, the error constant (Kp, Kv or Ka) and the steady-state error for a unit step, ramp or parabola input.
 
@@ -1121,12 +1069,12 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | — |
-| `den` | in | denominator coefficients of G(s), highest power of s first | — |
-| `input` | in | the test input: unit step 1/s, unit ramp 1/s^2 or unit parabola t^2/2 (1/s^3) | — |
-| `steady_state_error` | out | steady-state error (or 'infinite') | — |
-| `error_constant` | out | position (Kp), velocity (Kv) or acceleration (Ka) error constant | — |
-| `system_type` | out | number of open-loop poles at the origin | — |
+| `num` | in | numerator coefficients of the open-loop G(s), highest power of s first | - |
+| `den` | in | denominator coefficients of G(s), highest power of s first | - |
+| `input` | in | the test input: unit step 1/s, unit ramp 1/s^2 or unit parabola t^2/2 (1/s^3) | - |
+| `steady_state_error` | out | steady-state error (or 'infinite') | - |
+| `error_constant` | out | position (Kp), velocity (Kv) or acceleration (Ka) error constant | - |
+| `system_type` | out | number of open-loop poles at the origin | - |
 
 **Applies when:** a stable closed loop; unity negative feedback; unit-amplitude test input.
 
@@ -1144,7 +1092,7 @@ In the worked example, num = [10], den = [1, 3, 2], input = step go through the 
 
 <a id="dc_motor"></a>
 
-#### Steady-state speed and current of a permanent-magnet DC motor — `dc_motor`
+#### Steady-state speed and current of a permanent-magnet DC motor, `dc_motor`
 
 Speed, current, powers and efficiency of a DC motor with armature resistance R, torque constant Kt, back-emf constant Ke, viscous friction b and load torque T at supply voltage V.
 
@@ -1156,16 +1104,16 @@ $$
 |---|---|---|---|
 | `V` | in | armature supply voltage | V |
 | `R` | in | armature resistance | ohm |
-| `Kt` | in | torque constant in N*m/A | — |
-| `Ke` | in | back-emf constant in V*s/rad | — |
+| `Kt` | in | torque constant in N*m/A | - |
+| `Ke` | in | back-emf constant in V*s/rad | - |
 | `T` | in | load torque | N*m |
-| `b` | in | viscous friction in N*m*s/rad | — |
+| `b` | in | viscous friction in N*m*s/rad | - |
 | `speed` | out | steady-state speed | rad/s |
-| `rpm` | out | speed in revolutions per minute | — |
+| `rpm` | out | speed in revolutions per minute | - |
 | `current` | out | armature current | A |
 | `input_power` | out | electrical input power | W |
 | `output_power` | out | mechanical output power to the load | W |
-| `efficiency` | out | output over input power | — |
+| `efficiency` | out | output over input power | - |
 
 **Applies when:** steady state; linear model (no saturation, constant parameters).
 
@@ -1191,7 +1139,7 @@ efficiency = 0.4393939394
 
 <a id="second_order_step"></a>
 
-#### Step-response specifications of a standard second-order system — `second_order_step`
+#### Step-response specifications of a standard second-order system, `second_order_step`
 
 Percent overshoot, peak time, 10-90% rise time and exact 2% settling time of wn^2/(s^2 + 2 zeta wn s + wn^2) for a unit step.
 
@@ -1201,10 +1149,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `zeta` | in | damping ratio (0 < zeta < 1) | — |
+| `zeta` | in | damping ratio (0 < zeta < 1) | - |
 | `wn` | in | undamped natural frequency | rad/s |
-| `percent_overshoot` | out | maximum overshoot in percent | — |
-| `overshoot` | out | maximum overshoot as a fraction of the final value | — |
+| `percent_overshoot` | out | maximum overshoot in percent | - |
+| `overshoot` | out | maximum overshoot as a fraction of the final value | - |
 | `peak_time` | out | time of the first peak | s |
 | `rise_time` | out | 10% to 90% rise time | s |
 | `t10` | out | time to reach 10% of the final value | s |
@@ -1234,7 +1182,7 @@ damped_frequency = 3.464101615 rad/s
 
 <a id="state_space_to_tf"></a>
 
-#### Transfer function of a single-input single-output state-space model — `state_space_to_tf`
+#### Transfer function of a single-input single-output state-space model, `state_space_to_tf`
 
 G(s) = C (sI - A)^-1 B + D as numerator and denominator coefficients for x' = Ax + Bu, y = Cx + Du.
 
@@ -1244,13 +1192,13 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `A` | in | state matrix (n x n) | — |
-| `B` | in | input vector (n entries) | — |
-| `C` | in | output vector (n entries) | — |
-| `D` | in | feedthrough | — |
-| `num` | out | numerator coefficients (highest power first, length n + 1) | — |
-| `den` | out | denominator coefficients det(sI - A), monic | — |
-| `order` | out | system order n | — |
+| `A` | in | state matrix (n x n) | - |
+| `B` | in | input vector (n entries) | - |
+| `C` | in | output vector (n entries) | - |
+| `D` | in | feedthrough | - |
+| `num` | out | numerator coefficients (highest power first, length n + 1) | - |
+| `den` | out | denominator coefficients det(sI - A), monic | - |
+| `order` | out | system order n | - |
 
 **Applies when:** a square A with B and C of matching size; coefficients below 1e-12 of the largest are written as 0.
 
@@ -1270,7 +1218,7 @@ order = 2
 
 <a id="current_divider"></a>
 
-#### Current divider — `current_divider`
+#### Current divider: `current_divider`
 
 How a current I splits between two resistors in parallel.
 
@@ -1303,7 +1251,7 @@ I2 = 4 A
 
 <a id="delta_to_wye"></a>
 
-#### Delta-to-wye (Pi-to-T) resistor transformation — `delta_to_wye`
+#### Delta-to-wye (Pi-to-T) resistor transformation, `delta_to_wye`
 
 The three wye (star) resistances equivalent to a delta (triangle) of resistances between terminals a, b, c.
 
@@ -1338,7 +1286,7 @@ Rc = 10 ohm
 
 <a id="parallel_capacitance"></a>
 
-#### Equivalent capacitance of capacitors in parallel — `parallel_capacitance`
+#### Equivalent capacitance of capacitors in parallel, `parallel_capacitance`
 
 The single capacitance equivalent to two or more capacitors connected in parallel.
 
@@ -1348,11 +1296,11 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `C` | in | the capacitance values, all in one unit (F, mF, uF, nF ...; a list, e.g. '10, 22, 47') | — |
-| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | — |
-| `equivalent` | out | equivalent capacitance, in the unit of the inputs | — |
-| `count` | out | number of capacitors | — |
-| `unit` | out | the unit of the result | — |
+| `C` | in | the capacitance values, all in one unit (F, mF, uF, nF ...; a list, e.g. '10, 22, 47') | - |
+| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | - |
+| `equivalent` | out | equivalent capacitance, in the unit of the inputs | - |
+| `count` | out | number of capacitors | - |
+| `unit` | out | the unit of the result | - |
 
 **Applies when:** every value positive; at least two values.
 
@@ -1370,7 +1318,7 @@ unit = uF
 
 <a id="series_capacitance"></a>
 
-#### Equivalent capacitance of capacitors in series — `series_capacitance`
+#### Equivalent capacitance of capacitors in series, `series_capacitance`
 
 The single capacitance equivalent to two or more capacitors connected in series.
 
@@ -1380,11 +1328,11 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `C` | in | the capacitance values, all in one unit (F, mF, uF, nF ...; a list, e.g. '10, 22, 47') | — |
-| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | — |
-| `equivalent` | out | equivalent capacitance, in the unit of the inputs | — |
-| `count` | out | number of capacitors | — |
-| `unit` | out | the unit of the result | — |
+| `C` | in | the capacitance values, all in one unit (F, mF, uF, nF ...; a list, e.g. '10, 22, 47') | - |
+| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | - |
+| `equivalent` | out | equivalent capacitance, in the unit of the inputs | - |
+| `count` | out | number of capacitors | - |
+| `unit` | out | the unit of the result | - |
 
 **Applies when:** every value positive; at least two values.
 
@@ -1402,7 +1350,7 @@ unit = uF
 
 <a id="parallel_inductance"></a>
 
-#### Equivalent inductance of inductors in parallel — `parallel_inductance`
+#### Equivalent inductance of inductors in parallel, `parallel_inductance`
 
 The single inductance equivalent to two or more inductors connected in parallel.
 
@@ -1412,11 +1360,11 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `L` | in | the inductance values, all in one unit (H, mH, uH, nH ...; a list, e.g. '10, 22, 47') | — |
-| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | — |
-| `equivalent` | out | equivalent inductance, in the unit of the inputs | — |
-| `count` | out | number of inductors | — |
-| `unit` | out | the unit of the result | — |
+| `L` | in | the inductance values, all in one unit (H, mH, uH, nH ...; a list, e.g. '10, 22, 47') | - |
+| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | - |
+| `equivalent` | out | equivalent inductance, in the unit of the inputs | - |
+| `count` | out | number of inductors | - |
+| `unit` | out | the unit of the result | - |
 
 **Applies when:** every value positive; at least two values.
 
@@ -1434,7 +1382,7 @@ In the worked example, L = [10, 40], unit = mH go through the equation above and
 
 <a id="series_inductance"></a>
 
-#### Equivalent inductance of inductors in series — `series_inductance`
+#### Equivalent inductance of inductors in series, `series_inductance`
 
 The single inductance equivalent to two or more inductors connected in series.
 
@@ -1444,11 +1392,11 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `L` | in | the inductance values, all in one unit (H, mH, uH, nH ...; a list, e.g. '10, 22, 47') | — |
-| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | — |
-| `equivalent` | out | equivalent inductance, in the unit of the inputs | — |
-| `count` | out | number of inductors | — |
-| `unit` | out | the unit of the result | — |
+| `L` | in | the inductance values, all in one unit (H, mH, uH, nH ...; a list, e.g. '10, 22, 47') | - |
+| `unit` | in | the unit the values are written in (the result is in the same unit) (optional) | - |
+| `equivalent` | out | equivalent inductance, in the unit of the inputs | - |
+| `count` | out | number of inductors | - |
+| `unit` | out | the unit of the result | - |
 
 **Applies when:** every value positive; at least two values.
 
@@ -1466,7 +1414,7 @@ In the worked example, L = [10, 22], unit = mH go through the equation above and
 
 <a id="resistor_network"></a>
 
-#### Equivalent resistance of a series-parallel resistor network — `resistor_network`
+#### Equivalent resistance of a series-parallel resistor network, `resistor_network`
 
 The equivalent resistance of a network written with + for series and || for parallel, e.g. 10 + (20 || 30).
 
@@ -1476,9 +1424,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `network` | in | the network in ohms: + joins in series, \|\| joins in parallel ('\|\|' binds tighter than '+'), parentheses group | — |
+| `network` | in | the network in ohms: + joins in series, \|\| joins in parallel ('\|\|' binds tighter than '+'), parentheses group | - |
 | `equivalent` | out | equivalent resistance | ohm |
-| `resistors` | out | number of resistors in the network | — |
+| `resistors` | out | number of resistors in the network | - |
 
 **Applies when:** every resistance positive; at least two resistors; '||' binds tighter than '+'.
 
@@ -1495,7 +1443,7 @@ resistors = 3
 
 <a id="parallel_resistance"></a>
 
-#### Equivalent resistance of resistors in parallel — `parallel_resistance`
+#### Equivalent resistance of resistors in parallel, `parallel_resistance`
 
 The single resistance equivalent to two or more resistors connected in parallel.
 
@@ -1505,9 +1453,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `R` | in | the resistance values in ohms (a list, e.g. '10, 20, 30') | — |
+| `R` | in | the resistance values in ohms (a list, e.g. '10, 20, 30') | - |
 | `equivalent` | out | equivalent resistance | ohm |
-| `count` | out | number of resistors | — |
+| `count` | out | number of resistors | - |
 
 **Applies when:** every value positive; at least two values.
 
@@ -1523,7 +1471,7 @@ count = 2
 
 <a id="series_resistance"></a>
 
-#### Equivalent resistance of resistors in series — `series_resistance`
+#### Equivalent resistance of resistors in series, `series_resistance`
 
 The single resistance equivalent to two or more resistors connected in series.
 
@@ -1533,9 +1481,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `R` | in | the resistance values in ohms (a list, e.g. '10, 20, 30') | — |
+| `R` | in | the resistance values in ohms (a list, e.g. '10, 20, 30') | - |
 | `equivalent` | out | equivalent resistance | ohm |
-| `count` | out | number of resistors | — |
+| `count` | out | number of resistors | - |
 
 **Applies when:** every value positive; at least two values.
 
@@ -1551,7 +1499,7 @@ count = 3
 
 <a id="max_power_transfer"></a>
 
-#### Maximum power transfer — `max_power_transfer`
+#### Maximum power transfer: `max_power_transfer`
 
 The load resistance that draws the most power from a source with Thevenin voltage Vth and resistance Rth, and that power.
 
@@ -1565,7 +1513,7 @@ $$
 | `Rth` | in | Thevenin resistance | ohm |
 | `RL` | out | load resistance for maximum power (= Rth) | ohm |
 | `Pmax` | out | maximum power delivered to the load | W |
-| `efficiency` | out | fraction of the source power reaching the load at that point | — |
+| `efficiency` | out | fraction of the source power reaching the load at that point | - |
 
 **Applies when:** a resistive load; Rth > 0.
 
@@ -1584,7 +1532,7 @@ efficiency = 0.5
 
 <a id="mesh_currents"></a>
 
-#### Mesh currents from the mesh equations (Kirchhoff's voltage law) — `mesh_currents`
+#### Mesh currents from the mesh equations (Kirchhoff's voltage law), `mesh_currents`
 
 Solve the mesh equations R i = v of a circuit: the resistance matrix and the source-voltage vector give every mesh current.
 
@@ -1594,9 +1542,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `A` | in | mesh resistance matrix in ohms (self-resistances on the diagonal, minus the shared resistances off it) | — |
-| `b` | in | net source voltage around each mesh in volts, in the mesh-current direction | — |
-| `currents` | out | the mesh currents in amperes, in the order of the rows | — |
+| `A` | in | mesh resistance matrix in ohms (self-resistances on the diagonal, minus the shared resistances off it) | - |
+| `b` | in | net source voltage around each mesh in volts, in the mesh-current direction | - |
+| `currents` | out | the mesh currents in amperes, in the order of the rows | - |
 | `first` | out | the first mesh current | A |
 
 **Applies when:** square matrix; one source voltage per mesh; a non-singular matrix.
@@ -1613,7 +1561,7 @@ first = 1.5 A
 
 <a id="nodal_voltages"></a>
 
-#### Node voltages from the nodal equations (Kirchhoff's current law) — `nodal_voltages`
+#### Node voltages from the nodal equations (Kirchhoff's current law), `nodal_voltages`
 
 Solve the nodal equations G v = i of a circuit: the conductance matrix and the injected-current vector give every node voltage.
 
@@ -1623,9 +1571,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `A` | in | nodal conductance matrix in siemens (sums of conductances on the diagonal, minus the shared conductances off it) | — |
-| `b` | in | current injected into each node by sources, in amperes | — |
-| `voltages` | out | the node voltages in volts, in the order of the rows | — |
+| `A` | in | nodal conductance matrix in siemens (sums of conductances on the diagonal, minus the shared conductances off it) | - |
+| `b` | in | current injected into each node by sources, in amperes | - |
+| `voltages` | out | the node voltages in volts, in the order of the rows | - |
 | `first` | out | the first node voltage | V |
 
 **Applies when:** square matrix; one injected current per node; a non-singular matrix.
@@ -1642,7 +1590,7 @@ first = 4.8 V
 
 <a id="dc_node_voltages"></a>
 
-#### Node voltages of a DC resistive circuit from its netlist — `dc_node_voltages`
+#### Node voltages of a DC resistive circuit from its netlist, `dc_node_voltages`
 
 Every node voltage, every voltage-source current and the power delivered, for a circuit of resistors and independent sources written as a netlist.
 
@@ -1652,9 +1600,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `netlist` | in | elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes> (flowing from the first node through the source to the second); node 0 is ground | — |
-| `node_voltages` | out | voltage of every node relative to node 0, in volts | — |
-| `source_currents` | out | current through each voltage source from its + node to its - node, in amperes | — |
+| `netlist` | in | elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes> (flowing from the first node through the source to the second); node 0 is ground | - |
+| `node_voltages` | out | voltage of every node relative to node 0, in volts | - |
+| `source_currents` | out | current through each voltage source from its + node to its - node, in amperes | - |
 | `power_delivered` | out | total power delivered by the sources (= power dissipated in the resistors) | W |
 
 **Applies when:** a ground node 0; every resistance positive; a unique solution (no floating node, no loop of voltage sources).
@@ -1673,7 +1621,7 @@ power_delivered = 0.048 W
 
 <a id="norton_equivalent"></a>
 
-#### Norton equivalent of a DC circuit between two nodes — `norton_equivalent`
+#### Norton equivalent of a DC circuit between two nodes, `norton_equivalent`
 
 The Norton current and resistance seen between two nodes of a resistive circuit with independent sources.
 
@@ -1683,9 +1631,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `netlist` | in | elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes>; node 0 is ground | — |
-| `node_a` | in | the terminal node (the + side of the equivalent) | — |
-| `node_b` | in | the reference terminal node | — |
+| `netlist` | in | elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes>; node 0 is ground | - |
+| `node_a` | in | the terminal node (the + side of the equivalent) | - |
+| `node_b` | in | the reference terminal node | - |
 | `In` | out | Norton (short-circuit) current from node a to node b | A |
 | `Rn` | out | Norton resistance (equal to the Thevenin resistance) | ohm |
 
@@ -1696,9 +1644,9 @@ $ electrical-engineering solve norton_equivalent node_a=2 node_b=0 "netlist=V1 1
 In = 0.012 A
 Rn = 666.6666667 ohm
   by: Norton equivalent of a DC circuit between two nodes  (Thevenin voltage and resistance by modified nodal analysis, then I_N = V_th / R_th)
+  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_a = 2
   node_b = 0
-  netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 ```
 
@@ -1706,7 +1654,7 @@ In the worked example, node_a = 2, node_b = 0, netlist = V1 1 0 12; R1 1 2 1000;
 
 <a id="thevenin_equivalent"></a>
 
-#### Thevenin equivalent of a DC circuit between two nodes — `thevenin_equivalent`
+#### Thevenin equivalent of a DC circuit between two nodes, `thevenin_equivalent`
 
 The Thevenin voltage and resistance seen between two nodes of a resistive circuit with independent sources.
 
@@ -1716,9 +1664,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `netlist` | in | elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes>; node 0 is ground | — |
-| `node_a` | in | the terminal node (the + side of the equivalent) | — |
-| `node_b` | in | the reference terminal node | — |
+| `netlist` | in | elements separated by ';': R<name> <node> <node> <ohms>, V<name> <node+> <node-> <volts>, I<name> <node> <node> <amperes>; node 0 is ground | - |
+| `node_a` | in | the terminal node (the + side of the equivalent) | - |
+| `node_b` | in | the reference terminal node | - |
 | `Vth` | out | Thevenin (open-circuit) voltage, node a relative to node b | V |
 | `Rth` | out | Thevenin resistance | ohm |
 
@@ -1729,9 +1677,9 @@ $ electrical-engineering solve thevenin_equivalent node_a=2 node_b=0 "netlist=V1
 Vth = 8 V
 Rth = 666.6666667 ohm
   by: Thevenin equivalent of a DC circuit between two nodes  (open-circuit voltage by modified nodal analysis; resistance by a 1 A test current with the independent sources set to zero)
-  node_b = 0
   netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000.
   node_a = 2
+  node_b = 0
   assumes: both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 ```
 
@@ -1739,7 +1687,7 @@ Rth = 666.6666667 ohm
 
 <a id="voltage_divider"></a>
 
-#### Voltage divider — `voltage_divider`
+#### Voltage divider: `voltage_divider`
 
 The output voltage across R2 of two resistors in series across Vin (R1 on top, R2 to ground), and the current.
 
@@ -1772,7 +1720,7 @@ I = 0.004 A
 
 <a id="wheatstone_bridge"></a>
 
-#### Wheatstone bridge output — `wheatstone_bridge`
+#### Wheatstone bridge output: `wheatstone_bridge`
 
 The output voltage of a Wheatstone bridge (left arm R1 over R2, right arm R3 over R4, supply Vs), whether it is balanced, and the R4 that balances it.
 
@@ -1788,7 +1736,7 @@ $$
 | `R3` | in | right arm, top | ohm |
 | `R4` | in | right arm, bottom | ohm |
 | `Vout` | out | voltage of the left midpoint relative to the right midpoint | V |
-| `balanced` | out | true when R1 R4 = R2 R3 | — |
+| `balanced` | out | true when R1 R4 = R2 R3 | - |
 | `R4_balance` | out | the R4 that would balance the bridge | ohm |
 
 **Applies when:** an unloaded output (ideal voltmeter).
@@ -1811,7 +1759,7 @@ R4_balance = 300 ohm
 
 <a id="wye_to_delta"></a>
 
-#### Wye-to-delta (T-to-Pi) resistor transformation — `wye_to_delta`
+#### Wye-to-delta (T-to-Pi) resistor transformation, `wye_to_delta`
 
 The three delta (triangle) resistances equivalent to a wye (star) of resistances at terminals a, b, c.
 
@@ -1848,7 +1796,7 @@ Rca = 35 ohm
 
 <a id="adc_conversion"></a>
 
-#### Analog-to-digital conversion: output code and resolution — `adc_conversion`
+#### Analog-to-digital conversion: output code and resolution, `adc_conversion`
 
 The output code (truncating converter), its binary form, the LSB size and the quantized voltage of an ideal n-bit ADC with reference Vref.
 
@@ -1860,11 +1808,11 @@ $$
 |---|---|---|---|
 | `Vin` | in | input voltage (0 to Vref) | V |
 | `Vref` | in | full-scale reference voltage | V |
-| `bits` | in | resolution in bits | — |
-| `code` | out | output code | — |
-| `binary` | out | code in binary | — |
+| `bits` | in | resolution in bits | - |
+| `code` | out | output code | - |
+| `binary` | out | code in binary | - |
 | `lsb` | out | LSB size Vref/2^n | V |
-| `lsb_mV` | out | LSB in millivolts | — |
+| `lsb_mV` | out | LSB in millivolts | - |
 | `quantized` | out | voltage of the code, code x LSB | V |
 
 **Applies when:** 0 <= Vin <= Vref; truncating (floor) quantizer; Vref itself gives the top code.
@@ -1886,7 +1834,7 @@ quantized = 1.19140625 V
 
 <a id="gray_code"></a>
 
-#### Binary to Gray code and Gray code to binary — `gray_code`
+#### Binary to Gray code and Gray code to binary, `gray_code`
 
 The reflected binary (Gray) code of a binary word, or the binary word of a Gray code, with the same width.
 
@@ -1896,10 +1844,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `value` | in | the bits | — |
-| `direction` | in | conversion direction | — |
-| `result` | out | the converted bits | — |
-| `decimal` | out | the result read as an unsigned number | — |
+| `value` | in | the bits | - |
+| `direction` | in | conversion direction | - |
+| `result` | out | the converted bits | - |
+| `decimal` | out | the result read as an unsigned number | - |
 
 **Applies when:** 1 to 32 bits.
 
@@ -1917,7 +1865,7 @@ decimal = 14
 
 <a id="boolean_equivalence"></a>
 
-#### Equivalence of two Boolean expressions — `boolean_equivalence`
+#### Equivalence of two Boolean expressions: `boolean_equivalence`
 
 Whether two Boolean expressions are equal for every input, with a counterexample row when they are not.
 
@@ -1927,10 +1875,10 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `expression1` | in | first expression (same notation as boolean_evaluate) | — |
-| `expression2` | in | second expression | — |
-| `equivalent` | out | true when the two agree on every row | — |
-| `counterexample` | out | the first row where they differ ('none' if equivalent) | — |
+| `expression1` | in | first expression (same notation as boolean_evaluate) | - |
+| `expression2` | in | second expression | - |
+| `equivalent` | out | true when the two agree on every row | - |
+| `counterexample` | out | the first row where they differ ('none' if equivalent) | - |
 
 **Applies when:** at most 12 variables.
 
@@ -1939,8 +1887,8 @@ $ electrical-engineering solve boolean_equivalence "expression1=(A·B)'" "expres
 equivalent = true
 counterexample = none
   by: Equivalence of two Boolean expressions  (exhaustive comparison over the truth table)
-  expression2 = A' + B'
   expression1 = (A·B)'
+  expression2 = A' + B'
   assumes: at most 12 variables
 ```
 
@@ -1948,7 +1896,7 @@ counterexample = none
 
 <a id="boolean_evaluate"></a>
 
-#### Evaluate a Boolean expression — `boolean_evaluate`
+#### Evaluate a Boolean expression: `boolean_evaluate`
 
 The value (0 or 1) of a Boolean expression for given values of its variables.
 
@@ -1958,9 +1906,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `expression` | in | the expression: AND (&, ·, *), OR (\|, +), XOR (^), NOT (~, !, NOT, or a postfix '), parentheses; NOT > AND > XOR > OR | — |
-| `values` | in | the variables' values, e.g. 'A=1, B=0, C=1' | — |
-| `value` | out | value of the expression (0 or 1) | — |
+| `expression` | in | the expression: AND (&, ·, *), OR (\|, +), XOR (^), NOT (~, !, NOT, or a postfix '), parentheses; NOT > AND > XOR > OR | - |
+| `values` | in | the variables' values, e.g. 'A=1, B=0, C=1' | - |
+| `value` | out | value of the expression (0 or 1) | - |
 
 **Applies when:** every variable given 0 or 1; products written with an operator (A·B, not AB).
 
@@ -1977,7 +1925,7 @@ value = 1
 
 <a id="minterms_to_sop"></a>
 
-#### Minimal sum of products from minterms (with don't-cares) — `minterms_to_sop`
+#### Minimal sum of products from minterms (with don't-cares), `minterms_to_sop`
 
 A minimal sum of products (fewest terms, then fewest literals) of F(A, B, C, D) = Σm(...) + d(...), the Karnaugh-map result.
 
@@ -1987,13 +1935,13 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `minterms` | in | minterm numbers (A is the most significant bit) | — |
-| `variables` | in | number of variables (1 to 4) | — |
-| `dont_cares` | in | don't-care rows (optional) | — |
-| `minimal_sop` | out | a minimal sum of products in A, B, C, D (A' = NOT A) | — |
-| `terms` | out | number of product terms | — |
-| `literals` | out | number of literals | — |
-| `variables` | out | the variables | — |
+| `minterms` | in | minterm numbers (A is the most significant bit) | - |
+| `variables` | in | number of variables (1 to 4) | - |
+| `dont_cares` | in | don't-care rows (optional) | - |
+| `minimal_sop` | out | a minimal sum of products in A, B, C, D (A' = NOT A) | - |
+| `terms` | out | number of product terms | - |
+| `literals` | out | number of literals | - |
+| `variables` | out | the variables | - |
 
 **Applies when:** 1 to 4 variables; minterms and don't-cares disjoint and in range.
 
@@ -2011,7 +1959,7 @@ In the worked example, minterms = [0, 1, 2, 5, 6, 7], variables = 3 go through t
 
 <a id="base_conversion"></a>
 
-#### Number base conversion (binary, octal, decimal, hexadecimal) — `base_conversion`
+#### Number base conversion (binary, octal, decimal, hexadecimal), `base_conversion`
 
 A whole number written in base 2, 8, 10 or 16, given in all four bases.
 
@@ -2021,12 +1969,12 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `value` | in | the digits (0b, 0o, 0x prefixes allowed) | — |
-| `base` | in | the base the value is written in | — |
-| `decimal` | out | value in base 10 | — |
-| `binary` | out | base 2 | — |
-| `octal` | out | base 8 | — |
-| `hexadecimal` | out | base 16 (upper-case digits) | — |
+| `value` | in | the digits (0b, 0o, 0x prefixes allowed) | - |
+| `base` | in | the base the value is written in | - |
+| `decimal` | out | value in base 10 | - |
+| `binary` | out | base 2 | - |
+| `octal` | out | base 8 | - |
+| `hexadecimal` | out | base 16 (upper-case digits) | - |
 
 **Applies when:** a non-negative whole number below 2^53; digits valid for the base.
 
@@ -2046,7 +1994,7 @@ hexadecimal = B
 
 <a id="truth_table_sop"></a>
 
-#### Truth table and minimal sum of products of a Boolean expression — `truth_table_sop`
+#### Truth table and minimal sum of products of a Boolean expression, `truth_table_sop`
 
 The minterms (truth table), the canonical sum of products and a minimal sum of products (fewest terms, then fewest literals) of an expression in up to 4 variables.
 
@@ -2056,14 +2004,14 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `expression` | in | the expression: AND (&, ·, *), OR (\|, +), XOR (^), NOT (~, !, NOT, or a postfix '), parentheses; NOT > AND > XOR > OR | — |
-| `variables` | out | the variables in truth-table order (first = most significant bit) | — |
-| `minterms` | out | rows where the expression is 1 | — |
-| `maxterms` | out | rows where it is 0 | — |
-| `canonical_sop` | out | sum of all minterms | — |
-| `minimal_sop` | out | a minimal sum of products (A' means NOT A, · means AND) | — |
-| `terms` | out | number of product terms in the minimal form | — |
-| `literals` | out | number of literals in the minimal form | — |
+| `expression` | in | the expression: AND (&, ·, *), OR (\|, +), XOR (^), NOT (~, !, NOT, or a postfix '), parentheses; NOT > AND > XOR > OR | - |
+| `variables` | out | the variables in truth-table order (first = most significant bit) | - |
+| `minterms` | out | rows where the expression is 1 | - |
+| `maxterms` | out | rows where it is 0 | - |
+| `canonical_sop` | out | sum of all minterms | - |
+| `minimal_sop` | out | a minimal sum of products (A' means NOT A, · means AND) | - |
+| `terms` | out | number of product terms in the minimal form | - |
+| `literals` | out | number of literals in the minimal form | - |
 
 **Applies when:** 1 to 4 variables.
 
@@ -2085,7 +2033,7 @@ literals = 2
 
 <a id="twos_complement_encode"></a>
 
-#### Two's complement representation of a signed integer — `twos_complement_encode`
+#### Two's complement representation of a signed integer, `twos_complement_encode`
 
 The n-bit two's complement bit pattern (and its hexadecimal form) of a signed whole number.
 
@@ -2095,11 +2043,11 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `value` | in | the signed whole number | — |
-| `bits` | in | word width in bits | — |
-| `pattern` | out | the bit pattern, most significant bit first | — |
-| `hexadecimal` | out | the pattern in hexadecimal | — |
-| `unsigned` | out | the pattern read as an unsigned number | — |
+| `value` | in | the signed whole number | - |
+| `bits` | in | word width in bits | - |
+| `pattern` | out | the bit pattern, most significant bit first | - |
+| `hexadecimal` | out | the pattern in hexadecimal | - |
+| `unsigned` | out | the pattern read as an unsigned number | - |
 
 **Applies when:** -2^(n-1) <= value < 2^(n-1).
 
@@ -2116,7 +2064,7 @@ unsigned = 251
 
 <a id="twos_complement_decode"></a>
 
-#### Value of a two's complement bit pattern — `twos_complement_decode`
+#### Value of a two's complement bit pattern: `twos_complement_decode`
 
 The signed value of an n-bit two's complement pattern (n = the number of digits written).
 
@@ -2126,9 +2074,9 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `pattern` | in | the bits, most significant first | — |
-| `value` | out | signed value | — |
-| `bits` | out | word width | — |
+| `pattern` | in | the bits, most significant first | - |
+| `value` | out | signed value | - |
+| `bits` | out | word width | - |
 
 **Applies when:** only 0 and 1; at most 64 bits.
 
@@ -2147,7 +2095,7 @@ bits = 8
 
 <a id="bjt_divider_bias"></a>
 
-#### DC operating point of a voltage-divider biased BJT — `bjt_divider_bias`
+#### DC operating point of a voltage-divider biased BJT, `bjt_divider_bias`
 
 Base, collector and emitter currents and the node voltages of an NPN transistor with divider bias (R1 to VCC, R2 to ground), collector resistor RC and emitter resistor RE.
 
@@ -2162,10 +2110,10 @@ $$
 | `R2` | in | divider resistor from the base to ground | ohm |
 | `RC` | in | collector resistor | ohm |
 | `RE` | in | emitter resistor | ohm |
-| `beta` | in | DC current gain | — |
+| `beta` | in | DC current gain | - |
 | `VBE` | in | base-emitter voltage in conduction (e.g. 0.7 V) | V |
 | `IC` | out | collector current | A |
-| `IC_mA` | out | collector current in milliamperes | — |
+| `IC_mA` | out | collector current in milliamperes | - |
 | `IB` | out | base current | A |
 | `IE` | out | emitter current | A |
 | `VB` | out | base voltage | V |
@@ -2200,7 +2148,7 @@ VCE = 5.435289428 V
 
 <a id="mosfet_saturation"></a>
 
-#### MOSFET drain current in saturation (square law) — `mosfet_saturation`
+#### MOSFET drain current in saturation (square law), `mosfet_saturation`
 
 Drain current, overdrive voltage and transconductance of an n-channel MOSFET in saturation.
 
@@ -2210,15 +2158,15 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `kn` | in | process transconductance parameter mu_n Cox in A/V^2 | — |
-| `WL` | in | aspect ratio W/L | — |
+| `kn` | in | process transconductance parameter mu_n Cox in A/V^2 | - |
+| `WL` | in | aspect ratio W/L | - |
 | `VGS` | in | gate-source voltage | V |
 | `VTH` | in | threshold voltage | V |
 | `VDS` | in | drain-source voltage | V |
 | `ID` | out | drain current | A |
-| `ID_mA` | out | drain current in milliamperes | — |
+| `ID_mA` | out | drain current in milliamperes | - |
 | `VOV` | out | overdrive VGS - VTH | V |
-| `gm` | out | transconductance in A/V (siemens) | — |
+| `gm` | out | transconductance in A/V (siemens) | - |
 
 **Applies when:** saturation: VGS > VTH and VDS >= VGS - VTH; no channel-length modulation.
 
@@ -2241,7 +2189,7 @@ gm = 0.0026
 
 <a id="diode_circuit"></a>
 
-#### Operating point of a diode in series with a resistor (Shockley equation) — `diode_circuit`
+#### Operating point of a diode in series with a resistor (Shockley equation), `diode_circuit`
 
 The current and the diode voltage of a forward-biased diode I = Is (exp(VD/(n VT)) - 1) in series with a resistor across a DC source.
 
@@ -2254,10 +2202,10 @@ $$
 | `Vs` | in | source voltage (forward) | V |
 | `R` | in | series resistor | ohm |
 | `Is` | in | saturation current | A |
-| `n` | in | ideality factor | — |
+| `n` | in | ideality factor | - |
 | `VT` | in | thermal voltage kT/q (about 25.85 mV at 300 K) | V |
 | `I` | out | circuit current | A |
-| `I_mA` | out | current in milliamperes | — |
+| `I_mA` | out | current in milliamperes | - |
 | `VD` | out | diode voltage | V |
 | `VR` | out | resistor voltage | V |
 
@@ -2282,7 +2230,7 @@ VR = 4.307509625 V
 
 <a id="zener_regulator"></a>
 
-#### Zener diode shunt regulator — `zener_regulator`
+#### Zener diode shunt regulator: `zener_regulator`
 
 Load voltage and the currents of a Zener shunt regulator (series resistor R from the input, Zener and load in parallel).
 
@@ -2300,7 +2248,7 @@ $$
 | `IR` | out | current in the series resistor | A |
 | `IL` | out | load current | A |
 | `IZ` | out | Zener current | A |
-| `IZ_mA` | out | Zener current in milliamperes | — |
+| `IZ_mA` | out | Zener current in milliamperes | - |
 | `PZ` | out | power dissipated in the Zener | W |
 
 **Applies when:** the Zener is in breakdown (ideal: constant Vz); positive values.
@@ -2327,7 +2275,7 @@ PZ = 0.024 W
 
 <a id="difference_amplifier"></a>
 
-#### Difference amplifier output (four-resistor op-amp circuit) — `difference_amplifier`
+#### Difference amplifier output (four-resistor op-amp circuit), `difference_amplifier`
 
 The output of the classic difference amplifier: V1 through R1 to the inverting input, R2 from output to that input, V2 through R3 to the non-inverting input, R4 from it to ground.
 
@@ -2344,8 +2292,8 @@ $$
 | `R3` | in | input resistor to the non-inverting input | ohm |
 | `R4` | in | resistor from the non-inverting input to ground | ohm |
 | `Vout` | out | output voltage | V |
-| `gain_inverting` | out | gain from V1, -R2/R1 | — |
-| `gain_noninverting` | out | gain from V2, R4/(R3+R4) (1 + R2/R1) | — |
+| `gain_inverting` | out | gain from V1, -R2/R1 | - |
+| `gain_noninverting` | out | gain from V2, R4/(R3+R4) (1 + R2/R1) | - |
 
 **Applies when:** ideal op-amp (infinite gain, no saturation).
 
@@ -2368,7 +2316,7 @@ gain_noninverting = 10
 
 <a id="inverting_amplifier"></a>
 
-#### Inverting amplifier gain and output — `inverting_amplifier`
+#### Inverting amplifier gain and output: `inverting_amplifier`
 
 The voltage gain -Rf/Rin of an ideal inverting amplifier and its output for an input voltage.
 
@@ -2381,7 +2329,7 @@ $$
 | `Rin` | in | input resistor | ohm |
 | `Rf` | in | feedback resistor | ohm |
 | `Vin` | in | input voltage | V |
-| `gain` | out | closed-loop voltage gain | — |
+| `gain` | out | closed-loop voltage gain | - |
 | `Vout` | out | output voltage | V |
 
 **Applies when:** ideal op-amp, no saturation.
@@ -2401,7 +2349,7 @@ Vout = -2.35 V
 
 <a id="summing_amplifier"></a>
 
-#### Inverting summing amplifier output — `summing_amplifier`
+#### Inverting summing amplifier output: `summing_amplifier`
 
 The output of an ideal inverting summing amplifier: Vout = -Rf (V1/R1 + V2/R2 + ...).
 
@@ -2411,11 +2359,11 @@ $$
 
 | symbol |  | meaning | SI unit |
 |---|---|---|---|
-| `V` | in | input voltages in volts | — |
-| `R` | in | input resistors in ohms (one per input) | — |
+| `V` | in | input voltages in volts | - |
+| `R` | in | input resistors in ohms (one per input) | - |
 | `Rf` | in | feedback resistor | ohm |
 | `Vout` | out | output voltage | V |
-| `gains` | out | gain of each input, -Rf/R_k | — |
+| `gains` | out | gain of each input, -Rf/R_k | - |
 
 **Applies when:** ideal op-amp (infinite gain, no saturation); non-inverting input grounded.
 
@@ -2432,7 +2380,7 @@ gains = [-10.0,-5.0,-10.0]
 
 <a id="noninverting_amplifier"></a>
 
-#### Non-inverting amplifier gain and output — `noninverting_amplifier`
+#### Non-inverting amplifier gain and output: `noninverting_amplifier`
 
 The voltage gain 1 + Rf/Rg of an ideal non-inverting amplifier and its output.
 
@@ -2445,7 +2393,7 @@ $$
 | `Rg` | in | resistor from the inverting input to ground | ohm |
 | `Rf` | in | feedback resistor | ohm |
 | `Vin` | in | input voltage (at the non-inverting input) | V |
-| `gain` | out | closed-loop voltage gain | — |
+| `gain` | out | closed-loop voltage gain | - |
 | `Vout` | out | output voltage | V |
 
 **Applies when:** ideal op-amp, no saturation.
@@ -2465,7 +2413,7 @@ Vout = 2 V
 
 <a id="opamp_integrator"></a>
 
-#### Op-amp integrator output for a constant input — `opamp_integrator`
+#### Op-amp integrator output for a constant input, `opamp_integrator`
 
 The output of an ideal inverting integrator (R in, C feedback) after a constant input Vin has been applied for time t, from an initial output V0.
 
@@ -2481,7 +2429,7 @@ $$
 | `t` | in | integration time | s |
 | `V0` | in | output voltage at t = 0 | V |
 | `Vout` | out | output voltage at t | V |
-| `slope` | out | output slope dVout/dt in V/s | — |
+| `slope` | out | output slope dVout/dt in V/s | - |
 
 **Applies when:** ideal op-amp, no saturation; constant input.
 
@@ -2504,7 +2452,7 @@ slope = -50
 
 <a id="first_order_transient"></a>
 
-#### First-order (RC or RL) transient response — `first_order_transient`
+#### First-order (RC or RL) transient response: `first_order_transient`
 
 The value at time t of any voltage in a first-order circuit going from its initial value V0 toward its final value Vf with time constant tau.
 
@@ -2519,7 +2467,7 @@ $$
 | `tau` | in | time constant (RC or L/R) | s |
 | `t` | in | time after the switching | s |
 | `v` | out | value at time t | V |
-| `fraction_complete` | out | fraction of the change completed, 1 - exp(-t/tau) | — |
+| `fraction_complete` | out | fraction of the change completed, 1 - exp(-t/tau) | - |
 
 **Applies when:** a single time constant; a step change at t = 0.
 
@@ -2539,7 +2487,7 @@ fraction_complete = 0.8646647168
 
 <a id="series_rlc_step"></a>
 
-#### Step response of a series RLC circuit — `series_rlc_step`
+#### Step response of a series RLC circuit: `series_rlc_step`
 
 Capacitor voltage and loop current at time t after a DC step V is applied to a series RLC circuit at rest, with the damping classification.
 
@@ -2556,11 +2504,11 @@ $$
 | `t` | in | time after the step | s |
 | `vC` | out | capacitor voltage at t | V |
 | `i` | out | loop current at t | A |
-| `i_mA` | out | loop current in milliamperes | — |
-| `alpha` | out | neper frequency R/(2L) in 1/s | — |
+| `i_mA` | out | loop current in milliamperes | - |
+| `alpha` | out | neper frequency R/(2L) in 1/s | - |
 | `omega0` | out | undamped resonant frequency 1/sqrt(LC) | rad/s |
-| `zeta` | out | damping ratio alpha/omega0 | — |
-| `response` | out | underdamped, critically damped or overdamped | — |
+| `zeta` | out | damping ratio alpha/omega0 | - |
+| `response` | out | underdamped, critically damped or overdamped | - |
 
 **Applies when:** circuit at rest before the step (vC = 0, i = 0); ideal components.
 
@@ -2586,7 +2534,7 @@ response = underdamped
 
 <a id="first_order_time_to_value"></a>
 
-#### Time for a first-order response to reach a value — `first_order_time_to_value`
+#### Time for a first-order response to reach a value, `first_order_time_to_value`
 
 How long a first-order (RC or RL) response from V0 toward Vf with time constant tau takes to reach a value v.
 
@@ -2601,7 +2549,7 @@ $$
 | `tau` | in | time constant | s |
 | `v` | in | value to reach | V |
 | `t` | out | time to reach v | s |
-| `time_constants` | out | the same time in time constants | — |
+| `time_constants` | out | the same time in time constants | - |
 
 **Applies when:** v between V0 and Vf.
 
@@ -2619,4 +2567,4 @@ time_constants = 0.6931471806
 
 **What the worked example means:** This calculation finds the elapsed time for a first-order response starting at 0 V and ending at 10 V with a time constant of 0.002 s to reach the target value 5 V. The result is 0.00138629 s, meaning the circuit takes this duration to achieve that specific level. Expressed in normalized units, this corresponds to 0.693147 time constants, indicating how far along the exponential curve the target lies.
 
-Questions and reports: support@ai999x.com. AI999X — The Future Is Self-Improving.
+Questions and reports: support@ai999x.com. AI999X, The Future Is Self-Improving.

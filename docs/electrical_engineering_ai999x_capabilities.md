@@ -160,7 +160,7 @@ Call `solve("<id>", **inputs)` with plain numbers; the result's `values` holds e
 
 <a id="series_resistance"></a>
 
-### Equivalent resistance of resistors in series — `series_resistance`
+### Equivalent resistance of resistors in series, `series_resistance`
 
 The single resistance equivalent to two or more resistors connected in series.
 
@@ -206,7 +206,7 @@ electrical_engineering_ai999x.solve('series_resistance', R=[1000, 2200])
 
 <a id="parallel_resistance"></a>
 
-### Equivalent resistance of resistors in parallel — `parallel_resistance`
+### Equivalent resistance of resistors in parallel, `parallel_resistance`
 
 The single resistance equivalent to two or more resistors connected in parallel.
 
@@ -252,7 +252,7 @@ electrical_engineering_ai999x.solve('parallel_resistance', R=[30, 60, 20])
 
 <a id="series_capacitance"></a>
 
-### Equivalent capacitance of capacitors in series — `series_capacitance`
+### Equivalent capacitance of capacitors in series, `series_capacitance`
 
 The single capacitance equivalent to two or more capacitors connected in series.
 
@@ -300,7 +300,7 @@ electrical_engineering_ai999x.solve('series_capacitance', C=[10, 10, 10, 10])
 
 <a id="parallel_capacitance"></a>
 
-### Equivalent capacitance of capacitors in parallel — `parallel_capacitance`
+### Equivalent capacitance of capacitors in parallel, `parallel_capacitance`
 
 The single capacitance equivalent to two or more capacitors connected in parallel.
 
@@ -346,7 +346,7 @@ electrical_engineering_ai999x.solve('parallel_capacitance', C=[1, 2.2])
 
 <a id="series_inductance"></a>
 
-### Equivalent inductance of inductors in series — `series_inductance`
+### Equivalent inductance of inductors in series, `series_inductance`
 
 The single inductance equivalent to two or more inductors connected in series.
 
@@ -392,7 +392,7 @@ electrical_engineering_ai999x.solve('series_inductance', L=[1, 2, 3])
 
 <a id="parallel_inductance"></a>
 
-### Equivalent inductance of inductors in parallel — `parallel_inductance`
+### Equivalent inductance of inductors in parallel, `parallel_inductance`
 
 The single inductance equivalent to two or more inductors connected in parallel.
 
@@ -438,7 +438,7 @@ electrical_engineering_ai999x.solve('parallel_inductance', L=[6, 3])
 
 <a id="resistor_network"></a>
 
-### Equivalent resistance of a series-parallel resistor network — `resistor_network`
+### Equivalent resistance of a series-parallel resistor network, `resistor_network`
 
 The equivalent resistance of a network written with + for series and || for parallel, e.g. 10 + (20 || 30).
 
@@ -490,7 +490,7 @@ electrical_engineering_ai999x.solve('resistor_network', network='6 || 3 + 4')
 
 <a id="mesh_currents"></a>
 
-### Mesh currents from the mesh equations (Kirchhoff's voltage law) — `mesh_currents`
+### Mesh currents from the mesh equations (Kirchhoff's voltage law), `mesh_currents`
 
 Solve the mesh equations R $i = v$ of a circuit: the resistance matrix and the source-voltage vector give every mesh current.
 
@@ -545,7 +545,7 @@ electrical_engineering_ai999x.solve('mesh_currents', A='4 -2; -2 6', b='10 0')
 
 <a id="nodal_voltages"></a>
 
-### Node voltages from the nodal equations (Kirchhoff's current law) — `nodal_voltages`
+### Node voltages from the nodal equations (Kirchhoff's current law), `nodal_voltages`
 
 Solve the nodal equations G $v = i$ of a circuit: the conductance matrix and the injected-current vector give every node voltage.
 
@@ -595,7 +595,7 @@ electrical_engineering_ai999x.solve('nodal_voltages', A=[[0.3, -0.1], [-0.1, 0.2
 
 <a id="dc_node_voltages"></a>
 
-### Node voltages of a DC resistive circuit from its netlist — `dc_node_voltages`
+### Node voltages of a DC resistive circuit from its netlist, `dc_node_voltages`
 
 Every node voltage, every voltage-source current and the power delivered, for a circuit of resistors and independent sources written as a netlist.
 
@@ -642,7 +642,7 @@ electrical_engineering_ai999x.solve('dc_node_voltages', netlist='I1 0 1 0.01; R1
 
 <a id="thevenin_equivalent"></a>
 
-### Thevenin equivalent of a DC circuit between two nodes — `thevenin_equivalent`
+### Thevenin equivalent of a DC circuit between two nodes, `thevenin_equivalent`
 
 The Thevenin voltage and resistance seen between two nodes of a resistive circuit with independent sources.
 
@@ -690,7 +690,7 @@ electrical_engineering_ai999x.solve('thevenin_equivalent', netlist='I1 0 1 0.01;
 
 <a id="norton_equivalent"></a>
 
-### Norton equivalent of a DC circuit between two nodes — `norton_equivalent`
+### Norton equivalent of a DC circuit between two nodes, `norton_equivalent`
 
 The Norton current and resistance seen between two nodes of a resistive circuit with independent sources.
 
@@ -731,7 +731,7 @@ electrical_engineering_ai999x.solve('norton_equivalent', netlist='V1 1 0 12; R1 
 
 <a id="delta_to_wye"></a>
 
-### Delta-to-wye (Pi-to-T) resistor transformation — `delta_to_wye`
+### Delta-to-wye (Pi-to-T) resistor transformation, `delta_to_wye`
 
 The three wye (star) resistances equivalent to a delta (triangle) of resistances between terminals a, b, c.
 
@@ -783,7 +783,7 @@ electrical_engineering_ai999x.solve('delta_to_wye', Rab=30, Rbc=30, Rca=30)
 
 <a id="wye_to_delta"></a>
 
-### Wye-to-delta (T-to-Pi) resistor transformation — `wye_to_delta`
+### Wye-to-delta (T-to-Pi) resistor transformation, `wye_to_delta`
 
 The three delta (triangle) resistances equivalent to a wye (star) of resistances at terminals a, b, c.
 
@@ -835,7 +835,7 @@ electrical_engineering_ai999x.solve('wye_to_delta', Ra=10, Rb=10, Rc=10)
 
 <a id="routh_hurwitz"></a>
 
-### Routh-Hurwitz stability test — `routh_hurwitz`
+### Routh-Hurwitz stability test: `routh_hurwitz`
 
 The Routh array's first column, the number of roots in the right half plane and whether a characteristic polynomial is stable.
 
@@ -887,7 +887,7 @@ electrical_engineering_ai999x.solve('routh_hurwitz', coefficients=[1, 1, 2, 24])
 
 <a id="closed_loop_poles"></a>
 
-### Closed-loop poles with unity negative feedback — `closed_loop_poles`
+### Closed-loop poles with unity negative feedback, `closed_loop_poles`
 
 The poles of $K G$($s)/(1 + K G$(s)): the roots of den(s) + K*num(s), and whether the closed loop is stable.
 
@@ -937,7 +937,7 @@ electrical_engineering_ai999x.solve('closed_loop_poles', num=[10], den=[1, 6, 5,
 
 <a id="phase_margin"></a>
 
-### Phase margin and gain-crossover frequency — `phase_margin`
+### Phase margin and gain-crossover frequency: `phase_margin`
 
 The phase margin of a unity-feedback loop with open-loop G(s): 180 degrees plus the phase of G at the frequency where |G(jw)| = 1.
 
@@ -983,7 +983,7 @@ electrical_engineering_ai999x.solve('phase_margin', num=[10], den=[1, 6, 5, 0])
 
 <a id="gain_margin"></a>
 
-### Gain margin and phase-crossover frequency — `gain_margin`
+### Gain margin and phase-crossover frequency: `gain_margin`
 
 The gain margin of a unity-feedback loop with open-loop G(s): 1/|G(jw)| at the frequency where the phase $is -180$ degrees.
 
@@ -1030,7 +1030,7 @@ electrical_engineering_ai999x.solve('gain_margin', num=[6], den=[1, 3, 3, 1])
 
 <a id="bode_point"></a>
 
-### Frequency response (Bode magnitude and phase) at one frequency — `bode_point`
+### Frequency response (Bode magnitude and phase) at one frequency, `bode_point`
 
 |G(jw)| as a ratio and in decibels, and the phase of G(jw), for a transfer function at an angular frequency w.
 
@@ -1085,7 +1085,7 @@ electrical_engineering_ai999x.solve('bode_point', num=[100], den=[1, 10, 100], w
 
 <a id="steady_state_error"></a>
 
-### Steady-state error of a unity-feedback system — `steady_state_error`
+### Steady-state error of a unity-feedback system, `steady_state_error`
 
 The system type, the error constant (Kp, Kv or Ka) and the steady-state error for a unit step, ramp or parabola input.
 
@@ -1140,7 +1140,7 @@ electrical_engineering_ai999x.solve('steady_state_error', num=[20], den=[1, 5, 0
 
 <a id="second_order_step"></a>
 
-### Step-response specifications of a standard second-order system — `second_order_step`
+### Step-response specifications of a standard second-order system, `second_order_step`
 
 Percent overshoot, peak time, $10-90$% rise time and exact 2% settling time of wn^2/(s^2 + 2 zeta wn s + wn^2) for a unit step.
 
@@ -1196,7 +1196,7 @@ electrical_engineering_ai999x.solve('second_order_step', zeta=0.7, wn=10)
 
 <a id="series_rlc_impedance"></a>
 
-### Impedance of a series RLC circuit — `series_rlc_impedance`
+### Impedance of a series RLC circuit: `series_rlc_impedance`
 
 The complex impedance of R, L and C in series at a frequency: magnitude, phase angle and the two reactances.
 
@@ -1253,7 +1253,7 @@ electrical_engineering_ai999x.solve('series_rlc_impedance', R=3, L=0.01273239544
 
 <a id="parallel_rlc_impedance"></a>
 
-### Impedance of a parallel RLC circuit — `parallel_rlc_impedance`
+### Impedance of a parallel RLC circuit: `parallel_rlc_impedance`
 
 The complex impedance of R, L and C in parallel at a frequency: magnitude, phase angle and the two reactances.
 
@@ -1308,7 +1308,7 @@ electrical_engineering_ai999x.solve('parallel_rlc_impedance', R=50, L=0.00015915
 
 <a id="polar_to_rectangular"></a>
 
-### Phasor from polar to rectangular form — `polar_to_rectangular`
+### Phasor from polar to rectangular form: `polar_to_rectangular`
 
 The real and imaginary parts of a phasor given as a magnitude and an angle in degrees.
 
@@ -1358,7 +1358,7 @@ electrical_engineering_ai999x.solve('polar_to_rectangular', magnitude=2, angle_d
 
 <a id="rectangular_to_polar"></a>
 
-### Phasor from rectangular to polar form — `rectangular_to_polar`
+### Phasor from rectangular to polar form: `rectangular_to_polar`
 
 The magnitude and angle (degrees, in (-180, 180]) of a phasor given as real + j imaginary.
 
@@ -1408,7 +1408,7 @@ electrical_engineering_ai999x.solve('rectangular_to_polar', real=-2, imag=-2)
 
 <a id="phasor_sum"></a>
 
-### Sum of sinusoids by phasor addition — `phasor_sum`
+### Sum of sinusoids by phasor addition: `phasor_sum`
 
 The amplitude and phase of the sum of sinusoids of one frequency, A_k cos(wt + phi_k), by adding their phasors.
 
@@ -1460,7 +1460,7 @@ electrical_engineering_ai999x.solve('phasor_sum', amplitudes=[1, 1, 1], phases_d
 
 <a id="complex_power"></a>
 
-### Complex, real, reactive and apparent power from voltage and current phasors — `complex_power`
+### Complex, real, reactive and apparent power from voltage and current phasors, `complex_power`
 
 $S = V$ I* for rms phasors: real power P, reactive power Q, apparent power |S|, the power factor and whether it lags or leads.
 
@@ -1491,9 +1491,9 @@ $$
 
 *Power triangle of a load with V = 230 V ∠ 0° and I = 10 A ∠ -30°, from the complex power the package returned: real power P = 1991.86 W, reactive power Q = 1150 var (lagging), apparent power S = 2300 VA, power factor 0.866025. Marked: the tip of S.*
 
-![lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned — lagging: 315 cells, leading: 315 cells, unity: 21 cells](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-decision)
+![lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-decision)
 
-*lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned — lagging: 315 cells, leading: 315 cells, unity: 21 cells. Other inputs as in the worked example: V_phase = 0, I = 10 A. Marked: the worked example, I_phase = -30, V = 230 V → lagging.*
+*lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells. Other inputs as in the worked example: V_phase = 0, I = 10 A. Marked: the worked example, I_phase = -30, V = 230 V → lagging.*
 
 ![P (real (active) power in W) against I_phase (current phase angle in degrees) from -90 to 90](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-curve)
 
@@ -1519,7 +1519,7 @@ electrical_engineering_ai999x.solve('complex_power', V=120, V_phase=10, I=5, I_p
 
 <a id="power_factor_correction"></a>
 
-### Power-factor correction capacitor — `power_factor_correction`
+### Power-factor correction capacitor: `power_factor_correction`
 
 The shunt capacitance (and its reactive power) that raises a lagging load's power factor to a target value.
 
@@ -1571,7 +1571,7 @@ electrical_engineering_ai999x.solve('power_factor_correction', P=1000, V=120, f=
 
 <a id="three_phase_load"></a>
 
-### Balanced three-phase load (wye or delta) — `three_phase_load`
+### Balanced three-phase load (wye or delta): `three_phase_load`
 
 Phase voltage, phase and line currents, real, reactive and apparent power and the power factor of a balanced load with impedance R + jX per phase.
 
@@ -1628,7 +1628,7 @@ electrical_engineering_ai999x.solve('three_phase_load', VL=400, R=8, X=6, connec
 
 <a id="summing_amplifier"></a>
 
-### Inverting summing amplifier output — `summing_amplifier`
+### Inverting summing amplifier output: `summing_amplifier`
 
 The output of an ideal inverting summing amplifier: Vout = -Rf $(V_{1}/R_{1} + V_{2}/R_{2} + ...)$.
 
@@ -1675,7 +1675,7 @@ electrical_engineering_ai999x.solve('summing_amplifier', V=[0.2, 0.3], R=[1000, 
 
 <a id="difference_amplifier"></a>
 
-### Difference amplifier output (four-resistor op-amp circuit) — `difference_amplifier`
+### Difference amplifier output (four-resistor op-amp circuit), `difference_amplifier`
 
 The output of the classic difference amplifier: V1 through R1 to the inverting input, R2 from output to that input, V2 through R3 to the non-inverting input, R4 from it to ground.
 
@@ -1729,7 +1729,7 @@ electrical_engineering_ai999x.solve('difference_amplifier', V1=2, V2=1, R1=1000.
 
 <a id="bjt_divider_bias"></a>
 
-### DC operating point of a voltage-divider biased BJT — `bjt_divider_bias`
+### DC operating point of a voltage-divider biased BJT, `bjt_divider_bias`
 
 Base, collector and emitter currents and the node voltages of an NPN transistor with divider bias (R1 to VCC, R2 to ground), collector resistor RC and emitter resistor RE.
 
@@ -1790,7 +1790,7 @@ electrical_engineering_ai999x.solve('bjt_divider_bias', VCC=10, R1=10000.0, R2=1
 
 <a id="zener_regulator"></a>
 
-### Zener diode shunt regulator — `zener_regulator`
+### Zener diode shunt regulator: `zener_regulator`
 
 Load voltage and the currents of a Zener shunt regulator (series resistor R from the input, Zener and load in parallel).
 
@@ -1846,7 +1846,7 @@ electrical_engineering_ai999x.solve('zener_regulator', Vin=12, R=220, Vz=5.1, RL
 
 <a id="series_rlc_step"></a>
 
-### Step response of a series RLC circuit — `series_rlc_step`
+### Step response of a series RLC circuit: `series_rlc_step`
 
 Capacitor voltage and loop current at time t after a DC step V is applied to a series RLC circuit at rest, with the damping classification.
 
@@ -1886,7 +1886,7 @@ $$
 
 ![underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-decision)
 
-*underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0.01 H to 1 H (logarithmic axes): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned — overdamped: 84 cells, underdamped: 567 cells. Other inputs as in the worked example: C = 0.0001 F, V = 12 V, t = 0.005 s. Marked: the worked example, R = 10 ohm, L = 0.1 H → underdamped.*
+*underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0.01 H to 1 H (logarithmic axes): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, overdamped: 84 cells, underdamped: 567 cells. Other inputs as in the worked example: C = 0.0001 F, V = 12 V, t = 0.005 s. Marked: the worked example, R = 10 ohm, L = 0.1 H → underdamped.*
 
 ```python
 electrical_engineering_ai999x.solve('series_rlc_step', R=10, L=0.1, C=0.0001, V=12, t=0.005)
@@ -1908,7 +1908,7 @@ electrical_engineering_ai999x.solve('series_rlc_step', R=1000, L=0.1, C=1e-06, V
 
 <a id="boolean_evaluate"></a>
 
-### Evaluate a Boolean expression — `boolean_evaluate`
+### Evaluate a Boolean expression: `boolean_evaluate`
 
 The value (0 or 1) of a Boolean expression for given values of its variables.
 
@@ -1960,7 +1960,7 @@ electrical_engineering_ai999x.solve('boolean_evaluate', expression='A + B · C',
 
 <a id="truth_table_sop"></a>
 
-### Truth table and minimal sum of products of a Boolean expression — `truth_table_sop`
+### Truth table and minimal sum of products of a Boolean expression, `truth_table_sop`
 
 The minterms (truth table), the canonical sum of products and a minimal sum of products (fewest terms, then fewest literals) of an expression in up to 4 variables.
 
@@ -2015,7 +2015,7 @@ electrical_engineering_ai999x.solve('truth_table_sop', expression='A XOR B')
 
 <a id="minterms_to_sop"></a>
 
-### Minimal sum of products from minterms (with don't-cares) — `minterms_to_sop`
+### Minimal sum of products from minterms (with don't-cares), `minterms_to_sop`
 
 A minimal sum of products (fewest terms, then fewest literals) of F(A, B, C, D) = Σm(...) + d(...), the Karnaugh-map result.
 
@@ -2070,7 +2070,7 @@ electrical_engineering_ai999x.solve('minterms_to_sop', minterms='0, 2, 8, 10', v
 
 <a id="boolean_equivalence"></a>
 
-### Equivalence of two Boolean expressions — `boolean_equivalence`
+### Equivalence of two Boolean expressions: `boolean_equivalence`
 
 Whether two Boolean expressions are equal for every input, with a counterexample row when they are not.
 
@@ -2116,7 +2116,7 @@ electrical_engineering_ai999x.solve('boolean_equivalence', expression1='A + B', 
 
 <a id="base_conversion"></a>
 
-### Number base conversion (binary, octal, decimal, hexadecimal) — `base_conversion`
+### Number base conversion (binary, octal, decimal, hexadecimal), `base_conversion`
 
 A whole number written in base 2, 8, 10 or 16, given in all four bases.
 
@@ -2172,7 +2172,7 @@ electrical_engineering_ai999x.solve('base_conversion', value='0x1F', base='16')
 
 <a id="twos_complement_encode"></a>
 
-### Two's complement representation of a signed integer — `twos_complement_encode`
+### Two's complement representation of a signed integer, `twos_complement_encode`
 
 The n-bit two's complement bit pattern (and its hexadecimal form) of a signed whole number.
 
@@ -2224,7 +2224,7 @@ electrical_engineering_ai999x.solve('twos_complement_encode', value=-1234, bits=
 
 <a id="twos_complement_decode"></a>
 
-### Value of a two's complement bit pattern — `twos_complement_decode`
+### Value of a two's complement bit pattern: `twos_complement_decode`
 
 The signed value of an n-bit two's complement pattern (n = the number of digits written).
 
@@ -2274,7 +2274,7 @@ electrical_engineering_ai999x.solve('twos_complement_decode', pattern='1000')
 
 <a id="gray_code"></a>
 
-### Binary to Gray code and Gray code to binary — `gray_code`
+### Binary to Gray code and Gray code to binary, `gray_code`
 
 The reflected binary (Gray) code of a binary word, or the binary word of a Gray code, with the same width.
 
@@ -2320,7 +2320,7 @@ electrical_engineering_ai999x.solve('gray_code', value='1110', direction='to_bin
 
 <a id="voltage_divider"></a>
 
-### Voltage divider — `voltage_divider`
+### Voltage divider: `voltage_divider`
 
 The output voltage across R2 of two resistors in series across Vin (R1 on top, R2 to ground), and the current.
 
@@ -2372,7 +2372,7 @@ electrical_engineering_ai999x.solve('voltage_divider', Vin=5, R1=10000, R2=10000
 
 <a id="current_divider"></a>
 
-### Current divider — `current_divider`
+### Current divider: `current_divider`
 
 How a current I splits between two resistors in parallel.
 
@@ -2422,7 +2422,7 @@ electrical_engineering_ai999x.solve('current_divider', I=1, R1=100, R2=300)
 
 <a id="max_power_transfer"></a>
 
-### Maximum power transfer — `max_power_transfer`
+### Maximum power transfer: `max_power_transfer`
 
 The load resistance that draws the most power from a source with Thevenin voltage Vth and resistance Rth, and that power.
 
@@ -2472,7 +2472,7 @@ electrical_engineering_ai999x.solve('max_power_transfer', Vth=10, Rth=50)
 
 <a id="wheatstone_bridge"></a>
 
-### Wheatstone bridge output — `wheatstone_bridge`
+### Wheatstone bridge output: `wheatstone_bridge`
 
 The output voltage of a Wheatstone bridge (left arm R1 over R2, right arm R3 over R4, supply Vs), whether it is balanced, and the R4 that balances it.
 
@@ -2525,7 +2525,7 @@ electrical_engineering_ai999x.solve('wheatstone_bridge', Vs=5, R1=100, R2=100, R
 
 <a id="rc_filter"></a>
 
-### First-order RC filter: cutoff, gain and phase — `rc_filter`
+### First-order RC filter: cutoff, gain and phase, `rc_filter`
 
 The cutoff frequency 1/(2 pi R C) of an RC low-pass or high-pass filter and its gain (ratio and dB) and phase at a frequency.
 
@@ -2579,7 +2579,7 @@ electrical_engineering_ai999x.solve('rc_filter', R=1000, C=1e-06, f=159.15494309
 
 <a id="series_rlc_resonance"></a>
 
-### Resonance, Q factor and bandwidth of a series RLC circuit — `series_rlc_resonance`
+### Resonance, Q factor and bandwidth of a series RLC circuit, `series_rlc_resonance`
 
 The resonant frequency, quality factor, half-power bandwidth and half-power frequencies of a series RLC circuit.
 
@@ -2632,7 +2632,7 @@ electrical_engineering_ai999x.solve('series_rlc_resonance', R=1000, L=0.001, C=1
 
 <a id="parallel_rlc_resonance"></a>
 
-### Resonance, Q factor and bandwidth of a parallel RLC circuit — `parallel_rlc_resonance`
+### Resonance, Q factor and bandwidth of a parallel RLC circuit, `parallel_rlc_resonance`
 
 The resonant frequency, quality factor, half-power bandwidth and half-power frequencies of a parallel RLC circuit.
 
@@ -2685,7 +2685,7 @@ electrical_engineering_ai999x.solve('parallel_rlc_resonance', R=1000, L=0.001, C
 
 <a id="first_order_transient"></a>
 
-### First-order (RC or RL) transient response — `first_order_transient`
+### First-order (RC or RL) transient response: `first_order_transient`
 
 The value at time t of any voltage in a first-order circuit going from its initial value V0 toward its final value Vf with time constant tau.
 
@@ -2732,7 +2732,7 @@ electrical_engineering_ai999x.solve('first_order_transient', V0=5, Vf=0, tau=2, 
 
 <a id="inverting_amplifier"></a>
 
-### Inverting amplifier gain and output — `inverting_amplifier`
+### Inverting amplifier gain and output: `inverting_amplifier`
 
 The voltage gain -Rf/Rin of an ideal inverting amplifier and its output for an input voltage.
 
@@ -2782,7 +2782,7 @@ electrical_engineering_ai999x.solve('inverting_amplifier', Rin=1000.0, Rf=10000.
 
 <a id="noninverting_amplifier"></a>
 
-### Non-inverting amplifier gain and output — `noninverting_amplifier`
+### Non-inverting amplifier gain and output: `noninverting_amplifier`
 
 The voltage gain $1 + Rf/Rg$ of an ideal non-inverting amplifier and its output.
 
@@ -2832,7 +2832,7 @@ electrical_engineering_ai999x.solve('noninverting_amplifier', Rg=1000.0, Rf=1000
 
 <a id="opamp_integrator"></a>
 
-### Op-amp integrator output for a constant input — `opamp_integrator`
+### Op-amp integrator output for a constant input, `opamp_integrator`
 
 The output of an ideal inverting integrator (R in, C feedback) after a constant input Vin has been applied for time t, from an initial output V0.
 
@@ -2880,7 +2880,7 @@ electrical_engineering_ai999x.solve('opamp_integrator', R=100000.0, C=1e-07, Vin
 
 <a id="transformer"></a>
 
-### Ideal transformer: voltages, currents and reflected resistance — `transformer`
+### Ideal transformer: voltages, currents and reflected resistance, `transformer`
 
 Secondary voltage and current, primary current and the load resistance seen from the primary for an ideal transformer with a resistive load.
 
@@ -2934,7 +2934,7 @@ electrical_engineering_ai999x.solve('transformer', Np=100, Ns=200, Vp=12, RL=48)
 
 <a id="mosfet_saturation"></a>
 
-### MOSFET drain current in saturation (square law) — `mosfet_saturation`
+### MOSFET drain current in saturation (square law), `mosfet_saturation`
 
 Drain current, overdrive voltage and transconductance of an n-channel MOSFET in saturation.
 
@@ -2985,7 +2985,7 @@ electrical_engineering_ai999x.solve('mosfet_saturation', kn=0.0001, WL=20, VGS=1
 
 <a id="diode_circuit"></a>
 
-### Operating point of a diode in series with a resistor (Shockley equation) — `diode_circuit`
+### Operating point of a diode in series with a resistor (Shockley equation), `diode_circuit`
 
 The current and the diode voltage of a forward-biased diode $I = Is$ (exp(VD/(n VT)) - 1) in series with a resistor across a DC source.
 
@@ -3039,7 +3039,7 @@ electrical_engineering_ai999x.solve('diode_circuit', Vs=10, R=10000, Is=1e-12, n
 
 <a id="rms_waveform"></a>
 
-### RMS and average value of a periodic waveform — `rms_waveform`
+### RMS and average value of a periodic waveform, `rms_waveform`
 
 The rms value (with DC offset), average, AC rms and crest factor of a sine, square, triangle or sawtooth wave.
 
@@ -3097,7 +3097,7 @@ electrical_engineering_ai999x.solve('rms_waveform', shape='triangle', amplitude=
 
 <a id="adc_conversion"></a>
 
-### Analog-to-digital conversion: output code and resolution — `adc_conversion`
+### Analog-to-digital conversion: output code and resolution, `adc_conversion`
 
 The output code (truncating converter), its binary form, the LSB size and the quantized voltage of an ideal n-bit ADC with reference Vref.
 
@@ -3150,7 +3150,7 @@ electrical_engineering_ai999x.solve('adc_conversion', Vin=5, Vref=5, bits=4)
 
 <a id="state_space_to_tf"></a>
 
-### Transfer function of a single-input single-output state-space model — `state_space_to_tf`
+### Transfer function of a single-input single-output state-space model, `state_space_to_tf`
 
 G(s) = C $(sI - A)^{-1}$ B + D as numerator and denominator coefficients for x' = Ax + Bu, $y = Cx + Du.$
 
@@ -3202,7 +3202,7 @@ electrical_engineering_ai999x.solve('state_space_to_tf', A=[[-1, 0], [0, -2]], B
 
 <a id="controllability_observability"></a>
 
-### Controllability and observability of a single-input single-output system — `controllability_observability`
+### Controllability and observability of a single-input single-output system, `controllability_observability`
 
 The ranks of the controllability matrix [B AB ... A^(n-1)B] and the observability matrix [C; CA; ...; $CA^{n-1}$], and whether the system is controllable and observable.
 
@@ -3250,7 +3250,7 @@ electrical_engineering_ai999x.solve('controllability_observability', A=[[-1, 0],
 
 <a id="inductor_energy"></a>
 
-### Energy stored in an inductor — `inductor_energy`
+### Energy stored in an inductor: `inductor_energy`
 
 The magnetic energy L $I^{2}/2$ and the flux linkage L I of an inductor carrying current I.
 
@@ -3299,7 +3299,7 @@ electrical_engineering_ai999x.solve('inductor_energy', L=0.001, I=10)
 
 <a id="first_order_time_to_value"></a>
 
-### Time for a first-order response to reach a value — `first_order_time_to_value`
+### Time for a first-order response to reach a value, `first_order_time_to_value`
 
 How long a first-order (RC or RL) response from V0 toward Vf with time constant tau takes to reach a value v.
 
@@ -3346,7 +3346,7 @@ electrical_engineering_ai999x.solve('first_order_time_to_value', V0=12, Vf=0, ta
 
 <a id="lead_compensator"></a>
 
-### Maximum phase lead of a lead compensator — `lead_compensator`
+### Maximum phase lead of a lead compensator: `lead_compensator`
 
 For C(s) = (s + z)/(s + p) with $p > z$: the maximum phase lead, the frequency where it occurs, and the gain there.
 
@@ -3396,7 +3396,7 @@ electrical_engineering_ai999x.solve('lead_compensator', z=2, p=18)
 
 <a id="dc_motor"></a>
 
-### Steady-state speed and current of a permanent-magnet DC motor — `dc_motor`
+### Steady-state speed and current of a permanent-magnet DC motor, `dc_motor`
 
 Speed, current, powers and efficiency of a DC motor with armature resistance R, torque constant Kt, back-emf constant Ke, viscous friction b and load torque T at supply voltage V.
 
