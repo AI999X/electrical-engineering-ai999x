@@ -1,5 +1,5 @@
 {
- "package": "1.5.0",
+ "package": "1.6.0",
  "pack": "1.0.0",
  "knowledge_db": null,
  "files": {
@@ -7,8 +7,8 @@
   "dictionary/terms.json": "3781eac9e78cc74a52dfbb7f7c6ecd5f218e2a208be5aad6dabd1094f82ddc60",
   "knowledge/relations.json": "aafd3fe18af919bda7f2a51f3dded9c1bcd13ed7e3a56f88b66491079e6d1da8",
   "knowledge/reference_cases.json": "7414a14e2c4202a7fae8cdd14e1a2ef7267f35a9665b0633001349c698d4e4e7",
-  "capabilities/procedures.py": "20df816ae8e3e7d7cd64f7e4b07023b1e29b597890b7be66e4db43c9bfa17dc5",
-  "capabilities/procedures_certified.json": "d3abb5310fc202ef4e0116eab0edbdeeda4566ad2ccefa35b39d3076a8f4dd9b",
+  "capabilities/procedures.py": "4d27893c941d4a0321700ab70b802e6cfdf2d5d22728855400b924933185a867",
+  "capabilities/procedures_certified.json": "34d75d3a533d459194af213b0e277d04bd89138dadcc76c45d6f3ec74811c918",
   "electrical_engineering_knowledge_public.sqlite": "be7ef38b3f2c3b18a04b6e7811a79115cfb7e15aca59057007e7a52eafbd726a"
  },
  "engine": [

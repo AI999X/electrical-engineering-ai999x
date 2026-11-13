@@ -15,7 +15,7 @@ def _bind(product) -> None:
     _P = product
 
 
-CapabilityId = Literal["adc_conversion", "base_conversion", "bjt_divider_bias", "bode_point", "boolean_equivalence", "boolean_evaluate", "closed_loop_poles", "complex_power", "controllability_observability", "current_divider", "dc_motor", "dc_node_voltages", "delta_to_wye", "difference_amplifier", "diode_circuit", "first_order_time_to_value", "first_order_transient", "gain_margin", "gray_code", "inductor_energy", "inverting_amplifier", "lead_compensator", "max_power_transfer", "mesh_currents", "minterms_to_sop", "mosfet_saturation", "nodal_voltages", "noninverting_amplifier", "norton_equivalent", "opamp_integrator", "parallel_capacitance", "parallel_inductance", "parallel_resistance", "parallel_rlc_impedance", "parallel_rlc_resonance", "phase_margin", "phasor_sum", "polar_to_rectangular", "power_factor_correction", "rc_filter", "rectangular_to_polar", "resistor_network", "rms_waveform", "routh_hurwitz", "second_order_step", "series_capacitance", "series_inductance", "series_resistance", "series_rlc_impedance", "series_rlc_resonance", "series_rlc_step", "state_space_to_tf", "steady_state_error", "summing_amplifier", "thevenin_equivalent", "three_phase_load", "transformer", "truth_table_sop", "twos_complement_decode", "twos_complement_encode", "voltage_divider", "wheatstone_bridge", "wye_to_delta", "zener_regulator"]
+CapabilityId = Literal["ac_mesh_currents", "ac_node_voltages", "ac_norton_equivalent", "ac_thevenin_equivalent", "adc_conversion", "ammeter_shunt", "base_conversion", "bjt_divider_bias", "bode_point", "boolean_equivalence", "boolean_evaluate", "cell_battery", "closed_loop_poles", "coil_capacitor_parallel", "coil_inductance", "complex_power", "controllability_observability", "current_divider", "dc_machine_emf", "dc_motor", "dc_motor_speed_change", "dc_node_voltages", "dc_shunt_generator", "dc_shunt_motor", "delta_to_wye", "difference_amplifier", "diode_circuit", "electrical_energy_cost", "faraday_emf", "first_order_time_to_value", "first_order_transient", "gain_margin", "gray_code", "inductor_energy", "inverting_amplifier", "lead_compensator", "magnetic_circuit", "max_power_transfer", "mesh_currents", "minterms_to_sop", "mosfet_saturation", "mutual_inductance", "nodal_voltages", "noninverting_amplifier", "norton_equivalent", "opamp_integrator", "parallel_ac_supply", "parallel_capacitance", "parallel_inductance", "parallel_plate_capacitor", "parallel_resistance", "parallel_rlc_impedance", "parallel_rlc_resonance", "phase_margin", "phasor_sum", "plane_wave_lossless", "plane_wave_lossy", "polar_to_rectangular", "power_factor_correction", "rc_filter", "rectangular_to_polar", "resistance_at_temperature", "resistor_network", "rms_waveform", "routh_hurwitz", "second_order_step", "self_inductance", "series_ac_supply", "series_capacitance", "series_inductance", "series_resistance", "series_rlc_impedance", "series_rlc_resonance", "series_rlc_step", "sinusoid_time_to_value", "sinusoid_values", "state_space_to_tf", "steady_state_error", "summing_amplifier", "temperature_coefficient_from_resistances", "thevenin_equivalent", "three_phase_load", "transformer", "truth_table_sop", "two_wattmeter", "twos_complement_decode", "twos_complement_encode", "voltage_divider", "voltmeter_multiplier", "wheatstone_bridge", "wye_to_delta", "zener_regulator"]
 
 
 def solve(find: CapabilityId | str, given: dict | None = None, conditions=(), *, target: str | None = None, **inputs):
@@ -30,6 +30,60 @@ def help(name: CapabilityId | str | None = None) -> str:     # noqa: A001 (the p
     return text
 
 
+def ac_mesh_currents(R=None, X=None, V_mag=None, V_deg=None):
+    """AC mesh currents from the phasor mesh equations (complex impedances). Solve the mesh equations Z I = V of an AC circuit in phasor form: the mesh resistance and reactance matrices (Z = R + jX) and the source phasors give every mesh current's magnitude and angle.
+    Formula: (\\mathbf{R} + j\\mathbf{X})\\,\\mathbf{I} = \\mathbf{V}
+    Inputs:
+        R: mesh resistance matrix in ohms (real part of the mesh impedance matrix)
+        X: mesh reactance matrix in ohms (imaginary part: + wL for an inductor, - 1/(wC) for a capacitor; shared terms with a minus sign)
+        V_mag: rms magnitude of the net source voltage around each mesh, in volts (in the mesh-current direction)
+        V_deg: angle of each mesh's net source voltage, in degrees
+    Outputs: currents_mag (rms magnitudes of the mesh currents in amperes, in row order), currents_deg (angles of the mesh currents in degrees), currents_real (real parts of the mesh currents in amperes), currents_imag (imaginary parts of the mesh currents in amperes), first_mag (magnitude of the first mesh current), first_deg (angle of the first mesh current in degrees)
+    See also: help("ac_mesh_currents")
+    """
+    given = {k: v for k, v in dict(R=R, X=X, V_mag=V_mag, V_deg=V_deg).items() if v is not None}
+    return _P.solve("ac_mesh_currents", **given)
+
+def ac_node_voltages(netlist=None, f=None):
+    """Node voltages of an AC circuit from its netlist (phasor nodal analysis). Every node-voltage phasor (magnitude, angle, real and imaginary parts), every voltage-source current and the real and reactive power delivered, for a circuit of R, L, C and independent sinusoidal sources of one frequency.
+    Formula: \\mathbf{Y}(j\\omega)\\,\\mathbf{V} = \\mathbf{I}_s,\\quad Y_L = \\frac{1}{j\\omega L},\\ Y_C = j\\omega C
+    Inputs:
+        netlist: elements separated by ';': R<name> <node> <node> <ohms>, L<name> <node> <node> <henries>, C<name> <node> <node> <farads>, V<name> <node+> <node-> <rms volts> [<angle deg>], I<name> <node> <node> <rms amperes> [<angle deg>] (flowing from the first node through the source to the second); node 0 is ground
+        f: frequency of the sources
+    Outputs: node_voltages_mag (rms magnitude of every node voltage relative to node 0, in volts), node_voltages_deg (angle of every node voltage, in degrees), node_voltages_real (real part of every node voltage, in volts), node_voltages_imag (imaginary part of every node voltage, in volts), source_currents_real (real part of the current through each voltage source from + to -, in amperes), source_currents_imag (imaginary part of that current, in amperes), P_delivered (real power delivered by the sources (W)), Q_delivered (reactive power delivered by the sources, in var (positive: taken by inductance))
+    See also: help("ac_node_voltages")
+    """
+    given = {k: v for k, v in dict(netlist=netlist, f=f).items() if v is not None}
+    return _P.solve("ac_node_voltages", **given)
+
+def ac_norton_equivalent(netlist=None, node_a=None, node_b=None, f=None):
+    """Norton equivalent of an AC circuit between two nodes (phasors, complex impedance). The Norton current phasor and impedance seen between two nodes of an AC circuit of R, L, C and independent sinusoidal sources at one frequency.
+    Formula: \\mathbf{I}_N = \\frac{\\mathbf{V}_{th}}{Z_{th}},\\quad Z_N = Z_{th}
+    Inputs:
+        netlist: elements separated by ';': R<name> <node> <node> <ohms>, L<name> <node> <node> <henries>, C<name> <node> <node> <farads>, V<name> <node+> <node-> <rms volts> [<angle deg>], I<name> <node> <node> <rms amperes> [<angle deg>] (flowing from the first node through the source to the second); node 0 is ground
+        node_a: the terminal node (the + side of the equivalent)
+        node_b: the reference terminal node
+        f: frequency of the sources
+    Outputs: In_mag (rms magnitude of the Norton (short-circuit) current from node a to node b), In_deg (angle of the Norton (short-circuit) current from node a to node b in degrees), In_real (real part of the Norton (short-circuit) current from node a to node b), In_imag (imaginary part of the Norton (short-circuit) current from node a to node b), Zn_real (resistance (real part of the equivalent impedance)), Zn_imag (reactance (imaginary part of the equivalent impedance, + inductive)), Zn_mag (magnitude of the equivalent impedance), Zn_deg (angle of the equivalent impedance in degrees)
+    See also: help("ac_norton_equivalent")
+    """
+    given = {k: v for k, v in dict(netlist=netlist, node_a=node_a, node_b=node_b, f=f).items() if v is not None}
+    return _P.solve("ac_norton_equivalent", **given)
+
+def ac_thevenin_equivalent(netlist=None, node_a=None, node_b=None, f=None):
+    """Thevenin equivalent of an AC circuit between two nodes (phasors, complex impedance). The Thevenin voltage phasor and impedance Zth = R + jX seen between two nodes of an AC circuit of R, L, C and independent sinusoidal sources at one frequency.
+    Formula: \\mathbf{V}_{th} = \\mathbf{V}_a - \\mathbf{V}_b\\big|_{open},\\quad Z_{th} = \\frac{\\mathbf{V}_a - \\mathbf{V}_b}{1\\,\\mathrm{A}}\\big|_{sources\\ off}
+    Inputs:
+        netlist: elements separated by ';': R<name> <node> <node> <ohms>, L<name> <node> <node> <henries>, C<name> <node> <node> <farads>, V<name> <node+> <node-> <rms volts> [<angle deg>], I<name> <node> <node> <rms amperes> [<angle deg>] (flowing from the first node through the source to the second); node 0 is ground
+        node_a: the terminal node (the + side of the equivalent)
+        node_b: the reference terminal node
+        f: frequency of the sources
+    Outputs: Vth_mag (rms magnitude of the Thevenin (open-circuit) voltage, node a relative to node b), Vth_deg (angle of the Thevenin (open-circuit) voltage, node a relative to node b in degrees), Vth_real (real part of the Thevenin (open-circuit) voltage, node a relative to node b), Vth_imag (imaginary part of the Thevenin (open-circuit) voltage, node a relative to node b), Zth_real (resistance (real part of the equivalent impedance)), Zth_imag (reactance (imaginary part of the equivalent impedance, + inductive)), Zth_mag (magnitude of the equivalent impedance), Zth_deg (angle of the equivalent impedance in degrees)
+    See also: help("ac_thevenin_equivalent")
+    """
+    given = {k: v for k, v in dict(netlist=netlist, node_a=node_a, node_b=node_b, f=f).items() if v is not None}
+    return _P.solve("ac_thevenin_equivalent", **given)
+
 def adc_conversion(Vin=None, Vref=None, bits=None):
     """Analog-to-digital conversion: output code and resolution. The output code (truncating converter), its binary form, the LSB size and the quantized voltage of an ideal n-bit ADC with reference Vref.
     Formula: \\mathrm{code} = \\left\\lfloor \\frac{V_{in}}{V_{ref}/2^n} \\right\\rfloor
@@ -42,6 +96,19 @@ def adc_conversion(Vin=None, Vref=None, bits=None):
     """
     given = {k: v for k, v in dict(Vin=Vin, Vref=Vref, bits=bits).items() if v is not None}
     return _P.solve("adc_conversion", **given)
+
+def ammeter_shunt(Ifs=None, Rm=None, I=None):
+    """Ammeter shunt resistance. The shunt resistance that extends a moving-coil meter of full-scale current Ifs and resistance Rm to read a current I at full scale.
+    Formula: R_{sh} = \\frac{I_{fs}R_m}{I - I_{fs}}
+    Inputs:
+        Ifs: full-scale deflection current of the meter
+        Rm: resistance of the meter
+        I: required full-scale reading of the ammeter
+    Outputs: Rsh (shunt resistance), multiplying_factor (range multiplication I/Ifs), V_fs (voltage across the meter at full scale), R_total (resistance of the extended ammeter)
+    See also: help("ammeter_shunt")
+    """
+    given = {k: v for k, v in dict(Ifs=Ifs, Rm=Rm, I=I).items() if v is not None}
+    return _P.solve("ammeter_shunt", **given)
 
 def base_conversion(value=None, base=None):
     """Number base conversion (binary, octal, decimal, hexadecimal). A whole number written in base 2, 8, 10 or 16, given in all four bases.
@@ -109,6 +176,21 @@ def boolean_evaluate(expression=None, values=None):
     given = {k: v for k, v in dict(expression=expression, values=values).items() if v is not None}
     return _P.solve("boolean_evaluate", **given)
 
+def cell_battery(E=None, r=None, n=None, connection=None, RL=None):
+    """Cells with internal resistance: series and parallel batteries on a load. The combined emf and internal resistance of n identical cells in series or in parallel, the load current, the terminal voltage, the lost volts and the load power.
+    Formula: I = \\frac{E_b}{r_b + R_L},\\quad V = E_b - I r_b
+    Inputs:
+        E: emf of one cell
+        r: internal resistance of one cell
+        n: number of identical cells
+        connection: how the cells are connected
+        RL: load resistance
+    Outputs: emf_total (emf of the battery), r_total (internal resistance of the battery), I (load current), V_terminal (terminal voltage (across the load)), lost_volts (voltage lost inside the battery, I r), P_load (power delivered to the load)
+    See also: help("cell_battery")
+    """
+    given = {k: v for k, v in dict(E=E, r=r, n=n, connection=connection, RL=RL).items() if v is not None}
+    return _P.solve("cell_battery", **given)
+
 def closed_loop_poles(num=None, den=None, K=None):
     """Closed-loop poles with unity negative feedback. The poles of K*G(s)/(1 + K*G(s)): the roots of den(s) + K*num(s), and whether the closed loop is stable.
     Formula: 1 + K\\,G(s) = 0 \\iff \\mathrm{den}(s) + K\\,\\mathrm{num}(s) = 0
@@ -121,6 +203,35 @@ def closed_loop_poles(num=None, den=None, K=None):
     """
     given = {k: v for k, v in dict(num=num, den=den, K=K).items() if v is not None}
     return _P.solve("closed_loop_poles", **given)
+
+def coil_capacitor_parallel(V=None, f=None, R=None, L=None, C=None):
+    """Coil with resistance in parallel with a capacitor: currents, resonance and dynamic resistance. For a coil (R in series with L) in parallel with a capacitor C across a supply: the coil, capacitor and supply currents, the phase angle and power at the supply frequency, and the resonant frequency, dynamic resistance L/(CR), current at resonance and Q factor.
+    Formula: f_r = \\frac{1}{2\\pi}\\sqrt{\\frac{1}{LC} - \\frac{R^2}{L^2}},\\quad R_D = \\frac{L}{CR}
+    Inputs:
+        V: rms supply voltage
+        f: supply frequency
+        R: resistance of the coil
+        L: inductance of the coil
+        C: capacitance
+    Outputs: I_coil (coil current), I_C (capacitor current), I (supply current), Z (impedance of the network V/I), phase_deg (phase angle of the supply current behind the voltage, degrees), P (real power (dissipated in the coil's resistance)), f_r (resonant frequency), R_dynamic (dynamic resistance L/(CR) at resonance), I_resonance (supply current at resonance), Q (Q factor at resonance, wr L/R (current magnification))
+    See also: help("coil_capacitor_parallel")
+    """
+    given = {k: v for k, v in dict(V=V, f=f, R=R, L=L, C=C).items() if v is not None}
+    return _P.solve("coil_capacitor_parallel", **given)
+
+def coil_inductance(N=None, length=None, area=None, mu_r=None):
+    """Inductance of a coil on a uniform core. The self-inductance N^2/S of a coil of N turns on a uniform core (or a long air-cored coil), with the reluctance of the flux path and the flux per ampere.
+    Formula: L = \\frac{N^2}{S} = \\frac{\\mu_0\\mu_r N^2 A}{l}
+    Inputs:
+        N: number of turns
+        length: length of the flux path (coil length for an air-cored solenoid)
+        area: cross-sectional area of the core
+        mu_r: relative permeability of the core (1 for air)
+    Outputs: L (self-inductance), reluctance (reluctance of the flux path in A/Wb), flux_per_ampere (flux per ampere of coil current, Wb/A)
+    See also: help("coil_inductance")
+    """
+    given = {k: v for k, v in dict(N=N, length=length, area=area, mu_r=mu_r).items() if v is not None}
+    return _P.solve("coil_inductance", **given)
 
 def complex_power(V=None, V_phase=None, I=None, I_phase=None):
     """Complex, real, reactive and apparent power from voltage and current phasors. S = V I* for rms phasors: real power P, reactive power Q, apparent power |S|, the power factor and whether it lags or leads.
@@ -162,6 +273,21 @@ def current_divider(I=None, R1=None, R2=None):
     given = {k: v for k, v in dict(I=I, R1=R1, R2=R2).items() if v is not None}
     return _P.solve("current_divider", **given)
 
+def dc_machine_emf(poles=None, flux=None, Z=None, n=None, winding=None):
+    """Generated emf of a d.c. machine (lap or wave winding). The emf generated in the armature of a d.c. machine (the back emf of a motor) from its poles, flux per pole, armature conductors, speed and winding.
+    Formula: E = \\frac{p\\,\\Phi\\,n\\,Z}{a},\\quad a = p\\ (\\text{lap}),\\ a = 2\\ (\\text{wave})
+    Inputs:
+        poles: number of poles (even)
+        flux: useful flux per pole
+        Z: number of armature conductors
+        n: speed in rev/s (rpm accepted in questions)
+        winding: armature winding: lap or wave
+    Outputs: E (generated emf), paths (parallel paths: the number of poles for lap, 2 for wave), conductor_emf (average emf of one conductor, poles x flux x n)
+    See also: help("dc_machine_emf")
+    """
+    given = {k: v for k, v in dict(poles=poles, flux=flux, Z=Z, n=n, winding=winding).items() if v is not None}
+    return _P.solve("dc_machine_emf", **given)
+
 def dc_motor(V=None, R=None, Kt=None, Ke=None, T=None, b=None):
     """Steady-state speed and current of a permanent-magnet DC motor. Speed, current, powers and efficiency of a DC motor with armature resistance R, torque constant Kt, back-emf constant Ke, viscous friction b and load torque T at supply voltage V.
     Formula: \\omega = \\frac{K_tV - RT}{K_tK_e + Rb}
@@ -178,6 +304,22 @@ def dc_motor(V=None, R=None, Kt=None, Ke=None, T=None, b=None):
     given = {k: v for k, v in dict(V=V, R=R, Kt=Kt, Ke=Ke, T=T, b=b).items() if v is not None}
     return _P.solve("dc_motor", **given)
 
+def dc_motor_speed_change(V=None, Ra=None, Ia1=None, n1=None, Ia2=None, flux_ratio=None):
+    """New speed of a d.c. motor after a change of load or flux. The back emfs before and after, and the new speed, of a d.c. motor on a constant supply whose armature current changes from Ia1 to Ia2 and whose flux changes by a ratio (speed proportional to E/flux).
+    Formula: \\frac{n_2}{n_1} = \\frac{E_2}{E_1}\\cdot\\frac{\\Phi_1}{\\Phi_2}
+    Inputs:
+        V: supply voltage across the armature
+        Ra: armature resistance
+        Ia1: first armature current
+        n1: first speed in rev/s (rpm accepted in questions)
+        Ia2: new armature current
+        flux_ratio: new flux over the first flux (1 when unchanged) (optional)
+    Outputs: E1 (first back emf), E2 (new back emf), n2 (new speed in rev/s), n2_rpm (new speed in rpm), speed_change (fractional change of speed n2/n1 - 1)
+    See also: help("dc_motor_speed_change")
+    """
+    given = {k: v for k, v in dict(V=V, Ra=Ra, Ia1=Ia1, n1=n1, Ia2=Ia2, flux_ratio=flux_ratio).items() if v is not None}
+    return _P.solve("dc_motor_speed_change", **given)
+
 def dc_node_voltages(netlist=None):
     """Node voltages of a DC resistive circuit from its netlist. Every node voltage, every voltage-source current and the power delivered, for a circuit of resistors and independent sources written as a netlist.
     Formula: \\begin{bmatrix} G & B \\\\ B^T & 0 \\end{bmatrix}\\begin{bmatrix} v \\\\ i \\end{bmatrix} = \\begin{bmatrix} i_s \\\\ e \\end{bmatrix}
@@ -188,6 +330,36 @@ def dc_node_voltages(netlist=None):
     """
     given = {k: v for k, v in dict(netlist=netlist).items() if v is not None}
     return _P.solve("dc_node_voltages", **given)
+
+def dc_shunt_generator(V=None, IL=None, Ra=None, Rf=None):
+    """D.C. shunt generator: field and armature currents, generated emf and powers. The field current, armature current, generated emf, output power, power generated and copper losses of a shunt-wound d.c. generator delivering a load current at a terminal voltage.
+    Formula: I_a = I_L + I_f,\\quad E = V + I_aR_a
+    Inputs:
+        V: terminal voltage
+        IL: load current
+        Ra: armature resistance
+        Rf: shunt field resistance
+    Outputs: If (field current V/Rf), Ia (armature current IL + If), E (generated emf V + Ia Ra), P_out (power delivered to the load V IL), P_generated (electrical power generated E Ia), copper_loss (armature and field copper losses)
+    See also: help("dc_shunt_generator")
+    """
+    given = {k: v for k, v in dict(V=V, IL=IL, Ra=Ra, Rf=Rf).items() if v is not None}
+    return _P.solve("dc_shunt_generator", **given)
+
+def dc_shunt_motor(V=None, I=None, Ra=None, Rf=None, n=None, losses=None):
+    """D.C. shunt motor: back emf, torque, output and efficiency. The field and armature currents, back emf, power converted, electromagnetic torque, output power and efficiency of a shunt-wound d.c. motor taking a current I from a supply V at a speed n.
+    Formula: E = V - I_aR_a,\\quad T = \\frac{EI_a}{2\\pi n},\\quad \\eta = \\frac{EI_a - P_{loss}}{VI}
+    Inputs:
+        V: supply voltage
+        I: current taken from the supply
+        Ra: armature resistance
+        Rf: shunt field resistance
+        n: speed in rev/s (rpm accepted in questions)
+        losses: iron, friction and windage losses (0 when not given) (optional)
+    Outputs: If (field current V/Rf), Ia (armature current I - If), E (back emf V - Ia Ra), P_converted (power converted to mechanical form E Ia), torque (electromagnetic torque E Ia/(2 pi n)), P_out (output power (converted power minus the stated losses)), efficiency (efficiency P_out/(V I))
+    See also: help("dc_shunt_motor")
+    """
+    given = {k: v for k, v in dict(V=V, I=I, Ra=Ra, Rf=Rf, n=n, losses=losses).items() if v is not None}
+    return _P.solve("dc_shunt_motor", **given)
 
 def delta_to_wye(Rab=None, Rbc=None, Rca=None):
     """Delta-to-wye (Pi-to-T) resistor transformation. The three wye (star) resistances equivalent to a delta (triangle) of resistances between terminals a, b, c.
@@ -232,6 +404,32 @@ def diode_circuit(Vs=None, R=None, Is=None, n=None, VT=None):
     """
     given = {k: v for k, v in dict(Vs=Vs, R=R, Is=Is, n=n, VT=VT).items() if v is not None}
     return _P.solve("diode_circuit", **given)
+
+def electrical_energy_cost(P=None, t=None, tariff=None):
+    """Electrical energy and its cost. The energy a load of power P uses in a time t, in joules and in kilowatt-hours, and its cost at a tariff per kWh.
+    Formula: W = Pt,\\quad \\mathrm{cost} = \\frac{Pt}{3.6\\times10^{6}\\ \\mathrm{J/kWh}}\\times\\mathrm{tariff}
+    Inputs:
+        P: power of the load
+        t: running time (h and min accepted in questions)
+        tariff: price of one kWh (any currency)
+    Outputs: energy (energy used, in joules), energy_kWh (energy used, in kilowatt-hours), cost (cost of the energy, in the tariff's currency)
+    See also: help("electrical_energy_cost")
+    """
+    given = {k: v for k, v in dict(P=P, t=t, tariff=tariff).items() if v is not None}
+    return _P.solve("electrical_energy_cost", **given)
+
+def faraday_emf(N=None, dPhi=None, dt=None):
+    """Induced emf from a change of flux (Faraday's law). The average emf induced in a coil of N turns when the flux linking it changes by dPhi in a time dt, its sign by Lenz's law, and the change of flux linkage.
+    Formula: e = -N\\frac{\\Delta\\Phi}{\\Delta t}
+    Inputs:
+        N: number of turns
+        dPhi: change of flux (negative for a decrease)
+        dt: time taken by the change
+    Outputs: emf (magnitude of the average induced emf), emf_signed (induced emf with Lenz's sign, -N dPhi/dt), flux_rate (rate of change of flux in Wb/s), linkage_change (change of flux linkage N dPhi in weber-turns)
+    See also: help("faraday_emf")
+    """
+    given = {k: v for k, v in dict(N=N, dPhi=dPhi, dt=dt).items() if v is not None}
+    return _P.solve("faraday_emf", **given)
 
 def first_order_time_to_value(V0=None, Vf=None, tau=None, v=None):
     """Time for a first-order response to reach a value. How long a first-order (RC or RL) response from V0 toward Vf with time constant tau takes to reach a value v.
@@ -322,6 +520,22 @@ def lead_compensator(z=None, p=None):
     given = {k: v for k, v in dict(z=z, p=p).items() if v is not None}
     return _P.solve("lead_compensator", **given)
 
+def magnetic_circuit(N=None, lengths=None, areas=None, mu_r=None, flux=None, current=None):
+    """Series magnetic circuit: reluctance, magnetomotive force, flux density and field strength. The current a coil of N turns needs to set up a flux in a series magnetic circuit of sections (iron paths and air gaps), or the flux a current produces, with the reluctance, the mmf, and B and H in every section.
+    Formula: S = \\sum_k \\frac{l_k}{\\mu_0\\mu_{r,k}A_k},\\quad NI = \\Phi S = \\sum_k H_k l_k
+    Inputs:
+        N: number of turns of the magnetising coil
+        lengths: mean length of the flux path in each section, in m (an air gap is a section)
+        areas: cross-sectional area of each section, in m^2
+        mu_r: relative permeability of each section (1 for air)
+        flux: flux to produce (give this or the current) (optional)
+        current: coil current (give this or the flux) (optional)
+    Outputs: reluctance (total reluctance in A/Wb (ampere-turns per weber)), mmf (magnetomotive force N I in ampere-turns), current (coil current), flux (flux in the circuit), B (flux density of each section in T), H (magnetic field strength of each section in A/m)
+    See also: help("magnetic_circuit")
+    """
+    given = {k: v for k, v in dict(N=N, lengths=lengths, areas=areas, mu_r=mu_r, flux=flux, current=current).items() if v is not None}
+    return _P.solve("magnetic_circuit", **given)
+
 def max_power_transfer(Vth=None, Rth=None):
     """Maximum power transfer. The load resistance that draws the most power from a source with Thevenin voltage Vth and resistance Rth, and that power.
     Formula: P_{max} = \\frac{V_{th}^2}{4R_{th}}
@@ -373,6 +587,21 @@ def mosfet_saturation(kn=None, WL=None, VGS=None, VTH=None, VDS=None):
     """
     given = {k: v for k, v in dict(kn=kn, WL=WL, VGS=VGS, VTH=VTH, VDS=VDS).items() if v is not None}
     return _P.solve("mosfet_saturation", **given)
+
+def mutual_inductance(L1=None, L2=None, k=None, dI1=None, dt=None):
+    """Mutual inductance, induced emfs and coupled coils in series. The mutual inductance M = k sqrt(L1 L2) of two coupled coils, the emfs induced in coil 1 and in coil 2 when the current in coil 1 changes by dI1 in dt, and the inductance of the two coils in series aiding and opposing.
+    Formula: M = k\\sqrt{L_1L_2},\\quad E_2 = M\\frac{\\Delta I_1}{\\Delta t}
+    Inputs:
+        L1: self-inductance of coil 1
+        L2: self-inductance of coil 2
+        k: coupling coefficient (0 to 1)
+        dI1: change of the current in coil 1
+        dt: time taken by the change
+    Outputs: M (mutual inductance), E1 (magnitude of the emf self-induced in coil 1), E2 (magnitude of the emf induced in coil 2), L_aiding (series aiding L1 + L2 + 2M), L_opposing (series opposing L1 + L2 - 2M)
+    See also: help("mutual_inductance")
+    """
+    given = {k: v for k, v in dict(L1=L1, L2=L2, k=k, dI1=dI1, dt=dt).items() if v is not None}
+    return _P.solve("mutual_inductance", **given)
 
 def nodal_voltages(A=None, b=None):
     """Node voltages from the nodal equations (Kirchhoff's current law). Solve the nodal equations G v = i of a circuit: the conductance matrix and the injected-current vector give every node voltage.
@@ -427,6 +656,22 @@ def opamp_integrator(R=None, C=None, Vin=None, t=None, V0=None):
     given = {k: v for k, v in dict(R=R, C=C, Vin=Vin, t=t, V0=V0).items() if v is not None}
     return _P.solve("opamp_integrator", **given)
 
+def parallel_ac_supply(V=None, f=None, R=None, circuit=None, L=None, C=None):
+    """Parallel R-L, R-C or R-L-C circuit on an a.c. supply. The branch currents, supply current, impedance, phase angle, power factor and real, reactive and apparent power of R in parallel with L, with C, or with both, across a sinusoidal supply.
+    Formula: I = \\sqrt{I_R^2 + (I_L - I_C)^2},\\quad \\cos\\phi = \\frac{I_R}{I}
+    Inputs:
+        V: rms supply voltage
+        f: supply frequency
+        R: resistance
+        circuit: the elements: R-L, R-C or R-L-C
+        L: inductance (R-L and R-L-C circuits) (optional)
+        C: capacitance (R-C and R-L-C circuits) (optional)
+    Outputs: IR (current in R), IL (current in L (0 without an inductor)), IC (current in C (0 without a capacitor)), I (supply current), Z (impedance V/I), phase_deg (phase angle of the supply current behind the voltage, degrees (negative: leading)), power_factor (power factor cos(phase)), P (real power in W), Q (reactive power in var (positive: inductive)), S (apparent power in VA), nature (lagging, leading or unity power factor)
+    See also: help("parallel_ac_supply")
+    """
+    given = {k: v for k, v in dict(V=V, f=f, R=R, circuit=circuit, L=L, C=C).items() if v is not None}
+    return _P.solve("parallel_ac_supply", **given)
+
 def parallel_capacitance(C=None, unit=None):
     """Equivalent capacitance of capacitors in parallel. The single capacitance equivalent to two or more capacitors connected in parallel.
     Formula: C_{eq} = \\sum_i C_i
@@ -450,6 +695,21 @@ def parallel_inductance(L=None, unit=None):
     """
     given = {k: v for k, v in dict(L=L, unit=unit).items() if v is not None}
     return _P.solve("parallel_inductance", **given)
+
+def parallel_plate_capacitor(V=None, d=None, A=None, eps_r=None, n=None):
+    """Parallel-plate capacitor: capacitance, charge, field, flux density and energy. The capacitance of a capacitor of n parallel plates with a dielectric, and its charge, electric field strength, electric flux density and stored energy at a voltage V.
+    Formula: C = \\frac{\\varepsilon_0\\varepsilon_r A (n - 1)}{d},\\quad D = \\varepsilon_0\\varepsilon_r E,\\quad W = \\tfrac{1}{2}CV^2
+    Inputs:
+        V: voltage across the capacitor
+        d: separation of adjacent plates (dielectric thickness)
+        A: overlapping area of one plate
+        eps_r: relative permittivity of the dielectric (1 for air)
+        n: number of plates (2 when not given) (optional)
+    Outputs: C (capacitance), Q (charge), E (electric field strength V/d), D (electric flux density in C/m^2), energy (stored energy)
+    See also: help("parallel_plate_capacitor")
+    """
+    given = {k: v for k, v in dict(V=V, d=d, A=A, eps_r=eps_r, n=n).items() if v is not None}
+    return _P.solve("parallel_plate_capacitor", **given)
 
 def parallel_resistance(R=None):
     """Equivalent resistance of resistors in parallel. The single resistance equivalent to two or more resistors connected in parallel.
@@ -513,6 +773,33 @@ def phasor_sum(amplitudes=None, phases_deg=None):
     given = {k: v for k, v in dict(amplitudes=amplitudes, phases_deg=phases_deg).items() if v is not None}
     return _P.solve("phasor_sum", **given)
 
+def plane_wave_lossless(f=None, eps_r=None, mu_r=None):
+    """Plane wave in a lossless medium: speed, wavelength and wave impedance. The phase velocity, wavelength, intrinsic (wave) impedance, phase constant and refractive index of a uniform plane wave in a lossless medium.
+    Formula: v = \\frac{c}{\\sqrt{\\varepsilon_r\\mu_r}},\\quad \\lambda = \\frac{v}{f},\\quad \\eta = \\sqrt{\\frac{\\mu}{\\varepsilon}}
+    Inputs:
+        f: frequency
+        eps_r: relative permittivity
+        mu_r: relative permeability
+    Outputs: v (phase velocity), wavelength (wavelength in the medium), eta (intrinsic impedance), beta (phase constant in rad/m), n (refractive index sqrt(eps_r mu_r))
+    See also: help("plane_wave_lossless")
+    """
+    given = {k: v for k, v in dict(f=f, eps_r=eps_r, mu_r=mu_r).items() if v is not None}
+    return _P.solve("plane_wave_lossless", **given)
+
+def plane_wave_lossy(f=None, eps_r=None, mu_r=None, sigma=None):
+    """Plane wave in a conducting (lossy) medium: attenuation, skin depth, speed and wave impedance. The attenuation and phase constants, skin depth, phase velocity, wavelength, intrinsic impedance (magnitude and angle) and loss tangent of a uniform plane wave in a medium of conductivity sigma.
+    Formula: \\gamma = \\alpha + j\\beta = \\sqrt{j\\omega\\mu(\\sigma + j\\omega\\varepsilon)},\\quad \\delta = \\frac{1}{\\alpha}
+    Inputs:
+        f: frequency
+        eps_r: relative permittivity
+        mu_r: relative permeability
+        sigma: conductivity in S/m
+    Outputs: alpha (attenuation constant in Np/m), beta (phase constant in rad/m), skin_depth (skin depth 1/alpha), v (phase velocity w/beta), wavelength (wavelength 2 pi/beta), eta (magnitude of the intrinsic impedance), eta_angle_deg (angle of the intrinsic impedance in degrees (0 to 45)), loss_tangent (loss tangent sigma/(w eps))
+    See also: help("plane_wave_lossy")
+    """
+    given = {k: v for k, v in dict(f=f, eps_r=eps_r, mu_r=mu_r, sigma=sigma).items() if v is not None}
+    return _P.solve("plane_wave_lossy", **given)
+
 def polar_to_rectangular(magnitude=None, angle_deg=None):
     """Phasor from polar to rectangular form. The real and imaginary parts of a phasor given as a magnitude and an angle in degrees.
     Formula: M\\angle\\theta = M\\cos\\theta + jM\\sin\\theta
@@ -566,6 +853,20 @@ def rectangular_to_polar(real=None, imag=None):
     given = {k: v for k, v in dict(real=real, imag=imag).items() if v is not None}
     return _P.solve("rectangular_to_polar", **given)
 
+def resistance_at_temperature(R1=None, alpha1=None, T1=None, T2=None):
+    """Resistance at a new temperature (temperature coefficient). The resistance of a conductor at a temperature T2 from its resistance R1 at T1 and its temperature coefficient referred to T1, and the coefficient referred to T2.
+    Formula: R_2 = R_1\\left[1 + \\alpha_1 (T_2 - T_1)\\right]
+    Inputs:
+        R1: resistance at the reference temperature T1
+        alpha1: temperature coefficient of resistance referred to T1, per K (= per degree C)
+        T1: reference temperature (degrees C accepted in questions)
+        T2: new temperature
+    Outputs: R2 (resistance at T2), alpha2 (temperature coefficient referred to T2, per K), change (change of resistance R2 - R1)
+    See also: help("resistance_at_temperature")
+    """
+    given = {k: v for k, v in dict(R1=R1, alpha1=alpha1, T1=T1, T2=T2).items() if v is not None}
+    return _P.solve("resistance_at_temperature", **given)
+
 def resistor_network(network=None):
     """Equivalent resistance of a series-parallel resistor network. The equivalent resistance of a network written with + for series and || for parallel, e.g. 10 + (20 || 30).
     Formula: R_s = R_1 + R_2,\\quad R_p = \\left(\\frac{1}{R_1} + \\frac{1}{R_2}\\right)^{-1}
@@ -612,6 +913,35 @@ def second_order_step(zeta=None, wn=None):
     """
     given = {k: v for k, v in dict(zeta=zeta, wn=wn).items() if v is not None}
     return _P.solve("second_order_step", **given)
+
+def self_inductance(N=None, flux=None, I=None):
+    """Self-inductance from flux linkage. The self-inductance L = N phi/I of a coil of N turns in which a current I sets up a flux phi.
+    Formula: L = \\frac{N\\Phi}{I}
+    Inputs:
+        N: number of turns
+        flux: flux linking every turn
+        I: coil current
+    Outputs: L (self-inductance), flux_linkage (flux linkage N phi in weber-turns)
+    See also: help("self_inductance")
+    """
+    given = {k: v for k, v in dict(N=N, flux=flux, I=I).items() if v is not None}
+    return _P.solve("self_inductance", **given)
+
+def series_ac_supply(V=None, f=None, R=None, circuit=None, L=None, C=None):
+    """Series R-L, R-C or R-L-C circuit on an a.c. supply. The impedance, current, voltage across each element, phase angle, power factor and real, reactive and apparent power of a series R-L, R-C or R-L-C circuit connected to a sinusoidal supply.
+    Formula: Z = \\sqrt{R^2 + (X_L - X_C)^2},\\quad I = \\frac{V}{Z},\\quad \\cos\\phi = \\frac{R}{Z}
+    Inputs:
+        V: rms supply voltage
+        f: supply frequency
+        R: resistance
+        circuit: the elements: R-L, R-C or R-L-C
+        L: inductance (R-L and R-L-C circuits) (optional)
+        C: capacitance (R-C and R-L-C circuits) (optional)
+    Outputs: Z (impedance |Z|), I (rms current), VR (voltage across R), VL (voltage across L (0 without an inductor)), VC (voltage across C (0 without a capacitor)), XL (inductive reactance wL), XC (capacitive reactance 1/(wC)), phase_deg (phase angle of the supply current behind the voltage, degrees (negative: leading)), power_factor (power factor cos(phase)), P (real power in W), Q (reactive power in var (positive: inductive)), S (apparent power in VA), nature (lagging, leading or unity power factor)
+    See also: help("series_ac_supply")
+    """
+    given = {k: v for k, v in dict(V=V, f=f, R=R, circuit=circuit, L=L, C=C).items() if v is not None}
+    return _P.solve("series_ac_supply", **given)
 
 def series_capacitance(C=None, unit=None):
     """Equivalent capacitance of capacitors in series. The single capacitance equivalent to two or more capacitors connected in series.
@@ -690,6 +1020,34 @@ def series_rlc_step(R=None, L=None, C=None, V=None, t=None):
     given = {k: v for k, v in dict(R=R, L=L, C=C, V=V, t=t).items() if v is not None}
     return _P.solve("series_rlc_step", **given)
 
+def sinusoid_time_to_value(Vm=None, w=None, phi=None, v=None):
+    """Time at which a sinusoid first reaches a value. The first time t >= 0 at which v = Vm sin(wt + phi) equals a given value, the period, and whether v is rising or falling there.
+    Formula: \\omega t + \\phi = \\sin^{-1}\\frac{v}{V_m}\\ \\text{or}\\ \\pi - \\sin^{-1}\\frac{v}{V_m}
+    Inputs:
+        Vm: amplitude (peak value)
+        w: angular frequency omega
+        phi: phase angle in radians (positive: leads Vm sin wt)
+        v: value to reach (|v| <= Vm)
+    Outputs: t (first time at which v is reached), T (period), direction (rising, falling or peak at that time)
+    See also: help("sinusoid_time_to_value")
+    """
+    given = {k: v for k, v in dict(Vm=Vm, w=w, phi=phi, v=v).items() if v is not None}
+    return _P.solve("sinusoid_time_to_value", **given)
+
+def sinusoid_values(Vm=None, w=None, phi=None, t=None):
+    """Sinusoidal waveform v = Vm sin(wt + phi): frequency, period, phase, value at a time, form and peak factors. For v = Vm sin(wt + phi): the frequency, period, phase angle in degrees and whether it leads or lags Vm sin wt, the time shift, the value at a time t, the rms and half-cycle average values and the form and peak factors.
+    Formula: v = V_m\\sin(\\omega t + \\phi),\\quad f = \\frac{\\omega}{2\\pi},\\quad V_{rms} = \\frac{V_m}{\\sqrt 2}
+    Inputs:
+        Vm: amplitude (peak value)
+        w: angular frequency omega
+        phi: phase angle in radians (positive: leads Vm sin wt)
+        t: time at which to evaluate v
+    Outputs: v (instantaneous value at t), f (frequency w/(2 pi)), T (period), phase_deg (phase angle in degrees), relation (leads, lags or in phase (relative to Vm sin wt)), time_shift (time shift phi/w (positive: leads)), rms (rms value Vm/sqrt(2)), average (average over a half cycle, 2 Vm/pi), form_factor (form factor rms/average), peak_factor (peak factor Vm/rms)
+    See also: help("sinusoid_values")
+    """
+    given = {k: v for k, v in dict(Vm=Vm, w=w, phi=phi, t=t).items() if v is not None}
+    return _P.solve("sinusoid_values", **given)
+
 def state_space_to_tf(A=None, B=None, C=None, D=None):
     """Transfer function of a single-input single-output state-space model. G(s) = C (sI - A)^-1 B + D as numerator and denominator coefficients for x' = Ax + Bu, y = Cx + Du.
     Formula: G(s) = C(sI - A)^{-1}B + D
@@ -729,6 +1087,20 @@ def summing_amplifier(V=None, R=None, Rf=None):
     """
     given = {k: v for k, v in dict(V=V, R=R, Rf=Rf).items() if v is not None}
     return _P.solve("summing_amplifier", **given)
+
+def temperature_coefficient_from_resistances(R1=None, T1=None, R2=None, T2=None):
+    """Temperature coefficient of resistance from two readings. The temperature coefficient of resistance referred to each of two temperatures, from the resistances measured at them.
+    Formula: \\alpha_1 = \\frac{R_2 - R_1}{R_1 (T_2 - T_1)}
+    Inputs:
+        R1: resistance at T1
+        T1: first temperature (degrees C accepted in questions)
+        R2: resistance at T2
+        T2: second temperature
+    Outputs: alpha1 (temperature coefficient referred to T1, per K), alpha2 (temperature coefficient referred to T2, per K), slope (change of resistance per kelvin, ohm/K)
+    See also: help("temperature_coefficient_from_resistances")
+    """
+    given = {k: v for k, v in dict(R1=R1, T1=T1, R2=R2, T2=T2).items() if v is not None}
+    return _P.solve("temperature_coefficient_from_resistances", **given)
 
 def thevenin_equivalent(netlist=None, node_a=None, node_b=None):
     """Thevenin equivalent of a DC circuit between two nodes. The Thevenin voltage and resistance seen between two nodes of a resistive circuit with independent sources.
@@ -782,6 +1154,18 @@ def truth_table_sop(expression=None):
     given = {k: v for k, v in dict(expression=expression).items() if v is not None}
     return _P.solve("truth_table_sop", **given)
 
+def two_wattmeter(W1=None, W2=None):
+    """Three-phase power by the two-wattmeter method. The total power, the power factor, the load angle and the reactive and apparent power of a balanced three-phase load from the readings of two wattmeters.
+    Formula: P = W_1 + W_2,\\quad \\tan\\phi = \\sqrt{3}\\,\\frac{W_1 - W_2}{W_1 + W_2}
+    Inputs:
+        W1: reading of the first wattmeter (negative if it reads backwards)
+        W2: reading of the second wattmeter
+    Outputs: P (total power W1 + W2), Q (total reactive power in var (magnitude)), S (total apparent power in VA), power_factor (power factor of the load), phase_deg (load angle in degrees (lag or lead needs the phase sequence))
+    See also: help("two_wattmeter")
+    """
+    given = {k: v for k, v in dict(W1=W1, W2=W2).items() if v is not None}
+    return _P.solve("two_wattmeter", **given)
+
 def twos_complement_decode(pattern=None):
     """Value of a two's complement bit pattern. The signed value of an n-bit two's complement pattern (n = the number of digits written).
     Formula: x = -b_{n-1}2^{n-1} + \\sum_{i<n-1} b_i 2^i
@@ -817,6 +1201,19 @@ def voltage_divider(Vin=None, R1=None, R2=None):
     """
     given = {k: v for k, v in dict(Vin=Vin, R1=R1, R2=R2).items() if v is not None}
     return _P.solve("voltage_divider", **given)
+
+def voltmeter_multiplier(Ifs=None, Rm=None, V=None):
+    """Voltmeter multiplier resistance. The series (multiplier) resistance that makes a moving-coil meter of full-scale current Ifs and resistance Rm read a voltage V at full scale, and the voltmeter's sensitivity.
+    Formula: R_{mult} = \\frac{V}{I_{fs}} - R_m
+    Inputs:
+        Ifs: full-scale deflection current of the meter
+        Rm: resistance of the meter
+        V: required full-scale reading of the voltmeter
+    Outputs: Rmult (multiplier (series) resistance), R_total (resistance of the voltmeter), sensitivity (sensitivity in ohm per volt, 1/Ifs), V_fs (full-scale voltage of the bare meter)
+    See also: help("voltmeter_multiplier")
+    """
+    given = {k: v for k, v in dict(Ifs=Ifs, Rm=Rm, V=V).items() if v is not None}
+    return _P.solve("voltmeter_multiplier", **given)
 
 def wheatstone_bridge(Vs=None, R1=None, R2=None, R3=None, R4=None):
     """Wheatstone bridge output. The output voltage of a Wheatstone bridge (left arm R1 over R2, right arm R3 over R4, supply Vs), whether it is balanced, and the R4 that balances it.
@@ -861,4 +1258,4 @@ def zener_regulator(Vin=None, R=None, Vz=None, RL=None):
     return _P.solve("zener_regulator", **given)
 
 
-__all__ = ["CapabilityId", "solve", "help", "adc_conversion", "base_conversion", "bjt_divider_bias", "bode_point", "boolean_equivalence", "boolean_evaluate", "closed_loop_poles", "complex_power", "controllability_observability", "current_divider", "dc_motor", "dc_node_voltages", "delta_to_wye", "difference_amplifier", "diode_circuit", "first_order_time_to_value", "first_order_transient", "gain_margin", "gray_code", "inductor_energy", "inverting_amplifier", "lead_compensator", "max_power_transfer", "mesh_currents", "minterms_to_sop", "mosfet_saturation", "nodal_voltages", "noninverting_amplifier", "norton_equivalent", "opamp_integrator", "parallel_capacitance", "parallel_inductance", "parallel_resistance", "parallel_rlc_impedance", "parallel_rlc_resonance", "phase_margin", "phasor_sum", "polar_to_rectangular", "power_factor_correction", "rc_filter", "rectangular_to_polar", "resistor_network", "rms_waveform", "routh_hurwitz", "second_order_step", "series_capacitance", "series_inductance", "series_resistance", "series_rlc_impedance", "series_rlc_resonance", "series_rlc_step", "state_space_to_tf", "steady_state_error", "summing_amplifier", "thevenin_equivalent", "three_phase_load", "transformer", "truth_table_sop", "twos_complement_decode", "twos_complement_encode", "voltage_divider", "wheatstone_bridge", "wye_to_delta", "zener_regulator"]
+__all__ = ["CapabilityId", "solve", "help", "ac_mesh_currents", "ac_node_voltages", "ac_norton_equivalent", "ac_thevenin_equivalent", "adc_conversion", "ammeter_shunt", "base_conversion", "bjt_divider_bias", "bode_point", "boolean_equivalence", "boolean_evaluate", "cell_battery", "closed_loop_poles", "coil_capacitor_parallel", "coil_inductance", "complex_power", "controllability_observability", "current_divider", "dc_machine_emf", "dc_motor", "dc_motor_speed_change", "dc_node_voltages", "dc_shunt_generator", "dc_shunt_motor", "delta_to_wye", "difference_amplifier", "diode_circuit", "electrical_energy_cost", "faraday_emf", "first_order_time_to_value", "first_order_transient", "gain_margin", "gray_code", "inductor_energy", "inverting_amplifier", "lead_compensator", "magnetic_circuit", "max_power_transfer", "mesh_currents", "minterms_to_sop", "mosfet_saturation", "mutual_inductance", "nodal_voltages", "noninverting_amplifier", "norton_equivalent", "opamp_integrator", "parallel_ac_supply", "parallel_capacitance", "parallel_inductance", "parallel_plate_capacitor", "parallel_resistance", "parallel_rlc_impedance", "parallel_rlc_resonance", "phase_margin", "phasor_sum", "plane_wave_lossless", "plane_wave_lossy", "polar_to_rectangular", "power_factor_correction", "rc_filter", "rectangular_to_polar", "resistance_at_temperature", "resistor_network", "rms_waveform", "routh_hurwitz", "second_order_step", "self_inductance", "series_ac_supply", "series_capacitance", "series_inductance", "series_resistance", "series_rlc_impedance", "series_rlc_resonance", "series_rlc_step", "sinusoid_time_to_value", "sinusoid_values", "state_space_to_tf", "steady_state_error", "summing_amplifier", "temperature_coefficient_from_resistances", "thevenin_equivalent", "three_phase_load", "transformer", "truth_table_sop", "two_wattmeter", "twos_complement_decode", "twos_complement_encode", "voltage_divider", "voltmeter_multiplier", "wheatstone_bridge", "wye_to_delta", "zener_regulator"]

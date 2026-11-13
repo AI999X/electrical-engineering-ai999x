@@ -4,11 +4,11 @@
 
 **[Desktop app & command line](https://www.ai999x.com/desktop-cli/)** · **[Compute in your browser](https://www.ai999x.com/models/electrical-engineering-ai999x/#try)** · **[Install (Python)](https://pypi.org/project/electrical-engineering-ai999x/)** · **[Guides](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/docs)** · **[Evaluation](https://huggingface.co/AI999X/electrical-engineering-ai999x/tree/main/evaluation)** · **[AI999X on Hugging Face](https://huggingface.co/AI999X)** · **[Website](https://ai999x.com)** · **[Support: Buy Me a Coffee](https://buymeacoffee.com/ibnuljaiffarabi)**
 
-License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.5.0
+License: Apache-2.0 · Author: Ibnul Jaif Farabi (creator and engineer) · Organization: AI999X · Version 1.6.0
 
 Field: **Engineering** · Tasks: Question Answering
 
-electrical-engineering-ai999x is an offline, deterministic electrical engineering solver written in Rust: a desktop app, a command-line program, a browser module and a Python package. It answers electrical engineering questions with verified results from 64 certified capabilities, gives 326 documented answers identically on Windows and Linux, and refuses rather than guesses when an answer cannot be verified.
+electrical-engineering-ai999x is an offline, deterministic electrical engineering solver written in Rust: a desktop app, a command-line program, a browser module and a Python package. It answers electrical engineering questions with verified results from 92 certified capabilities, gives 493 documented answers identically on Windows and Linux, and refuses rather than guesses when an answer cannot be verified.
 
 **electrical-engineering-ai999x** reads a question in plain English (or a typed call), picks a certified electrical engineering capability, computes the answer exactly, checks it, and returns the result with its steps, units, LaTeX and assumptions, or a refusal that says what is missing. It runs fully offline on any CPU, needs no GPU, no API key and no internet, and is built to give **zero wrong answers**: when it is not sure, it refuses instead of guessing.
 
@@ -20,13 +20,13 @@ electrical-engineering-ai999x is an offline, deterministic electrical engineerin
 
 | Way to run it | For | Get it |
 |---|---|---|
-| **AI999X Electrical Engineering desktop app** 1.5.0 | Windows, Linux. This model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz) |
-| **AI999X desktop app** 1.5.0 | Windows, Linux. Every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz) |
-| **Command line** (`electrical-engineering`) | Windows, Linux. One program per model, offline, no Python | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz) |
+| **AI999X Electrical Engineering desktop app** 1.6.0 | Windows, Linux. This model in its own app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-electrical-engineering-1.6.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-electrical-engineering-1.6.0-linux-x86_64.tar.gz) |
+| **AI999X desktop app** 1.6.0 | Windows, Linux. Every AI999X model in one app: search, ask in words, forms, live figures, explanations, offline | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-linux-x86_64.tar.gz) |
+| **Command line** (`electrical-engineering`) | Windows, Linux. One program per model, offline, no Python | [Windows (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-windows-x86_64.zip) · [Linux (x86-64)](https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz) |
 | **In your browser** | any device. Nothing to install | [Compute on the model page](https://www.ai999x.com/models/electrical-engineering-ai999x/#try) |
 | **Python** | Python 3.10+ | `pip install electrical-engineering-ai999x` |
 
-Checksums: [SHA256SUMS](https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS) · every version: [https://downloads.ai999x.com/desktop/latest/](https://downloads.ai999x.com/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
+Checksums: [SHA256SUMS](https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS) · every version: [https://downloads.ai999x.com/desktop/latest/](https://downloads.ai999x.com/desktop/latest/) · install guide: [desktop & command line](https://www.ai999x.com/desktop-cli/)
 
 ## Quick start
 
@@ -37,11 +37,11 @@ Download **AI999X Electrical Engineering** for your system (above), unpack it an
 Linux, from a terminal:
 
 ```bash
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-electrical-engineering-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
-./ai999x-electrical-engineering-1.5.0-linux-x86_64/ai999x-electrical-engineering
+tar xzf ai999x-electrical-engineering-1.6.0-linux-x86_64.tar.gz
+./ai999x-electrical-engineering-1.6.0-linux-x86_64/ai999x-electrical-engineering
 ```
 
 ### Command line
@@ -49,23 +49,23 @@ tar xzf ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
 Linux:
 
 ```bash
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share && tar xzf ai999x-cli-1.5.0-linux-x86_64.tar.gz -C ~/.local/share
-echo 'export PATH="$HOME/.local/share/ai999x-cli-1.5.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
+mkdir -p ~/.local/share && tar xzf ai999x-cli-1.6.0-linux-x86_64.tar.gz -C ~/.local/share
+echo 'export PATH="$HOME/.local/share/ai999x-cli-1.6.0-linux-x86_64:$PATH"' >> ~/.bashrc && source ~/.bashrc
 electrical-engineering --version
 ```
 
 Windows (PowerShell):
 
 ```powershell
-$F = "ai999x-cli-1.5.0-windows-x86_64.zip"
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/$F" -OutFile $F
-Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS" -OutFile SHA256SUMS
+$F = "ai999x-cli-1.6.0-windows-x86_64.zip"
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.6.0/$F" -OutFile $F
+Invoke-WebRequest "https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS" -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split ' ')[0]
 Expand-Archive $F -DestinationPath "$env:LOCALAPPDATA\AI999X" -Force
-$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.5.0-windows-x86_64"; $env:Path += ";$D"
+$D = "$env:LOCALAPPDATA\AI999X\ai999x-cli-1.6.0-windows-x86_64"; $env:Path += ";$D"
 [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$D", "User")
 electrical-engineering --version
 ```
@@ -142,6 +142,35 @@ pip install electrical-engineering-ai999x
 ## Worked examples in every form
 
 The same worked example from the command line, from Python and in the browser. Each command-line output is what the program printed.
+
+### AC mesh currents from the phasor mesh equations (complex impedances)
+
+Solve the mesh equations Z I = V of an AC circuit in phasor form: the mesh resistance and reactance matrices (Z = R + jX) and the source phasors give every mesh current's magnitude and angle.
+
+Command line:
+
+```console
+$ electrical-engineering solve ac_mesh_currents "R=[[10, -4], [-4, 8]]" "X=[[5, -2], [-2, -3]]" "V_mag=[10, 0]" "V_deg=[0, 0]"
+currents_real = [0.984837545126,0.462093862816]
+currents_imag = [-0.290252707581,0.274368231047]
+currents_mag = [1.02671886344,0.5374092149]
+currents_deg = [-16.4213738458,30.6997225508]
+first_mag = 1.026718863 A
+first_deg = -16.42137385
+  by: AC mesh currents from the phasor mesh equations (complex impedances)  (complex Gaussian elimination with partial pivoting on (R + jX) I = V)
+  assumes: square matrices of one shape; one source phasor per mesh (magnitude >= 0); a non-singular impedance matrix; sinusoidal steady state, one frequency
+```
+
+Python:
+
+```python
+import electrical_engineering_ai999x as m
+
+a = m.solve("ac_mesh_currents", R=[[10, -4], [-4, 8]], X=[[5, -2], [-2, -3]], V_mag=[10, 0], V_deg=[0, 0])
+print(a.values or (a.value, a.unit))
+```
+
+Browser: [open this capability on the model page](https://www.ai999x.com/models/electrical-engineering-ai999x/#cap-ac_mesh_currents) and press **Compute in your browser**.
 
 ### Balanced three-phase load (wye or delta)
 
@@ -242,39 +271,6 @@ Browser: [open this capability on the model page](https://www.ai999x.com/models/
 
 _What this means:_ This calculation determines the magnetic energy stored in an inductor and its flux linkage based on the given inductance of 0.05 H and current of 2 A. The resulting energy of 0.1 J represents the work done to establish the magnetic field, while the flux linkage of 0.1 indicates the total magnetic flux coupled with the coil turns. These values are critical for analyzing circuit transients and power conversion efficiency.
 
-### First-order RC filter: cutoff, gain and phase
-
-The cutoff frequency 1/(2 pi R C) of an RC low-pass or high-pass filter and its gain (ratio and dB) and phase at a frequency.
-
-Command line:
-
-```console
-$ electrical-engineering solve rc_filter "R=1000 ohm" "C=1e-07 F" "f=2000 Hz" filter=lowpass
-fc = 1591.549431 Hz
-gain = 0.6226769923
-gain_db = -4.11474362
-phase_deg = -51.48811275
-  by: First-order RC filter: cutoff, gain and phase  (H = 1/(1 + j f/fc) (low-pass) or (j f/fc)/(1 + j f/fc) (high-pass))
-  R = 1000 ohm
-  C = 1e-07 F
-  f = 2000 Hz
-  filter = lowpass
-  assumes: unloaded output; R, C, f > 0
-```
-
-Python:
-
-```python
-import electrical_engineering_ai999x as m
-
-a = m.solve("rc_filter", R="1000 ohm", C="1e-07 F", f="2000 Hz", filter="lowpass")
-print(a.values or (a.value, a.unit))
-```
-
-Browser: [open this capability on the model page](https://www.ai999x.com/models/electrical-engineering-ai999x/#cap-rc_filter) and press **Compute in your browser**.
-
-_What this means:_ This calculation determines the cutoff frequency, magnitude gain, decibel gain, and phase shift for a first-order RC filter. Using resistance 1000 ohm, capacitance 1e-07 F, and signal frequency 2000 Hz, it finds that the cutoff frequency is 1591.55 Hz. The resulting voltage gain ratio is 0.622677, which corresponds to -4.11474 in decibels, with a phase shift of -51.4881 degrees between output and input.
-
 ## Documentation
 
 - **Rust user guide**: the command line, every capability with a command and what it printed: [PDF](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_rust_guide.pdf) · [Markdown](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_rust_guide.md)
@@ -285,7 +281,7 @@ _What this means:_ This calculation determines the cutoff frequency, magnitude g
 ## Highlights
 
 - **Verified, not generated.** Every answer is computed by a certified electrical engineering capability and checked (substituted back, dimension-checked or compared with an independent computation) before it is returned.
-- **Zero wrong answers by design.** Seven explicit outcomes (SOLVED, NEEDS_INPUT, AMBIGUOUS, INVALID_INPUT, OUT_OF_SCOPE, UNRECOGNIZED_FORMAT, INTERNAL_ERROR), never a silent guess. Every one of its 326 documented answers is reproduced exactly on every tested platform.
+- **Zero wrong answers by design.** Seven explicit outcomes (SOLVED, NEEDS_INPUT, AMBIGUOUS, INVALID_INPUT, OUT_OF_SCOPE, UNRECOGNIZED_FORMAT, INTERNAL_ERROR), never a silent guess. Every one of its 493 documented answers is reproduced exactly on every tested platform.
 - **Plain-English questions and a guaranteed typed interface.** `ask()` reads documented question forms; `solve(capability_id, **inputs)` always solves a supported task with valid inputs.
 - **Explains itself.** Steps, formulas in LaTeX, units, assumptions and the model used, ready for notebooks, tutoring apps and homework checkers.
 - **Native and in the browser.** Every capability also computes natively in Rust: the desktop app and the `electrical-engineering` command line for Windows and Linux, and WebAssembly on the model page, no Python, no network.
@@ -296,11 +292,11 @@ _What this means:_ This calculation determines the cutoff frequency, magnitude g
 
 | Property | Value |
 |---|---|
-| Package | `electrical-engineering-ai999x` 1.5.0 (import `electrical_engineering_ai999x`) |
+| Package | `electrical-engineering-ai999x` 1.6.0 (import `electrical_engineering_ai999x`) |
 | Type | Deterministic neuro-symbolic electrical engineering engine (rule-based reading + certified symbolic capabilities) |
-| Capabilities | 64 certified procedures |
+| Capabilities | 92 certified procedures |
 | Knowledge pack | version 1.0.0 |
-| Golden answers | 326 documented answers, identical on every tested platform |
+| Golden answers | 493 documented answers, identical on every tested platform |
 | Platforms tested | Windows (Python 3.13), Linux x86-64 (Python 3.10, 3.11, 3.12, 3.13, 3.14) |
 | Runtime | CPU only, offline; no GPU, no network, no API key |
 | License | Apache-2.0 |
@@ -330,7 +326,7 @@ electrical_engineering.ask("Who created you?").message
 # -> electrical-engineering-ai999x was created and engineered by Ibnul Jaif Farabi at AI999X.
 ```
 
-The Python package also installs a Python command, `electrical-engineering-ai999x "<question>"`; for the native program use `electrical-engineering` (above). The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.5.0.
+The Python package also installs a Python command, `electrical-engineering-ai999x "<question>"`; for the native program use `electrical-engineering` (above). The outputs above were produced by running this exact code on electrical-engineering-ai999x 1.6.0.
 
 ## How every answer is verified
 
@@ -405,15 +401,15 @@ Each question was put to `electrical-engineering-ai999x`; the answer is the one 
 
 </details>
 
-**DC operating point of a voltage-divider biased BJT** · _Diodes and transistors_
+**Time at which a sinusoid first reaches a value** · _Alternating voltages and currents_
 
-> A voltage-divider biased BJT has VCC = 12 V, R1 = 10 kohm, R2 = 2.2 kohm, RC = 3.6 kohm, RE = 1 kohm, beta = 100 and VBE = 0.7 V. Find the collector current.
+> When does the sinusoid with Vm = 100 V, w = 314.159 rad/s, phi = 0 first reach v = 50 V?
 
-→ **IC = 0.001424015309 A, IC_mA = 1.424015309, IB = 1.424015309e-05 A, IE = 0.001438255462 A, VB = 2.138255462 V, VE = 1.438255462 V, VC = 6.873544889 V, VCE = 5.435289428 V**
+→ **t = 0.001666668074 s, T = 0.02000001689 s, direction = rising**
 
 <details><summary>Steps</summary>
 
-- DC operating point of a voltage-divider biased BJT: VCC = 12 V, VBE = 0.7 V, R1 = 10000 ohm, R2 = 2200 ohm, RC = 3600 ohm, RE = 1000 ohm, beta = 100 → IC = 0.001424015309 A, IC_mA = 1.424015309, IB = 1.424015309e-05 A, IE = 0.001438255462 A, VB = 2.138255462 V, VE = 1.438255462 V, VC = 6.873544889 V, VCE = 5.435289428 V
+- Time at which a sinusoid first reaches a value: Vm = 100 V, w = 314.159 rad/s, phi = 0, v = 50 V → t = 0.001666668074 s, T = 0.02000001689 s, direction = rising s
 
 </details>
 
@@ -453,9 +449,9 @@ _Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R
 
 ## Capabilities
 
-64 certified procedures. A few of them:
+92 certified procedures. A few of them:
 
-- **Procedures:** Analog-to-digital conversion: output code and resolution; Balanced three-phase load (wye or delta); Binary to Gray code and Gray code to binary; Closed-loop poles with unity negative feedback; Complex, real, reactive and apparent power from voltage and current phasors; Controllability and observability of a single-input single-output system; Current divider; DC operating point of a voltage-divider biased BJT; Delta-to-wye (Pi-to-T) resistor transformation; Difference amplifier output (four-resistor op-amp circuit); Energy stored in an inductor; Equivalence of two Boolean expressions; Equivalent capacitance of capacitors in parallel; Equivalent capacitance of capacitors in series; Equivalent inductance of inductors in parallel; Equivalent inductance of inductors in series; Equivalent resistance of a series-parallel resistor network; Equivalent resistance of resistors in parallel; Equivalent resistance of resistors in series; Evaluate a Boolean expression; First-order (RC or RL) transient response; First-order RC filter: cutoff, gain and phase; Frequency response (Bode magnitude and phase) at one frequency; Gain margin and phase-crossover frequency …
+- **Procedures:** AC mesh currents from the phasor mesh equations (complex impedances); Ammeter shunt resistance; Analog-to-digital conversion: output code and resolution; Balanced three-phase load (wye or delta); Binary to Gray code and Gray code to binary; Cells with internal resistance: series and parallel batteries on a load; Closed-loop poles with unity negative feedback; Coil with resistance in parallel with a capacitor: currents, resonance and dynamic resistance; Complex, real, reactive and apparent power from voltage and current phasors; Controllability and observability of a single-input single-output system; Current divider; D.C. shunt generator: field and armature currents, generated emf and powers; D.C. shunt motor: back emf, torque, output and efficiency; DC operating point of a voltage-divider biased BJT; Delta-to-wye (Pi-to-T) resistor transformation; Difference amplifier output (four-resistor op-amp circuit); Electrical energy and its cost; Energy stored in an inductor; Equivalence of two Boolean expressions; Equivalent capacitance of capacitors in parallel; Equivalent capacitance of capacitors in series; Equivalent inductance of inductors in parallel; Equivalent inductance of inductors in series; Equivalent resistance of a series-parallel resistor network …
 
 `electrical_engineering_ai999x.templates()` lists every question form `ask()` reads; the capability guide (PDF, every example executed) is included in this repository.
 
@@ -474,10 +470,10 @@ _Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R
 ## Citation
 
 ```bibtex
-@software{electrical_engineering_ai999x_1_5_0,
+@software{electrical_engineering_ai999x_1_6_0,
   title  = {electrical-engineering-ai999x: an offline, verified electrical engineering solver},
   author = {Farabi, Ibnul Jaif}, organization = {AI999X},
-  year   = {2026}, version = {1.5.0},
+  year   = {2026}, version = {1.6.0},
   url    = {https://huggingface.co/AI999X/electrical-engineering-ai999x}
 }
 ```
@@ -494,7 +490,7 @@ Created and engineered by **Ibnul Jaif Farabi** · **[AI999X](https://huggingfac
 
 ## Source and releases
 
-This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/electrical-engineering-ai999x/) (`pip install .` builds it). Releases are tagged `v1.5.0`; the [GitHub release](https://github.com/AI999X/electrical-engineering-ai999x/releases/tag/v1.5.0) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
+This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/electrical-engineering-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.0`; the [GitHub release](https://github.com/AI999X/electrical-engineering-ai999x/releases/tag/v1.6.0) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
 
 ## Build the program from source
 

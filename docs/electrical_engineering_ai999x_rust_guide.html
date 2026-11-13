@@ -21,42 +21,42 @@ figcaption{font-size:9pt;color:#555}
 .pb{page-break-after:always}
 </style></head><body>
 <h1>electrical-engineering: the Electrical Engineering program, user guide</h1>
-<p><strong>electrical-engineering-ai999x 1.1.0</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
-<p>Electrical Engineering covers DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode). This guide is about <code>electrical-engineering</code>, the model as a self-contained program for Windows and Linux: 64 capabilities in 7 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model&#x27;s page (https://www.ai999x.com/models/electrical-engineering-ai999x/); the Python package (<code>pip install electrical-engineering-ai999x</code>) has its own guide. Every command output printed here is what the program printed.</p>
+<p><strong>electrical-engineering-ai999x 1.6.0</strong>, Rust build: command line, desktop app and browser. <strong>Creator / engineer:</strong> Ibnul Jaif Farabi · <strong>Company:</strong> AI999X · support@ai999x.com</p>
+<p>Electrical Engineering covers DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode). This guide is about <code>electrical-engineering</code>, the model as a self-contained program for Windows and Linux: 92 capabilities in 17 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model&#x27;s page (https://www.ai999x.com/models/electrical-engineering-ai999x/); the Python package (<code>pip install electrical-engineering-ai999x</code>) has its own guide. Every command output printed here is what the program printed.</p>
 <h2>Contents</h2>
 <ul><li>1. Get it: desktop app, command line, browser, Python</li><li>2. Quick start</li><li>3. Writing inputs</li><li>4. Outcomes and exit codes</li><li>5. Scripts and agents: batch and JSON</li><li>6. Figures</li><li>7. In a web page or Node.js: WebAssembly</li><li>8. Every capability</li></ul>
 <h2>1. Get it</h2>
-<p>Version 1.5.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
-<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Electrical Engineering</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Electrical Engineering</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz</td></tr></tbody></table>
+<p>Version 1.6.0 of the AI999X desktop app and of the command-line bundle. Checksums for every file: https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS; the newest version is always under https://downloads.ai999x.com/desktop/latest/. Full instructions: https://www.ai999x.com/desktop-cli/</p>
+<table><thead><tr><th>what</th><th>system</th><th>download</th></tr></thead><tbody><tr><td>Desktop app: Electrical Engineering</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.6.0/ai999x-electrical-engineering-1.6.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: Electrical Engineering</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.6.0/ai999x-electrical-engineering-1.6.0-linux-x86_64.tar.gz</td></tr><tr><td>Desktop app: all models</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-windows-x86_64.zip</td></tr><tr><td>Desktop app: all models</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-linux-x86_64.tar.gz</td></tr><tr><td>Command line</td><td>Windows x86-64</td><td>https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-windows-x86_64.zip</td></tr><tr><td>Command line</td><td>Linux x86-64</td><td>https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz</td></tr></tbody></table>
 <h3>Desktop app</h3>
-<p>Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.5.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
-<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+<p>Electrical Engineering in its own app: search, questions in words, input forms, live figures and explanations. Windows: Download ai999x-electrical-engineering-1.6.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x-electrical-engineering.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-electrical-engineering-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-electrical-engineering-1.5.0-linux-x86_64.tar.gz
-./ai999x-electrical-engineering-1.5.0-linux-x86_64/ai999x-electrical-engineering</code></pre>
-<p>It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.5.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
-<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+tar xzf ai999x-electrical-engineering-1.6.0-linux-x86_64.tar.gz
+./ai999x-electrical-engineering-1.6.0-linux-x86_64/ai999x-electrical-engineering</code></pre>
+<p>It opens on this model: type a question or pick a capability, fill in the form and press Compute. The AI999X desktop app with every model works the same way (choose the model first). Windows: Download ai999x-1.6.0-windows-x86_64.zip, right-click it → Extract All, then open the folder and start ai999x.exe. If Windows SmartScreen asks, choose More info → Run anyway. Linux:</p>
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-tar xzf ai999x-1.5.0-linux-x86_64.tar.gz
-./ai999x-1.5.0-linux-x86_64/ai999x</code></pre>
+tar xzf ai999x-1.6.0-linux-x86_64.tar.gz
+./ai999x-1.6.0-linux-x86_64/ai999x</code></pre>
 <h3>Command line, Linux</h3>
 <p>The bundle holds one program per model; <code>electrical-engineering</code> is this one. The checksum line should print OK.</p>
-<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.5.0/ai999x-cli-1.5.0-linux-x86_64.tar.gz
-curl -LO https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS
+<pre><code class="shell">curl -LO https://downloads.ai999x.com/desktop/1.6.0/ai999x-cli-1.6.0-linux-x86_64.tar.gz
+curl -LO https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS
 sha256sum -c --ignore-missing SHA256SUMS
-mkdir -p ~/.local/share &amp;&amp; tar xzf ai999x-cli-1.5.0-linux-x86_64.tar.gz -C ~/.local/share
-echo &#x27;export PATH=&quot;$HOME/.local/share/ai999x-cli-1.5.0-linux-x86_64:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
+mkdir -p ~/.local/share &amp;&amp; tar xzf ai999x-cli-1.6.0-linux-x86_64.tar.gz -C ~/.local/share
+echo &#x27;export PATH=&quot;$HOME/.local/share/ai999x-cli-1.6.0-linux-x86_64:$PATH&quot;&#x27; &gt;&gt; ~/.bashrc &amp;&amp; source ~/.bashrc
 electrical-engineering --version</code></pre>
 <h3>Command line, Windows (PowerShell)</h3>
 <p>The fourth line should print True.</p>
-<pre><code class="powershell">$F = &quot;ai999x-cli-1.5.0-windows-x86_64.zip&quot;
-Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.5.0/$F&quot; -OutFile $F
-Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.5.0/SHA256SUMS&quot; -OutFile SHA256SUMS
+<pre><code class="powershell">$F = &quot;ai999x-cli-1.6.0-windows-x86_64.zip&quot;
+Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.6.0/$F&quot; -OutFile $F
+Invoke-WebRequest &quot;https://downloads.ai999x.com/desktop/1.6.0/SHA256SUMS&quot; -OutFile SHA256SUMS
 (Get-FileHash $F -Algorithm SHA256).Hash.ToLower() -eq ((Select-String -SimpleMatch $F SHA256SUMS).Line -split &#x27; &#x27;)[0]
 Expand-Archive $F -DestinationPath &quot;$env:LOCALAPPDATA\AI999X&quot; -Force
-$D = &quot;$env:LOCALAPPDATA\AI999X\ai999x-cli-1.5.0-windows-x86_64&quot;; $env:Path += &quot;;$D&quot;
+$D = &quot;$env:LOCALAPPDATA\AI999X\ai999x-cli-1.6.0-windows-x86_64&quot;; $env:Path += &quot;;$D&quot;
 [Environment]::SetEnvironmentVariable(&quot;Path&quot;, [Environment]::GetEnvironmentVariable(&quot;Path&quot;, &quot;User&quot;) + &quot;;$D&quot;, &quot;User&quot;)
 electrical-engineering --version</code></pre>
 <h3>In your browser</h3>
@@ -67,7 +67,7 @@ electrical-engineering --version</code></pre>
 <h3>2.1 Check the install</h3>
 <p>Prints the model, its version and that this is the Rust build.</p>
 <pre><code class="shell">$ electrical-engineering --version
-electrical-engineering-ai999x 1.5.0 (Rust build, ax-engine 1.5.0)</code></pre>
+electrical-engineering-ai999x 1.6.0 (Rust build, ax-engine 1.6.0)</code></pre>
 <h3>2.2 Ask in words</h3>
 <p>Write the question as you would say it: the program reads the quantities and their units, picks the capability and answers.</p>
 <pre><code class="shell">$ electrical-engineering ask &quot;Find the Thevenin equivalent between nodes 2 and 0 of the circuit: V1 1 0 12; R1 1 2 1000; R2 2 0 2000.&quot;
@@ -84,25 +84,25 @@ Rth = 666.6666667 ohm
 <pre><code class="shell">$ electrical-engineering search &quot;thevenin equivalent of a dc circuit between two nodes&quot;
 thevenin_equivalent                  Thevenin equivalent of a DC circuit between two nodes  (DC circuits / Thevenin and Norton equivalents)
 norton_equivalent                    Norton equivalent of a DC circuit between two nodes  (DC circuits / Thevenin and Norton equivalents)
-dc_node_voltages                     Node voltages of a DC resistive circuit from its netlist  (DC circuits / mesh and nodal analysis)
+ac_thevenin_equivalent               Thevenin equivalent of an AC circuit between two nodes (phasors, complex impedance)  (AC circuits / AC Thevenin and Norton equivalents)
+ac_norton_equivalent                 Norton equivalent of an AC circuit between two nodes (phasors, complex impedance)  (AC circuits / AC Thevenin and Norton equivalents)
 boolean_equivalence                  Equivalence of two Boolean expressions  (digital logic / Boolean algebra)
+dc_node_voltages                     Node voltages of a DC resistive circuit from its netlist  (DC circuits / mesh and nodal analysis)
 nodal_voltages                       Node voltages from the nodal equations (Kirchhoff&#x27;s current law)  (DC circuits / mesh and nodal analysis)
-max_power_transfer                   Maximum power transfer  (DC circuits / Thevenin and Norton equivalents)
-series_resistance                    Equivalent resistance of resistors in series  (DC circuits / series and parallel combinations)
-parallel_resistance                  Equivalent resistance of resistors in parallel  (DC circuits / series and parallel combinations)
+ac_node_voltages                     Node voltages of an AC circuit from its netlist (phasor nodal analysis)  (AC circuits / AC network analysis)
 … 12 more</code></pre>
 <h3>2.4 List the capabilities</h3>
 <p>Every capability the program answers: its id (what you pass to solve) and its name.</p>
 <pre><code class="shell">$ electrical-engineering list
+ac_mesh_currents                         AC mesh currents from the phasor mesh equations (complex impedances)
+ac_node_voltages                         Node voltages of an AC circuit from its netlist (phasor nodal analysis)
+ac_norton_equivalent                     Norton equivalent of an AC circuit between two nodes (phasors, complex impedance)
+ac_thevenin_equivalent                   Thevenin equivalent of an AC circuit between two nodes (phasors, complex impedance)
 adc_conversion                           Analog-to-digital conversion: output code and resolution
+ammeter_shunt                            Ammeter shunt resistance
 base_conversion                          Number base conversion (binary, octal, decimal, hexadecimal)
 bjt_divider_bias                         DC operating point of a voltage-divider biased BJT
-bode_point                               Frequency response (Bode magnitude and phase) at one frequency
-boolean_equivalence                      Equivalence of two Boolean expressions
-boolean_evaluate                         Evaluate a Boolean expression
-closed_loop_poles                        Closed-loop poles with unity negative feedback
-complex_power                            Complex, real, reactive and apparent power from voltage and current phasors
-… 56 more</code></pre>
+… 84 more</code></pre>
 <h3>2.5 What a capability needs</h3>
 <p>The equation or method, every input and output with its SI unit. Read this before solve: it tells you the input names.</p>
 <pre><code class="shell">$ electrical-engineering info thevenin_equivalent
@@ -169,7 +169,22 @@ answers = [json.loads(line) for line in out.splitlines()]</code></pre>
 &lt;/script&gt;</code></pre>
 <h2>8. Every capability</h2>
 <p>By topic. For each: what it does, what it needs and gives, when it applies, and a command with what the program printed for it. <code>electrical-engineering info &lt;id&gt;</code> shows the same inputs and outputs in the terminal.</p>
-<h3>AC circuits (14)</h3>
+<h3>AC circuits (18)</h3>
+<h4 id="ac_mesh_currents">AC mesh currents from the phasor mesh equations (complex impedances), <code>ac_mesh_currents</code></h4>
+<p>Solve the mesh equations Z I = V of an AC circuit in phasor form: the mesh resistance and reactance matrices (Z = R + jX) and the source phasors give every mesh current&#x27;s magnitude and angle.</p>
+<div class="math">\[(\mathbf{R} + j\mathbf{X})\,\mathbf{I} = \mathbf{V}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R</code></td><td>in</td><td>mesh resistance matrix in ohms (real part of the mesh impedance matrix)</td><td>, </td></tr><tr><td><code>X</code></td><td>in</td><td>mesh reactance matrix in ohms (imaginary part: + wL for an inductor, - 1/(wC) for a capacitor; shared terms with a minus sign)</td><td>, </td></tr><tr><td><code>V_mag</code></td><td>in</td><td>rms magnitude of the net source voltage around each mesh, in volts (in the mesh-current direction)</td><td>, </td></tr><tr><td><code>V_deg</code></td><td>in</td><td>angle of each mesh&#x27;s net source voltage, in degrees</td><td>, </td></tr><tr><td><code>currents_mag</code></td><td>out</td><td>rms magnitudes of the mesh currents in amperes, in row order</td><td>, </td></tr><tr><td><code>currents_deg</code></td><td>out</td><td>angles of the mesh currents in degrees</td><td>, </td></tr><tr><td><code>currents_real</code></td><td>out</td><td>real parts of the mesh currents in amperes</td><td>, </td></tr><tr><td><code>currents_imag</code></td><td>out</td><td>imaginary parts of the mesh currents in amperes</td><td>, </td></tr><tr><td><code>first_mag</code></td><td>out</td><td>magnitude of the first mesh current</td><td>A</td></tr><tr><td><code>first_deg</code></td><td>out</td><td>angle of the first mesh current in degrees</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> square matrices of one shape; one source phasor per mesh (magnitude &gt;= 0); a non-singular impedance matrix; sinusoidal steady state, one frequency.</p>
+<pre><code class="shell">$ electrical-engineering solve ac_mesh_currents &quot;R=[[10, -4], [-4, 8]]&quot; &quot;X=[[5, -2], [-2, -3]]&quot; &quot;V_mag=[10, 0]&quot; &quot;V_deg=[0, 0]&quot;
+currents_real = [0.984837545126,0.462093862816]
+currents_imag = [-0.290252707581,0.274368231047]
+currents_mag = [1.02671886344,0.5374092149]
+currents_deg = [-16.4213738458,30.6997225508]
+first_mag = 1.026718863 A
+first_deg = -16.42137385
+  by: AC mesh currents from the phasor mesh equations (complex impedances)  (complex Gaussian elimination with partial pivoting on (R + jX) I = V)
+  assumes: square matrices of one shape; one source phasor per mesh (magnitude &gt;= 0); a non-singular impedance matrix; sinusoidal steady state, one frequency</code></pre>
+<p>In the worked example, R = [10 -4; -4 8], X = [5 -2; -2 -3], V_mag = [10, 0], V_deg = [0, 0] go through the equation above and give currents_real = [0.9848375451, 0.4620938628], currents_imag = [-0.2902527076, 0.274368231], currents_mag = [1.026718863, 0.5374092149], currents_deg = [-16.42137385, 30.69972255]. It applies only when square matrices of one shape; one source phasor per mesh (magnitude &gt;= 0); a non-singular impedance matrix; sinusoidal steady state, one frequency: outside that it says what is wrong instead of returning a number.</p>
 <h4 id="three_phase_load">Balanced three-phase load (wye or delta), <code>three_phase_load</code></h4>
 <p>Phase voltage, phase and line currents, real, reactive and apparent power and the power factor of a balanced load with impedance R + jX per phase.</p>
 <div class="math">\[P = \sqrt{3}\,V_L I_L \cos\phi\]</div>
@@ -294,6 +309,46 @@ XC = 15.91549431 ohm
   f = 1000 Hz
   assumes: R &gt;= 0, L &gt; 0, C &gt; 0, f &gt; 0; sinusoidal steady state</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines the total opposition to alternating current in a series circuit containing resistance, inductance, and capacitance. Using the source frequency 1000 Hz, it computes the inductive reactance as 314.159 ohm and the capacitive reactance as 15.9155 ohm. The resulting complex impedance has a real part of 100 ohm and an imaginary part of 298.244 ohm, yielding a total magnitude of 314.562 ohm and a phase angle of 71.4639. A positive phase angle indicates the circuit behaves inductively at this frequency.</p>
+<h4 id="ac_node_voltages">Node voltages of an AC circuit from its netlist (phasor nodal analysis), <code>ac_node_voltages</code></h4>
+<p>Every node-voltage phasor (magnitude, angle, real and imaginary parts), every voltage-source current and the real and reactive power delivered, for a circuit of R, L, C and independent sinusoidal sources of one frequency.</p>
+<div class="math">\[\mathbf{Y}(j\omega)\,\mathbf{V} = \mathbf{I}_s,\quad Y_L = \frac{1}{j\omega L},\ Y_C = j\omega C\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>netlist</code></td><td>in</td><td>elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, L&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;henries&gt;, C&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;farads&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;rms volts&gt; [&lt;angle deg&gt;], I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;rms amperes&gt; [&lt;angle deg&gt;] (flowing from the first node through the source to the second); node 0 is ground</td><td>, </td></tr><tr><td><code>f</code></td><td>in</td><td>frequency of the sources</td><td>Hz</td></tr><tr><td><code>node_voltages_mag</code></td><td>out</td><td>rms magnitude of every node voltage relative to node 0, in volts</td><td>, </td></tr><tr><td><code>node_voltages_deg</code></td><td>out</td><td>angle of every node voltage, in degrees</td><td>, </td></tr><tr><td><code>node_voltages_real</code></td><td>out</td><td>real part of every node voltage, in volts</td><td>, </td></tr><tr><td><code>node_voltages_imag</code></td><td>out</td><td>imaginary part of every node voltage, in volts</td><td>, </td></tr><tr><td><code>source_currents_real</code></td><td>out</td><td>real part of the current through each voltage source from + to -, in amperes</td><td>, </td></tr><tr><td><code>source_currents_imag</code></td><td>out</td><td>imaginary part of that current, in amperes</td><td>, </td></tr><tr><td><code>P_delivered</code></td><td>out</td><td>real power delivered by the sources (W)</td><td>W</td></tr><tr><td><code>Q_delivered</code></td><td>out</td><td>reactive power delivered by the sources, in var (positive: taken by inductance)</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a ground node 0; R, L, C positive; f &gt; 0, one frequency for every source; a unique solution (no floating node, no loop of voltage sources).</p>
+<pre><code class="shell">$ electrical-engineering solve ac_node_voltages &quot;netlist=V1 1 0 10; R1 1 2 3; L1 2 0 0.01.&quot; &quot;f=50 Hz&quot;
+node_voltages_mag = {&quot;1&quot;:10.0,&quot;2&quot;:7.23216748343}
+node_voltages_deg = {&quot;1&quot;:0.0,&quot;2&quot;:43.6792962299}
+node_voltages_real = {&quot;1&quot;:10.0,&quot;2&quot;:5.23042465083}
+node_voltages_imag = {&quot;1&quot;:0.0,&quot;2&quot;:4.9946876259}
+source_currents_real = {&quot;V1&quot;:-1.58985844972}
+source_currents_imag = {&quot;V1&quot;:1.6648958753}
+P_delivered = 15.8985845 W
+Q_delivered = 16.64895875
+  by: Node voltages of an AC circuit from its netlist (phasor nodal analysis)  (modified nodal analysis with complex admittances 1/R, 1/(j w L), j w C, solved by complex Gaussian elimination)
+  f = 50 Hz
+  netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01.
+  assumes: a ground node 0; R, L, C positive; f &gt; 0, one frequency for every source; a unique solution (no floating node, no loop of voltage sources)</code></pre>
+<p>In the worked example, netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01., f = 50 Hz go through the equation above and give node_voltages_mag = {&#x27;1&#x27;: 10.0, &#x27;2&#x27;: 7.23216748343}, node_voltages_deg = {&#x27;1&#x27;: 0.0, &#x27;2&#x27;: 43.6792962299}, node_voltages_real = {&#x27;1&#x27;: 10.0, &#x27;2&#x27;: 5.23042465083}, node_voltages_imag = {&#x27;1&#x27;: 0.0, &#x27;2&#x27;: 4.9946876259}. It applies only when a ground node 0; R, L, C positive; f &gt; 0, one frequency for every source; a unique solution (no floating node, no loop of voltage sources): outside that it says what is wrong instead of returning a number.</p>
+<h4 id="ac_norton_equivalent">Norton equivalent of an AC circuit between two nodes (phasors, complex impedance), <code>ac_norton_equivalent</code></h4>
+<p>The Norton current phasor and impedance seen between two nodes of an AC circuit of R, L, C and independent sinusoidal sources at one frequency.</p>
+<div class="math">\[\mathbf{I}_N = \frac{\mathbf{V}_{th}}{Z_{th}},\quad Z_N = Z_{th}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>netlist</code></td><td>in</td><td>elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, L&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;henries&gt;, C&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;farads&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;rms volts&gt; [&lt;angle deg&gt;], I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;rms amperes&gt; [&lt;angle deg&gt;] (flowing from the first node through the source to the second); node 0 is ground</td><td>, </td></tr><tr><td><code>node_a</code></td><td>in</td><td>the terminal node (the + side of the equivalent)</td><td>, </td></tr><tr><td><code>node_b</code></td><td>in</td><td>the reference terminal node</td><td>, </td></tr><tr><td><code>f</code></td><td>in</td><td>frequency of the sources</td><td>Hz</td></tr><tr><td><code>In_mag</code></td><td>out</td><td>rms magnitude of the Norton (short-circuit) current from node a to node b</td><td>A</td></tr><tr><td><code>In_deg</code></td><td>out</td><td>angle of the Norton (short-circuit) current from node a to node b in degrees</td><td>, </td></tr><tr><td><code>In_real</code></td><td>out</td><td>real part of the Norton (short-circuit) current from node a to node b</td><td>A</td></tr><tr><td><code>In_imag</code></td><td>out</td><td>imaginary part of the Norton (short-circuit) current from node a to node b</td><td>A</td></tr><tr><td><code>Zn_real</code></td><td>out</td><td>resistance (real part of the equivalent impedance)</td><td>ohm</td></tr><tr><td><code>Zn_imag</code></td><td>out</td><td>reactance (imaginary part of the equivalent impedance, + inductive)</td><td>ohm</td></tr><tr><td><code>Zn_mag</code></td><td>out</td><td>magnitude of the equivalent impedance</td><td>ohm</td></tr><tr><td><code>Zn_deg</code></td><td>out</td><td>angle of the equivalent impedance in degrees</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); f &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve ac_norton_equivalent &quot;netlist=V1 1 0 10; R1 1 2 3; L1 2 0 0.01.&quot; node_a=2 node_b=0 &quot;f=50 Hz&quot;
+In_real = 3.333333333 A
+In_imag = 0 A
+In_mag = 3.333333333 A
+In_deg = 0
+Zn_real = 1.569127395 ohm
+Zn_imag = 1.498406288 ohm
+Zn_mag = 2.169650245 ohm
+Zn_deg = 43.67929623
+  by: Norton equivalent of an AC circuit between two nodes (phasors, complex impedance)  (Thevenin voltage and impedance by phasor modified nodal analysis, then I_N = V_th / Z_th)
+  f = 50 Hz
+  netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01.
+  node_a = 2
+  node_b = 0
+  assumes: both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); f &gt; 0</code></pre>
+<p>In the worked example, netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01., node_a = 2, node_b = 0, f = 50 Hz go through the equation above and give In_real = 3.333333333 A, In_imag = 0 A, In_mag = 3.333333333 A, In_deg = 0. It applies only when both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); f &gt; 0: outside that it says what is wrong instead of returning a number.</p>
 <h4 id="polar_to_rectangular">Phasor from polar to rectangular form, <code>polar_to_rectangular</code></h4>
 <p>The real and imaginary parts of a phasor given as a magnitude and an angle in degrees.</p>
 <div class="math">\[M\angle\theta = M\cos\theta + jM\sin\theta\]</div>
@@ -402,6 +457,154 @@ imag = 4
   by: Sum of sinusoids by phasor addition  (complex addition of the phasors A_k e^{j phi_k})
   assumes: one phase per amplitude; one common frequency</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines the single sinusoid that results from adding multiple sinusoids of the same frequency. Converting each input amplitude [3, 4, 2] and phase angle [0, 90, 180] into complex phasors, summing them, and converting back gives the final amplitude 4.12311 and phase 75.9638. The real part of this resultant vector is 1 and the imaginary part is 4, representing the combined effect in the time domain.</p>
+<h4 id="ac_thevenin_equivalent">Thevenin equivalent of an AC circuit between two nodes (phasors, complex impedance), <code>ac_thevenin_equivalent</code></h4>
+<p>The Thevenin voltage phasor and impedance Zth = R + jX seen between two nodes of an AC circuit of R, L, C and independent sinusoidal sources at one frequency.</p>
+<div class="math">\[\mathbf{V}_{th} = \mathbf{V}_a - \mathbf{V}_b\big|_{open},\quad Z_{th} = \frac{\mathbf{V}_a - \mathbf{V}_b}{1\,\mathrm{A}}\big|_{sources\ off}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>netlist</code></td><td>in</td><td>elements separated by &#x27;;&#x27;: R&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;ohms&gt;, L&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;henries&gt;, C&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;farads&gt;, V&lt;name&gt; &lt;node+&gt; &lt;node-&gt; &lt;rms volts&gt; [&lt;angle deg&gt;], I&lt;name&gt; &lt;node&gt; &lt;node&gt; &lt;rms amperes&gt; [&lt;angle deg&gt;] (flowing from the first node through the source to the second); node 0 is ground</td><td>, </td></tr><tr><td><code>node_a</code></td><td>in</td><td>the terminal node (the + side of the equivalent)</td><td>, </td></tr><tr><td><code>node_b</code></td><td>in</td><td>the reference terminal node</td><td>, </td></tr><tr><td><code>f</code></td><td>in</td><td>frequency of the sources</td><td>Hz</td></tr><tr><td><code>Vth_mag</code></td><td>out</td><td>rms magnitude of the Thevenin (open-circuit) voltage, node a relative to node b</td><td>V</td></tr><tr><td><code>Vth_deg</code></td><td>out</td><td>angle of the Thevenin (open-circuit) voltage, node a relative to node b in degrees</td><td>, </td></tr><tr><td><code>Vth_real</code></td><td>out</td><td>real part of the Thevenin (open-circuit) voltage, node a relative to node b</td><td>V</td></tr><tr><td><code>Vth_imag</code></td><td>out</td><td>imaginary part of the Thevenin (open-circuit) voltage, node a relative to node b</td><td>V</td></tr><tr><td><code>Zth_real</code></td><td>out</td><td>resistance (real part of the equivalent impedance)</td><td>ohm</td></tr><tr><td><code>Zth_imag</code></td><td>out</td><td>reactance (imaginary part of the equivalent impedance, + inductive)</td><td>ohm</td></tr><tr><td><code>Zth_mag</code></td><td>out</td><td>magnitude of the equivalent impedance</td><td>ohm</td></tr><tr><td><code>Zth_deg</code></td><td>out</td><td>angle of the equivalent impedance in degrees</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); f &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve ac_thevenin_equivalent &quot;netlist=V1 1 0 10; R1 1 2 3; L1 2 0 0.01.&quot; node_a=2 node_b=0 &quot;f=50 Hz&quot;
+Vth_real = 5.230424651 V
+Vth_imag = 4.994687626 V
+Vth_mag = 7.232167483 V
+Vth_deg = 43.67929623
+Zth_real = 1.569127395 ohm
+Zth_imag = 1.498406288 ohm
+Zth_mag = 2.169650245 ohm
+Zth_deg = 43.67929623
+  by: Thevenin equivalent of an AC circuit between two nodes (phasors, complex impedance)  (open-circuit voltage by phasor modified nodal analysis; impedance by a 1 A test current with the independent sources set to zero)
+  f = 50 Hz
+  netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01.
+  node_a = 2
+  node_b = 0
+  assumes: both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); f &gt; 0</code></pre>
+<p>In the worked example, netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01., node_a = 2, node_b = 0, f = 50 Hz go through the equation above and give Vth_real = 5.230424651 V, Vth_imag = 4.994687626 V, Vth_mag = 7.232167483 V, Vth_deg = 43.67929623. It applies only when both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); f &gt; 0: outside that it says what is wrong instead of returning a number.</p>
+<h3>Alternating voltages and currents (2)</h3>
+<h4 id="sinusoid_values">Sinusoidal waveform v = Vm sin(wt + phi): frequency, period, phase, value at a time, form and peak factors, <code>sinusoid_values</code></h4>
+<p>For v = Vm sin(wt + phi): the frequency, period, phase angle in degrees and whether it leads or lags Vm sin wt, the time shift, the value at a time t, the rms and half-cycle average values and the form and peak factors.</p>
+<div class="math">\[v = V_m\sin(\omega t + \phi),\quad f = \frac{\omega}{2\pi},\quad V_{rms} = \frac{V_m}{\sqrt 2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vm</code></td><td>in</td><td>amplitude (peak value)</td><td>V</td></tr><tr><td><code>w</code></td><td>in</td><td>angular frequency omega</td><td>rad/s</td></tr><tr><td><code>phi</code></td><td>in</td><td>phase angle in radians (positive: leads Vm sin wt)</td><td>, </td></tr><tr><td><code>t</code></td><td>in</td><td>time at which to evaluate v</td><td>s</td></tr><tr><td><code>v</code></td><td>out</td><td>instantaneous value at t</td><td>V</td></tr><tr><td><code>f</code></td><td>out</td><td>frequency w/(2 pi)</td><td>Hz</td></tr><tr><td><code>T</code></td><td>out</td><td>period</td><td>s</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase angle in degrees</td><td>, </td></tr><tr><td><code>relation</code></td><td>out</td><td>leads, lags or in phase (relative to Vm sin wt)</td><td>, </td></tr><tr><td><code>time_shift</code></td><td>out</td><td>time shift phi/w (positive: leads)</td><td>s</td></tr><tr><td><code>rms</code></td><td>out</td><td>rms value Vm/sqrt(2)</td><td>V</td></tr><tr><td><code>average</code></td><td>out</td><td>average over a half cycle, 2 Vm/pi</td><td>V</td></tr><tr><td><code>form_factor</code></td><td>out</td><td>form factor rms/average</td><td>, </td></tr><tr><td><code>peak_factor</code></td><td>out</td><td>peak factor Vm/rms</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a pure sinusoid; |phi| &lt;= 2 pi rad.</p>
+<pre><code class="shell">$ electrical-engineering solve sinusoid_values &quot;Vm=200 V&quot; &quot;w=314.159 rad/s&quot; phi=0 &quot;t=0.0025 s&quot;
+v = 141.4212624 V
+f = 49.99995777 Hz
+T = 0.02000001689 s
+phase_deg = 0
+relation = in phase
+time_shift = 0 s
+rms = 141.4213562 V
+average = 127.3239545 V
+form_factor = 1.110720735
+peak_factor = 1.414213562
+  by: Sinusoidal waveform v = Vm sin(wt + phi): frequency, period, phase, value at a time, form and peak factors  (v = Vm sin(wt + phi); f = w/(2 pi); T = 1/f; Vrms = Vm/sqrt 2; Vav = 2 Vm/pi)
+  Vm = 200 V
+  w = 314.159 rad/s
+  phi = 0
+  t = 0.0025 s
+  assumes: a pure sinusoid; |phi| &lt;= 2 pi rad</code></pre>
+<p>In the worked example, Vm = 200 V, w = 314.159 rad/s, phi = 0, t = 0.0025 s go through the equation above and give v = 141.4212624 V, f = 49.99995777 Hz, T = 0.02000001689 s, phase_deg = 0. It applies only when a pure sinusoid; |phi| &lt;= 2 pi rad: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="sinusoid_time_to_value">Time at which a sinusoid first reaches a value, <code>sinusoid_time_to_value</code></h4>
+<p>The first time t &gt;= 0 at which v = Vm sin(wt + phi) equals a given value, the period, and whether v is rising or falling there.</p>
+<div class="math">\[\omega t + \phi = \sin^{-1}\frac{v}{V_m}\ \text{or}\ \pi - \sin^{-1}\frac{v}{V_m}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Vm</code></td><td>in</td><td>amplitude (peak value)</td><td>V</td></tr><tr><td><code>w</code></td><td>in</td><td>angular frequency omega</td><td>rad/s</td></tr><tr><td><code>phi</code></td><td>in</td><td>phase angle in radians (positive: leads Vm sin wt)</td><td>, </td></tr><tr><td><code>v</code></td><td>in</td><td>value to reach (|v| &lt;= Vm)</td><td>V</td></tr><tr><td><code>t</code></td><td>out</td><td>first time at which v is reached</td><td>s</td></tr><tr><td><code>T</code></td><td>out</td><td>period</td><td>s</td></tr><tr><td><code>direction</code></td><td>out</td><td>rising, falling or peak at that time</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> |v| &lt;= Vm; |phi| &lt;= 2 pi rad; t counted from 0.</p>
+<pre><code class="shell">$ electrical-engineering solve sinusoid_time_to_value &quot;Vm=100 V&quot; &quot;w=314.159 rad/s&quot; phi=0 &quot;v=50 V&quot;
+t = 0.001666668074 s
+T = 0.02000001689 s
+direction = rising
+  by: Time at which a sinusoid first reaches a value  (wt + phi = asin(v/Vm) or pi - asin(v/Vm), reduced to the first period; the smaller time)
+  Vm = 100 V
+  w = 314.159 rad/s
+  phi = 0
+  v = 50 V
+  assumes: |v| &lt;= Vm; |phi| &lt;= 2 pi rad; t counted from 0</code></pre>
+<p>In the worked example, Vm = 100 V, w = 314.159 rad/s, phi = 0, v = 50 V go through the equation above and give t = 0.001666668074 s, T = 0.02000001689 s, direction = rising. It applies only when |v| &lt;= Vm; |phi| &lt;= 2 pi rad; t counted from 0: outside that it says what is wrong instead of returning a number.</p>
+<h3>Basic electrical quantities (4)</h3>
+<h4 id="cell_battery">Cells with internal resistance: series and parallel batteries on a load, <code>cell_battery</code></h4>
+<p>The combined emf and internal resistance of n identical cells in series or in parallel, the load current, the terminal voltage, the lost volts and the load power.</p>
+<div class="math">\[I = \frac{E_b}{r_b + R_L},\quad V = E_b - I r_b\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>E</code></td><td>in</td><td>emf of one cell</td><td>V</td></tr><tr><td><code>r</code></td><td>in</td><td>internal resistance of one cell</td><td>ohm</td></tr><tr><td><code>n</code></td><td>in</td><td>number of identical cells</td><td>, </td></tr><tr><td><code>connection</code></td><td>in</td><td>how the cells are connected</td><td>, </td></tr><tr><td><code>RL</code></td><td>in</td><td>load resistance</td><td>ohm</td></tr><tr><td><code>emf_total</code></td><td>out</td><td>emf of the battery</td><td>V</td></tr><tr><td><code>r_total</code></td><td>out</td><td>internal resistance of the battery</td><td>ohm</td></tr><tr><td><code>I</code></td><td>out</td><td>load current</td><td>A</td></tr><tr><td><code>V_terminal</code></td><td>out</td><td>terminal voltage (across the load)</td><td>V</td></tr><tr><td><code>lost_volts</code></td><td>out</td><td>voltage lost inside the battery, I r</td><td>V</td></tr><tr><td><code>P_load</code></td><td>out</td><td>power delivered to the load</td><td>W</td></tr></tbody></table>
+<p><strong>Applies when:</strong> identical cells; E, r, RL &gt; 0; n a whole number.</p>
+<pre><code class="shell">$ electrical-engineering solve cell_battery &quot;E=1.5 V&quot; &quot;r=0.5 ohm&quot; n=4 &quot;RL=10 ohm&quot; connection=series
+emf_total = 6 V
+r_total = 2 ohm
+I = 0.5 A
+V_terminal = 5 V
+lost_volts = 1 V
+P_load = 2.5 W
+  by: Cells with internal resistance: series and parallel batteries on a load  (series: E_b = n E, r_b = n r; parallel: E_b = E, r_b = r/n; I = E_b/(r_b + R_L), V = I R_L)
+  E = 1.5 V
+  r = 0.5 ohm
+  n = 4
+  RL = 10 ohm
+  connection = series
+  assumes: identical cells; E, r, RL &gt; 0; n a whole number</code></pre>
+<p>In the worked example, E = 1.5 V, r = 0.5 ohm, n = 4, RL = 10 ohm, connection = series go through the equation above and give emf_total = 6 V, r_total = 2 ohm, I = 0.5 A, V_terminal = 5 V. It applies only when identical cells; E, r, RL &gt; 0; n a whole number: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="electrical_energy_cost">Electrical energy and its cost, <code>electrical_energy_cost</code></h4>
+<p>The energy a load of power P uses in a time t, in joules and in kilowatt-hours, and its cost at a tariff per kWh.</p>
+<div class="math">\[W = Pt,\quad \mathrm{cost} = \frac{Pt}{3.6\times10^{6}\ \mathrm{J/kWh}}\times\mathrm{tariff}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>P</code></td><td>in</td><td>power of the load</td><td>W</td></tr><tr><td><code>t</code></td><td>in</td><td>running time (h and min accepted in questions)</td><td>s</td></tr><tr><td><code>tariff</code></td><td>in</td><td>price of one kWh (any currency)</td><td>, </td></tr><tr><td><code>energy</code></td><td>out</td><td>energy used, in joules</td><td>J</td></tr><tr><td><code>energy_kWh</code></td><td>out</td><td>energy used, in kilowatt-hours</td><td>, </td></tr><tr><td><code>cost</code></td><td>out</td><td>cost of the energy, in the tariff&#x27;s currency</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> constant power; P &gt; 0, t &gt; 0, tariff &gt;= 0.</p>
+<pre><code class="shell">$ electrical-engineering solve electrical_energy_cost &quot;P=2000 W&quot; &quot;t=18000 s&quot; tariff=0.15
+energy = 36000000 J
+energy_kWh = 10
+cost = 1.5
+  by: Electrical energy and its cost  (W = P t; kWh = W / 3.6e6; cost = kWh x tariff)
+  P = 2000 W
+  t = 18000 s
+  tariff = 0.15
+  assumes: constant power; P &gt; 0, t &gt; 0, tariff &gt;= 0</code></pre>
+<p>In the worked example, P = 2000 W, t = 18000 s, tariff = 0.15 go through the equation above and give energy = 36000000 J, energy_kWh = 10, cost = 1.5. It applies only when constant power; P &gt; 0, t &gt; 0, tariff &gt;= 0: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="resistance_at_temperature">Resistance at a new temperature (temperature coefficient), <code>resistance_at_temperature</code></h4>
+<p>The resistance of a conductor at a temperature T2 from its resistance R1 at T1 and its temperature coefficient referred to T1, and the coefficient referred to T2.</p>
+<div class="math">\[R_2 = R_1\left[1 + \alpha_1 (T_2 - T_1)\right]\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R1</code></td><td>in</td><td>resistance at the reference temperature T1</td><td>ohm</td></tr><tr><td><code>alpha1</code></td><td>in</td><td>temperature coefficient of resistance referred to T1, per K (= per degree C)</td><td>, </td></tr><tr><td><code>T1</code></td><td>in</td><td>reference temperature (degrees C accepted in questions)</td><td>K</td></tr><tr><td><code>T2</code></td><td>in</td><td>new temperature</td><td>K</td></tr><tr><td><code>R2</code></td><td>out</td><td>resistance at T2</td><td>ohm</td></tr><tr><td><code>alpha2</code></td><td>out</td><td>temperature coefficient referred to T2, per K</td><td>, </td></tr><tr><td><code>change</code></td><td>out</td><td>change of resistance R2 - R1</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> a linear R(T) over the range; R1 &gt; 0, temperatures above absolute zero.</p>
+<pre><code class="shell">$ electrical-engineering solve resistance_at_temperature &quot;R1=50 ohm&quot; alpha1=0.004 &quot;T1=293.15 K&quot; &quot;T2=353.15 K&quot;
+R2 = 62 ohm
+alpha2 = 0.003225806452
+change = 12 ohm
+  by: Resistance at a new temperature (temperature coefficient)  (R2 = R1 (1 + alpha1 (T2 - T1)); alpha2 = alpha1 / (1 + alpha1 (T2 - T1)))
+  R1 = 50 ohm
+  alpha1 = 0.004
+  T1 = 293.15 K
+  T2 = 353.15 K
+  assumes: a linear R(T) over the range; R1 &gt; 0, temperatures above absolute zero</code></pre>
+<p>In the worked example, R1 = 50 ohm, alpha1 = 0.004, T1 = 293.15 K, T2 = 353.15 K go through the equation above and give R2 = 62 ohm, alpha2 = 0.003225806452, change = 12 ohm. It applies only when a linear R(T) over the range; R1 &gt; 0, temperatures above absolute zero: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="temperature_coefficient_from_resistances">Temperature coefficient of resistance from two readings, <code>temperature_coefficient_from_resistances</code></h4>
+<p>The temperature coefficient of resistance referred to each of two temperatures, from the resistances measured at them.</p>
+<div class="math">\[\alpha_1 = \frac{R_2 - R_1}{R_1 (T_2 - T_1)}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>R1</code></td><td>in</td><td>resistance at T1</td><td>ohm</td></tr><tr><td><code>T1</code></td><td>in</td><td>first temperature (degrees C accepted in questions)</td><td>K</td></tr><tr><td><code>R2</code></td><td>in</td><td>resistance at T2</td><td>ohm</td></tr><tr><td><code>T2</code></td><td>in</td><td>second temperature</td><td>K</td></tr><tr><td><code>alpha1</code></td><td>out</td><td>temperature coefficient referred to T1, per K</td><td>, </td></tr><tr><td><code>alpha2</code></td><td>out</td><td>temperature coefficient referred to T2, per K</td><td>, </td></tr><tr><td><code>slope</code></td><td>out</td><td>change of resistance per kelvin, ohm/K</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a linear R(T) between the readings; T1 != T2.</p>
+<pre><code class="shell">$ electrical-engineering solve temperature_coefficient_from_resistances &quot;R1=100 ohm&quot; &quot;T1=293.15 K&quot; &quot;R2=120 ohm&quot; &quot;T2=343.15 K&quot;
+alpha1 = 0.004
+alpha2 = 0.003333333333
+slope = 0.4
+  by: Temperature coefficient of resistance from two readings  (alpha1 = (R2 - R1) / (R1 (T2 - T1)))
+  R1 = 100 ohm
+  T1 = 293.15 K
+  R2 = 120 ohm
+  T2 = 343.15 K
+  assumes: a linear R(T) between the readings; T1 != T2</code></pre>
+<p>In the worked example, R1 = 100 ohm, T1 = 293.15 K, R2 = 120 ohm, T2 = 343.15 K go through the equation above and give alpha1 = 0.004, alpha2 = 0.003333333333, slope = 0.4. It applies only when a linear R(T) between the readings; T1 != T2: outside that it says what is wrong instead of returning a number.</p>
+<h3>Capacitors (1)</h3>
+<h4 id="parallel_plate_capacitor">Parallel-plate capacitor: capacitance, charge, field, flux density and energy, <code>parallel_plate_capacitor</code></h4>
+<p>The capacitance of a capacitor of n parallel plates with a dielectric, and its charge, electric field strength, electric flux density and stored energy at a voltage V.</p>
+<div class="math">\[C = \frac{\varepsilon_0\varepsilon_r A (n - 1)}{d},\quad D = \varepsilon_0\varepsilon_r E,\quad W = \tfrac{1}{2}CV^2\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>voltage across the capacitor</td><td>V</td></tr><tr><td><code>d</code></td><td>in</td><td>separation of adjacent plates (dielectric thickness)</td><td>m</td></tr><tr><td><code>A</code></td><td>in</td><td>overlapping area of one plate</td><td>m^2</td></tr><tr><td><code>eps_r</code></td><td>in</td><td>relative permittivity of the dielectric (1 for air)</td><td>, </td></tr><tr><td><code>n</code></td><td>in</td><td>number of plates (2 when not given) (optional)</td><td>, </td></tr><tr><td><code>C</code></td><td>out</td><td>capacitance</td><td>F</td></tr><tr><td><code>Q</code></td><td>out</td><td>charge</td><td>C</td></tr><tr><td><code>E</code></td><td>out</td><td>electric field strength V/d</td><td>N/C</td></tr><tr><td><code>D</code></td><td>out</td><td>electric flux density in C/m^2</td><td>, </td></tr><tr><td><code>energy</code></td><td>out</td><td>stored energy</td><td>J</td></tr></tbody></table>
+<p><strong>Applies when:</strong> uniform field (plate size much larger than d); eps_r &gt;= 1, n &gt;= 2 plates.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_plate_capacitor &quot;V=200 V&quot; &quot;d=0.0001 m&quot; &quot;A=0.0004 m^2&quot; eps_r=5
+C = 1.770837564e-10 F
+Q = 3.541675127e-08 C
+E = 2000000 N/C
+D = 8.854187818e-05
+energy = 3.541675127e-06 J
+  by: Parallel-plate capacitor: capacitance, charge, field, flux density and energy  (C = eps0 eps_r A (n - 1)/d; Q = CV; E = V/d; D = eps0 eps_r E; W = CV^2/2)
+  V = 200 V
+  d = 0.0001 m
+  A = 0.0004 m^2
+  eps_r = 5
+  assumes: uniform field (plate size much larger than d); eps_r &gt;= 1, n &gt;= 2 plates</code></pre>
+<p>In the worked example, V = 200 V, d = 0.0001 m, A = 0.0004 m^2, eps_r = 5 go through the equation above and give C = 1.770837564e-10 F, Q = 3.541675127e-08 C, E = 2000000 N/C, D = 8.854187818e-05. It applies only when uniform field (plate size much larger than d); eps_r &gt;= 1, n &gt;= 2 plates: outside that it says what is wrong instead of returning a number.</p>
 <h3>Control systems (11)</h3>
 <h4 id="closed_loop_poles">Closed-loop poles with unity negative feedback, <code>closed_loop_poles</code></h4>
 <p>The poles of K*G(s)/(1 + K*G(s)): the roots of den(s) + K*num(s), and whether the closed loop is stable.</p>
@@ -559,6 +762,84 @@ order = 2
   D = 0
   assumes: a square A with B and C of matching size; coefficients below 1e-12 of the largest are written as 0</code></pre>
 <p><strong>What the worked example means:</strong> This calculation derives the single-input single-output transfer function from the state-space matrices A, B, C, and D. The resulting numerator coefficients are [0, 0, 1] and the denominator coefficients are [1, 3, 2], which define the poles of the system. This representation allows for frequency-domain analysis of the dynamics described by the state matrix A with dimension 2.</p>
+<h3>D.c. machines (4)</h3>
+<h4 id="dc_shunt_generator">D.C. shunt generator: field and armature currents, generated emf and powers, <code>dc_shunt_generator</code></h4>
+<p>The field current, armature current, generated emf, output power, power generated and copper losses of a shunt-wound d.c. generator delivering a load current at a terminal voltage.</p>
+<div class="math">\[I_a = I_L + I_f,\quad E = V + I_aR_a\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>terminal voltage</td><td>V</td></tr><tr><td><code>IL</code></td><td>in</td><td>load current</td><td>A</td></tr><tr><td><code>Ra</code></td><td>in</td><td>armature resistance</td><td>ohm</td></tr><tr><td><code>Rf</code></td><td>in</td><td>shunt field resistance</td><td>ohm</td></tr><tr><td><code>If</code></td><td>out</td><td>field current V/Rf</td><td>A</td></tr><tr><td><code>Ia</code></td><td>out</td><td>armature current IL + If</td><td>A</td></tr><tr><td><code>E</code></td><td>out</td><td>generated emf V + Ia Ra</td><td>V</td></tr><tr><td><code>P_out</code></td><td>out</td><td>power delivered to the load V IL</td><td>W</td></tr><tr><td><code>P_generated</code></td><td>out</td><td>electrical power generated E Ia</td><td>W</td></tr><tr><td><code>copper_loss</code></td><td>out</td><td>armature and field copper losses</td><td>W</td></tr></tbody></table>
+<p><strong>Applies when:</strong> steady state; brush drop neglected (or included in Ra).</p>
+<pre><code class="shell">$ electrical-engineering solve dc_shunt_generator &quot;V=250 V&quot; &quot;IL=100 A&quot; &quot;Ra=0.1 ohm&quot; &quot;Rf=125 ohm&quot;
+If = 2 A
+Ia = 102 A
+E = 260.2 V
+P_out = 25000 W
+P_generated = 26540.4 W
+copper_loss = 1540.4 W
+  by: D.C. shunt generator: field and armature currents, generated emf and powers  (If = V/Rf; Ia = IL + If; E = V + Ia Ra)
+  V = 250 V
+  IL = 100 A
+  Ra = 0.1 ohm
+  Rf = 125 ohm
+  assumes: steady state; brush drop neglected (or included in Ra)</code></pre>
+<p>In the worked example, V = 250 V, IL = 100 A, Ra = 0.1 ohm, Rf = 125 ohm go through the equation above and give If = 2 A, Ia = 102 A, E = 260.2 V, P_out = 25000 W. It applies only when steady state; brush drop neglected (or included in Ra): outside that it says what is wrong instead of returning a number.</p>
+<h4 id="dc_shunt_motor">D.C. shunt motor: back emf, torque, output and efficiency, <code>dc_shunt_motor</code></h4>
+<p>The field and armature currents, back emf, power converted, electromagnetic torque, output power and efficiency of a shunt-wound d.c. motor taking a current I from a supply V at a speed n.</p>
+<div class="math">\[E = V - I_aR_a,\quad T = \frac{EI_a}{2\pi n},\quad \eta = \frac{EI_a - P_{loss}}{VI}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>supply voltage</td><td>V</td></tr><tr><td><code>I</code></td><td>in</td><td>current taken from the supply</td><td>A</td></tr><tr><td><code>Ra</code></td><td>in</td><td>armature resistance</td><td>ohm</td></tr><tr><td><code>Rf</code></td><td>in</td><td>shunt field resistance</td><td>ohm</td></tr><tr><td><code>n</code></td><td>in</td><td>speed in rev/s (rpm accepted in questions)</td><td>, </td></tr><tr><td><code>losses</code></td><td>in</td><td>iron, friction and windage losses (0 when not given) (optional)</td><td>W</td></tr><tr><td><code>If</code></td><td>out</td><td>field current V/Rf</td><td>A</td></tr><tr><td><code>Ia</code></td><td>out</td><td>armature current I - If</td><td>A</td></tr><tr><td><code>E</code></td><td>out</td><td>back emf V - Ia Ra</td><td>V</td></tr><tr><td><code>P_converted</code></td><td>out</td><td>power converted to mechanical form E Ia</td><td>W</td></tr><tr><td><code>torque</code></td><td>out</td><td>electromagnetic torque E Ia/(2 pi n)</td><td>N*m</td></tr><tr><td><code>P_out</code></td><td>out</td><td>output power (converted power minus the stated losses)</td><td>W</td></tr><tr><td><code>efficiency</code></td><td>out</td><td>efficiency P_out/(V I)</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> steady state; brush drop neglected (or included in Ra).</p>
+<pre><code class="shell">$ electrical-engineering solve dc_shunt_motor &quot;I=30 A&quot; &quot;V=220 V&quot; &quot;Ra=0.4 ohm&quot; &quot;Rf=110 ohm&quot; n=16.66666667 &quot;losses=500 W&quot;
+If = 2 A
+Ia = 28 A
+E = 208.8 V
+P_converted = 5846.4 W
+torque = 55.82900755 N*m
+P_out = 5346.4 W
+efficiency = 0.8100606061
+  by: D.C. shunt motor: back emf, torque, output and efficiency  (If = V/Rf; Ia = I - If; E = V - Ia Ra; T = E Ia/(2 pi n))
+  I = 30 A
+  V = 220 V
+  Ra = 0.4 ohm
+  Rf = 110 ohm
+  n = 16.66666667
+  losses = 500 W
+  assumes: steady state; brush drop neglected (or included in Ra)</code></pre>
+<p>In the worked example, I = 30 A, V = 220 V, Ra = 0.4 ohm, Rf = 110 ohm, n = 16.66666667, losses = 500 W go through the equation above and give If = 2 A, Ia = 28 A, E = 208.8 V, P_converted = 5846.4 W. It applies only when steady state; brush drop neglected (or included in Ra): outside that it says what is wrong instead of returning a number.</p>
+<h4 id="dc_machine_emf">Generated emf of a d.c. machine (lap or wave winding), <code>dc_machine_emf</code></h4>
+<p>The emf generated in the armature of a d.c. machine (the back emf of a motor) from its poles, flux per pole, armature conductors, speed and winding.</p>
+<div class="math">\[E = \frac{p\,\Phi\,n\,Z}{a},\quad a = p\ (\text{lap}),\ a = 2\ (\text{wave})\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>poles</code></td><td>in</td><td>number of poles (even)</td><td>, </td></tr><tr><td><code>flux</code></td><td>in</td><td>useful flux per pole</td><td>Wb</td></tr><tr><td><code>Z</code></td><td>in</td><td>number of armature conductors</td><td>, </td></tr><tr><td><code>n</code></td><td>in</td><td>speed in rev/s (rpm accepted in questions)</td><td>, </td></tr><tr><td><code>winding</code></td><td>in</td><td>armature winding: lap or wave</td><td>, </td></tr><tr><td><code>E</code></td><td>out</td><td>generated emf</td><td>V</td></tr><tr><td><code>paths</code></td><td>out</td><td>parallel paths: the number of poles for lap, 2 for wave</td><td>, </td></tr><tr><td><code>conductor_emf</code></td><td>out</td><td>average emf of one conductor, poles x flux x n</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> an even number of poles; speed in rev/s; simplex windings.</p>
+<pre><code class="shell">$ electrical-engineering solve dc_machine_emf poles=4 &quot;flux=0.025 Wb&quot; Z=600 n=20 winding=lap
+E = 300 V
+paths = 4
+conductor_emf = 2 V
+  by: Generated emf of a d.c. machine (lap or wave winding)  (E = poles flux n Z / a with a = poles (lap) or 2 (wave))
+  poles = 4
+  flux = 0.025 Wb
+  Z = 600
+  n = 20
+  winding = lap
+  assumes: an even number of poles; speed in rev/s; simplex windings</code></pre>
+<p>In the worked example, poles = 4, flux = 0.025 Wb, Z = 600, n = 20, winding = lap go through the equation above and give E = 300 V, paths = 4, conductor_emf = 2 V. It applies only when an even number of poles; speed in rev/s; simplex windings: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="dc_motor_speed_change">New speed of a d.c. motor after a change of load or flux, <code>dc_motor_speed_change</code></h4>
+<p>The back emfs before and after, and the new speed, of a d.c. motor on a constant supply whose armature current changes from Ia1 to Ia2 and whose flux changes by a ratio (speed proportional to E/flux).</p>
+<div class="math">\[\frac{n_2}{n_1} = \frac{E_2}{E_1}\cdot\frac{\Phi_1}{\Phi_2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>supply voltage across the armature</td><td>V</td></tr><tr><td><code>Ra</code></td><td>in</td><td>armature resistance</td><td>ohm</td></tr><tr><td><code>Ia1</code></td><td>in</td><td>first armature current</td><td>A</td></tr><tr><td><code>n1</code></td><td>in</td><td>first speed in rev/s (rpm accepted in questions)</td><td>, </td></tr><tr><td><code>Ia2</code></td><td>in</td><td>new armature current</td><td>A</td></tr><tr><td><code>flux_ratio</code></td><td>in</td><td>new flux over the first flux (1 when unchanged) (optional)</td><td>, </td></tr><tr><td><code>E1</code></td><td>out</td><td>first back emf</td><td>V</td></tr><tr><td><code>E2</code></td><td>out</td><td>new back emf</td><td>V</td></tr><tr><td><code>n2</code></td><td>out</td><td>new speed in rev/s</td><td>, </td></tr><tr><td><code>n2_rpm</code></td><td>out</td><td>new speed in rpm</td><td>, </td></tr><tr><td><code>speed_change</code></td><td>out</td><td>fractional change of speed n2/n1 - 1</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a constant supply voltage across the armature; brush drop neglected.</p>
+<pre><code class="shell">$ electrical-engineering solve dc_motor_speed_change &quot;V=220 V&quot; &quot;Ra=0.5 ohm&quot; &quot;Ia1=20 A&quot; n1=16.66666667 &quot;Ia2=40 A&quot;
+E1 = 210 V
+E2 = 200 V
+n2 = 15.87301588
+n2_rpm = 952.3809526
+speed_change = -0.04761904762
+  by: New speed of a d.c. motor after a change of load or flux  (E = V - Ia Ra; n2/n1 = (E2/E1)(phi1/phi2))
+  V = 220 V
+  Ra = 0.5 ohm
+  Ia1 = 20 A
+  n1 = 16.66666667
+  Ia2 = 40 A
+  assumes: a constant supply voltage across the armature; brush drop neglected</code></pre>
+<p>In the worked example, V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 16.66666667, Ia2 = 40 A go through the equation above and give E1 = 210 V, E2 = 200 V, n2 = 15.87301587, n2_rpm = 952.3809524. It applies only when a constant supply voltage across the armature; brush drop neglected: outside that it says what is wrong instead of returning a number.</p>
 <h3>DC circuits (18)</h3>
 <h4 id="current_divider">Current divider, <code>current_divider</code></h4>
 <p>How a current I splits between two resistors in parallel.</p>
@@ -1002,6 +1283,162 @@ PZ = 0.024 W
   RL = 2000 ohm
   assumes: the Zener is in breakdown (ideal: constant Vz); positive values</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines the operating point of a Zener diode shunt regulator. The series resistor current 0.008 A A is derived from the difference between the input voltage 20 V and the Zener breakdown voltage 12 V, divided by the resistance 1000 ohm. The load current 0.006 A A flows through the load resistance 2000 ohm, resulting in a stable load voltage 12 V. The remaining current, 0.002 A A or 2 mA, passes through the Zener diode, dissipating power of 0.024 W W to maintain regulation.</p>
+<h3>Electromagnetic induction (4)</h3>
+<h4 id="faraday_emf">Induced emf from a change of flux (Faraday&#x27;s law), <code>faraday_emf</code></h4>
+<p>The average emf induced in a coil of N turns when the flux linking it changes by dPhi in a time dt, its sign by Lenz&#x27;s law, and the change of flux linkage.</p>
+<div class="math">\[e = -N\frac{\Delta\Phi}{\Delta t}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>N</code></td><td>in</td><td>number of turns</td><td>, </td></tr><tr><td><code>dPhi</code></td><td>in</td><td>change of flux (negative for a decrease)</td><td>Wb</td></tr><tr><td><code>dt</code></td><td>in</td><td>time taken by the change</td><td>s</td></tr><tr><td><code>emf</code></td><td>out</td><td>magnitude of the average induced emf</td><td>V</td></tr><tr><td><code>emf_signed</code></td><td>out</td><td>induced emf with Lenz&#x27;s sign, -N dPhi/dt</td><td>V</td></tr><tr><td><code>flux_rate</code></td><td>out</td><td>rate of change of flux in Wb/s</td><td>, </td></tr><tr><td><code>linkage_change</code></td><td>out</td><td>change of flux linkage N dPhi in weber-turns</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a uniform rate of change (the result is the average emf); the flux links every turn.</p>
+<pre><code class="shell">$ electrical-engineering solve faraday_emf N=200 &quot;dPhi=0.025 Wb&quot; &quot;dt=0.05 s&quot;
+emf = 100 V
+emf_signed = -100 V
+flux_rate = 0.5
+linkage_change = 5
+  by: Induced emf from a change of flux (Faraday&#x27;s law)  (e = -N dPhi/dt)
+  N = 200
+  dPhi = 0.025 Wb
+  dt = 0.05 s
+  assumes: a uniform rate of change (the result is the average emf); the flux links every turn</code></pre>
+<p>In the worked example, N = 200, dPhi = 0.025 Wb, dt = 0.05 s go through the equation above and give emf = 100 V, emf_signed = -100 V, flux_rate = 0.5, linkage_change = 5. It applies only when a uniform rate of change (the result is the average emf); the flux links every turn: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="coil_inductance">Inductance of a coil on a uniform core, <code>coil_inductance</code></h4>
+<p>The self-inductance N^2/S of a coil of N turns on a uniform core (or a long air-cored coil), with the reluctance of the flux path and the flux per ampere.</p>
+<div class="math">\[L = \frac{N^2}{S} = \frac{\mu_0\mu_r N^2 A}{l}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>N</code></td><td>in</td><td>number of turns</td><td>, </td></tr><tr><td><code>length</code></td><td>in</td><td>length of the flux path (coil length for an air-cored solenoid)</td><td>m</td></tr><tr><td><code>area</code></td><td>in</td><td>cross-sectional area of the core</td><td>m^2</td></tr><tr><td><code>mu_r</code></td><td>in</td><td>relative permeability of the core (1 for air)</td><td>, </td></tr><tr><td><code>L</code></td><td>out</td><td>self-inductance</td><td>H</td></tr><tr><td><code>reluctance</code></td><td>out</td><td>reluctance of the flux path in A/Wb</td><td>, </td></tr><tr><td><code>flux_per_ampere</code></td><td>out</td><td>flux per ampere of coil current, Wb/A</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> uniform field along the path, no leakage (a long coil or a closed core); linear core.</p>
+<pre><code class="shell">$ electrical-engineering solve coil_inductance N=500 &quot;length=0.2 m&quot; &quot;area=0.0004 m^2&quot; mu_r=1
+L = 0.0006283185307 H
+reluctance = 397887357.7
+flux_per_ampere = 1.256637061e-06
+  by: Inductance of a coil on a uniform core  (S = l/(mu0 mu_r A); L = N^2/S = mu0 mu_r N^2 A/l)
+  N = 500
+  length = 0.2 m
+  area = 0.0004 m^2
+  mu_r = 1
+  assumes: uniform field along the path, no leakage (a long coil or a closed core); linear core</code></pre>
+<p>In the worked example, N = 500, length = 0.2 m, area = 0.0004 m^2, mu_r = 1 go through the equation above and give L = 0.0006283185307 H, reluctance = 397887357.7, flux_per_ampere = 1.256637061e-06. It applies only when uniform field along the path, no leakage (a long coil or a closed core); linear core: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="mutual_inductance">Mutual inductance, induced emfs and coupled coils in series, <code>mutual_inductance</code></h4>
+<p>The mutual inductance M = k sqrt(L1 L2) of two coupled coils, the emfs induced in coil 1 and in coil 2 when the current in coil 1 changes by dI1 in dt, and the inductance of the two coils in series aiding and opposing.</p>
+<div class="math">\[M = k\sqrt{L_1L_2},\quad E_2 = M\frac{\Delta I_1}{\Delta t}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>L1</code></td><td>in</td><td>self-inductance of coil 1</td><td>H</td></tr><tr><td><code>L2</code></td><td>in</td><td>self-inductance of coil 2</td><td>H</td></tr><tr><td><code>k</code></td><td>in</td><td>coupling coefficient (0 to 1)</td><td>, </td></tr><tr><td><code>dI1</code></td><td>in</td><td>change of the current in coil 1</td><td>A</td></tr><tr><td><code>dt</code></td><td>in</td><td>time taken by the change</td><td>s</td></tr><tr><td><code>M</code></td><td>out</td><td>mutual inductance</td><td>H</td></tr><tr><td><code>E1</code></td><td>out</td><td>magnitude of the emf self-induced in coil 1</td><td>V</td></tr><tr><td><code>E2</code></td><td>out</td><td>magnitude of the emf induced in coil 2</td><td>V</td></tr><tr><td><code>L_aiding</code></td><td>out</td><td>series aiding L1 + L2 + 2M</td><td>H</td></tr><tr><td><code>L_opposing</code></td><td>out</td><td>series opposing L1 + L2 - 2M</td><td>H</td></tr></tbody></table>
+<p><strong>Applies when:</strong> linear coils; a uniform rate of change of current (average emfs); 0 &lt;= k &lt;= 1.</p>
+<pre><code class="shell">$ electrical-engineering solve mutual_inductance &quot;L1=0.2 H&quot; &quot;L2=0.8 H&quot; k=0.5 &quot;dI1=4 A&quot; &quot;dt=0.02 s&quot;
+M = 0.2 H
+E1 = 40 V
+E2 = 40 V
+L_aiding = 1.4 H
+L_opposing = 0.6 H
+  by: Mutual inductance, induced emfs and coupled coils in series  (M = k sqrt(L1 L2); E1 = L1 dI1/dt; E2 = M dI1/dt; L = L1 + L2 +/- 2M)
+  L1 = 0.2 H
+  L2 = 0.8 H
+  k = 0.5
+  dI1 = 4 A
+  dt = 0.02 s
+  assumes: linear coils; a uniform rate of change of current (average emfs); 0 &lt;= k &lt;= 1</code></pre>
+<p>In the worked example, L1 = 0.2 H, L2 = 0.8 H, k = 0.5, dI1 = 4 A, dt = 0.02 s go through the equation above and give M = 0.2 H, E1 = 40 V, E2 = 40 V, L_aiding = 1.4 H. It applies only when linear coils; a uniform rate of change of current (average emfs); 0 &lt;= k &lt;= 1: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="self_inductance">Self-inductance from flux linkage, <code>self_inductance</code></h4>
+<p>The self-inductance L = N phi/I of a coil of N turns in which a current I sets up a flux phi.</p>
+<div class="math">\[L = \frac{N\Phi}{I}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>N</code></td><td>in</td><td>number of turns</td><td>, </td></tr><tr><td><code>flux</code></td><td>in</td><td>flux linking every turn</td><td>Wb</td></tr><tr><td><code>I</code></td><td>in</td><td>coil current</td><td>A</td></tr><tr><td><code>L</code></td><td>out</td><td>self-inductance</td><td>H</td></tr><tr><td><code>flux_linkage</code></td><td>out</td><td>flux linkage N phi in weber-turns</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> the flux links every turn; a linear core (flux proportional to the current).</p>
+<pre><code class="shell">$ electrical-engineering solve self_inductance N=200 &quot;flux=0.005 Wb&quot; &quot;I=2 A&quot;
+L = 0.5 H
+flux_linkage = 1
+  by: Self-inductance from flux linkage  (L = N phi / I)
+  N = 200
+  flux = 0.005 Wb
+  I = 2 A
+  assumes: the flux links every turn; a linear core (flux proportional to the current)</code></pre>
+<p>In the worked example, N = 200, flux = 0.005 Wb, I = 2 A go through the equation above and give L = 0.5 H, flux_linkage = 1. It applies only when the flux links every turn; a linear core (flux proportional to the current): outside that it says what is wrong instead of returning a number.</p>
+<h3>Electromagnetics (2)</h3>
+<h4 id="plane_wave_lossy">Plane wave in a conducting (lossy) medium: attenuation, skin depth, speed and wave impedance, <code>plane_wave_lossy</code></h4>
+<p>The attenuation and phase constants, skin depth, phase velocity, wavelength, intrinsic impedance (magnitude and angle) and loss tangent of a uniform plane wave in a medium of conductivity sigma.</p>
+<div class="math">\[\gamma = \alpha + j\beta = \sqrt{j\omega\mu(\sigma + j\omega\varepsilon)},\quad \delta = \frac{1}{\alpha}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>f</code></td><td>in</td><td>frequency</td><td>Hz</td></tr><tr><td><code>eps_r</code></td><td>in</td><td>relative permittivity</td><td>, </td></tr><tr><td><code>mu_r</code></td><td>in</td><td>relative permeability</td><td>, </td></tr><tr><td><code>sigma</code></td><td>in</td><td>conductivity in S/m</td><td>, </td></tr><tr><td><code>alpha</code></td><td>out</td><td>attenuation constant in Np/m</td><td>, </td></tr><tr><td><code>beta</code></td><td>out</td><td>phase constant in rad/m</td><td>, </td></tr><tr><td><code>skin_depth</code></td><td>out</td><td>skin depth 1/alpha</td><td>m</td></tr><tr><td><code>v</code></td><td>out</td><td>phase velocity w/beta</td><td>m/s</td></tr><tr><td><code>wavelength</code></td><td>out</td><td>wavelength 2 pi/beta</td><td>m</td></tr><tr><td><code>eta</code></td><td>out</td><td>magnitude of the intrinsic impedance</td><td>ohm</td></tr><tr><td><code>eta_angle_deg</code></td><td>out</td><td>angle of the intrinsic impedance in degrees (0 to 45)</td><td>, </td></tr><tr><td><code>loss_tangent</code></td><td>out</td><td>loss tangent sigma/(w eps)</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a linear, homogeneous medium; sigma &gt; 0 (a lossless medium: plane_wave_lossless); eps_r, mu_r &gt;= 1.</p>
+<pre><code class="shell">$ electrical-engineering solve plane_wave_lossy &quot;f=1000000 Hz&quot; eps_r=1 mu_r=1 sigma=58000000
+alpha = 15131.91403
+beta = 15131.91403
+skin_depth = 6.60854931e-05 m
+v = 415.2273993 m/s
+wavelength = 0.0004152273993 m
+eta = 0.0003689613455 ohm
+eta_angle_deg = 45
+loss_tangent = 1.042556007e+12
+  by: Plane wave in a conducting (lossy) medium: attenuation, skin depth, speed and wave impedance  (gamma = alpha + j beta = sqrt(jw mu (sigma + jw eps)); delta = 1/alpha; eta = sqrt(jw mu/(sigma + jw eps)))
+  f = 1000000 Hz
+  eps_r = 1
+  mu_r = 1
+  sigma = 58000000
+  assumes: a linear, homogeneous medium; sigma &gt; 0 (a lossless medium: plane_wave_lossless); eps_r, mu_r &gt;= 1</code></pre>
+<p>In the worked example, f = 1000000 Hz, eps_r = 1, mu_r = 1, sigma = 58000000 go through the equation above and give alpha = 15131.91403, beta = 15131.91403, skin_depth = 6.60854931e-05 m, v = 415.2273993 m/s. It applies only when a linear, homogeneous medium; sigma &gt; 0 (a lossless medium: plane_wave_lossless); eps_r, mu_r &gt;= 1: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="plane_wave_lossless">Plane wave in a lossless medium: speed, wavelength and wave impedance, <code>plane_wave_lossless</code></h4>
+<p>The phase velocity, wavelength, intrinsic (wave) impedance, phase constant and refractive index of a uniform plane wave in a lossless medium.</p>
+<div class="math">\[v = \frac{c}{\sqrt{\varepsilon_r\mu_r}},\quad \lambda = \frac{v}{f},\quad \eta = \sqrt{\frac{\mu}{\varepsilon}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>f</code></td><td>in</td><td>frequency</td><td>Hz</td></tr><tr><td><code>eps_r</code></td><td>in</td><td>relative permittivity</td><td>, </td></tr><tr><td><code>mu_r</code></td><td>in</td><td>relative permeability</td><td>, </td></tr><tr><td><code>v</code></td><td>out</td><td>phase velocity</td><td>m/s</td></tr><tr><td><code>wavelength</code></td><td>out</td><td>wavelength in the medium</td><td>m</td></tr><tr><td><code>eta</code></td><td>out</td><td>intrinsic impedance</td><td>ohm</td></tr><tr><td><code>beta</code></td><td>out</td><td>phase constant in rad/m</td><td>, </td></tr><tr><td><code>n</code></td><td>out</td><td>refractive index sqrt(eps_r mu_r)</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a lossless, linear, homogeneous medium (conductivity 0); eps_r, mu_r &gt;= 1.</p>
+<pre><code class="shell">$ electrical-engineering solve plane_wave_lossless &quot;f=100000000 Hz&quot; eps_r=4 mu_r=1
+v = 149896229 m/s
+wavelength = 1.49896229 m
+eta = 188.3651567 ohm
+beta = 4.191690044
+n = 2
+  by: Plane wave in a lossless medium: speed, wavelength and wave impedance  (v = c/sqrt(eps_r mu_r); wavelength = v/f; eta = eta0 sqrt(mu_r/eps_r))
+  f = 100000000 Hz
+  eps_r = 4
+  mu_r = 1
+  assumes: a lossless, linear, homogeneous medium (conductivity 0); eps_r, mu_r &gt;= 1</code></pre>
+<p>In the worked example, f = 100000000 Hz, eps_r = 4, mu_r = 1 go through the equation above and give v = 149896229 m/s, wavelength = 1.49896229 m, eta = 188.3651567 ohm, beta = 4.191690044. It applies only when a lossless, linear, homogeneous medium (conductivity 0); eps_r, mu_r &gt;= 1: outside that it says what is wrong instead of returning a number.</p>
+<h3>Magnetic circuits (1)</h3>
+<h4 id="magnetic_circuit">Series magnetic circuit: reluctance, magnetomotive force, flux density and field strength, <code>magnetic_circuit</code></h4>
+<p>The current a coil of N turns needs to set up a flux in a series magnetic circuit of sections (iron paths and air gaps), or the flux a current produces, with the reluctance, the mmf, and B and H in every section.</p>
+<div class="math">\[S = \sum_k \frac{l_k}{\mu_0\mu_{r,k}A_k},\quad NI = \Phi S = \sum_k H_k l_k\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>N</code></td><td>in</td><td>number of turns of the magnetising coil</td><td>, </td></tr><tr><td><code>lengths</code></td><td>in</td><td>mean length of the flux path in each section, in m (an air gap is a section)</td><td>, </td></tr><tr><td><code>areas</code></td><td>in</td><td>cross-sectional area of each section, in m^2</td><td>, </td></tr><tr><td><code>mu_r</code></td><td>in</td><td>relative permeability of each section (1 for air)</td><td>, </td></tr><tr><td><code>flux</code></td><td>in</td><td>flux to produce (give this or the current) (optional)</td><td>Wb</td></tr><tr><td><code>current</code></td><td>in</td><td>coil current (give this or the flux) (optional)</td><td>A</td></tr><tr><td><code>reluctance</code></td><td>out</td><td>total reluctance in A/Wb (ampere-turns per weber)</td><td>, </td></tr><tr><td><code>mmf</code></td><td>out</td><td>magnetomotive force N I in ampere-turns</td><td>, </td></tr><tr><td><code>current</code></td><td>out</td><td>coil current</td><td>A</td></tr><tr><td><code>flux</code></td><td>out</td><td>flux in the circuit</td><td>Wb</td></tr><tr><td><code>B</code></td><td>out</td><td>flux density of each section in T</td><td>, </td></tr><tr><td><code>H</code></td><td>out</td><td>magnetic field strength of each section in A/m</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> linear materials: a constant relative permeability in each section (no B-H curve); no leakage or fringing; exactly one of the flux and the current.</p>
+<pre><code class="shell">$ electrical-engineering solve magnetic_circuit N=500 &quot;flux=0.0006 Wb&quot; &quot;lengths=[0.4, 0.001]&quot; &quot;areas=[0.0005, 0.0005]&quot; &quot;mu_r=[800, 1]&quot;
+reluctance = 2387324.146
+mmf = 1432.394488
+current = 2.864788976 A
+flux = 0.0006 Wb
+B = [1.2,1.2]
+H = [1193.6620731892149,954929.658551372]
+  by: Series magnetic circuit: reluctance, magnetomotive force, flux density and field strength  (S = sum l/(mu0 mu_r A); F = N I = flux S; B = flux/A; H = B/(mu0 mu_r))
+  N = 500
+  flux = 0.0006 Wb
+  assumes: linear materials: a constant relative permeability in each section (no B-H curve); no leakage or fringing; exactly one of the flux and the current</code></pre>
+<p>In the worked example, N = 500, flux = 0.0006 Wb, lengths = [0.4, 0.001], areas = [0.0005, 0.0005], mu_r = [800, 1] go through the equation above and give reluctance = 2387324.146, mmf = 1432.394488, current = 2.864788976 A, flux = 0.0006 Wb. It applies only when linear materials: a constant relative permeability in each section (no B-H curve); no leakage or fringing; exactly one of the flux and the current: outside that it says what is wrong instead of returning a number.</p>
+<h3>Measuring instruments (2)</h3>
+<h4 id="ammeter_shunt">Ammeter shunt resistance, <code>ammeter_shunt</code></h4>
+<p>The shunt resistance that extends a moving-coil meter of full-scale current Ifs and resistance Rm to read a current I at full scale.</p>
+<div class="math">\[R_{sh} = \frac{I_{fs}R_m}{I - I_{fs}}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Ifs</code></td><td>in</td><td>full-scale deflection current of the meter</td><td>A</td></tr><tr><td><code>Rm</code></td><td>in</td><td>resistance of the meter</td><td>ohm</td></tr><tr><td><code>I</code></td><td>in</td><td>required full-scale reading of the ammeter</td><td>A</td></tr><tr><td><code>Rsh</code></td><td>out</td><td>shunt resistance</td><td>ohm</td></tr><tr><td><code>multiplying_factor</code></td><td>out</td><td>range multiplication I/Ifs</td><td>, </td></tr><tr><td><code>V_fs</code></td><td>out</td><td>voltage across the meter at full scale</td><td>V</td></tr><tr><td><code>R_total</code></td><td>out</td><td>resistance of the extended ammeter</td><td>ohm</td></tr></tbody></table>
+<p><strong>Applies when:</strong> I &gt; Ifs; the meter&#x27;s resistance constant.</p>
+<pre><code class="shell">$ electrical-engineering solve ammeter_shunt &quot;Ifs=0.001 A&quot; &quot;Rm=100 ohm&quot; &quot;I=1 A&quot;
+Rsh = 0.1001001001 ohm
+multiplying_factor = 1000
+V_fs = 0.1 V
+R_total = 0.1 ohm
+  by: Ammeter shunt resistance  (Rsh = Ifs Rm / (I - Ifs))
+  Ifs = 0.001 A
+  Rm = 100 ohm
+  I = 1 A
+  assumes: I &gt; Ifs; the meter&#x27;s resistance constant</code></pre>
+<p>In the worked example, Ifs = 0.001 A, Rm = 100 ohm, I = 1 A go through the equation above and give Rsh = 0.1001001001 ohm, multiplying_factor = 1000, V_fs = 0.1 V, R_total = 0.1 ohm. It applies only when I &gt; Ifs; the meter&#x27;s resistance constant: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="voltmeter_multiplier">Voltmeter multiplier resistance, <code>voltmeter_multiplier</code></h4>
+<p>The series (multiplier) resistance that makes a moving-coil meter of full-scale current Ifs and resistance Rm read a voltage V at full scale, and the voltmeter&#x27;s sensitivity.</p>
+<div class="math">\[R_{mult} = \frac{V}{I_{fs}} - R_m\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>Ifs</code></td><td>in</td><td>full-scale deflection current of the meter</td><td>A</td></tr><tr><td><code>Rm</code></td><td>in</td><td>resistance of the meter</td><td>ohm</td></tr><tr><td><code>V</code></td><td>in</td><td>required full-scale reading of the voltmeter</td><td>V</td></tr><tr><td><code>Rmult</code></td><td>out</td><td>multiplier (series) resistance</td><td>ohm</td></tr><tr><td><code>R_total</code></td><td>out</td><td>resistance of the voltmeter</td><td>ohm</td></tr><tr><td><code>sensitivity</code></td><td>out</td><td>sensitivity in ohm per volt, 1/Ifs</td><td>, </td></tr><tr><td><code>V_fs</code></td><td>out</td><td>full-scale voltage of the bare meter</td><td>V</td></tr></tbody></table>
+<p><strong>Applies when:</strong> V &gt; Ifs Rm.</p>
+<pre><code class="shell">$ electrical-engineering solve voltmeter_multiplier &quot;Ifs=0.001 A&quot; &quot;Rm=100 ohm&quot; &quot;V=10 V&quot;
+Rmult = 9900 ohm
+R_total = 10000 ohm
+sensitivity = 1000
+V_fs = 0.1 V
+  by: Voltmeter multiplier resistance  (Rmult = V/Ifs - Rm)
+  Ifs = 0.001 A
+  Rm = 100 ohm
+  V = 10 V
+  assumes: V &gt; Ifs Rm</code></pre>
+<p>In the worked example, Ifs = 0.001 A, Rm = 100 ohm, V = 10 V go through the equation above and give Rmult = 9900 ohm, R_total = 10000 ohm, sensitivity = 1000, V_fs = 0.1 V. It applies only when V &gt; Ifs Rm: outside that it says what is wrong instead of returning a number.</p>
 <h3>Operational amplifiers (5)</h3>
 <h4 id="difference_amplifier">Difference amplifier output (four-resistor op-amp circuit), <code>difference_amplifier</code></h4>
 <p>The output of the classic difference amplifier: V1 through R1 to the inverting input, R2 from output to that input, V2 through R3 to the non-inverting input, R4 from it to ground.</p>
@@ -1077,6 +1514,100 @@ slope = -50
   V0 = 0 V
   assumes: ideal op-amp, no saturation; constant input</code></pre>
 <p><strong>What the worked example means:</strong> This calculation determines the final output voltage of an ideal inverting integrator after a constant input has been applied for a specific duration. Starting from an initial voltage, the circuit accumulates the input signal over time, producing a linear ramp at the output. The computed result shows that with an input resistor and feedback capacitor creating a specific time constant, the output reaches -0.25 V while changing at a rate of -50. This reflects how the capacitor charges or discharges in response to the steady input current generated by the voltage across the input resistor.</p>
+<h3>Single-phase a.c. circuits (3)</h3>
+<h4 id="coil_capacitor_parallel">Coil with resistance in parallel with a capacitor: currents, resonance and dynamic resistance, <code>coil_capacitor_parallel</code></h4>
+<p>For a coil (R in series with L) in parallel with a capacitor C across a supply: the coil, capacitor and supply currents, the phase angle and power at the supply frequency, and the resonant frequency, dynamic resistance L/(CR), current at resonance and Q factor.</p>
+<div class="math">\[f_r = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \frac{R^2}{L^2}},\quad R_D = \frac{L}{CR}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>rms supply voltage</td><td>V</td></tr><tr><td><code>f</code></td><td>in</td><td>supply frequency</td><td>Hz</td></tr><tr><td><code>R</code></td><td>in</td><td>resistance of the coil</td><td>ohm</td></tr><tr><td><code>L</code></td><td>in</td><td>inductance of the coil</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance</td><td>F</td></tr><tr><td><code>I_coil</code></td><td>out</td><td>coil current</td><td>A</td></tr><tr><td><code>I_C</code></td><td>out</td><td>capacitor current</td><td>A</td></tr><tr><td><code>I</code></td><td>out</td><td>supply current</td><td>A</td></tr><tr><td><code>Z</code></td><td>out</td><td>impedance of the network V/I</td><td>ohm</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase angle of the supply current behind the voltage, degrees</td><td>, </td></tr><tr><td><code>P</code></td><td>out</td><td>real power (dissipated in the coil&#x27;s resistance)</td><td>W</td></tr><tr><td><code>f_r</code></td><td>out</td><td>resonant frequency</td><td>Hz</td></tr><tr><td><code>R_dynamic</code></td><td>out</td><td>dynamic resistance L/(CR) at resonance</td><td>ohm</td></tr><tr><td><code>I_resonance</code></td><td>out</td><td>supply current at resonance</td><td>A</td></tr><tr><td><code>Q</code></td><td>out</td><td>Q factor at resonance, wr L/R (current magnification)</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> R^2 &lt; L/C (a resonance exists); sinusoidal steady state, ideal capacitor.</p>
+<pre><code class="shell">$ electrical-engineering solve coil_capacitor_parallel &quot;R=10 ohm&quot; &quot;L=0.1 H&quot; &quot;C=1e-05 F&quot; &quot;V=100 V&quot; &quot;f=50 Hz&quot;
+I_coil = 3.033144711 A
+I_C = 0.3141592654 A
+I = 2.735445524 A
+Z = 36.55711624 ohm
+phase_deg = 70.34691454
+P = 91.99966835 W
+f_r = 158.3571689 Hz
+R_dynamic = 1000 ohm
+I_resonance = 0.1 A
+Q = 9.949874371
+  by: Coil with resistance in parallel with a capacitor: currents, resonance and dynamic resistance  (Y = 1/(R + jwL) + jwC; fr = (1/2 pi) sqrt(1/(LC) - R^2/L^2); RD = L/(CR); Q = wr L/R)
+  R = 10 ohm
+  L = 0.1 H
+  C = 1e-05 F
+  V = 100 V
+  f = 50 Hz
+  assumes: R^2 &lt; L/C (a resonance exists); sinusoidal steady state, ideal capacitor</code></pre>
+<p>In the worked example, R = 10 ohm, L = 0.1 H, C = 1e-05 F, V = 100 V, f = 50 Hz go through the equation above and give I_coil = 3.033144711 A, I_C = 0.3141592654 A, I = 2.735445524 A, Z = 36.55711624 ohm. It applies only when R^2 &lt; L/C (a resonance exists); sinusoidal steady state, ideal capacitor: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="parallel_ac_supply">Parallel R-L, R-C or R-L-C circuit on an a.c. supply, <code>parallel_ac_supply</code></h4>
+<p>The branch currents, supply current, impedance, phase angle, power factor and real, reactive and apparent power of R in parallel with L, with C, or with both, across a sinusoidal supply.</p>
+<div class="math">\[I = \sqrt{I_R^2 + (I_L - I_C)^2},\quad \cos\phi = \frac{I_R}{I}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>rms supply voltage</td><td>V</td></tr><tr><td><code>f</code></td><td>in</td><td>supply frequency</td><td>Hz</td></tr><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>circuit</code></td><td>in</td><td>the elements: R-L, R-C or R-L-C</td><td>, </td></tr><tr><td><code>L</code></td><td>in</td><td>inductance (R-L and R-L-C circuits) (optional)</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance (R-C and R-L-C circuits) (optional)</td><td>F</td></tr><tr><td><code>IR</code></td><td>out</td><td>current in R</td><td>A</td></tr><tr><td><code>IL</code></td><td>out</td><td>current in L (0 without an inductor)</td><td>A</td></tr><tr><td><code>IC</code></td><td>out</td><td>current in C (0 without a capacitor)</td><td>A</td></tr><tr><td><code>I</code></td><td>out</td><td>supply current</td><td>A</td></tr><tr><td><code>Z</code></td><td>out</td><td>impedance V/I</td><td>ohm</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase angle of the supply current behind the voltage, degrees (negative: leading)</td><td>, </td></tr><tr><td><code>power_factor</code></td><td>out</td><td>power factor cos(phase)</td><td>, </td></tr><tr><td><code>P</code></td><td>out</td><td>real power in W</td><td>W</td></tr><tr><td><code>Q</code></td><td>out</td><td>reactive power in var (positive: inductive)</td><td>, </td></tr><tr><td><code>S</code></td><td>out</td><td>apparent power in VA</td><td>, </td></tr><tr><td><code>nature</code></td><td>out</td><td>lagging, leading or unity power factor</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> sinusoidal steady state, rms values; ideal L and C (a coil with resistance: use coil_capacitor_parallel); R &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve parallel_ac_supply &quot;R=25 ohm&quot; &quot;L=0.1 H&quot; &quot;V=100 V&quot; &quot;f=50 Hz&quot; circuit=RL
+IR = 4 A
+IL = 3.183098862 A
+IC = 0 A
+I = 5.111958369 A
+Z = 19.56197465 ohm
+phase_deg = 38.51188725
+power_factor = 0.7824789858
+P = 400 W
+Q = 318.3098862
+S = 511.1958369
+nature = lagging
+  by: Parallel R-L, R-C or R-L-C circuit on an a.c. supply  (IR = V/R, IL = V/(wL), IC = V wC; I = sqrt(IR^2 + (IL - IC)^2); phase = atan((IL - IC)/IR))
+  R = 25 ohm
+  L = 0.1 H
+  V = 100 V
+  f = 50 Hz
+  circuit = RL
+  assumes: sinusoidal steady state, rms values; ideal L and C (a coil with resistance: use coil_capacitor_parallel); R &gt; 0</code></pre>
+<p>In the worked example, R = 25 ohm, L = 0.1 H, V = 100 V, f = 50 Hz, circuit = RL go through the equation above and give IR = 4 A, IL = 3.183098862 A, IC = 0 A, I = 5.111958369 A. It applies only when sinusoidal steady state, rms values; ideal L and C (a coil with resistance: use coil_capacitor_parallel); R &gt; 0: outside that it says what is wrong instead of returning a number.</p>
+<h4 id="series_ac_supply">Series R-L, R-C or R-L-C circuit on an a.c. supply, <code>series_ac_supply</code></h4>
+<p>The impedance, current, voltage across each element, phase angle, power factor and real, reactive and apparent power of a series R-L, R-C or R-L-C circuit connected to a sinusoidal supply.</p>
+<div class="math">\[Z = \sqrt{R^2 + (X_L - X_C)^2},\quad I = \frac{V}{Z},\quad \cos\phi = \frac{R}{Z}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>V</code></td><td>in</td><td>rms supply voltage</td><td>V</td></tr><tr><td><code>f</code></td><td>in</td><td>supply frequency</td><td>Hz</td></tr><tr><td><code>R</code></td><td>in</td><td>resistance</td><td>ohm</td></tr><tr><td><code>circuit</code></td><td>in</td><td>the elements: R-L, R-C or R-L-C</td><td>, </td></tr><tr><td><code>L</code></td><td>in</td><td>inductance (R-L and R-L-C circuits) (optional)</td><td>H</td></tr><tr><td><code>C</code></td><td>in</td><td>capacitance (R-C and R-L-C circuits) (optional)</td><td>F</td></tr><tr><td><code>Z</code></td><td>out</td><td>impedance |Z|</td><td>ohm</td></tr><tr><td><code>I</code></td><td>out</td><td>rms current</td><td>A</td></tr><tr><td><code>VR</code></td><td>out</td><td>voltage across R</td><td>V</td></tr><tr><td><code>VL</code></td><td>out</td><td>voltage across L (0 without an inductor)</td><td>V</td></tr><tr><td><code>VC</code></td><td>out</td><td>voltage across C (0 without a capacitor)</td><td>V</td></tr><tr><td><code>XL</code></td><td>out</td><td>inductive reactance wL</td><td>ohm</td></tr><tr><td><code>XC</code></td><td>out</td><td>capacitive reactance 1/(wC)</td><td>ohm</td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>phase angle of the supply current behind the voltage, degrees (negative: leading)</td><td>, </td></tr><tr><td><code>power_factor</code></td><td>out</td><td>power factor cos(phase)</td><td>, </td></tr><tr><td><code>P</code></td><td>out</td><td>real power in W</td><td>W</td></tr><tr><td><code>Q</code></td><td>out</td><td>reactive power in var (positive: inductive)</td><td>, </td></tr><tr><td><code>S</code></td><td>out</td><td>apparent power in VA</td><td>, </td></tr><tr><td><code>nature</code></td><td>out</td><td>lagging, leading or unity power factor</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> sinusoidal steady state, rms values; ideal L and C; R &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve series_ac_supply &quot;R=30 ohm&quot; &quot;L=0.1 H&quot; &quot;V=240 V&quot; &quot;f=50 Hz&quot; circuit=RL
+Z = 43.43915791 ohm
+I = 5.52496898 A
+VR = 165.7490694 V
+VL = 173.5720196 V
+VC = 0 V
+XL = 31.41592654 ohm
+XC = 0 ohm
+phase_deg = 46.32070377
+power_factor = 0.6906211226
+P = 915.758467 W
+Q = 958.9800242
+S = 1325.992555
+nature = lagging
+  by: Series R-L, R-C or R-L-C circuit on an a.c. supply  (Z = sqrt(R^2 + (XL - XC)^2); I = V/Z; VR = IR, VL = I XL, VC = I XC; phase = atan((XL - XC)/R); P = I^2 R)
+  R = 30 ohm
+  L = 0.1 H
+  V = 240 V
+  f = 50 Hz
+  circuit = RL
+  assumes: sinusoidal steady state, rms values; ideal L and C; R &gt; 0</code></pre>
+<p>In the worked example, R = 30 ohm, L = 0.1 H, V = 240 V, f = 50 Hz, circuit = RL go through the equation above and give Z = 43.43915791 ohm, I = 5.52496898 A, VR = 165.7490694 V, VL = 173.5720196 V. It applies only when sinusoidal steady state, rms values; ideal L and C; R &gt; 0: outside that it says what is wrong instead of returning a number.</p>
+<h3>Three-phase systems (1)</h3>
+<h4 id="two_wattmeter">Three-phase power by the two-wattmeter method, <code>two_wattmeter</code></h4>
+<p>The total power, the power factor, the load angle and the reactive and apparent power of a balanced three-phase load from the readings of two wattmeters.</p>
+<div class="math">\[P = W_1 + W_2,\quad \tan\phi = \sqrt{3}\,\frac{W_1 - W_2}{W_1 + W_2}\]</div>
+<table><thead><tr><th>symbol</th><th></th><th>meaning</th><th>SI unit</th></tr></thead><tbody><tr><td><code>W1</code></td><td>in</td><td>reading of the first wattmeter (negative if it reads backwards)</td><td>W</td></tr><tr><td><code>W2</code></td><td>in</td><td>reading of the second wattmeter</td><td>W</td></tr><tr><td><code>P</code></td><td>out</td><td>total power W1 + W2</td><td>W</td></tr><tr><td><code>Q</code></td><td>out</td><td>total reactive power in var (magnitude)</td><td>, </td></tr><tr><td><code>S</code></td><td>out</td><td>total apparent power in VA</td><td>, </td></tr><tr><td><code>power_factor</code></td><td>out</td><td>power factor of the load</td><td>, </td></tr><tr><td><code>phase_deg</code></td><td>out</td><td>load angle in degrees (lag or lead needs the phase sequence)</td><td>, </td></tr></tbody></table>
+<p><strong>Applies when:</strong> a balanced load and a symmetrical supply; W1 + W2 &gt; 0.</p>
+<pre><code class="shell">$ electrical-engineering solve two_wattmeter &quot;W1=3000 W&quot; &quot;W2=1000 W&quot;
+P = 4000 W
+Q = 3464.101615
+S = 5291.502622
+power_factor = 0.755928946
+phase_deg = 40.89339465
+  by: Three-phase power by the two-wattmeter method  (P = W1 + W2; tan(phi) = sqrt(3) (W1 - W2)/(W1 + W2))
+  W1 = 3000 W
+  W2 = 1000 W
+  assumes: a balanced load and a symmetrical supply; W1 + W2 &gt; 0</code></pre>
+<p>In the worked example, W1 = 3000 W, W2 = 1000 W go through the equation above and give P = 4000 W, Q = 3464.101615, S = 5291.502622, power_factor = 0.755928946. It applies only when a balanced load and a symmetrical supply; W1 + W2 &gt; 0: outside that it says what is wrong instead of returning a number.</p>
 <h3>Transients (3)</h3>
 <h4 id="first_order_transient">First-order (RC or RL) transient response, <code>first_order_transient</code></h4>
 <p>The value at time t of any voltage in a first-order circuit going from its initial value V0 toward its final value Vf with time constant tau.</p>

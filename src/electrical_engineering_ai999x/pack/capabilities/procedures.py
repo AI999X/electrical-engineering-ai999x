@@ -6,6 +6,12 @@ verified worked examples, an INDEPENDENT reference computation (used only by cer
 are imported inside the reference functions) and a deliberately wrong variant that the checks must reject.
 
 The shipped code (run, verify, parse) is plain Python: math, cmath, re, itertools.
+
+Conventions of the core-course section (magnetic circuits, induction, capacitors, plane waves): mu0 = 4 pi x 1e-7 H/m
+and eps0 = 1/(mu0 c^2) with c = 299 792 458 m/s (so 1/sqrt(mu0 eps0) = c exactly); the references use the same values.
+Temperatures are taken in kelvin (a question's degrees Celsius are converted by its reader); a temperature
+coefficient is per kelvin (= per degree Celsius). Reactive power is reported in var and apparent power in VA as plain
+numbers. Machine speeds are in revolutions per second (questions may write rpm). A phase angle phi is in radians.
 """
 from __future__ import annotations
 
@@ -508,6 +514,10 @@ PROCEDURES["resistor_network"] = {
 
 
 # ============================================================================== linear circuit equations (mesh, nodal)
+# wording of an AC (phasor) question: the DC readers below refuse it, so it reaches only the AC solvers (2026-11-12)
+_AC_HINT = r"\b(?:ac|a\.c\.|phasors?|reactance|impedances?|sinusoidal)\b|\d\s*(?:[kM]?Hz|hertz)\b"
+
+
 def _bracket_after(question, words):
     """The written matrix or vector that follows one of `words`: '[[10, -4], [-4, 8]]', '[12, 0]' or '10 -4; -4 8'."""
     for w in words:
@@ -519,7 +529,7 @@ def _bracket_after(question, words):
 
 def _linear_parse(matrix_words, vector_words, keyword):
     def parse(question):
-        if not re.search(keyword, question, re.I):
+        if not re.search(keyword, question, re.I) or re.search(_AC_HINT, question, re.I):
             return None
         A = _bracket_after(question, matrix_words)
         b = _bracket_after(question, vector_words)
@@ -882,7 +892,7 @@ def _random_netlist(rng, current_source=True, port=False):
 
 
 def parse_netlist(question):
-    if re.search(r"\b(thevenin|th[eé]venin|norton)\b", question, re.I):
+    if re.search(r"\b(thevenin|th[eé]venin|norton)\b", question, re.I) or re.search(_AC_HINT, question, re.I):
         return None
     m = re.search(r"\b(?:node voltages|voltage at every node|nodal analysis)\b.*?\bcircuit\s*:\s*(.+?)\s*$", question, re.I | re.S)
     return {"netlist": m.group(1)} if m else None
@@ -1007,7 +1017,7 @@ def _wrong_thevenin(netlist, node_a, node_b):
 
 def parse_thevenin(kind):
     def parse(question):
-        if not re.search(rf"\b{kind}\b", question, re.I):
+        if not re.search(rf"\b{kind}\b", question, re.I) or re.search(_AC_HINT, question, re.I):
             return None
         m = re.search(r"\bbetween\s+nodes?\s+(\w+)\s+and\s+(\w+)\b.*?\bcircuit\s*:\s*(.+?)\s*$", question, re.I | re.S)
         if not m:
@@ -5113,3 +5123,2626 @@ PROCEDURES["dc_motor"] = _fspec(
     [{"q": "Find the steady-state speed of a DC motor with V = 12 V, R = 1 ohm, Kt = 0.05, Ke = 0.05, T = 0.02 N*m, b = 0.0001.",
       "outputs": {"speed": (0.05 * 12 - 0.02) / (0.0025 + 0.0001)}},
      {"q": "Find the steady-state speed of a DC motor with V = 12 V, R = 1 ohm, Kt = 0.05, Ke = 0.05, T = 0.02 N*m.", "outcome": "NEEDS_INPUT"}])
+
+
+# ================================================================================ core course calculations (2026-11-12)
+# Basic quantities and energy cost, resistance and temperature, cells, capacitors, magnetic circuits, induction,
+# instruments, sinusoids, series and parallel a.c. circuits with a supply, two-wattmeter power, d.c. machines and plane
+# waves. Constants: mu0 = 4 pi 1e-7 H/m and eps0 = 1/(mu0 c^2) (see the module docstring).
+_MU0 = 4e-7 * math.pi
+_C0 = 299792458.0
+_EPS0 = 1.0 / (_MU0 * _C0 * _C0)
+_TWO_PI = 2.0 * math.pi
+_UNITS["time"].update({"h": 3600.0, "hours": 3600.0, "hour": 3600.0, "min": 60.0, "minutes": 60.0, "minute": 60.0})
+_UNITS["length"] = {"m": 1.0, "cm": 1e-2, "mm": 1e-3, "um": 1e-6, "µm": 1e-6, "km": 1e3}
+_UNITS["area"] = {"m^2": 1.0, "m2": 1.0, "cm^2": 1e-4, "cm2": 1e-4, "mm^2": 1e-6, "mm2": 1e-6}
+_UNITS["magnetic_flux"] = _unit_table(["Wb"])
+_UNITS["temperature"] = {"K": 1.0}
+_EXTRA_UNITS["rotational_speed"] = {"rev/s": 1.0, "rps": 1.0, "r/s": 1.0, "rpm": 1.0 / 60.0, "rev/min": 1.0 / 60.0, "r/min": 1.0 / 60.0}
+_EXTRA_UNITS["conductivity"] = {"S/m": 1.0, "kS/m": 1e3, "MS/m": 1e6, "mS/m": 1e-3}
+
+
+def _celsius_to_kelvin(question):
+    """'20 °C' (also degC, deg C, degrees C, degrees Celsius) -> '293.15 K', so that the reader takes every temperature
+    in kelvin. A coefficient written per degree ('0.004 °C^-1') is left alone and is then refused as an unread number."""
+    pat = rf"({_NUM_NB})\s*(?:°\s*C|degC|deg\s+C|degrees?\s+C(?:elsius)?)\b(?!\s*(?:\^|-1|⁻))"
+    return re.sub(pat, lambda m: repr(float(m.group(1)) + 273.15) + " K", question)
+
+
+# --------------------------------------------------------------------------------------------- energy and its cost
+def electrical_energy_cost(P, t, tariff) -> dict:
+    _check_positive(P=P, t=t)
+    if not (math.isfinite(tariff) and tariff >= 0):
+        raise ValueError("the tariff must be zero or positive")
+    energy = P * t
+    kwh = energy / 3.6e6
+    return {"energy": energy, "energy_kWh": kwh, "cost": kwh * tariff}
+
+
+def _verify_energy_cost(i, o):
+    return (_rel(o["energy"], i["P"] * i["t"]) + _rel(o["energy_kWh"] * 3.6e6, o["energy"])
+            + abs(o["cost"] - o["energy_kWh"] * i["tariff"]) / max(abs(o["cost"]), o["energy_kWh"] * i["tariff"], 1e-300))
+
+
+def _reference_energy_cost(P, t, tariff):
+    """INDEPENDENT reference (weak: a definition): the energy as the integral of the power over the time
+    (scipy.integrate.quad) and the kilowatt-hour taken from scipy.constants (1000 W for one hour)."""
+    from scipy import constants, integrate
+    energy, _ = integrate.quad(lambda x: P, 0.0, t, epsabs=0, epsrel=1e-13)
+    kwh = energy / (1000.0 * constants.hour)
+    return {"energy": float(energy), "energy_kWh": float(kwh), "cost": float(kwh * tariff)}
+
+
+PROCEDURES["electrical_energy_cost"] = _fspec(
+    "Electrical energy and its cost", "basic electrical quantities / energy",
+    "The energy a load of power P uses in a time t, in joules and in kilowatt-hours, and its cost at a tariff per kWh.",
+    [_inp("P", "power", "power of the load"), _inp("t", "time", "running time (h and min accepted in questions)"),
+     _inp("tariff", "number", "price of one kWh (any currency)")],
+    [_out("energy", "energy", "energy used, in joules"), _out("energy_kWh", "number", "energy used, in kilowatt-hours"),
+     _out("cost", "number", "cost of the energy, in the tariff's currency")],
+    "cost", ["constant power", "P > 0, t > 0, tariff >= 0"], "W = P t; kWh = W / 3.6e6; cost = kWh x tariff",
+    r"W = Pt,\quad \mathrm{cost} = \frac{Pt}{3.6\times10^{6}\ \mathrm{J/kWh}}\times\mathrm{tariff}",
+    electrical_energy_cost, _verify_energy_cost, _reference_energy_cost,
+    lambda P, t, tariff: {"energy": P * t, "energy_kWh": P * t / 3600.0, "cost": P * t / 3600.0 * tariff},   # Wh taken as kWh
+    lambda rng: {"P": round(10 ** rng.uniform(0.7, 3.7), 1), "t": round(rng.uniform(0.1, 500), 2) * 3600.0, "tariff": round(rng.uniform(0.05, 0.5), 3)},
+    r"\benergy cost\b|\bcost of (?:the )?(?:electrical )?energy\b",
+    ["Find the energy cost with P = 2 kW, t = 5 h, tariff = 0.15 per kWh."],
+    [{"inputs": {"P": 2000, "t": 18000, "tariff": 0.15}, "outputs": {"energy": 3.6e7, "energy_kWh": 10.0, "cost": 1.5}},
+     {"inputs": {"P": 100, "t": 36000, "tariff": 0.2}, "outputs": {"energy": 3.6e6, "energy_kWh": 1.0, "cost": 0.2}}],
+    [{"q": "Find the energy cost with P = 2 kW, t = 5 h, tariff = 0.15 per kWh.", "outputs": {"energy_kWh": 10.0, "cost": 1.5}},
+     {"q": "What is the cost of energy for P = 100 W, t = 10 hours, tariff = 0.2 per kWh?", "outputs": {"energy": 3.6e6, "cost": 0.2}},
+     {"q": "Find the energy cost with P = 2 kW, t = 5 h.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the energy cost with P = 2 kW, t = 5 h, tariff = -0.15 per kWh.", "outcome": "INVALID_INPUT"}])
+
+
+# --------------------------------------------------------------------------------------------- resistance and temperature
+def resistance_at_temperature(R1, alpha1, T1, T2) -> dict:
+    _check_positive(R1=R1, T1=T1, T2=T2)
+    if not math.isfinite(alpha1):
+        raise ValueError("alpha1 must be a finite number")
+    g = 1.0 + alpha1 * (T2 - T1)
+    if g <= 0:
+        raise ValueError("the linear model gives no positive resistance at T2: the change of temperature is too large for this coefficient")
+    return {"R2": R1 * g, "alpha2": alpha1 / g, "change": R1 * alpha1 * (T2 - T1)}
+
+
+def _verify_r_temp(i, o):
+    R1, a1 = i["R1"], i["alpha1"]
+    return (_rel(o["R2"], R1 * (1.0 + a1 * (i["T2"] - i["T1"]))) + abs(o["alpha2"] * o["R2"] - a1 * R1) / max(abs(a1 * R1), 1e-300)
+            + abs(o["change"] - (o["R2"] - R1)) / R1)
+
+
+def _reference_r_temp(R1, alpha1, T1, T2):
+    """INDEPENDENT reference: R2 by integrating the constant slope dR/dT = alpha1 R1 from T1 to T2
+    (scipy.integrate.quad); alpha2 found by scipy.optimize.brentq as the coefficient referred to T2 that brings R2
+    back to R1, R1 = R2 (1 + alpha2 (T1 - T2))."""
+    from scipy import integrate, optimize
+    dr, _ = integrate.quad(lambda T: alpha1 * R1, T1, T2, epsabs=0, epsrel=1e-13)
+    R2 = R1 + dr
+    if T1 == T2:
+        a2 = alpha1
+    else:
+        a2 = optimize.brentq(lambda a: R2 * (1.0 + a * (T1 - T2)) - R1, -10.0, 10.0, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    return {"R2": float(R2), "alpha2": float(a2), "change": float(dr)}
+
+
+def _random_r_temp(rng):
+    T1 = round(273.15 + rng.uniform(0, 40), 2)
+    d = rng.uniform(5, 200) if rng.random() < 0.7 else -rng.uniform(5, 60)
+    return {"R1": _e12(rng, 0, 4), "alpha1": rng.choice([0.0039, 0.00393, 0.0043, 0.0045, 0.004, 0.0068, 0.0006]), "T1": T1, "T2": round(T1 + d, 2)}
+
+
+_RT_IN = [_inp("R1", "resistance", "resistance at the reference temperature T1"),
+          _inp("alpha1", "number", "temperature coefficient of resistance referred to T1, per K (= per degree C)"),
+          _inp("T1", "temperature", "reference temperature (degrees C accepted in questions)"), _inp("T2", "temperature", "new temperature")]
+
+PROCEDURES["resistance_at_temperature"] = _fspec(
+    "Resistance at a new temperature (temperature coefficient)", "basic electrical quantities / resistance variation",
+    "The resistance of a conductor at a temperature T2 from its resistance R1 at T1 and its temperature coefficient referred to T1, and the coefficient referred to T2.",
+    _RT_IN,
+    [_out("R2", "resistance", "resistance at T2"), _out("alpha2", "number", "temperature coefficient referred to T2, per K"),
+     _out("change", "resistance", "change of resistance R2 - R1")],
+    "R2", ["a linear R(T) over the range", "R1 > 0, temperatures above absolute zero"], "R2 = R1 (1 + alpha1 (T2 - T1)); alpha2 = alpha1 / (1 + alpha1 (T2 - T1))",
+    r"R_2 = R_1\left[1 + \alpha_1 (T_2 - T_1)\right]",
+    resistance_at_temperature, _verify_r_temp, _reference_r_temp,
+    lambda R1, alpha1, T1, T2: (lambda g: {"R2": R1 * g, "alpha2": alpha1 / g, "change": R1 * (g - 1.0)})(1.0 + alpha1 * T2),   # T2 not referred to T1
+    _random_r_temp,
+    r"\bresistance at (?:a |the )?new temperature\b",
+    ["Find the resistance at a new temperature with R1 = 50 ohm, alpha1 = 0.004, T1 = 20 °C, T2 = 80 °C."],
+    [{"inputs": {"R1": 50, "alpha1": 0.004, "T1": 293.15, "T2": 353.15}, "outputs": {"R2": 62.0, "alpha2": 0.004 / 1.24, "change": 12.0}},
+     {"inputs": {"R1": 100, "alpha1": 0.0043, "T1": 273.15, "T2": 373.15}, "outputs": {"R2": 143.0, "change": 43.0}}],
+    [{"q": "Find the resistance at a new temperature with R1 = 50 ohm, alpha1 = 0.004, T1 = 20 °C, T2 = 80 °C.", "outputs": {"R2": 62.0}},
+     {"q": "Find the resistance at a new temperature with R1 = 100 ohm, alpha1 = 0.0043, T1 = 0 °C, T2 = 100 °C.", "outputs": {"R2": 143.0, "alpha2": 0.0043 / 1.43}},
+     {"q": "Find the resistance at a new temperature with R1 = 50 ohm, alpha1 = 0.004, T1 = 20 °C.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the resistance at a new temperature with R1 = 50 ohm, alpha1 = 0.004, T1 = 20 °C, T2 = -300 °C.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\btemperature coefficient from\b")
+
+
+def _parse_r_temp(question):
+    return _kv_parse(r"\bresistance at (?:a |the )?new temperature\b", _RT_IN, r"\btemperature coefficient from\b")(_celsius_to_kelvin(question))
+
+
+PROCEDURES["resistance_at_temperature"]["parse"] = _parse_r_temp
+
+
+def temperature_coefficient_from_resistances(R1, T1, R2, T2) -> dict:
+    _check_positive(R1=R1, T1=T1, R2=R2, T2=T2)
+    if T1 == T2:
+        raise ValueError("the two temperatures must differ")
+    slope = (R2 - R1) / (T2 - T1)
+    return {"alpha1": slope / R1, "alpha2": slope / R2, "slope": slope}
+
+
+def _verify_tc_from(i, o):
+    R1, R2 = i["R1"], i["R2"]
+    s = o["slope"]
+    return (abs(s * (i["T2"] - i["T1"]) - (R2 - R1)) / max(abs(R2 - R1), 1e-12 * R1) + abs(o["alpha1"] * R1 - s) / max(abs(s), 1e-300)
+            + abs(o["alpha2"] * R2 - s) / max(abs(s), 1e-300))
+
+
+def _reference_tc_from(R1, T1, R2, T2):
+    """INDEPENDENT reference: the straight line R(T) through the two readings fitted by numpy.polyfit; each
+    coefficient is its slope over the fitted resistance at that temperature (numpy.polyval)."""
+    import numpy as np
+    k, b = np.polyfit([T1, T2], [R1, R2], 1)
+    return {"slope": float(k), "alpha1": float(k / np.polyval([k, b], T1)), "alpha2": float(k / np.polyval([k, b], T2))}
+
+
+def _random_tc_from(rng):
+    r = _random_r_temp(rng)
+    R1 = _e12(rng, 1, 4)
+    return {"R1": R1, "T1": r["T1"], "R2": round(R1 * (1.0 + r["alpha1"] * (r["T2"] - r["T1"])), 6), "T2": r["T2"]}
+
+
+_TCF_IN = [_inp("R1", "resistance", "resistance at T1"), _inp("T1", "temperature", "first temperature (degrees C accepted in questions)"),
+           _inp("R2", "resistance", "resistance at T2"), _inp("T2", "temperature", "second temperature")]
+
+PROCEDURES["temperature_coefficient_from_resistances"] = _fspec(
+    "Temperature coefficient of resistance from two readings", "basic electrical quantities / resistance variation",
+    "The temperature coefficient of resistance referred to each of two temperatures, from the resistances measured at them.",
+    _TCF_IN,
+    [_out("alpha1", "number", "temperature coefficient referred to T1, per K"), _out("alpha2", "number", "temperature coefficient referred to T2, per K"),
+     _out("slope", "number", "change of resistance per kelvin, ohm/K")],
+    "alpha1", ["a linear R(T) between the readings", "T1 != T2"], "alpha1 = (R2 - R1) / (R1 (T2 - T1))",
+    r"\alpha_1 = \frac{R_2 - R_1}{R_1 (T_2 - T_1)}",
+    temperature_coefficient_from_resistances, _verify_tc_from, _reference_tc_from,
+    lambda R1, T1, R2, T2: (lambda s: {"alpha1": s / R2, "alpha2": s / R1, "slope": s})((R2 - R1) / (T2 - T1)),   # referred to the wrong reading
+    _random_tc_from,
+    r"\btemperature coefficient from\b",
+    ["Find the temperature coefficient from R1 = 100 ohm, T1 = 20 °C, R2 = 120 ohm, T2 = 70 °C."],
+    [{"inputs": {"R1": 100, "T1": 293.15, "R2": 120, "T2": 343.15}, "outputs": {"alpha1": 0.004, "alpha2": 1 / 300, "slope": 0.4}},
+     {"inputs": {"R1": 50, "T1": 273.15, "R2": 69.25, "T2": 373.15}, "outputs": {"alpha1": 0.00385, "slope": 0.1925}}],
+    [{"q": "Find the temperature coefficient from R1 = 100 ohm, T1 = 20 °C, R2 = 120 ohm, T2 = 70 °C.", "outputs": {"alpha1": 0.004}},
+     {"q": "Find the temperature coefficient from R1 = 50 ohm, T1 = 0 °C, R2 = 69.25 ohm, T2 = 100 °C.", "outputs": {"alpha1": 0.00385}},
+     {"q": "Find the temperature coefficient from R1 = 100 ohm, T1 = 20 °C, T2 = 70 °C.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the temperature coefficient from R1 = 100 ohm, T1 = 20 °C, R2 = 120 ohm, T2 = 20 °C.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bnew temperature\b")
+
+
+def _parse_tc_from(question):
+    return _kv_parse(r"\btemperature coefficient from\b", _TCF_IN, r"\bnew temperature\b")(_celsius_to_kelvin(question))
+
+
+PROCEDURES["temperature_coefficient_from_resistances"]["parse"] = _parse_tc_from
+
+
+# --------------------------------------------------------------------------------------------- cells and batteries
+def cell_battery(E, r, n, connection, RL) -> dict:
+    _check_positive(E=E, r=r, RL=RL)
+    if not (math.isfinite(n) and n == int(n) and 1 <= n <= 1000):
+        raise ValueError("the number of cells must be a whole number from 1 to 1000")
+    if connection == "series":
+        emf, rint = n * E, n * r
+    else:
+        emf, rint = E, r / n
+    cur = emf / (rint + RL)
+    vt = cur * RL
+    return {"emf_total": emf, "r_total": rint, "I": cur, "V_terminal": vt, "lost_volts": cur * rint, "P_load": cur * vt}
+
+
+def _verify_cells(i, o):
+    E, r, n, RL = i["E"], i["r"], i["n"], i["RL"]
+    want_e = n * E if i["connection"] == "series" else E
+    want_r = n * r if i["connection"] == "series" else r / n
+    return (_rel(o["emf_total"], want_e) + _rel(o["r_total"], want_r) + abs(o["emf_total"] - o["I"] * (o["r_total"] + RL)) / o["emf_total"]
+            + _rel(o["V_terminal"], o["I"] * RL) + abs(o["lost_volts"] - o["I"] * o["r_total"]) / o["emf_total"] + _rel(o["P_load"], o["I"] * o["V_terminal"]))
+
+
+def _reference_cells(E, r, n, connection, RL):
+    """INDEPENDENT reference: every cell drawn as its own source with its own internal resistor, wired in series or in
+    parallel, solved exactly by sympy (Kirchhoff's laws in rational arithmetic) with and without the load; the combined
+    emf is the open-circuit voltage and the combined internal resistance follows from the loaded solution."""
+    k = int(n)
+    parts = []
+    if connection == "series":
+        prev = "0"
+        for j in range(1, k + 1):
+            parts.append(f"V{j} p{j} {prev} {E!r}")
+            parts.append(f"R{j} p{j} q{j} {r!r}")
+            prev = f"q{j}"
+        node = prev
+    else:
+        for j in range(1, k + 1):
+            parts.append(f"V{j} p{j} 0 {E!r}")
+            parts.append(f"R{j} p{j} t {r!r}")
+        node = "t"
+    v_open = _netlist_solve("; ".join(parts))[0][node]
+    v_load = _netlist_solve("; ".join(parts + [f"RL {node} 0 {RL!r}"]))[0][node]
+    cur = v_load / RL
+    return {"emf_total": v_open, "r_total": (v_open - v_load) / cur, "I": cur, "V_terminal": v_load, "lost_volts": v_open - v_load, "P_load": cur * v_load}
+
+
+_CELL_IN = [_inp("E", "voltage", "emf of one cell"), _inp("r", "resistance", "internal resistance of one cell"),
+            _inp("n", "number", "number of identical cells"),
+            {"symbol": "connection", "type": "choice", "choices": ["series", "parallel"], "required": True, "meaning": "how the cells are connected"},
+            _inp("RL", "resistance", "load resistance")]
+
+
+def _parse_cells(question):
+    q = question.lower()
+    if not re.search(r"\bcells\b", q):
+        return None
+    ser, par = re.search(r"\bin series\b", q), re.search(r"\bin parallel\b", q)
+    if ser and par:
+        return None
+    base = _kv_parse(r"\bcells\b", [x for x in _CELL_IN if x["symbol"] != "connection"])(question)
+    if base is None:
+        return None
+    if ser or par:
+        base["connection"] = "series" if ser else "parallel"
+    return base
+
+
+PROCEDURES["cell_battery"] = {
+    "name": "Cells with internal resistance: series and parallel batteries on a load", "topic": "basic electrical quantities / cells and batteries",
+    "purpose": "The combined emf and internal resistance of n identical cells in series or in parallel, the load current, the terminal voltage, the lost volts and the load power.",
+    "inputs": _CELL_IN,
+    "outputs": [_out("emf_total", "voltage", "emf of the battery"), _out("r_total", "resistance", "internal resistance of the battery"),
+                _out("I", "current", "load current"), _out("V_terminal", "voltage", "terminal voltage (across the load)"),
+                _out("lost_volts", "voltage", "voltage lost inside the battery, I r"), _out("P_load", "power", "power delivered to the load")],
+    "primary": "V_terminal", "conditions": ["identical cells", "E, r, RL > 0", "n a whole number"],
+    "method": "series: E_b = n E, r_b = n r; parallel: E_b = E, r_b = r/n; I = E_b/(r_b + R_L), V = I R_L",
+    "latex": r"I = \frac{E_b}{r_b + R_L},\quad V = E_b - I r_b",
+    "run": cell_battery, "verify": _verify_cells, "parse": _parse_cells, "reference": _reference_cells,
+    "wrong": lambda E, r, n, connection, RL: (lambda emf: {"emf_total": emf, "r_total": r, "I": emf / (r + RL), "V_terminal": emf * RL / (r + RL),
+                                                           "lost_volts": emf * r / (r + RL), "P_load": (emf / (r + RL)) ** 2 * RL})(n * E if connection == "series" else E),
+    "random_inputs": lambda rng: {"E": rng.choice([1.2, 1.5, 2.0, 2.1, 3.7]), "r": round(rng.uniform(0.02, 1.0), 3), "n": float(rng.randint(2, 8)),
+                                  "connection": rng.choice(["series", "parallel"]), "RL": _e12(rng, 0, 1)},
+    "templates": ["Find the terminal voltage of identical cells in series with E = 1.5 V, r = 0.5 ohm, n = 4, RL = 10 ohm."],
+    "examples": [{"inputs": {"E": 1.5, "r": 0.5, "n": 4, "connection": "series", "RL": 10},
+                  "outputs": {"emf_total": 6.0, "r_total": 2.0, "I": 0.5, "V_terminal": 5.0, "lost_volts": 1.0, "P_load": 2.5}},
+                 {"inputs": {"E": 2, "r": 0.3, "n": 3, "connection": "parallel", "RL": 1.9},
+                  "outputs": {"emf_total": 2.0, "r_total": 0.1, "I": 1.0, "V_terminal": 1.9, "lost_volts": 0.1}}],
+    "questions": [{"q": "Find the terminal voltage of identical cells in series with E = 1.5 V, r = 0.5 ohm, n = 4, RL = 10 ohm.", "outputs": {"V_terminal": 5.0, "I": 0.5}},
+                  {"q": "Find the current from identical cells in parallel with E = 2 V, r = 0.3 ohm, n = 3, RL = 1.9 ohm.", "outputs": {"I": 1.0}},
+                  {"q": "Find the terminal voltage of identical cells in series with E = 1.5 V, r = 0.5 ohm, n = 4.", "outcome": "NEEDS_INPUT"},
+                  {"q": "Find the terminal voltage of identical cells in series with E = 1.5 V, r = 0.5 ohm, n = 2.5, RL = 10 ohm.", "outcome": "INVALID_INPUT"}]}
+
+
+# --------------------------------------------------------------------------------------------- capacitors
+def parallel_plate_capacitor(V, d, A, eps_r, n=2.0) -> dict:
+    _check_positive(V=V, d=d, A=A)
+    if not (math.isfinite(eps_r) and eps_r >= 1):
+        raise ValueError("the relative permittivity must be at least 1")
+    if not (math.isfinite(n) and n == int(n) and 2 <= n <= 1000):
+        raise ValueError("the number of plates must be a whole number from 2 to 1000")
+    cap = _EPS0 * eps_r * A * (n - 1) / d
+    field = V / d
+    return {"C": cap, "Q": cap * V, "E": field, "D": _EPS0 * eps_r * field, "energy": 0.5 * cap * V * V}
+
+
+def _verify_plate_cap(i, o):
+    gaps = i.get("n", 2.0) - 1
+    return (_rel(o["E"] * i["d"], i["V"]) + _rel(o["D"], _EPS0 * i["eps_r"] * o["E"]) + _rel(o["D"] * gaps * i["A"], o["Q"])
+            + _rel(o["Q"], o["C"] * i["V"]) + _rel(o["energy"], 0.5 * o["Q"] * i["V"]))
+
+
+def _reference_plate_cap(V, d, A, eps_r, n=2.0):
+    """INDEPENDENT reference (field-energy route): the energy density eps E^2/2 of the uniform field E = V/d integrated
+    across each dielectric gap (scipy.integrate.quad) and summed over the n - 1 gaps; C = 2W/V^2, Q = CV and D from
+    Gauss's law, D = Q/((n - 1) A). eps0 = 1/(mu0 c^2) from scipy.constants.c with mu0 = 4 pi 1e-7."""
+    from scipy import constants, integrate
+    eps = eps_r / (4e-7 * math.pi * constants.c ** 2)
+    field = V / d
+    gaps = int(n) - 1
+    w1, _ = integrate.quad(lambda x: 0.5 * eps * field * field * A, 0.0, d, epsabs=0, epsrel=1e-13)
+    energy = gaps * w1
+    cap = 2.0 * energy / (V * V)
+    return {"C": float(cap), "Q": float(cap * V), "E": float(field), "D": float(cap * V / (gaps * A)), "energy": float(energy)}
+
+
+PROCEDURES["parallel_plate_capacitor"] = _fspec(
+    "Parallel-plate capacitor: capacitance, charge, field, flux density and energy", "capacitors / parallel plates",
+    "The capacitance of a capacitor of n parallel plates with a dielectric, and its charge, electric field strength, electric flux density and stored energy at a voltage V.",
+    [_inp("V", "voltage", "voltage across the capacitor"), _inp("d", "length", "separation of adjacent plates (dielectric thickness)"),
+     _inp("A", "area", "overlapping area of one plate"), _inp("eps_r", "number", "relative permittivity of the dielectric (1 for air)"),
+     _inp("n", "number", "number of plates (2 when not given)", required=False)],
+    [_out("C", "capacitance", "capacitance"), _out("Q", "charge", "charge"), _out("E", "electric_field", "electric field strength V/d"),
+     _out("D", "number", "electric flux density in C/m^2"), _out("energy", "energy", "stored energy")],
+    "C", ["uniform field (plate size much larger than d)", "eps_r >= 1, n >= 2 plates"],
+    "C = eps0 eps_r A (n - 1)/d; Q = CV; E = V/d; D = eps0 eps_r E; W = CV^2/2",
+    r"C = \frac{\varepsilon_0\varepsilon_r A (n - 1)}{d},\quad D = \varepsilon_0\varepsilon_r E,\quad W = \tfrac{1}{2}CV^2",
+    parallel_plate_capacitor, _verify_plate_cap, _reference_plate_cap,
+    lambda V, d, A, eps_r, n=2.0: (lambda cap: {"C": cap, "Q": cap * V, "E": V / d, "D": _EPS0 * eps_r * V / d, "energy": 0.5 * cap * V * V})(_EPS0 * eps_r * A * n / d),
+    lambda rng: {"V": rng.choice([10.0, 50.0, 100.0, 200.0, 500.0]), "d": round(rng.uniform(0.05, 2.0), 3) * 1e-3, "A": round(rng.uniform(1, 100), 2) * 1e-4,
+                 "eps_r": rng.choice([1.0, 2.2, 2.5, 3.5, 5.0, 6.0, 10.0]), "n": float(rng.randint(2, 10))},
+    r"\b(?:parallel[- ])?plate capacitor\b",
+    ["Find the capacitance of a parallel-plate capacitor with V = 200 V, d = 0.1 mm, A = 4 cm^2, eps_r = 5."],
+    [{"inputs": {"V": 200, "d": 1e-4, "A": 4e-4, "eps_r": 5, "n": 2},
+      "outputs": {"C": 20 * 8.854187817620389e-12, "Q": 4000 * 8.854187817620389e-12, "E": 2e6, "D": 1e7 * 8.854187817620389e-12, "energy": 4e5 * 8.854187817620389e-12}},
+     {"inputs": {"V": 100, "d": 5e-4, "A": 1e-3, "eps_r": 2.5, "n": 11}, "outputs": {"C": 50 * 8.854187817620389e-12, "E": 2e5}}],
+    [{"q": "Find the capacitance of a parallel-plate capacitor with V = 200 V, d = 0.1 mm, A = 4 cm^2, eps_r = 5.", "outputs": {"C": 20 * 8.854187817620389e-12}},
+     {"q": "Find the charge on a parallel-plate capacitor with V = 100 V, d = 0.5 mm, A = 10 cm^2, eps_r = 2.5, n = 11.", "outputs": {"Q": 5000 * 8.854187817620389e-12}},
+     {"q": "Find the capacitance of a parallel-plate capacitor with V = 200 V, A = 4 cm^2, eps_r = 5.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the capacitance of a parallel-plate capacitor with V = 200 V, d = 0.1 mm, A = 4 cm^2, eps_r = 0.5.", "outcome": "INVALID_INPUT"}])
+
+
+# --------------------------------------------------------------------------------------------- magnetic circuits
+def magnetic_circuit(N, lengths, areas, mu_r, flux=0.0, current=0.0) -> dict:
+    _check_positive(N=N)
+    k = len(lengths)
+    if k == 0 or len(areas) != k or len(mu_r) != k:
+        raise ValueError("give one length, one area and one relative permeability for every section")
+    for j in range(k):
+        if not (math.isfinite(lengths[j]) and lengths[j] > 0 and math.isfinite(areas[j]) and areas[j] > 0):
+            raise ValueError("every length and every area must be positive")
+        if not (math.isfinite(mu_r[j]) and mu_r[j] >= 1):
+            raise ValueError("every relative permeability must be at least 1")
+    if not (math.isfinite(flux) and math.isfinite(current)) or flux < 0 or current < 0:
+        raise ValueError("the flux and the current must not be negative")
+    given = 0
+    if flux > 0:
+        given += 1
+    if current > 0:
+        given += 1
+    if given != 1:
+        raise ValueError("give exactly one of the flux and the current")
+    rel = 0.0
+    for j in range(k):
+        rel += lengths[j] / (_MU0 * mu_r[j] * areas[j])
+    if flux > 0:
+        phi = flux
+        mmf = phi * rel
+        cur = mmf / N
+    else:
+        cur = current
+        mmf = N * cur
+        phi = mmf / rel
+    B = []
+    H = []
+    for j in range(k):
+        b = phi / areas[j]
+        B.append(b)
+        H.append(b / (_MU0 * mu_r[j]))
+    return {"reluctance": rel, "mmf": mmf, "current": cur, "flux": phi, "B": B, "H": H}
+
+
+def _verify_magnetic(i, o):
+    """Ampere's law around the circuit (sum of H l = N I), B = flux/area and H = B/(mu0 mu_r) in every section, and
+    the given quantity reproduced."""
+    k = len(i["lengths"])
+    if len(o["B"]) != k or len(o["H"]) != k:
+        return 1.0
+    res = 0.0
+    amp = 0.0
+    for j in range(k):
+        res += _rel(o["B"][j], o["flux"] / i["areas"][j]) + _rel(o["H"][j] * _MU0 * i["mu_r"][j], o["B"][j])
+        amp += o["H"][j] * i["lengths"][j]
+    res += _rel(amp, i["N"] * o["current"]) + _rel(o["mmf"], i["N"] * o["current"]) + _rel(o["reluctance"] * o["flux"], o["mmf"])
+    if i.get("flux", 0.0) > 0:
+        res += _rel(o["flux"], i["flux"])
+    else:
+        res += _rel(o["current"], i.get("current", 0.0))
+    return res
+
+
+def _reference_magnetic(N, lengths, areas, mu_r, flux=0.0, current=0.0):
+    """INDEPENDENT reference: Ampere's circuital law as a line integral, mmf = integral of H dl along the flux path
+    with H piecewise (B = flux/area, H = B/(mu0 mu_r)), integrated by scipy.integrate.quad section by section; with
+    the current given, the flux is found by scipy.optimize.brentq so that the integral equals N I."""
+    from scipy import integrate, optimize
+    mu0 = 4e-7 * math.pi
+
+    def line(phi):
+        tot, start = 0.0, 0.0
+        for l, a, m in zip(lengths, areas, mu_r):
+            v, _ = integrate.quad(lambda x, a=a, m=m: phi / a / (mu0 * m), start, start + l, epsabs=0, epsrel=1e-13)
+            tot += v
+            start += l
+        return tot
+    if flux > 0:
+        phi = flux
+        mmf = line(phi)
+    else:
+        mmf = N * current
+        hi = 1e-6
+        for _ in range(400):
+            if line(hi) >= mmf:
+                break
+            hi *= 10.0
+        phi = optimize.brentq(lambda p: line(p) - mmf, 0.0, hi, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    B = [phi / a for a in areas]
+    return {"mmf": float(mmf), "current": float(mmf / N), "flux": float(phi), "reluctance": float(mmf / phi), "B": B,
+            "H": [b / (mu0 * m) for b, m in zip(B, mu_r)]}
+
+
+def _random_magnetic(rng):
+    k = rng.randint(1, 2)
+    lengths = [round(rng.uniform(0.1, 1.0), 3) for _ in range(k)]
+    areas = [round(rng.uniform(1, 10), 2) * 1e-4 for _ in range(k)]
+    mu = [float(rng.choice([300, 500, 800, 1000, 1500, 2000, 3000])) for _ in range(k)]
+    if rng.random() < 0.6:                                  # an air gap
+        lengths.append(round(rng.uniform(0.2, 3.0), 2) * 1e-3)
+        areas.append(areas[0])
+        mu.append(1.0)
+    out = {"N": float(rng.randint(50, 2000)), "lengths": lengths, "areas": areas, "mu_r": mu}
+    if rng.random() < 0.5:
+        out["flux"] = round(rng.uniform(0.1, 2.0), 3) * 1e-3
+    else:
+        out["current"] = round(rng.uniform(0.2, 10), 2)
+    return out
+
+
+_MAG_IN = [_inp("N", "number", "number of turns of the magnetising coil"),
+           {"symbol": "lengths", "type": "vector", "min_length": 1, "max_length": 10, "required": True,
+            "meaning": "mean length of the flux path in each section, in m (an air gap is a section)"},
+           {"symbol": "areas", "type": "vector", "min_length": 1, "max_length": 10, "required": True, "meaning": "cross-sectional area of each section, in m^2"},
+           {"symbol": "mu_r", "type": "vector", "min_length": 1, "max_length": 10, "required": True, "meaning": "relative permeability of each section (1 for air)"},
+           _inp("flux", "magnetic_flux", "flux to produce (give this or the current)", required=False),
+           _inp("current", "current", "coil current (give this or the flux)", required=False)]
+
+
+def _parse_magnetic(question):
+    if not re.search(r"\bmagnetic circuit\b", question, re.I):
+        return None
+    lists = {}
+
+    def grab(m):
+        lists[m.group(1)] = m.group(2)
+        return " "
+    rest = re.sub(r"\b(lengths|areas|mu_r)\s*=\s*(\[[^\[\]]*\])", grab, question)
+    if "[" in rest or "]" in rest:
+        return None
+    base = _kv_parse(r"\bmagnetic circuit\b", [x for x in _MAG_IN if x["symbol"] in ("N", "flux", "current")])(rest)
+    if base is None:
+        if re.search(_NUMRE, rest):
+            return None
+        base = {}
+    base.update(lists)
+    return base or None
+
+
+PROCEDURES["magnetic_circuit"] = {
+    "name": "Series magnetic circuit: reluctance, magnetomotive force, flux density and field strength", "topic": "magnetic circuits / series circuits",
+    "purpose": "The current a coil of N turns needs to set up a flux in a series magnetic circuit of sections (iron paths and air gaps), or the flux a current produces, with the reluctance, the mmf, and B and H in every section.",
+    "inputs": _MAG_IN,
+    "outputs": [_out("reluctance", "number", "total reluctance in A/Wb (ampere-turns per weber)"), _out("mmf", "number", "magnetomotive force N I in ampere-turns"),
+                _out("current", "current", "coil current"), _out("flux", "magnetic_flux", "flux in the circuit"),
+                _out("B", "number", "flux density of each section in T"), _out("H", "number", "magnetic field strength of each section in A/m")],
+    "primary": "current", "conditions": ["linear materials: a constant relative permeability in each section (no B-H curve)", "no leakage or fringing",
+                                          "exactly one of the flux and the current"],
+    "method": "S = sum l/(mu0 mu_r A); F = N I = flux S; B = flux/A; H = B/(mu0 mu_r)",
+    "latex": r"S = \sum_k \frac{l_k}{\mu_0\mu_{r,k}A_k},\quad NI = \Phi S = \sum_k H_k l_k",
+    "run": magnetic_circuit, "verify": _verify_magnetic, "parse": _parse_magnetic, "reference": _reference_magnetic,
+    "wrong": lambda N, lengths, areas, mu_r, flux=0.0, current=0.0: magnetic_circuit(N, lengths, areas, [1.0 for _ in mu_r], flux, current),   # mu_r forgotten
+    "random_inputs": _random_magnetic,
+    "templates": ["Find the current for a magnetic circuit with N = 500, lengths = [0.4, 0.001], areas = [5e-4, 5e-4], mu_r = [800, 1], flux = 0.6 mWb."],
+    "examples": [{"inputs": {"N": 500, "lengths": [0.4], "areas": [5e-4], "mu_r": [800], "flux": 6e-4},
+                  "outputs": {"reluctance": 0.4 / (4e-7 * math.pi * 800 * 5e-4), "current": 6e-4 * 0.4 / (4e-7 * math.pi * 800 * 5e-4) / 500,
+                              "B": [1.2], "H": [1.2 / (4e-7 * math.pi * 800)]}},
+                 {"inputs": {"N": 500, "lengths": [0.4, 0.001], "areas": [5e-4, 5e-4], "mu_r": [800, 1], "flux": 6e-4},
+                  "outputs": {"mmf": 6e-4 * (0.4 / (4e-7 * math.pi * 800 * 5e-4) + 0.001 / (4e-7 * math.pi * 5e-4))}},
+                 {"inputs": {"N": 200, "lengths": [0.5], "areas": [4e-4], "mu_r": [1000], "current": 2},
+                  "outputs": {"mmf": 400.0, "flux": 400 / (0.5 / (4e-7 * math.pi * 1000 * 4e-4))}}],
+    "questions": [{"q": "Find the current for a magnetic circuit with N = 500, lengths = [0.4, 0.001], areas = [5e-4, 5e-4], mu_r = [800, 1], flux = 0.6 mWb.",
+                   "outputs": {"current": 6e-4 * (0.4 / (4e-7 * math.pi * 800 * 5e-4) + 0.001 / (4e-7 * math.pi * 5e-4)) / 500}},
+                  {"q": "Find the flux of a magnetic circuit with N = 200, lengths = [0.5], areas = [4e-4], mu_r = [1000], current = 2 A.",
+                   "outputs": {"flux": 400 / (0.5 / (4e-7 * math.pi * 1000 * 4e-4))}},
+                  {"q": "Find the current for a magnetic circuit with N = 500, lengths = [0.4], areas = [5e-4], mu_r = [800], flux = 0.6 mWb, current = 2 A.",
+                   "outcome": "INVALID_INPUT"},
+                  {"q": "Find the current for a magnetic circuit with N = 500, lengths = [0.4, 0.001], areas = [5e-4], mu_r = [800, 1], flux = 0.6 mWb.",
+                   "outcome": "INVALID_INPUT"}]}
+
+
+# --------------------------------------------------------------------------------------------- induction and inductance
+def coil_inductance(N, length, area, mu_r) -> dict:
+    _check_positive(N=N, length=length, area=area)
+    if not (math.isfinite(mu_r) and mu_r >= 1):
+        raise ValueError("the relative permeability must be at least 1")
+    rel = length / (_MU0 * mu_r * area)
+    return {"L": N * N / rel, "reluctance": rel, "flux_per_ampere": N / rel}
+
+
+def _verify_coil_l(i, o):
+    return (_rel(o["L"] * o["reluctance"], i["N"] * i["N"]) + _rel(o["reluctance"] * _MU0 * i["mu_r"] * i["area"], i["length"])
+            + _rel(o["flux_per_ampere"] * i["N"], o["L"]))
+
+
+def _reference_coil_l(N, length, area, mu_r):
+    """INDEPENDENT reference (field-energy route): at a coil current of 1 A, H = N I/l and B = mu0 mu_r H; the
+    energy density B H/2 integrated over the core volume (scipy.integrate.quad along the length) gives W and
+    L = 2W/I^2; the reluctance is N^2/L and the flux per ampere B A."""
+    from scipy import integrate
+    H = N / length
+    B = 4e-7 * math.pi * mu_r * H
+    W, _ = integrate.quad(lambda x: 0.5 * B * H * area, 0.0, length, epsabs=0, epsrel=1e-13)
+    L = 2.0 * W
+    return {"L": float(L), "reluctance": float(N * N / L), "flux_per_ampere": float(B * area)}
+
+
+PROCEDURES["coil_inductance"] = _fspec(
+    "Inductance of a coil on a uniform core", "electromagnetic induction / inductance",
+    "The self-inductance N^2/S of a coil of N turns on a uniform core (or a long air-cored coil), with the reluctance of the flux path and the flux per ampere.",
+    [_inp("N", "number", "number of turns"), _inp("length", "length", "length of the flux path (coil length for an air-cored solenoid)"),
+     _inp("area", "area", "cross-sectional area of the core"), _inp("mu_r", "number", "relative permeability of the core (1 for air)")],
+    [_out("L", "inductance", "self-inductance"), _out("reluctance", "number", "reluctance of the flux path in A/Wb"),
+     _out("flux_per_ampere", "number", "flux per ampere of coil current, Wb/A")],
+    "L", ["uniform field along the path, no leakage (a long coil or a closed core)", "linear core"],
+    "S = l/(mu0 mu_r A); L = N^2/S = mu0 mu_r N^2 A/l", r"L = \frac{N^2}{S} = \frac{\mu_0\mu_r N^2 A}{l}",
+    coil_inductance, _verify_coil_l, _reference_coil_l,
+    lambda N, length, area, mu_r: (lambda rel: {"L": N / rel, "reluctance": rel, "flux_per_ampere": N / rel})(length / (_MU0 * mu_r * area)),   # N not squared
+    lambda rng: {"N": float(rng.randint(10, 2000)), "length": round(rng.uniform(0.05, 1.0), 3), "area": round(rng.uniform(0.5, 20), 2) * 1e-4,
+                 "mu_r": rng.choice([1.0, 1.0, 100.0, 500.0, 1000.0, 2000.0])},
+    r"\binductance of (?:a |the )?coil\b",
+    ["Find the inductance of a coil with N = 500, length = 0.2 m, area = 4 cm^2, mu_r = 1."],
+    [{"inputs": {"N": 500, "length": 0.2, "area": 4e-4, "mu_r": 1}, "outputs": {"L": 2e-4 * math.pi, "reluctance": 0.2 / (4e-7 * math.pi * 4e-4)}},
+     {"inputs": {"N": 200, "length": 0.5, "area": 1e-3, "mu_r": 500}, "outputs": {"L": 0.016 * math.pi}}],
+    [{"q": "Find the inductance of a coil with N = 500, length = 0.2 m, area = 4 cm^2, mu_r = 1.", "outputs": {"L": 2e-4 * math.pi}},
+     {"q": "What is the inductance of a coil with N = 200, length = 50 cm, area = 10 cm^2, mu_r = 500?", "outputs": {"L": 0.016 * math.pi}},
+     {"q": "Find the inductance of a coil with N = 500, length = 0.2 m, mu_r = 1.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the inductance of a coil with N = 500, length = 0.2 m, area = 4 cm^2, mu_r = 0.5.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bself[- ]inductance\b|\bcapacitor\b")
+
+
+def self_inductance(N, flux, I) -> dict:
+    _check_positive(N=N, flux=flux, I=I)
+    return {"L": N * flux / I, "flux_linkage": N * flux}
+
+
+def _verify_self_l(i, o):
+    return _rel(o["L"] * i["I"], o["flux_linkage"]) + _rel(o["flux_linkage"], i["N"] * i["flux"])
+
+
+def _reference_self_l(N, flux, I):
+    """INDEPENDENT reference (weak: energy route of the definition): with the flux linkage proportional to the
+    current, the work done against the induced emf while the current rises to I is the integral of N phi(i) di
+    (scipy.integrate.quad); L = 2W/I^2."""
+    from scipy import integrate
+    W, _ = integrate.quad(lambda x: N * flux * x / I, 0.0, I, epsabs=0, epsrel=1e-13)
+    L = 2.0 * W / (I * I)
+    return {"L": float(L), "flux_linkage": float(L * I)}
+
+
+PROCEDURES["self_inductance"] = _fspec(
+    "Self-inductance from flux linkage", "electromagnetic induction / inductance",
+    "The self-inductance L = N phi/I of a coil of N turns in which a current I sets up a flux phi.",
+    [_inp("N", "number", "number of turns"), _inp("flux", "magnetic_flux", "flux linking every turn"), _inp("I", "current", "coil current")],
+    [_out("L", "inductance", "self-inductance"), _out("flux_linkage", "number", "flux linkage N phi in weber-turns")],
+    "L", ["the flux links every turn", "a linear core (flux proportional to the current)"], "L = N phi / I", r"L = \frac{N\Phi}{I}",
+    self_inductance, _verify_self_l, _reference_self_l,
+    lambda N, flux, I: {"L": flux / I, "flux_linkage": N * flux},                    # turns forgotten
+    lambda rng: {"N": float(rng.randint(10, 3000)), "flux": round(rng.uniform(0.01, 10), 3) * 1e-3, "I": round(rng.uniform(0.1, 20), 2)},
+    r"\bself[- ]inductance\b",
+    ["Find the self-inductance with N = 200, flux = 5 mWb, I = 2 A."],
+    [{"inputs": {"N": 200, "flux": 5e-3, "I": 2}, "outputs": {"L": 0.5, "flux_linkage": 1.0}},
+     {"inputs": {"N": 1000, "flux": 2e-4, "I": 0.5}, "outputs": {"L": 0.4, "flux_linkage": 0.2}}],
+    [{"q": "Find the self-inductance with N = 200, flux = 5 mWb, I = 2 A.", "outputs": {"L": 0.5}},
+     {"q": "What is the self-inductance of a coil with N = 1000, flux = 0.2 mWb, I = 0.5 A?", "outputs": {"L": 0.4}},
+     {"q": "Find the self-inductance with N = 200, I = 2 A.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the self-inductance with N = 200, flux = 5 mWb, I = 0 A.", "outcome": "INVALID_INPUT"}])
+
+
+def faraday_emf(N, dPhi, dt) -> dict:
+    _check_positive(N=N, dt=dt)
+    if not math.isfinite(dPhi):
+        raise ValueError("the change of flux must be a finite number")
+    rate = dPhi / dt
+    return {"emf": N * abs(rate), "emf_signed": -N * rate + 0.0, "flux_rate": rate, "linkage_change": N * dPhi}
+
+
+def _verify_faraday(i, o):
+    N, d, t = i["N"], i["dPhi"], i["dt"]
+    big = max(N * abs(d), 1e-300)
+    return (abs(o["emf"] * t - N * abs(d)) / big + abs(o["emf_signed"] * t + N * d) / big
+            + abs(o["flux_rate"] * t - d) / max(abs(d), 1e-300) + abs(o["linkage_change"] - N * d) / big)
+
+
+def _reference_faraday(N, dPhi, dt):
+    """INDEPENDENT reference: the flux written as a function of time (a uniform change of dPhi over dt) and the emf
+    e = -N dphi/dt obtained by sympy differentiation, in exact rational arithmetic."""
+    import sympy as sp
+    t = sp.Symbol("t")
+    phi = _exact(dPhi) * t / _exact(dt)
+    rate = sp.diff(phi, t)
+    e = -_exact(N) * rate
+    return {"emf": float(abs(e)), "emf_signed": float(e), "flux_rate": float(rate), "linkage_change": float(_exact(N) * _exact(dPhi))}
+
+
+PROCEDURES["faraday_emf"] = _fspec(
+    "Induced emf from a change of flux (Faraday's law)", "electromagnetic induction / Faraday's law",
+    "The average emf induced in a coil of N turns when the flux linking it changes by dPhi in a time dt, its sign by Lenz's law, and the change of flux linkage.",
+    [_inp("N", "number", "number of turns"), _inp("dPhi", "magnetic_flux", "change of flux (negative for a decrease)"),
+     _inp("dt", "time", "time taken by the change")],
+    [_out("emf", "voltage", "magnitude of the average induced emf"), _out("emf_signed", "voltage", "induced emf with Lenz's sign, -N dPhi/dt"),
+     _out("flux_rate", "number", "rate of change of flux in Wb/s"), _out("linkage_change", "number", "change of flux linkage N dPhi in weber-turns")],
+    "emf", ["a uniform rate of change (the result is the average emf)", "the flux links every turn"],
+    "e = -N dPhi/dt", r"e = -N\frac{\Delta\Phi}{\Delta t}",
+    faraday_emf, _verify_faraday, _reference_faraday,
+    lambda N, dPhi, dt: {"emf": abs(dPhi / dt), "emf_signed": -dPhi / dt, "flux_rate": dPhi / dt, "linkage_change": dPhi},   # turns forgotten
+    lambda rng: {"N": float(rng.randint(10, 2000)), "dPhi": (round(rng.uniform(-50, 50), 2) or 1.0) * 1e-3, "dt": round(rng.uniform(1, 500), 1) * 1e-3},
+    r"\binduced emf\b|\bfaraday\b",
+    ["Find the induced emf with N = 200, dPhi = 25 mWb, dt = 50 ms."],
+    [{"inputs": {"N": 200, "dPhi": 0.025, "dt": 0.05}, "outputs": {"emf": 100.0, "emf_signed": -100.0, "flux_rate": 0.5, "linkage_change": 5.0}},
+     {"inputs": {"N": 500, "dPhi": -4e-3, "dt": 0.02}, "outputs": {"emf": 100.0, "emf_signed": 100.0, "flux_rate": -0.2}}],
+    [{"q": "Find the induced emf with N = 200, dPhi = 25 mWb, dt = 50 ms.", "outputs": {"emf": 100.0}},
+     {"q": "Find the induced emf with N = 500, dPhi = -4 mWb, dt = 20 ms.", "outputs": {"emf": 100.0, "emf_signed": 100.0}},
+     {"q": "Find the induced emf with N = 200, dPhi = 25 mWb.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the induced emf with N = 200, dPhi = 25 mWb, dt = 0 ms.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bmutual\b|\bgenerated\b")
+
+
+def mutual_inductance(L1, L2, k, dI1, dt) -> dict:
+    _check_positive(L1=L1, L2=L2, dt=dt)
+    if not (math.isfinite(k) and 0 <= k <= 1):
+        raise ValueError("the coupling coefficient must be between 0 and 1")
+    if not math.isfinite(dI1):
+        raise ValueError("the change of current must be a finite number")
+    m = k * math.sqrt(L1 * L2)
+    rate = abs(dI1) / dt
+    return {"M": m, "E1": L1 * rate, "E2": m * rate, "L_aiding": L1 + L2 + 2.0 * m, "L_opposing": L1 + L2 - 2.0 * m}
+
+
+def _verify_mutual(i, o):
+    L1, L2, k = i["L1"], i["L2"], i["k"]
+    rate = abs(i["dI1"]) / i["dt"]
+    big = max(L1 * rate, 1e-300)
+    return (abs(o["M"] ** 2 - k * k * L1 * L2) / (L1 * L2) + abs(o["E1"] - L1 * rate) / big + abs(o["E2"] - o["M"] * rate) / big
+            + abs(o["L_aiding"] + o["L_opposing"] - 2.0 * (L1 + L2)) / (L1 + L2) + abs(o["L_aiding"] - o["L_opposing"] - 4.0 * o["M"]) / (L1 + L2))
+
+
+def _reference_mutual(L1, L2, k, dI1, dt):
+    """INDEPENDENT reference (weak for M itself): M = k times the geometric mean of L1 and L2 (scipy.stats.gmean);
+    the emfs as the inductance matrix [[L1, M], [M, L2]] times the current rates (numpy), and the series inductances
+    as the quadratic forms of that matrix with (1, 1) and (1, -1)."""
+    import numpy as np
+    from scipy import stats
+    m = k * float(stats.gmean([L1, L2]))
+    Lm = np.array([[L1, m], [m, L2]])
+    v = Lm @ np.array([abs(dI1) / dt, 0.0])
+    a, b = np.array([1.0, 1.0]), np.array([1.0, -1.0])
+    return {"M": m, "E1": float(v[0]), "E2": float(v[1]), "L_aiding": float(a @ Lm @ a), "L_opposing": float(b @ Lm @ b)}
+
+
+PROCEDURES["mutual_inductance"] = _fspec(
+    "Mutual inductance, induced emfs and coupled coils in series", "electromagnetic induction / mutual inductance",
+    "The mutual inductance M = k sqrt(L1 L2) of two coupled coils, the emfs induced in coil 1 and in coil 2 when the current in coil 1 changes by dI1 in dt, and the inductance of the two coils in series aiding and opposing.",
+    [_inp("L1", "inductance", "self-inductance of coil 1"), _inp("L2", "inductance", "self-inductance of coil 2"),
+     _inp("k", "number", "coupling coefficient (0 to 1)"), _inp("dI1", "current", "change of the current in coil 1"),
+     _inp("dt", "time", "time taken by the change")],
+    [_out("M", "inductance", "mutual inductance"), _out("E1", "voltage", "magnitude of the emf self-induced in coil 1"),
+     _out("E2", "voltage", "magnitude of the emf induced in coil 2"), _out("L_aiding", "inductance", "series aiding L1 + L2 + 2M"),
+     _out("L_opposing", "inductance", "series opposing L1 + L2 - 2M")],
+    "M", ["linear coils", "a uniform rate of change of current (average emfs)", "0 <= k <= 1"],
+    "M = k sqrt(L1 L2); E1 = L1 dI1/dt; E2 = M dI1/dt; L = L1 + L2 +/- 2M", r"M = k\sqrt{L_1L_2},\quad E_2 = M\frac{\Delta I_1}{\Delta t}",
+    mutual_inductance, _verify_mutual, _reference_mutual,
+    lambda L1, L2, k, dI1, dt: (lambda m, rate: {"M": m, "E1": L1 * rate, "E2": m * rate, "L_aiding": L1 + L2 + 2 * m, "L_opposing": L1 + L2 - 2 * m})(
+        k * (L1 + L2) / 2.0, abs(dI1) / dt),                                                  # arithmetic instead of geometric mean
+    lambda rng: (lambda L1: {"L1": L1, "L2": round(L1 * rng.choice([2.0, 3.0, 4.0, 5.0, 10.0]), 12), "k": round(rng.uniform(0.1, 0.95), 3),
+                             "dI1": round(rng.uniform(-10, 10), 2) or 1.0, "dt": round(rng.uniform(1, 100), 1) * 1e-3})(_e12(rng, -3, -1)),
+    r"\bmutual inductance\b",
+    ["Find the mutual inductance with L1 = 0.2 H, L2 = 0.8 H, k = 0.5, dI1 = 4 A, dt = 20 ms."],
+    [{"inputs": {"L1": 0.2, "L2": 0.8, "k": 0.5, "dI1": 4, "dt": 0.02}, "outputs": {"M": 0.2, "E1": 40.0, "E2": 40.0, "L_aiding": 1.4, "L_opposing": 0.6}},
+     {"inputs": {"L1": 0.01, "L2": 0.04, "k": 0.9, "dI1": 2, "dt": 1e-3}, "outputs": {"M": 0.018, "E1": 20.0, "E2": 36.0, "L_aiding": 0.086, "L_opposing": 0.014}}],
+    [{"q": "Find the mutual inductance with L1 = 0.2 H, L2 = 0.8 H, k = 0.5, dI1 = 4 A, dt = 20 ms.", "outputs": {"M": 0.2, "E2": 40.0}},
+     {"q": "Find the mutual inductance with L1 = 10 mH, L2 = 40 mH, k = 0.9, dI1 = 2 A, dt = 1 ms.", "outputs": {"M": 0.018, "E2": 36.0}},
+     {"q": "Find the mutual inductance with L1 = 0.2 H, L2 = 0.8 H, k = 0.5, dI1 = 4 A.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the mutual inductance with L1 = 0.2 H, L2 = 0.8 H, k = 1.2, dI1 = 4 A, dt = 20 ms.", "outcome": "INVALID_INPUT"}])
+
+
+# --------------------------------------------------------------------------------------------- measuring instruments
+def ammeter_shunt(Ifs, Rm, I) -> dict:
+    _check_positive(Ifs=Ifs, Rm=Rm, I=I)
+    if I <= Ifs:
+        raise ValueError("the new range must be larger than the meter's full-scale current")
+    vfs = Ifs * Rm
+    rsh = vfs / (I - Ifs)
+    return {"Rsh": rsh, "multiplying_factor": I / Ifs, "V_fs": vfs, "R_total": vfs / I}
+
+
+def _verify_ammeter(i, o):
+    Ifs, Rm, I = i["Ifs"], i["Rm"], i["I"]
+    return (_rel(Ifs * Rm, (I - Ifs) * o["Rsh"]) + _rel(o["multiplying_factor"] * Ifs, I) + _rel(o["V_fs"], Ifs * Rm)
+            + _rel(o["R_total"] * (Rm + o["Rsh"]), Rm * o["Rsh"]))
+
+
+def _reference_ammeter(Ifs, Rm, I):
+    """INDEPENDENT reference: the meter and a trial shunt in parallel, fed by the current I, solved by modified nodal
+    analysis; scipy.optimize.brentq finds the shunt that leaves exactly the full-scale current in the meter."""
+    from scipy import optimize
+
+    def solve(rs):
+        return _mna([("I", "I1", "0", "1", I), ("R", "Rm", "1", "0", Rm), ("R", "Rs", "1", "0", rs)])[0]
+    rs = optimize.brentq(lambda x: solve(x)["1"] / Rm - Ifs, Rm * 1e-12, Rm * 1e6, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    v = solve(rs)["1"]
+    return {"Rsh": float(rs), "multiplying_factor": float(I * Rm / v), "V_fs": float(v), "R_total": float(v / I)}
+
+
+PROCEDURES["ammeter_shunt"] = _fspec(
+    "Ammeter shunt resistance", "measuring instruments / range extension",
+    "The shunt resistance that extends a moving-coil meter of full-scale current Ifs and resistance Rm to read a current I at full scale.",
+    [_inp("Ifs", "current", "full-scale deflection current of the meter"), _inp("Rm", "resistance", "resistance of the meter"),
+     _inp("I", "current", "required full-scale reading of the ammeter")],
+    [_out("Rsh", "resistance", "shunt resistance"), _out("multiplying_factor", "number", "range multiplication I/Ifs"),
+     _out("V_fs", "voltage", "voltage across the meter at full scale"), _out("R_total", "resistance", "resistance of the extended ammeter")],
+    "Rsh", ["I > Ifs", "the meter's resistance constant"], "Rsh = Ifs Rm / (I - Ifs)", r"R_{sh} = \frac{I_{fs}R_m}{I - I_{fs}}",
+    ammeter_shunt, _verify_ammeter, _reference_ammeter,
+    lambda Ifs, Rm, I: (lambda rs: {"Rsh": rs, "multiplying_factor": I / Ifs, "V_fs": Ifs * Rm, "R_total": Rm * rs / (Rm + rs)})(Rm * (I / Ifs - 1.0)),   # multiplier formula
+    lambda rng: (lambda ifs: {"Ifs": ifs, "Rm": _e12(rng, 0, 3), "I": round(ifs * rng.choice([10, 20, 50, 100, 200, 1000]), 9)})(
+        rng.choice([50e-6, 100e-6, 1e-3, 5e-3, 10e-3])),
+    r"\bammeter\b",
+    ["Find the shunt for an ammeter with Ifs = 1 mA, Rm = 100 ohm, I = 1 A."],
+    [{"inputs": {"Ifs": 1e-3, "Rm": 100, "I": 1}, "outputs": {"Rsh": 0.1 / 0.999, "multiplying_factor": 1000.0, "V_fs": 0.1, "R_total": 0.1}},
+     {"inputs": {"Ifs": 0.01, "Rm": 5, "I": 2}, "outputs": {"Rsh": 0.05 / 1.99, "R_total": 0.025}}],
+    [{"q": "Find the shunt for an ammeter with Ifs = 1 mA, Rm = 100 ohm, I = 1 A.", "outputs": {"Rsh": 0.1 / 0.999}},
+     {"q": "Find the shunt for an ammeter with Ifs = 10 mA, Rm = 5 ohm, I = 2 A.", "outputs": {"Rsh": 0.05 / 1.99}},
+     {"q": "Find the shunt for an ammeter with Ifs = 1 mA, I = 1 A.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the shunt for an ammeter with Ifs = 1 mA, Rm = 100 ohm, I = 0.5 mA.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bvoltmeter\b")
+
+
+def voltmeter_multiplier(Ifs, Rm, V) -> dict:
+    _check_positive(Ifs=Ifs, Rm=Rm, V=V)
+    vfs = Ifs * Rm
+    if V <= vfs:
+        raise ValueError("the new range must be larger than the meter's full-scale voltage Ifs Rm")
+    total = V / Ifs
+    return {"Rmult": total - Rm, "R_total": total, "sensitivity": 1.0 / Ifs, "V_fs": vfs}
+
+
+def _verify_voltmeter(i, o):
+    Ifs, Rm, V = i["Ifs"], i["Rm"], i["V"]
+    return (_rel(Ifs * (Rm + o["Rmult"]), V) + _rel(o["R_total"], Rm + o["Rmult"]) + _rel(o["sensitivity"] * Ifs, 1.0) + _rel(o["V_fs"], Ifs * Rm))
+
+
+def _reference_voltmeter(Ifs, Rm, V):
+    """INDEPENDENT reference: the series loop (multiplier Rx and meter Rm across the measured voltage V) carries
+    I(Rx) = V/(Rx + Rm) by Kirchhoff's voltage law; scipy.optimize.brentq finds the Rx at which that loop current is
+    exactly the full-scale current. (A nodal solve was ill-conditioned at the tiny lower bracket and was replaced.)"""
+    from scipy import optimize
+
+    def meter(rx):
+        return V / (rx + Rm)
+    rx = optimize.brentq(lambda x: meter(x) - Ifs, 0.0, 2.0 * V / Ifs, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    cur = meter(rx)
+    return {"Rmult": float(rx), "R_total": float(V / cur), "sensitivity": float(V / cur / V), "V_fs": float(cur * Rm)}
+
+
+PROCEDURES["voltmeter_multiplier"] = _fspec(
+    "Voltmeter multiplier resistance", "measuring instruments / range extension",
+    "The series (multiplier) resistance that makes a moving-coil meter of full-scale current Ifs and resistance Rm read a voltage V at full scale, and the voltmeter's sensitivity.",
+    [_inp("Ifs", "current", "full-scale deflection current of the meter"), _inp("Rm", "resistance", "resistance of the meter"),
+     _inp("V", "voltage", "required full-scale reading of the voltmeter")],
+    [_out("Rmult", "resistance", "multiplier (series) resistance"), _out("R_total", "resistance", "resistance of the voltmeter"),
+     _out("sensitivity", "number", "sensitivity in ohm per volt, 1/Ifs"), _out("V_fs", "voltage", "full-scale voltage of the bare meter")],
+    "Rmult", ["V > Ifs Rm"], "Rmult = V/Ifs - Rm", r"R_{mult} = \frac{V}{I_{fs}} - R_m",
+    voltmeter_multiplier, _verify_voltmeter, _reference_voltmeter,
+    lambda Ifs, Rm, V: (lambda rx: {"Rmult": rx, "R_total": rx + Rm, "sensitivity": 1.0 / Ifs, "V_fs": Ifs * Rm})(Rm / (V / (Ifs * Rm) - 1.0)),   # shunt formula
+    lambda rng: (lambda ifs, rm: {"Ifs": ifs, "Rm": rm, "V": float(f"{ifs * rm * rng.choice([5, 10, 50, 100, 1000]):.6g}")})(
+        rng.choice([50e-6, 100e-6, 1e-3, 5e-3, 10e-3]), _e12(rng, 0, 3)),
+    r"\bvoltmeter\b",
+    ["Find the multiplier for a voltmeter with Ifs = 1 mA, Rm = 100 ohm, V = 10 V."],
+    [{"inputs": {"Ifs": 1e-3, "Rm": 100, "V": 10}, "outputs": {"Rmult": 9900.0, "R_total": 10000.0, "sensitivity": 1000.0, "V_fs": 0.1}},
+     {"inputs": {"Ifs": 50e-6, "Rm": 2000, "V": 100}, "outputs": {"Rmult": 1998000.0, "sensitivity": 20000.0}}],
+    [{"q": "Find the multiplier for a voltmeter with Ifs = 1 mA, Rm = 100 ohm, V = 10 V.", "outputs": {"Rmult": 9900.0}},
+     {"q": "Find the multiplier for a voltmeter with Ifs = 50 uA, Rm = 2 kohm, V = 100 V.", "outputs": {"Rmult": 1998000.0, "sensitivity": 20000.0}},
+     {"q": "Find the multiplier for a voltmeter with Ifs = 1 mA, V = 10 V.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the multiplier for a voltmeter with Ifs = 1 mA, Rm = 100 ohm, V = 0.05 V.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bammeter\b")
+
+
+# --------------------------------------------------------------------------------------------- sinusoidal waveforms
+def _check_phase(phi):
+    if not (math.isfinite(phi) and abs(phi) <= 2.0 * math.pi):
+        raise ValueError("the phase angle must be between -2 pi and 2 pi rad")
+
+
+def sinusoid_values(Vm, w, phi, t) -> dict:
+    _check_positive(Vm=Vm, w=w)
+    _check_phase(phi)
+    if not math.isfinite(t):
+        raise ValueError("the time must be a finite number")
+    rel = "in phase" if phi == 0 else ("leads" if phi > 0 else "lags")
+    return {"v": Vm * math.sin(w * t + phi), "f": w / _TWO_PI, "T": _TWO_PI / w, "phase_deg": math.degrees(phi) + 0.0,
+            "relation": rel, "time_shift": phi / w + 0.0, "rms": Vm / math.sqrt(2.0), "average": 2.0 * Vm / math.pi,
+            "form_factor": math.pi / (2.0 * math.sqrt(2.0)), "peak_factor": math.sqrt(2.0)}
+
+
+def _verify_sinusoid(i, o):
+    Vm, w, phi, t = i["Vm"], i["w"], i["phi"], i["t"]
+    want = "in phase" if phi == 0 else ("leads" if phi > 0 else "lags")
+    return (abs(o["v"] - Vm * math.sin(w * t + phi)) / Vm + _rel(o["f"] * _TWO_PI, w) + _rel(o["T"] * o["f"], 1.0)
+            + abs(math.radians(o["phase_deg"]) - phi) / max(1.0, abs(phi)) + abs(o["time_shift"] * w - phi) / max(1.0, abs(phi))
+            + _rel(o["rms"] * o["peak_factor"], Vm) + _rel(o["peak_factor"] ** 2, 2.0) + _rel(o["average"] * math.pi, 2.0 * Vm)
+            + _rel(o["form_factor"] * o["average"], o["rms"]) + float(o["relation"] != want))
+
+
+def _reference_sinusoid(Vm, w, phi, t):
+    """INDEPENDENT reference: the rms and the half-cycle average from the mean of v^2 and of |v| over one period
+    (scipy.integrate.quad, split at the zeros); the value at t as the imaginary part of the phasor Vm e^(j(wt + phi))
+    (numpy); the time shift as minus the rising zero crossing found by scipy.optimize.brentq."""
+    import numpy as np
+    from scipy import integrate, optimize
+    T = 2 * np.pi / w
+    zeros = sorted(x for x in ((k * np.pi - phi) / w for k in range(-3, 6)) if 0 < x < T)
+    kw = dict(epsabs=0, epsrel=1e-13, limit=200, points=zeros or None)
+    sq, _ = integrate.quad(lambda x: (Vm * np.sin(w * x + phi)) ** 2, 0.0, T, **kw)
+    ab, _ = integrate.quad(lambda x: abs(Vm * np.sin(w * x + phi)), 0.0, T, **kw)
+    rms, avg = (sq / T) ** 0.5, ab / T
+    t0 = optimize.brentq(lambda x: np.sin(w * x + phi), -phi / w - T / 4, -phi / w + T / 4, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    return {"v": float((Vm * np.exp(1j * (w * t + phi))).imag), "f": float(1 / T), "T": float(T), "rms": float(rms), "average": float(avg),
+            "form_factor": float(rms / avg), "peak_factor": float(Vm / rms), "time_shift": float(-t0)}
+
+
+def _wrong_sinusoid(Vm, w, phi, t):                     # the phase angle dropped from the value, the shift not divided by w
+    out = sinusoid_values(Vm, w, phi, t)
+    out["v"] = Vm * math.sin(w * t)
+    out["time_shift"] = phi
+    return out
+
+
+def _random_sinusoid(rng):
+    return {"Vm": round(rng.uniform(1, 400), 1), "w": round(_TWO_PI * rng.choice([50, 60, 100, 400, 1000]), 3),
+            "phi": round(rng.choice([-1, 1]) * rng.uniform(0.2, 1.5), 3), "t": round(rng.uniform(0.0, 0.05), 5)}
+
+
+_SIN_IN = [_inp("Vm", "voltage", "amplitude (peak value)"), _inp("w", "angular_frequency", "angular frequency omega"),
+           _inp("phi", "number", "phase angle in radians (positive: leads Vm sin wt)")]
+
+PROCEDURES["sinusoid_values"] = _fspec(
+    "Sinusoidal waveform v = Vm sin(wt + phi): frequency, period, phase, value at a time, form and peak factors", "alternating voltages and currents / sinusoids",
+    "For v = Vm sin(wt + phi): the frequency, period, phase angle in degrees and whether it leads or lags Vm sin wt, the time shift, the value at a time t, the rms and half-cycle average values and the form and peak factors.",
+    _SIN_IN + [_inp("t", "time", "time at which to evaluate v")],
+    [_out("v", "voltage", "instantaneous value at t"), _out("f", "frequency", "frequency w/(2 pi)"), _out("T", "time", "period"),
+     _out("phase_deg", "number", "phase angle in degrees"), _out("relation", "text", "leads, lags or in phase (relative to Vm sin wt)"),
+     _out("time_shift", "time", "time shift phi/w (positive: leads)"), _out("rms", "voltage", "rms value Vm/sqrt(2)"),
+     _out("average", "voltage", "average over a half cycle, 2 Vm/pi"), _out("form_factor", "number", "form factor rms/average"),
+     _out("peak_factor", "number", "peak factor Vm/rms")],
+    "v", ["a pure sinusoid", "|phi| <= 2 pi rad"], "v = Vm sin(wt + phi); f = w/(2 pi); T = 1/f; Vrms = Vm/sqrt 2; Vav = 2 Vm/pi",
+    r"v = V_m\sin(\omega t + \phi),\quad f = \frac{\omega}{2\pi},\quad V_{rms} = \frac{V_m}{\sqrt 2}",
+    sinusoid_values, _verify_sinusoid, _reference_sinusoid, _wrong_sinusoid, _random_sinusoid,
+    r"\bsinusoid(?:al)?\b",
+    ["Find the values of the sinusoid v = Vm sin(wt + phi) with Vm = 200 V, w = 314.159 rad/s, phi = 0, t = 2.5 ms."],
+    [{"inputs": {"Vm": 200, "w": 100 * math.pi, "phi": 0, "t": 0.0025},
+      "outputs": {"v": 100 * math.sqrt(2), "f": 50.0, "T": 0.02, "relation": "in phase", "rms": 100 * math.sqrt(2), "average": 400 / math.pi,
+                  "form_factor": math.pi / (2 * math.sqrt(2)), "peak_factor": math.sqrt(2)}},
+     {"inputs": {"Vm": 10, "w": 1000, "phi": -0.5, "t": 0.002},
+      "outputs": {"v": 10 * math.sin(1.5), "relation": "lags", "time_shift": -0.0005, "phase_deg": math.degrees(-0.5)}}],
+    [{"q": "Find the values of the sinusoid v = Vm sin(wt + phi) with Vm = 200 V, w = 314.159 rad/s, phi = 0, t = 2.5 ms.",
+      "outputs": {"v": 200 * math.sin(314.159 * 0.0025), "f": 314.159 / (2 * math.pi)}},
+     {"q": "Find the values of the sinusoidal voltage with Vm = 10 V, w = 1000 rad/s, phi = -0.5, t = 2 ms.", "outputs": {"v": 10 * math.sin(1.5)}},
+     {"q": "Find the values of the sinusoid with Vm = 10 V, w = 1000 rad/s, t = 2 ms.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the values of the sinusoid with Vm = -5 V, w = 1000 rad/s, phi = 0, t = 2 ms.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bfirst reach|\brms\b")
+
+
+def sinusoid_time_to_value(Vm, w, phi, v) -> dict:
+    _check_positive(Vm=Vm, w=w)
+    _check_phase(phi)
+    if not (math.isfinite(v) and abs(v) <= Vm):
+        raise ValueError("a sinusoid never reaches a value beyond its amplitude")
+    r = v / Vm
+    if r > 1.0:
+        r = 1.0
+    if r < -1.0:
+        r = -1.0
+    a = math.asin(r)
+    best = 10.0
+    for th in [a, math.pi - a]:
+        x = th - phi
+        while x < 0:
+            x += _TWO_PI
+        while x >= _TWO_PI:
+            x -= _TWO_PI
+        if x <= 1e-12 or _TWO_PI - x <= 1e-12:
+            x = 0.0
+        if x < best:
+            best = x
+    slope = math.cos(best + phi)
+    direction = "rising" if slope > 1e-9 else ("falling" if slope < -1e-9 else "peak")
+    return {"t": best / w, "T": _TWO_PI / w, "direction": direction}
+
+
+def _verify_sin_time(i, o):
+    """The value is reached at t, t lies in the first period, v(s) - v keeps one sign on [0, t) (no earlier
+    crossing, checked at 200 points) and the stated direction matches the slope."""
+    Vm, w, phi, v = i["Vm"], i["w"], i["phi"], i["v"]
+    t = o["t"]
+    T = _TWO_PI / w
+    res = abs(Vm * math.sin(w * t + phi) - v) / Vm + _rel(o["T"], T) + float(t < 0 or t >= T)
+    first = Vm * math.sin(phi) - v
+    for k in range(1, 200):
+        g = Vm * math.sin(w * t * k / 200.0 + phi) - v
+        if g * first < 0 and abs(g) > 1e-9 * Vm and abs(first) > 1e-9 * Vm:
+            res += 1.0
+            break
+    c = math.cos(w * t + phi)
+    want = "rising" if c > 1e-9 else ("falling" if c < -1e-9 else "peak")
+    return res + float(o["direction"] != want)
+
+
+def _reference_sin_time(Vm, w, phi, v):
+    """INDEPENDENT reference: v(t) - v sampled at 4001 points of the first period, the first sign change bracketed and
+    refined by scipy.optimize.brentq."""
+    import numpy as np
+    from scipy import optimize
+    T = 2 * np.pi / w
+    g = lambda x: Vm * np.sin(w * x + phi) - v                                  # noqa: E731
+    if g(0.0) == 0:
+        t = 0.0
+    else:
+        grid = np.linspace(0.0, T, 4001)
+        vals = g(grid)
+        j = int(np.argmax(np.sign(vals[1:]) != np.sign(vals[0])) + 1)
+        t = 0.0 + optimize.brentq(g, grid[j - 1], grid[j], xtol=1e-300, rtol=8.9e-16, maxiter=500) if vals[j] != 0 else float(grid[j])
+    c = np.cos(w * t + phi)
+    return {"t": float(t), "T": float(T), "direction": "rising" if c > 1e-9 else ("falling" if c < -1e-9 else "peak")}
+
+
+PROCEDURES["sinusoid_time_to_value"] = _fspec(
+    "Time at which a sinusoid first reaches a value", "alternating voltages and currents / sinusoids",
+    "The first time t >= 0 at which v = Vm sin(wt + phi) equals a given value, the period, and whether v is rising or falling there.",
+    _SIN_IN + [_inp("v", "voltage", "value to reach (|v| <= Vm)")],
+    [_out("t", "time", "first time at which v is reached"), _out("T", "time", "period"), _out("direction", "text", "rising, falling or peak at that time")],
+    "t", ["|v| <= Vm", "|phi| <= 2 pi rad", "t counted from 0"], "wt + phi = asin(v/Vm) or pi - asin(v/Vm), reduced to the first period; the smaller time",
+    r"\omega t + \phi = \sin^{-1}\frac{v}{V_m}\ \text{or}\ \pi - \sin^{-1}\frac{v}{V_m}",
+    sinusoid_time_to_value, _verify_sin_time, _reference_sin_time,
+    lambda Vm, w, phi, v: sinusoid_time_to_value(Vm, w, 0.0, v),                  # the phase angle ignored
+    lambda rng: (lambda b: dict(b, v=round(b["Vm"] * rng.uniform(-0.95, 0.95), 3)))({k: x for k, x in _random_sinusoid(rng).items() if k != "t"}),
+    r"(?=.*\bsinusoid)(?=.*\bfirst reach)",
+    ["When does the sinusoid with Vm = 100 V, w = 314.159 rad/s, phi = 0 first reach v = 50 V?"],
+    [{"inputs": {"Vm": 100, "w": 100 * math.pi, "phi": 0, "v": 50}, "outputs": {"t": 1 / 600, "T": 0.02, "direction": "rising"}},
+     {"inputs": {"Vm": 10, "w": 1000, "phi": 0.5, "v": 0}, "outputs": {"t": (math.pi - 0.5) / 1000, "direction": "falling"}}],
+    [{"q": "When does the sinusoid with Vm = 100 V, w = 314.159 rad/s, phi = 0 first reach v = 50 V?", "outputs": {"t": math.asin(0.5) / 314.159}},
+     {"q": "When does the sinusoid with Vm = 10 V, w = 1000 rad/s, phi = 0.5 first reach v = 0 V?", "outputs": {"t": (math.pi - 0.5) / 1000}},
+     {"q": "When does the sinusoid with Vm = 100 V, w = 314.159 rad/s, phi = 0 first reach v = 150 V?", "outcome": "INVALID_INPUT"}])
+
+
+# --------------------------------------------------------------------------------------------- a.c. circuits with a supply
+def _ac_check(V, f, R, circuit, L, C):
+    _check_positive(V=V, f=f, R=R)
+    if not (math.isfinite(L) and math.isfinite(C)) or L < 0 or C < 0:
+        raise ValueError("L and C must not be negative")
+    if circuit == "RL" and not (L > 0 and C == 0):
+        raise ValueError("an R-L circuit needs an inductance L > 0 and no capacitor")
+    if circuit == "RC" and not (C > 0 and L == 0):
+        raise ValueError("an R-C circuit needs a capacitance C > 0 and no inductor")
+    if circuit == "RLC" and not (L > 0 and C > 0):
+        raise ValueError("an R-L-C circuit needs both L > 0 and C > 0")
+
+
+def series_ac_supply(V, f, R, circuit, L=0.0, C=0.0) -> dict:
+    _ac_check(V, f, R, circuit, L, C)
+    w = _TWO_PI * f
+    xl = w * L if L > 0 else 0.0
+    xc = 1.0 / (w * C) if C > 0 else 0.0
+    x = xl - xc
+    if abs(x) <= 1e-12 * max(xl, xc):          # at resonance the net reactance is exactly 0, not rounding residue
+        x = 0.0
+    z = math.hypot(R, x)
+    cur = V / z
+    nature = "unity" if x == 0 else ("lagging" if x > 0 else "leading")
+    return {"Z": z, "I": cur, "VR": cur * R, "VL": cur * xl, "VC": cur * xc, "XL": xl, "XC": xc,
+            "phase_deg": math.degrees(math.atan2(x, R)) + 0.0, "power_factor": R / z, "P": cur * cur * R, "Q": cur * cur * x + 0.0,
+            "S": V * cur, "nature": nature}
+
+
+def _verify_series_ac(i, o):
+    """Kirchhoff's voltage law with phasors (VR and VL - VC in quadrature add to V), each element's law, the power
+    triangle and the phase angle."""
+    V, R = i["V"], i["R"]
+    L, C = i.get("L", 0.0), i.get("C", 0.0)
+    w = _TWO_PI * i["f"]
+    cur, S = o["I"], o["S"]
+    xc = 1.0 / (w * C) if C > 0 else 0.0
+    d = o["VL"] - o["VC"]
+    want = "lagging" if d > 1e-12 * V else ("leading" if d < -1e-12 * V else "unity")
+    return (abs(math.hypot(o["VR"], d) - V) / V + _rel(o["VR"], cur * R) + abs(o["VL"] - cur * w * L) / V + abs(o["VC"] - cur * xc) / V
+            + _rel(o["Z"] * cur, V) + abs(o["XL"] - w * L) / o["Z"] + abs(o["XC"] - xc) / o["Z"] + _rel(S, V * cur)
+            + abs(o["P"] - V * cur * o["power_factor"]) / S + abs(o["P"] ** 2 + o["Q"] ** 2 - S * S) / (S * S)
+            + abs(o["power_factor"] - math.cos(math.radians(o["phase_deg"]))) + abs(o["Q"] - cur * d) / S + float(o["nature"] != want))
+
+
+def _reference_series_ac(V, f, R, circuit, L=0.0, C=0.0):
+    """INDEPENDENT reference: the circuit's admittance as a rational function of s (R-L: 1/(Ls + R); R-C:
+    Cs/(RCs + 1); R-L-C: Cs/(LCs^2 + RCs + 1)) evaluated on the jw axis by scipy.signal.freqs, the element voltages
+    from the current phasor (numpy), and P and Q as averages of v(t) i(t) over one period (512 samples)."""
+    import numpy as np
+    from scipy import signal
+    w = 2 * np.pi * f
+    if circuit == "RL":
+        b, a = [1.0], [L, R]
+    elif circuit == "RC":
+        b, a = [C, 0.0], [R * C, 1.0]
+    else:
+        b, a = [C, 0.0], [L * C, R * C, 1.0]
+    Y = complex(signal.freqs(b, a, worN=[w])[1][0])
+    Iph = V * Y
+    cur = abs(Iph)
+    ph = -float(np.angle(Iph))
+    n = 512
+    th = 2 * np.pi * np.arange(n) / n
+    v = np.sqrt(2) * V * np.cos(th)
+    P = float(np.mean(v * np.sqrt(2) * cur * np.cos(th - ph)))
+    Q = float(np.mean(v * np.sqrt(2) * cur * np.cos(th - ph + np.pi / 2)))
+    return {"Z": 1 / abs(Y), "I": cur, "VR": abs(Iph * R), "VL": abs(Iph * 1j * w * L), "VC": abs(Iph / (1j * w * C)) if C > 0 else 0.0,
+            "phase_deg": float(np.degrees(ph)), "power_factor": P / (V * cur), "P": P, "Q": Q, "S": V * cur}
+
+
+def parallel_ac_supply(V, f, R, circuit, L=0.0, C=0.0) -> dict:
+    _ac_check(V, f, R, circuit, L, C)
+    w = _TWO_PI * f
+    ir = V / R
+    il = V / (w * L) if L > 0 else 0.0
+    ic = V * w * C if C > 0 else 0.0
+    b = il - ic
+    if abs(b) <= 1e-12 * max(il, ic):          # at resonance the net reactive current is exactly 0
+        b = 0.0
+    cur = math.hypot(ir, b)
+    nature = "unity" if b == 0 else ("lagging" if b > 0 else "leading")
+    return {"IR": ir, "IL": il, "IC": ic, "I": cur, "Z": V / cur, "phase_deg": math.degrees(math.atan2(b, ir)) + 0.0,
+            "power_factor": ir / cur, "P": V * ir, "Q": V * b + 0.0, "S": V * cur, "nature": nature}
+
+
+def _verify_parallel_ac(i, o):
+    """Kirchhoff's current law with phasors (IR and IL - IC in quadrature add to I), each branch's law, the power
+    triangle and the phase angle."""
+    V, R = i["V"], i["R"]
+    L, C = i.get("L", 0.0), i.get("C", 0.0)
+    w = _TWO_PI * i["f"]
+    cur, S = o["I"], o["S"]
+    il = V / (w * L) if L > 0 else 0.0
+    d = o["IL"] - o["IC"]
+    want = "lagging" if d > 1e-12 * cur else ("leading" if d < -1e-12 * cur else "unity")
+    return (abs(math.hypot(o["IR"], d) - cur) / cur + _rel(o["IR"] * R, V) + abs(o["IL"] - il) / cur + abs(o["IC"] - V * w * C) / cur
+            + _rel(o["Z"] * cur, V) + _rel(S, V * cur) + abs(o["P"] - V * cur * o["power_factor"]) / S
+            + abs(o["P"] ** 2 + o["Q"] ** 2 - S * S) / (S * S) + abs(o["power_factor"] - math.cos(math.radians(o["phase_deg"])))
+            + abs(o["Q"] - V * d) / S + float(o["nature"] != want))
+
+
+def _reference_parallel_ac(V, f, R, circuit, L=0.0, C=0.0):
+    """INDEPENDENT reference: the branch admittances 1/R, 1/(jwL) and jwC added in complex arithmetic (numpy), the
+    branch and supply current phasors from them, and P and Q as averages of v(t) i(t) over one period."""
+    import numpy as np
+    w = 2 * np.pi * f
+    yl = 1 / (1j * w * L) if L > 0 else 0j
+    yc = 1j * w * C if C > 0 else 0j
+    Iph = V * (1 / R + yl + yc)
+    cur = abs(Iph)
+    ph = -float(np.angle(Iph))
+    n = 512
+    th = 2 * np.pi * np.arange(n) / n
+    v = np.sqrt(2) * V * np.cos(th)
+    P = float(np.mean(v * np.sqrt(2) * cur * np.cos(th - ph)))
+    Q = float(np.mean(v * np.sqrt(2) * cur * np.cos(th - ph + np.pi / 2)))
+    return {"IR": V / R, "IL": abs(V * yl), "IC": abs(V * yc), "I": cur, "Z": V / cur, "phase_deg": float(np.degrees(ph)),
+            "power_factor": P / (V * cur), "P": P, "Q": Q, "S": V * cur}
+
+
+def _random_ac_supply(rng):
+    c = rng.choice(["RL", "RC", "RLC"])
+    out = {"V": rng.choice([12.0, 24.0, 100.0, 120.0, 230.0, 240.0]), "f": rng.choice([50.0, 60.0, 400.0, 1000.0]), "R": _e12(rng, 0, 3), "circuit": c}
+    if c != "RC":
+        out["L"] = _e12(rng, -3, -1)
+    if c != "RL":
+        out["C"] = _e12(rng, -7, -5)
+    return out
+
+
+_AC_IN = [_inp("V", "voltage", "rms supply voltage"), _inp("f", "frequency", "supply frequency"), _inp("R", "resistance", "resistance"),
+          {"symbol": "circuit", "type": "choice", "choices": ["RL", "RC", "RLC"], "required": True, "meaning": "the elements: R-L, R-C or R-L-C"},
+          _inp("L", "inductance", "inductance (R-L and R-L-C circuits)", required=False),
+          _inp("C", "capacitance", "capacitance (R-C and R-L-C circuits)", required=False)]
+_AC_KV = [x for x in _AC_IN if x["symbol"] != "circuit"]
+
+
+def _ac_supply_parse(arrangement):
+    pat = rf"\b{arrangement}\s+(R-L-C|R-L|R-C)\b"
+
+    def parse(question):
+        found = {m.upper() for m in re.findall(pat, question, re.I)}
+        if len(found) != 1 or not re.search(r"\bsupply\b", question, re.I) or re.search(r"\bstep\b", question, re.I):
+            return None
+        rest = re.sub(pat, arrangement, question, flags=re.I)
+        base = _kv_parse(r"\bsupply\b", _AC_KV)(rest)
+        if base is None:
+            return None
+        base["circuit"] = next(iter(found)).replace("-", "")
+        return base
+    return parse
+
+
+_AC_COMMON_OUT = [_out("phase_deg", "number", "phase angle of the supply current behind the voltage, degrees (negative: leading)"),
+                  _out("power_factor", "number", "power factor cos(phase)"), _out("P", "power", "real power in W"),
+                  _out("Q", "number", "reactive power in var (positive: inductive)"), _out("S", "number", "apparent power in VA"),
+                  _out("nature", "text", "lagging, leading or unity power factor")]
+
+PROCEDURES["series_ac_supply"] = {
+    "name": "Series R-L, R-C or R-L-C circuit on an a.c. supply", "topic": "single-phase a.c. circuits / series circuits",
+    "purpose": "The impedance, current, voltage across each element, phase angle, power factor and real, reactive and apparent power of a series R-L, R-C or R-L-C circuit connected to a sinusoidal supply.",
+    "inputs": _AC_IN,
+    "outputs": [_out("Z", "resistance", "impedance |Z|"), _out("I", "current", "rms current"), _out("VR", "voltage", "voltage across R"),
+                _out("VL", "voltage", "voltage across L (0 without an inductor)"), _out("VC", "voltage", "voltage across C (0 without a capacitor)"),
+                _out("XL", "resistance", "inductive reactance wL"), _out("XC", "resistance", "capacitive reactance 1/(wC)")] + _AC_COMMON_OUT,
+    "primary": "I", "conditions": ["sinusoidal steady state, rms values", "ideal L and C", "R > 0"],
+    "method": "Z = sqrt(R^2 + (XL - XC)^2); I = V/Z; VR = IR, VL = I XL, VC = I XC; phase = atan((XL - XC)/R); P = I^2 R",
+    "latex": r"Z = \sqrt{R^2 + (X_L - X_C)^2},\quad I = \frac{V}{Z},\quad \cos\phi = \frac{R}{Z}",
+    "run": series_ac_supply, "verify": _verify_series_ac, "parse": _ac_supply_parse("series"), "reference": _reference_series_ac,
+    "wrong": lambda V, f, R, circuit, L=0.0, C=0.0: series_ac_supply(V, f / _TWO_PI, R, circuit, L, C),   # f used as w
+    "random_inputs": _random_ac_supply,
+    "templates": ["A series R-L circuit with R = 30 ohm and L = 0.1 H is connected to a supply of V = 240 V, f = 50 Hz. Find the current and the power factor."],
+    "examples": [{"inputs": {"V": 250, "f": 50, "R": 30, "circuit": "RL", "L": 40 / (2 * math.pi * 50)},
+                  "outputs": {"Z": 50.0, "I": 5.0, "VR": 150.0, "VL": 200.0, "VC": 0.0, "power_factor": 0.6, "P": 750.0, "Q": 1000.0, "S": 1250.0,
+                              "phase_deg": math.degrees(math.atan2(4, 3)), "nature": "lagging"}},
+                 {"inputs": {"V": 100, "f": 50, "R": 8, "circuit": "RC", "C": 1 / (2 * math.pi * 50 * 6)},
+                  "outputs": {"Z": 10.0, "I": 10.0, "VR": 80.0, "VC": 60.0, "power_factor": 0.8, "P": 800.0, "Q": -600.0, "nature": "leading"}},
+                 {"inputs": {"V": 230, "f": 50, "R": 10, "circuit": "RLC", "L": 0.1, "C": 1e-4},
+                  "outputs": {"I": 230 / math.hypot(10, 10 * math.pi - 100 / math.pi), "nature": "leading"}}],
+    "questions": [{"q": "A series R-L circuit with R = 30 ohm and L = 0.1 H is connected to a supply of V = 240 V, f = 50 Hz. Find the current and the power factor.",
+                   "outputs": {"I": 240 / math.hypot(30, 10 * math.pi), "power_factor": 30 / math.hypot(30, 10 * math.pi)}},
+                  {"q": "A series R-C circuit with R = 8 ohm and C = 500 uF is connected to a supply of V = 100 V, f = 50 Hz. Find the current.",
+                   "outputs": {"I": 100 / math.hypot(8, 20 / math.pi)}},
+                  {"q": "A series R-L-C circuit with R = 10 ohm, L = 0.1 H and C = 100 uF is connected to a supply of V = 230 V, f = 50 Hz. Find the current.",
+                   "outputs": {"I": 230 / math.hypot(10, 10 * math.pi - 100 / math.pi)}},
+                  {"q": "A series R-L circuit with R = 30 ohm and L = 0.1 H is connected to a supply of V = 240 V. Find the current.", "outcome": "NEEDS_INPUT"},
+                  {"q": "A series R-L circuit with R = 30 ohm, L = 0.1 H and C = 100 uF is connected to a supply of V = 240 V, f = 50 Hz. Find the current.",
+                   "outcome": "INVALID_INPUT"}]}
+
+PROCEDURES["parallel_ac_supply"] = {
+    "name": "Parallel R-L, R-C or R-L-C circuit on an a.c. supply", "topic": "single-phase a.c. circuits / parallel circuits",
+    "purpose": "The branch currents, supply current, impedance, phase angle, power factor and real, reactive and apparent power of R in parallel with L, with C, or with both, across a sinusoidal supply.",
+    "inputs": _AC_IN,
+    "outputs": [_out("IR", "current", "current in R"), _out("IL", "current", "current in L (0 without an inductor)"),
+                _out("IC", "current", "current in C (0 without a capacitor)"), _out("I", "current", "supply current"),
+                _out("Z", "resistance", "impedance V/I")] + _AC_COMMON_OUT,
+    "primary": "I", "conditions": ["sinusoidal steady state, rms values", "ideal L and C (a coil with resistance: use coil_capacitor_parallel)", "R > 0"],
+    "method": "IR = V/R, IL = V/(wL), IC = V wC; I = sqrt(IR^2 + (IL - IC)^2); phase = atan((IL - IC)/IR)",
+    "latex": r"I = \sqrt{I_R^2 + (I_L - I_C)^2},\quad \cos\phi = \frac{I_R}{I}",
+    "run": parallel_ac_supply, "verify": _verify_parallel_ac, "parse": _ac_supply_parse("parallel"), "reference": _reference_parallel_ac,
+    "wrong": lambda V, f, R, circuit, L=0.0, C=0.0: parallel_ac_supply(V, f / _TWO_PI, R, circuit, L, C),   # f used as w
+    "random_inputs": _random_ac_supply,
+    "templates": ["A parallel R-L circuit with R = 25 ohm and L = 0.1 H is connected to a supply of V = 100 V, f = 50 Hz. Find the supply current."],
+    "examples": [{"inputs": {"V": 100, "f": 50, "R": 25, "circuit": "RL", "L": (100 / 3) / (2 * math.pi * 50)},
+                  "outputs": {"IR": 4.0, "IL": 3.0, "IC": 0.0, "I": 5.0, "Z": 20.0, "power_factor": 0.8, "P": 400.0, "Q": 300.0, "S": 500.0, "nature": "lagging"}},
+                 {"inputs": {"V": 60, "f": 50, "R": 12, "circuit": "RC", "C": 0.2 / (2 * math.pi * 50)},
+                  "outputs": {"IR": 5.0, "IC": 12.0, "I": 13.0, "power_factor": 5 / 13, "Q": -720.0, "S": 780.0, "nature": "leading"}}],
+    "questions": [{"q": "A parallel R-L circuit with R = 25 ohm and L = 0.1 H is connected to a supply of V = 100 V, f = 50 Hz. Find the supply current.",
+                   "outputs": {"I": math.hypot(4, 10 / math.pi)}},
+                  {"q": "A parallel R-L-C circuit with R = 100 ohm, L = 0.5 H and C = 20 uF is connected to a supply of V = 230 V, f = 50 Hz. Find the supply current.",
+                   "outputs": {"I": math.hypot(2.3, 230 / (50 * math.pi) - 0.46 * math.pi)}},
+                  {"q": "A parallel R-L circuit with R = 25 ohm and L = 0.1 H is connected to a supply of f = 50 Hz. Find the supply current.", "outcome": "NEEDS_INPUT"},
+                  {"q": "A parallel R-C circuit with R = 12 ohm, L = 0.1 H and C = 100 uF is connected to a supply of V = 60 V, f = 50 Hz. Find the supply current.",
+                   "outcome": "INVALID_INPUT"}]}
+
+
+def coil_capacitor_parallel(V, f, R, L, C) -> dict:
+    _check_positive(V=V, f=f, R=R, L=L, C=C)
+    if R * R >= L / C:
+        raise ValueError("the coil's resistance must be below sqrt(L/C), or the circuit has no resonance")
+    w = _TWO_PI * f
+    xl = w * L
+    d = R * R + xl * xl
+    g = R / d
+    bl = xl / d
+    bc = w * C
+    b = bc - bl
+    if abs(b) <= 1e-12 * max(bc, bl):          # exactly at resonance the susceptance is 0, not rounding residue
+        b = 0.0
+    y = math.hypot(g, b)
+    wr = math.sqrt(1.0 / (L * C) - R * R / (L * L))
+    rd = L / (C * R)
+    return {"I_coil": V / math.sqrt(d), "I_C": V * bc, "I": V * y, "Z": 1.0 / y, "phase_deg": math.degrees(math.atan2(-b, g)) + 0.0,
+            "P": V * V * g, "f_r": wr / _TWO_PI, "R_dynamic": rd, "I_resonance": V / rd, "Q": wr * L / R}
+
+
+def _verify_coil_cap(i, o):
+    """Kirchhoff's current law with phasors at the supply frequency (coil current plus capacitor current), and at
+    the stated resonant frequency: zero susceptance, the dynamic resistance as 1/G there, and Q = wr L/R."""
+    V, R, L, C = i["V"], i["R"], i["L"], i["C"]
+    w = _TWO_PI * i["f"]
+    d = R * R + (w * L) ** 2
+    re_, im_ = V * R / d, -V * w * L / d + V * w * C
+    res = (_rel(o["I_coil"], V / math.sqrt(d)) + _rel(o["I_C"], V * w * C) + _rel(o["I"], math.hypot(re_, im_)) + _rel(o["Z"] * o["I"], V)
+           + abs(math.radians(o["phase_deg"]) - math.atan2(-im_, re_)) / math.pi + _rel(o["P"], V * re_))
+    wr = _TWO_PI * o["f_r"]
+    dr = R * R + (wr * L) ** 2
+    return (res + abs(wr * C - wr * L / dr) / (wr * C) + _rel(o["R_dynamic"], dr / R) + _rel(o["I_resonance"] * o["R_dynamic"], V)
+            + _rel(o["Q"] * R, wr * L))
+
+
+def _reference_coil_cap(V, f, R, L, C):
+    """INDEPENDENT reference: the admittance Y(f) = 1/(R + jwL) + jwC in complex arithmetic (numpy); the resonant
+    frequency where its imaginary part vanishes found by scipy.optimize.brentq below 1/(2 pi sqrt(LC)); the dynamic
+    resistance 1/Re Y there, and Q as the current magnification I_C/I at resonance."""
+    import numpy as np
+    from scipy import optimize
+    Y = lambda ff: 1 / (R + 1j * 2 * np.pi * ff * L) + 1j * 2 * np.pi * ff * C       # noqa: E731
+    y = Y(f)
+    f0 = 1 / (2 * np.pi * np.sqrt(L * C))
+    fr = optimize.brentq(lambda ff: Y(ff).imag, f0 * 1e-9, f0, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    yr = Y(fr)
+    return {"I_coil": float(abs(V / (R + 1j * 2 * np.pi * f * L))), "I_C": float(V * 2 * np.pi * f * C), "I": float(abs(V * y)), "Z": float(1 / abs(y)),
+            "phase_deg": float(-np.angle(y, deg=True)), "P": float(V * V * y.real), "f_r": float(fr), "R_dynamic": float(1 / yr.real),
+            "I_resonance": float(V * yr.real), "Q": float((V * 2 * np.pi * fr * C) / (V * abs(yr)))}
+
+
+def _wrong_coil_cap(V, f, R, L, C):                     # the ideal-circuit resonance 1/(2 pi sqrt(LC)), the coil's R ignored
+    out = coil_capacitor_parallel(V, f, R, L, C)
+    w0 = 1.0 / math.sqrt(L * C)
+    out["f_r"] = w0 / _TWO_PI
+    out["Q"] = w0 * L / R
+    return out
+
+
+def _random_coil_cap(rng):
+    L, C = _e12(rng, -3, -1), _e12(rng, -8, -5)
+    return {"V": rng.choice([12.0, 100.0, 230.0, 240.0]), "f": rng.choice([50.0, 60.0, 400.0, 1000.0, 10000.0]),
+            "R": round(math.sqrt(L / C) * math.sqrt(rng.uniform(0.1, 0.7)), 3), "L": L, "C": C}
+
+
+PROCEDURES["coil_capacitor_parallel"] = _fspec(
+    "Coil with resistance in parallel with a capacitor: currents, resonance and dynamic resistance", "single-phase a.c. circuits / parallel resonance",
+    "For a coil (R in series with L) in parallel with a capacitor C across a supply: the coil, capacitor and supply currents, the phase angle and power at the supply frequency, and the resonant frequency, dynamic resistance L/(CR), current at resonance and Q factor.",
+    [_inp("V", "voltage", "rms supply voltage"), _inp("f", "frequency", "supply frequency"), _inp("R", "resistance", "resistance of the coil"),
+     _inp("L", "inductance", "inductance of the coil"), _inp("C", "capacitance", "capacitance")],
+    [_out("I_coil", "current", "coil current"), _out("I_C", "current", "capacitor current"), _out("I", "current", "supply current"),
+     _out("Z", "resistance", "impedance of the network V/I"), _out("phase_deg", "number", "phase angle of the supply current behind the voltage, degrees"),
+     _out("P", "power", "real power (dissipated in the coil's resistance)"), _out("f_r", "frequency", "resonant frequency"),
+     _out("R_dynamic", "resistance", "dynamic resistance L/(CR) at resonance"), _out("I_resonance", "current", "supply current at resonance"),
+     _out("Q", "number", "Q factor at resonance, wr L/R (current magnification)")],
+    "f_r", ["R^2 < L/C (a resonance exists)", "sinusoidal steady state, ideal capacitor"],
+    "Y = 1/(R + jwL) + jwC; fr = (1/2 pi) sqrt(1/(LC) - R^2/L^2); RD = L/(CR); Q = wr L/R",
+    r"f_r = \frac{1}{2\pi}\sqrt{\frac{1}{LC} - \frac{R^2}{L^2}},\quad R_D = \frac{L}{CR}",
+    coil_capacitor_parallel, _verify_coil_cap, _reference_coil_cap, _wrong_coil_cap, _random_coil_cap,
+    r"\bcoil\b(?=.*\bcapacitor\b)(?=.*\bparallel\b)",
+    ["A coil with R = 10 ohm and L = 0.1 H is in parallel with a capacitor C = 10 uF across a supply of V = 100 V, f = 50 Hz. Find the supply current and the resonant frequency."],
+    [{"inputs": {"V": 100, "f": 50, "R": 10, "L": 0.1, "C": 1e-5},
+      "outputs": {"I_coil": 100 / math.hypot(10, 10 * math.pi), "I_C": 100 * 2 * math.pi * 50 * 1e-5,
+                  "I": abs(100 / complex(10, 10 * math.pi) + 1j * 100 * 2 * math.pi * 50 * 1e-5),
+                  "f_r": math.sqrt(1 / (0.1 * 1e-5) - 100 / 0.01) / (2 * math.pi), "R_dynamic": 1000.0, "I_resonance": 0.1,
+                  "Q": math.sqrt(1 / (0.1 * 1e-5) - 100 / 0.01) * 0.1 / 10}},
+     {"inputs": {"V": 240, "f": 50, "R": 50, "L": 0.5, "C": 1e-6},
+      "outputs": {"f_r": math.sqrt(1 / (0.5 * 1e-6) - 2500 / 0.25) / (2 * math.pi), "R_dynamic": 10000.0, "I_resonance": 0.024}}],
+    [{"q": "A coil with R = 10 ohm and L = 0.1 H is in parallel with a capacitor C = 10 uF across a supply of V = 100 V, f = 50 Hz. Find the supply current and the resonant frequency.",
+      "outputs": {"f_r": math.sqrt(1 / (0.1 * 1e-5) - 100 / 0.01) / (2 * math.pi), "R_dynamic": 1000.0}},
+     {"q": "A coil with R = 10 ohm and L = 0.1 H is in parallel with a capacitor C = 10 uF across a supply of V = 100 V. Find the supply current.", "outcome": "NEEDS_INPUT"},
+     {"q": "A coil with R = 200 ohm and L = 0.1 H is in parallel with a capacitor C = 10 uF across a supply of V = 100 V, f = 50 Hz. Find the resonant frequency.",
+      "outcome": "INVALID_INPUT"}],
+    forbid=r"\bseries\b")
+
+
+# --------------------------------------------------------------------------------------------- three-phase measurement
+def two_wattmeter(W1, W2) -> dict:
+    if not (math.isfinite(W1) and math.isfinite(W2)):
+        raise ValueError("the readings must be finite numbers")
+    p = W1 + W2
+    if p <= 0:
+        raise ValueError("the sum of the two readings (the total power) must be positive")
+    q = math.sqrt(3.0) * abs(W1 - W2)
+    s = math.hypot(p, q)
+    return {"P": p, "Q": q, "S": s, "power_factor": p / s, "phase_deg": math.degrees(math.atan2(q, p))}
+
+
+def _verify_two_watt(i, o):
+    W1, W2 = i["W1"], i["W2"]
+    s = o["S"]
+    return (_rel(o["P"], W1 + W2) + abs(o["Q"] - math.sqrt(3.0) * abs(W1 - W2)) / s + abs(s * s - o["P"] ** 2 - o["Q"] ** 2) / (s * s)
+            + abs(o["power_factor"] - o["P"] / s) + abs(math.tan(math.radians(o["phase_deg"])) * o["P"] - o["Q"]) / s)
+
+
+def _reference_two_watt(W1, W2):
+    """INDEPENDENT reference: a balanced star load modelled with phasors (numpy, abc sequence); the two wattmeters in
+    lines a and c with their voltage coils to line b read Re((Va - Vb) Ia*) and Re((Vc - Vb) Ic*). The load angle that
+    gives the measured ratio (W1 - W2)/(W1 + W2) is found by scipy.optimize.brentq and the model scaled to W1 + W2."""
+    import numpy as np
+    from scipy import optimize
+    a = np.exp(-2j * np.pi / 3)
+
+    def readings(phi):
+        Ia, Ic = np.exp(-1j * phi), a * a * np.exp(-1j * phi)
+        return float(((1 - a) * np.conj(Ia)).real), float(((a * a - a) * np.conj(Ic)).real)
+    hi, lo = max(W1, W2), min(W1, W2)
+    target = (hi - lo) / (hi + lo)
+
+    def g(phi):
+        r1, r2 = readings(phi)
+        return (max(r1, r2) - min(r1, r2)) / (r1 + r2) - target
+    phi = 0.0 if target == 0 else optimize.brentq(g, 0.0, np.pi / 2 - 1e-9, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    r1, r2 = readings(phi)
+    S = 3.0 * (W1 + W2) / (r1 + r2)
+    return {"P": float(S * np.cos(phi)), "Q": float(S * np.sin(phi)), "S": float(S), "power_factor": float(np.cos(phi)), "phase_deg": float(np.degrees(phi))}
+
+
+def _random_two_watt(rng):
+    phi, vi = math.radians(rng.uniform(5, 80)), rng.uniform(300, 30000)          # load angle and VL IL
+    a, b = round(vi * math.cos(math.radians(30) - phi), 1), round(vi * math.cos(math.radians(30) + phi), 1)
+    return {"W1": a, "W2": b} if rng.random() < 0.5 else {"W1": b, "W2": a}
+
+
+PROCEDURES["two_wattmeter"] = _fspec(
+    "Three-phase power by the two-wattmeter method", "three-phase systems / power measurement",
+    "The total power, the power factor, the load angle and the reactive and apparent power of a balanced three-phase load from the readings of two wattmeters.",
+    [_inp("W1", "power", "reading of the first wattmeter (negative if it reads backwards)"), _inp("W2", "power", "reading of the second wattmeter")],
+    [_out("P", "power", "total power W1 + W2"), _out("Q", "number", "total reactive power in var (magnitude)"),
+     _out("S", "number", "total apparent power in VA"), _out("power_factor", "number", "power factor of the load"),
+     _out("phase_deg", "number", "load angle in degrees (lag or lead needs the phase sequence)")],
+    "power_factor", ["a balanced load and a symmetrical supply", "W1 + W2 > 0"],
+    "P = W1 + W2; tan(phi) = sqrt(3) (W1 - W2)/(W1 + W2)", r"P = W_1 + W_2,\quad \tan\phi = \sqrt{3}\,\frac{W_1 - W_2}{W_1 + W_2}",
+    two_wattmeter, _verify_two_watt, _reference_two_watt,
+    lambda W1, W2: (lambda p, q: {"P": p, "Q": q, "S": math.hypot(p, q), "power_factor": p / math.hypot(p, q), "phase_deg": math.degrees(math.atan2(q, p))})(
+        W1 + W2, abs(W1 - W2)),                                                    # sqrt(3) forgotten
+    _random_two_watt,
+    r"\btwo[- ]wattmeter\b",
+    ["Two-wattmeter method: W1 = 3 kW, W2 = 1 kW. Find the total power and the power factor."],
+    [{"inputs": {"W1": 3000, "W2": 1000}, "outputs": {"P": 4000.0, "Q": 2000 * math.sqrt(3), "S": math.hypot(4000, 2000 * math.sqrt(3)),
+                                                      "power_factor": 4000 / math.hypot(4000, 2000 * math.sqrt(3)), "phase_deg": math.degrees(math.atan(math.sqrt(3) / 2))}},
+     {"inputs": {"W1": 5000, "W2": 0}, "outputs": {"P": 5000.0, "S": 10000.0, "power_factor": 0.5, "phase_deg": 60.0}},
+     {"inputs": {"W1": 2000, "W2": 2000}, "outputs": {"Q": 0.0, "power_factor": 1.0, "phase_deg": 0.0}}],
+    [{"q": "Two-wattmeter method: W1 = 3 kW, W2 = 1 kW. Find the total power and the power factor.",
+      "outputs": {"P": 4000.0, "power_factor": 4000 / math.hypot(4000, 2000 * math.sqrt(3))}},
+     {"q": "Two-wattmeter method: W1 = 5 kW, W2 = -1 kW. Find the power factor.", "outputs": {"power_factor": 4000 / math.hypot(4000, 6000 * math.sqrt(3))}},
+     {"q": "Two-wattmeter method: W1 = 3 kW. Find the total power.", "outcome": "NEEDS_INPUT"},
+     {"q": "Two-wattmeter method: W1 = 1 kW, W2 = -2 kW. Find the power factor.", "outcome": "INVALID_INPUT"}])
+
+
+# --------------------------------------------------------------------------------------------- d.c. machines
+def dc_machine_emf(poles, flux, Z, n, winding) -> dict:
+    _check_positive(flux=flux, Z=Z, n=n)
+    if not (math.isfinite(poles) and poles == int(poles) and poles >= 2 and int(poles) % 2 == 0):
+        raise ValueError("the number of poles must be an even whole number of at least 2")
+    if Z != int(Z):
+        raise ValueError("the number of armature conductors must be a whole number")
+    paths = poles if winding == "lap" else 2.0
+    per = poles * flux * n
+    return {"E": per * Z / paths, "paths": float(paths), "conductor_emf": per}
+
+
+def _verify_dc_emf(i, o):
+    poles = i["poles"]
+    want = poles if i["winding"] == "lap" else 2.0
+    return _rel(o["conductor_emf"], poles * i["flux"] * i["n"]) + _rel(o["E"] * o["paths"], o["conductor_emf"] * i["Z"]) + abs(o["paths"] - want)
+
+
+def _reference_dc_emf(poles, flux, Z, n, winding):
+    """INDEPENDENT reference: the emf of one conductor averaged over a revolution as the integral of |B(theta)| l r
+    d(theta) times n (scipy.integrate.quad), for a flux density B = Bm sin(p theta/2) scaled so that each pole carries
+    the flux phi; the conductors in series per parallel path (Z/a, a = poles for lap, 2 for wave) add."""
+    from scipy import integrate
+    p = int(poles)
+    amp = flux * p / 4.0                                   # Bm l r, from phi = integral over one pole of Bm l r sin(p theta/2)
+    pts = [2 * math.pi * k / p for k in range(1, p)]
+    tot, _ = integrate.quad(lambda th: abs(amp * math.sin(p * th / 2)), 0.0, 2 * math.pi, points=pts, limit=200, epsabs=0, epsrel=1e-13)
+    e = n * tot
+    paths = p if winding == "lap" else 2
+    return {"E": float(e * Z / paths), "paths": float(paths), "conductor_emf": float(e)}
+
+
+_DCE_IN = [_inp("poles", "number", "number of poles (even)"), _inp("flux", "magnetic_flux", "useful flux per pole"),
+           _inp("Z", "number", "number of armature conductors"), _inp("n", "number", "speed in rev/s (rpm accepted in questions)", units="rotational_speed"),
+           {"symbol": "winding", "type": "choice", "choices": ["lap", "wave"], "required": True, "meaning": "armature winding: lap or wave"}]
+
+
+def _parse_dc_emf(question):
+    q = question.lower()
+    if not re.search(r"\bgenerated emf\b", q) or re.search(r"\bshunt\b", q):
+        return None
+    lap, wave = re.search(r"\blap\b", q), re.search(r"\bwave\b", q)
+    if lap and wave:
+        return None
+    base = _kv_parse(r"\bgenerated emf\b", _DCE_IN[:4])(question)
+    if base is None:
+        return None
+    if lap or wave:
+        base["winding"] = "lap" if lap else "wave"
+    return base
+
+
+PROCEDURES["dc_machine_emf"] = {
+    "name": "Generated emf of a d.c. machine (lap or wave winding)", "topic": "d.c. machines / emf equation",
+    "purpose": "The emf generated in the armature of a d.c. machine (the back emf of a motor) from its poles, flux per pole, armature conductors, speed and winding.",
+    "inputs": _DCE_IN,
+    "outputs": [_out("E", "voltage", "generated emf"), _out("paths", "number", "parallel paths: the number of poles for lap, 2 for wave"),
+                _out("conductor_emf", "voltage", "average emf of one conductor, poles x flux x n")],
+    "primary": "E", "conditions": ["an even number of poles", "speed in rev/s", "simplex windings"],
+    "method": "E = poles flux n Z / a with a = poles (lap) or 2 (wave)", "latex": r"E = \frac{p\,\Phi\,n\,Z}{a},\quad a = p\ (\text{lap}),\ a = 2\ (\text{wave})",
+    "run": dc_machine_emf, "verify": _verify_dc_emf, "parse": _parse_dc_emf, "reference": _reference_dc_emf,
+    "wrong": lambda poles, flux, Z, n, winding: dc_machine_emf(poles, flux, Z, n, "wave" if winding == "lap" else "lap"),   # windings swapped
+    "random_inputs": lambda rng: {"poles": float(rng.choice([4, 6, 8])), "flux": round(rng.uniform(5, 60), 1) * 1e-3, "Z": float(rng.randint(100, 1200)),
+                                  "n": round(rng.uniform(8, 30), 2), "winding": rng.choice(["lap", "wave"])},
+    "templates": ["Find the generated emf of a lap-wound d.c. machine with poles = 4, flux = 25 mWb, Z = 600, n = 20 rev/s."],
+    "examples": [{"inputs": {"poles": 4, "flux": 0.025, "Z": 600, "n": 20, "winding": "lap"}, "outputs": {"E": 300.0, "paths": 4.0, "conductor_emf": 2.0}},
+                 {"inputs": {"poles": 6, "flux": 0.02, "Z": 400, "n": 15, "winding": "wave"}, "outputs": {"E": 360.0, "paths": 2.0}}],
+    "questions": [{"q": "Find the generated emf of a lap-wound d.c. machine with poles = 4, flux = 25 mWb, Z = 600, n = 20 rev/s.", "outputs": {"E": 300.0}},
+                  {"q": "Find the generated emf of a wave-wound d.c. machine with poles = 6, flux = 20 mWb, Z = 400, n = 900 rpm.", "outputs": {"E": 360.0}},
+                  {"q": "Find the generated emf of a d.c. machine with poles = 4, flux = 25 mWb, Z = 600, n = 20 rev/s.", "outcome": "NEEDS_INPUT"},
+                  {"q": "Find the generated emf of a lap-wound d.c. machine with poles = 5, flux = 25 mWb, Z = 600, n = 20 rev/s.", "outcome": "INVALID_INPUT"}]}
+
+
+def dc_shunt_generator(V, IL, Ra, Rf) -> dict:
+    _check_positive(V=V, Ra=Ra, Rf=Rf)
+    if not (math.isfinite(IL) and IL >= 0):
+        raise ValueError("the load current must be zero or positive")
+    i_f = V / Rf
+    ia = IL + i_f
+    e = V + ia * Ra
+    return {"If": i_f, "Ia": ia, "E": e, "P_out": V * IL, "P_generated": e * ia, "copper_loss": ia * ia * Ra + V * i_f}
+
+
+def _verify_dc_gen(i, o):
+    V, IL, Ra, Rf = i["V"], i["IL"], i["Ra"], i["Rf"]
+    pg = o["P_generated"]
+    return (_rel(o["If"] * Rf, V) + _rel(o["Ia"], IL + o["If"]) + _rel(o["E"], V + o["Ia"] * Ra) + _rel(pg, o["E"] * o["Ia"])
+            + _rel(pg, o["P_out"] + o["copper_loss"]) + abs(o["P_out"] - V * IL) / pg + abs(o["copper_loss"] - o["Ia"] ** 2 * Ra - o["If"] ** 2 * Rf) / pg)
+
+
+def _reference_dc_gen(V, IL, Ra, Rf):
+    """INDEPENDENT reference: the generator as a circuit (a source E behind Ra, the shunt field Rf and the load V/IL
+    across the terminals) solved by modified nodal analysis; scipy.optimize.brentq finds the E that gives the terminal
+    voltage V. Currents and powers are read from that solution."""
+    from scipy import optimize
+
+    def solve(e):
+        els = [("V", "VE", "1", "0", e), ("R", "Ra", "1", "2", Ra), ("R", "Rf", "2", "0", Rf)]
+        if IL > 0:
+            els.append(("R", "RL", "2", "0", V / IL))
+        return _mna(els)
+    hi = 2.0 * V * (1.0 + Ra / Rf + Ra * IL / V)
+    e = optimize.brentq(lambda x: solve(x)[0]["2"] - V, 0.0, hi, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    volts, cur = solve(e)
+    ia, vt = -cur["VE"], volts["2"]
+    return {"E": float(e), "Ia": float(ia), "If": float(vt / Rf), "P_out": float(vt * vt * IL / V), "P_generated": float(e * ia),
+            "copper_loss": float(ia * ia * Ra + vt * vt / Rf)}
+
+
+def _random_dc_gen(rng):
+    V, IL = rng.choice([110.0, 220.0, 250.0, 440.0, 500.0]), round(rng.uniform(10, 200), 1)
+    return {"V": V, "IL": IL, "Ra": round(V * rng.uniform(0.02, 0.08) / IL, 4), "Rf": round(V / (IL * rng.uniform(0.01, 0.05)), 1)}
+
+
+PROCEDURES["dc_shunt_generator"] = _fspec(
+    "D.C. shunt generator: field and armature currents, generated emf and powers", "d.c. machines / generators",
+    "The field current, armature current, generated emf, output power, power generated and copper losses of a shunt-wound d.c. generator delivering a load current at a terminal voltage.",
+    [_inp("V", "voltage", "terminal voltage"), _inp("IL", "current", "load current"), _inp("Ra", "resistance", "armature resistance"),
+     _inp("Rf", "resistance", "shunt field resistance")],
+    [_out("If", "current", "field current V/Rf"), _out("Ia", "current", "armature current IL + If"), _out("E", "voltage", "generated emf V + Ia Ra"),
+     _out("P_out", "power", "power delivered to the load V IL"), _out("P_generated", "power", "electrical power generated E Ia"),
+     _out("copper_loss", "power", "armature and field copper losses")],
+    "E", ["steady state", "brush drop neglected (or included in Ra)"], "If = V/Rf; Ia = IL + If; E = V + Ia Ra",
+    r"I_a = I_L + I_f,\quad E = V + I_aR_a",
+    dc_shunt_generator, _verify_dc_gen, _reference_dc_gen,
+    lambda V, IL, Ra, Rf: (lambda i_f, ia: {"If": i_f, "Ia": ia, "E": V - ia * Ra, "P_out": V * IL, "P_generated": (V - ia * Ra) * ia,
+                                            "copper_loss": ia * ia * Ra + V * i_f})(V / Rf, IL + V / Rf),   # the motor's sign
+    _random_dc_gen,
+    r"\bshunt generator\b",
+    ["Find the generated emf of a shunt generator with V = 250 V, IL = 100 A, Ra = 0.1 ohm, Rf = 125 ohm."],
+    [{"inputs": {"V": 250, "IL": 100, "Ra": 0.1, "Rf": 125},
+      "outputs": {"If": 2.0, "Ia": 102.0, "E": 260.2, "P_out": 25000.0, "P_generated": 26540.4, "copper_loss": 1540.4}},
+     {"inputs": {"V": 220, "IL": 0, "Ra": 0.5, "Rf": 110}, "outputs": {"If": 2.0, "Ia": 2.0, "E": 221.0, "P_out": 0.0, "P_generated": 442.0}}],
+    [{"q": "Find the generated emf of a shunt generator with V = 250 V, IL = 100 A, Ra = 0.1 ohm, Rf = 125 ohm.", "outputs": {"E": 260.2, "Ia": 102.0}},
+     {"q": "Find the generated emf of a shunt generator with V = 220 V, IL = 0 A, Ra = 0.5 ohm, Rf = 110 ohm.", "outputs": {"E": 221.0}},
+     {"q": "Find the generated emf of a shunt generator with V = 250 V, IL = 100 A, Ra = 0.1 ohm.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the generated emf of a shunt generator with V = 250 V, IL = 100 A, Ra = 0 ohm, Rf = 125 ohm.", "outcome": "INVALID_INPUT"}])
+
+
+def dc_shunt_motor(V, I, Ra, Rf, n, losses=0.0) -> dict:
+    _check_positive(V=V, I=I, Ra=Ra, Rf=Rf, n=n)
+    if not (math.isfinite(losses) and losses >= 0):
+        raise ValueError("the losses must be zero or positive")
+    i_f = V / Rf
+    ia = I - i_f
+    if ia <= 0:
+        raise ValueError("the supply current must exceed the field current V/Rf")
+    e = V - ia * Ra
+    if e <= 0:
+        raise ValueError("the armature drop Ia Ra reaches the supply voltage: there is no positive back emf")
+    pc = e * ia
+    pout = pc - losses
+    if pout < 0:
+        raise ValueError("the stated losses exceed the power converted")
+    return {"If": i_f, "Ia": ia, "E": e, "P_converted": pc, "torque": pc / (_TWO_PI * n), "P_out": pout, "efficiency": pout / (V * I)}
+
+
+def _verify_dc_motor(i, o):
+    V, I, Ra, Rf, n = i["V"], i["I"], i["Ra"], i["Rf"], i["n"]
+    pc = o["P_converted"]
+    return (_rel(o["If"] * Rf, V) + _rel(o["If"] + o["Ia"], I) + _rel(o["E"] + o["Ia"] * Ra, V) + _rel(pc, o["E"] * o["Ia"])
+            + _rel(o["torque"] * _TWO_PI * n, pc) + abs(o["P_out"] - pc + i.get("losses", 0.0)) / pc + abs(o["efficiency"] - o["P_out"] / (V * I)))
+
+
+def _reference_dc_motor(V, I, Ra, Rf, n, losses=0.0):
+    """INDEPENDENT reference: the motor as a circuit (supply V, shunt field Rf, and the armature Ra in series with a
+    back-emf source E) solved by modified nodal analysis; scipy.optimize.brentq finds the E at which the supply
+    delivers I. The power converted is the power the back-emf source absorbs; the torque is that power over 2 pi n."""
+    from scipy import optimize
+
+    def solve(e):
+        return _mna([("V", "VS", "1", "0", V), ("R", "Rf", "1", "0", Rf), ("R", "Ra", "1", "2", Ra), ("V", "VE", "2", "0", e)])
+    e = optimize.brentq(lambda x: -solve(x)[1]["VS"] - I, 0.0, V, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    volts, cur = solve(e)
+    ia = cur["VE"]
+    pc = e * ia
+    return {"If": float(volts["1"] / Rf), "Ia": float(ia), "E": float(e), "P_converted": float(pc), "torque": float(pc / (2 * math.pi * n)),
+            "P_out": float(pc - losses), "efficiency": float((pc - losses) / (V * I))}
+
+
+def _random_dc_motor(rng):
+    V = rng.choice([110.0, 220.0, 230.0, 250.0, 440.0, 500.0])
+    rf = round(V / rng.uniform(0.5, 5.0), 1)
+    ia = rng.uniform(5, 100)
+    out = {"V": V, "I": round(ia + V / rf, 3), "Ra": round(V * rng.uniform(0.02, 0.1) / ia, 4), "Rf": rf, "n": round(rng.uniform(10, 30), 2)}
+    if rng.random() < 0.5:
+        out["losses"] = round(rng.uniform(0.0, 0.05) * V * ia, 1)
+    return out
+
+
+PROCEDURES["dc_shunt_motor"] = _fspec(
+    "D.C. shunt motor: back emf, torque, output and efficiency", "d.c. machines / motors",
+    "The field and armature currents, back emf, power converted, electromagnetic torque, output power and efficiency of a shunt-wound d.c. motor taking a current I from a supply V at a speed n.",
+    [_inp("V", "voltage", "supply voltage"), _inp("I", "current", "current taken from the supply"), _inp("Ra", "resistance", "armature resistance"),
+     _inp("Rf", "resistance", "shunt field resistance"), _inp("n", "number", "speed in rev/s (rpm accepted in questions)", units="rotational_speed"),
+     _inp("losses", "power", "iron, friction and windage losses (0 when not given)", required=False)],
+    [_out("If", "current", "field current V/Rf"), _out("Ia", "current", "armature current I - If"), _out("E", "voltage", "back emf V - Ia Ra"),
+     _out("P_converted", "power", "power converted to mechanical form E Ia"), _out("torque", "torque", "electromagnetic torque E Ia/(2 pi n)"),
+     _out("P_out", "power", "output power (converted power minus the stated losses)"), _out("efficiency", "number", "efficiency P_out/(V I)")],
+    "E", ["steady state", "brush drop neglected (or included in Ra)"], "If = V/Rf; Ia = I - If; E = V - Ia Ra; T = E Ia/(2 pi n)",
+    r"E = V - I_aR_a,\quad T = \frac{EI_a}{2\pi n},\quad \eta = \frac{EI_a - P_{loss}}{VI}",
+    dc_shunt_motor, _verify_dc_motor, _reference_dc_motor,
+    lambda V, I, Ra, Rf, n, losses=0.0: (lambda i_f, ia: (lambda e: {"If": i_f, "Ia": ia, "E": e, "P_converted": e * ia, "torque": e * ia / (_TWO_PI * n),
+                                                                      "P_out": e * ia - losses, "efficiency": (e * ia - losses) / (V * I)})(V + ia * Ra))(
+        V / Rf, I - V / Rf),                                                         # the generator's sign
+    _random_dc_motor,
+    r"\bshunt motor\b",
+    ["A shunt motor takes I = 30 A from V = 220 V with Ra = 0.4 ohm, Rf = 110 ohm, n = 1000 rpm, losses = 500 W. Find the back emf, torque and efficiency."],
+    [{"inputs": {"V": 220, "I": 30, "Ra": 0.4, "Rf": 110, "n": 1000 / 60, "losses": 500},
+      "outputs": {"If": 2.0, "Ia": 28.0, "E": 208.8, "P_converted": 5846.4, "torque": 5846.4 / (2 * math.pi * 1000 / 60), "P_out": 5346.4, "efficiency": 5346.4 / 6600}},
+     {"inputs": {"V": 250, "I": 20, "Ra": 0.5, "Rf": 250, "n": 20},
+      "outputs": {"If": 1.0, "Ia": 19.0, "E": 240.5, "P_converted": 4569.5, "torque": 4569.5 / (40 * math.pi), "efficiency": 0.9139}}],
+    [{"q": "A shunt motor takes I = 30 A from V = 220 V with Ra = 0.4 ohm, Rf = 110 ohm, n = 1000 rpm, losses = 500 W. Find the back emf, torque and efficiency.",
+      "outputs": {"E": 208.8, "efficiency": 5346.4 / 6600}},
+     {"q": "A shunt motor takes I = 20 A from V = 250 V with Ra = 0.5 ohm, Rf = 250 ohm, n = 20 rev/s. Find the back emf and the torque.",
+      "outputs": {"E": 240.5, "torque": 4569.5 / (40 * math.pi)}},
+     {"q": "A shunt motor takes I = 30 A from V = 220 V with Ra = 0.4 ohm, Rf = 110 ohm. Find the back emf and the torque.", "outcome": "NEEDS_INPUT"},
+     {"q": "A shunt motor takes I = 1 A from V = 220 V with Ra = 0.4 ohm, Rf = 110 ohm, n = 1000 rpm. Find the back emf.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bnew speed\b")
+
+
+def dc_motor_speed_change(V, Ra, Ia1, n1, Ia2, flux_ratio=1.0) -> dict:
+    _check_positive(V=V, Ra=Ra, n1=n1, flux_ratio=flux_ratio)
+    if not (math.isfinite(Ia1) and Ia1 >= 0 and math.isfinite(Ia2) and Ia2 >= 0):
+        raise ValueError("the armature currents must be zero or positive")
+    e1 = V - Ia1 * Ra
+    e2 = V - Ia2 * Ra
+    if e1 <= 0 or e2 <= 0:
+        raise ValueError("the armature drop Ia Ra reaches the supply voltage: there is no positive back emf")
+    n2 = n1 * (e2 / e1) / flux_ratio
+    return {"E1": e1, "E2": e2, "n2": n2, "n2_rpm": 60.0 * n2, "speed_change": n2 / n1 - 1.0}
+
+
+def _verify_dc_speed(i, o):
+    V, Ra, n1 = i["V"], i["Ra"], i["n1"]
+    k = i.get("flux_ratio", 1.0)
+    return (_rel(o["E1"] + i["Ia1"] * Ra, V) + _rel(o["E2"] + i["Ia2"] * Ra, V) + _rel(o["E2"] * n1, o["E1"] * k * o["n2"])
+            + _rel(o["n2_rpm"], 60.0 * o["n2"]) + abs(o["speed_change"] - (o["n2"] / n1 - 1.0)))
+
+
+def _reference_dc_speed(V, Ra, Ia1, n1, Ia2, flux_ratio=1.0):
+    """INDEPENDENT reference (weak: a re-solve of the machine equations): the machine constant k = E1/(phi1 w1) from
+    the first state (phi1 = 1), then the new angular speed solved by scipy.optimize.brentq from V = Ia2 Ra + k phi2 w2."""
+    from scipy import optimize
+    w1 = 2 * math.pi * n1
+    k = (V - Ia1 * Ra) / w1
+    w2 = optimize.brentq(lambda w: V - Ia2 * Ra - k * flux_ratio * w, 0.0, 1e3 * w1 / flux_ratio, xtol=1e-300, rtol=8.9e-16, maxiter=500)
+    n2 = w2 / (2 * math.pi)
+    return {"E1": float(k * w1), "E2": float(k * flux_ratio * w2), "n2": float(n2), "n2_rpm": float(60 * n2), "speed_change": float(n2 / n1 - 1)}
+
+
+def _random_dc_speed(rng):
+    V = rng.choice([110.0, 220.0, 230.0, 250.0, 440.0, 500.0])
+    ia1 = round(rng.uniform(10, 50), 2)
+    out = {"V": V, "Ra": round(V * rng.uniform(0.03, 0.08) / ia1, 4), "Ia1": ia1, "n1": round(rng.uniform(10, 25), 2), "Ia2": round(ia1 * rng.uniform(1.5, 2.5), 2)}
+    if rng.random() < 0.7:
+        out["flux_ratio"] = round(rng.uniform(0.7, 0.95), 3)
+    return out
+
+
+PROCEDURES["dc_motor_speed_change"] = _fspec(
+    "New speed of a d.c. motor after a change of load or flux", "d.c. machines / speed",
+    "The back emfs before and after, and the new speed, of a d.c. motor on a constant supply whose armature current changes from Ia1 to Ia2 and whose flux changes by a ratio (speed proportional to E/flux).",
+    [_inp("V", "voltage", "supply voltage across the armature"), _inp("Ra", "resistance", "armature resistance"), _inp("Ia1", "current", "first armature current"),
+     _inp("n1", "number", "first speed in rev/s (rpm accepted in questions)", units="rotational_speed"), _inp("Ia2", "current", "new armature current"),
+     _inp("flux_ratio", "number", "new flux over the first flux (1 when unchanged)", required=False)],
+    [_out("E1", "voltage", "first back emf"), _out("E2", "voltage", "new back emf"), _out("n2", "number", "new speed in rev/s"),
+     _out("n2_rpm", "number", "new speed in rpm"), _out("speed_change", "number", "fractional change of speed n2/n1 - 1")],
+    "n2_rpm", ["a constant supply voltage across the armature", "brush drop neglected"], "E = V - Ia Ra; n2/n1 = (E2/E1)(phi1/phi2)",
+    r"\frac{n_2}{n_1} = \frac{E_2}{E_1}\cdot\frac{\Phi_1}{\Phi_2}",
+    dc_motor_speed_change, _verify_dc_speed, _reference_dc_speed,
+    lambda V, Ra, Ia1, n1, Ia2, flux_ratio=1.0: (lambda e1, e2: (lambda n2: {"E1": e1, "E2": e2, "n2": n2, "n2_rpm": 60 * n2, "speed_change": n2 / n1 - 1})(
+        n1 * (e1 / e2) * flux_ratio))(V - Ia1 * Ra, V - Ia2 * Ra),                 # both ratios inverted
+    _random_dc_speed,
+    r"\bnew speed\b",
+    ["Find the new speed of a d.c. motor with V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 1000 rpm, Ia2 = 40 A."],
+    [{"inputs": {"V": 220, "Ra": 0.5, "Ia1": 20, "n1": 1000 / 60, "Ia2": 40},
+      "outputs": {"E1": 210.0, "E2": 200.0, "n2": 1000 / 60 * 200 / 210, "n2_rpm": 1000 * 200 / 210, "speed_change": 200 / 210 - 1}},
+     {"inputs": {"V": 250, "Ra": 0.2, "Ia1": 50, "n1": 20, "Ia2": 50, "flux_ratio": 0.8}, "outputs": {"n2": 25.0, "n2_rpm": 1500.0, "speed_change": 0.25}}],
+    [{"q": "Find the new speed of a d.c. motor with V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 1000 rpm, Ia2 = 40 A.", "outputs": {"n2_rpm": 1000 * 200 / 210}},
+     {"q": "Find the new speed of a d.c. motor with V = 250 V, Ra = 0.2 ohm, Ia1 = 50 A, n1 = 1200 rpm, Ia2 = 50 A, flux_ratio = 0.8.", "outputs": {"n2_rpm": 1500.0}},
+     {"q": "Find the new speed of a d.c. motor with V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 1000 rpm.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the new speed of a d.c. motor with V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 1000 rpm, Ia2 = 40 A, flux_ratio = 0.", "outcome": "INVALID_INPUT"}])
+
+
+# --------------------------------------------------------------------------------------------- plane electromagnetic waves
+def plane_wave_lossless(f, eps_r, mu_r) -> dict:
+    _check_positive(f=f)
+    if not (math.isfinite(eps_r) and eps_r >= 1 and math.isfinite(mu_r) and mu_r >= 1):
+        raise ValueError("the relative permittivity and permeability must be at least 1")
+    idx = math.sqrt(eps_r * mu_r)
+    v = _C0 / idx
+    lam = v / f
+    return {"v": v, "wavelength": lam, "eta": _MU0 * _C0 * math.sqrt(mu_r / eps_r), "beta": _TWO_PI / lam, "n": idx}
+
+
+def _verify_wave(i, o):
+    er, mr, f = i["eps_r"], i["mu_r"], i["f"]
+    return (_rel(o["v"] ** 2 * er * mr * _EPS0 * _MU0, 1.0) + _rel(o["wavelength"] * f, o["v"]) + _rel(o["eta"] ** 2 * _EPS0 * er, _MU0 * mr)
+            + _rel(o["beta"] * o["wavelength"], _TWO_PI) + _rel(o["n"] * o["v"], _C0))
+
+
+def _reference_wave(f, eps_r, mu_r):
+    """INDEPENDENT reference: the propagation constant gamma = sqrt(jw mu (jw eps)) and the wave impedance
+    sqrt(mu/eps) in complex arithmetic (numpy), with c from scipy.constants and the stated mu0 = 4 pi 1e-7,
+    eps0 = 1/(mu0 c^2); v = w/beta, wavelength 2 pi/beta, n = c beta/w."""
+    import numpy as np
+    from scipy import constants
+    mu = 4e-7 * np.pi * mu_r
+    eps = eps_r / (4e-7 * np.pi * constants.c ** 2)
+    w = 2 * np.pi * f
+    beta = abs(float(np.sqrt(complex(1j * w * mu) * complex(1j * w * eps)).imag))
+    eta = float(np.sqrt(complex(mu / eps)).real)
+    return {"v": float(w / beta), "wavelength": float(2 * np.pi / beta), "eta": eta, "beta": beta, "n": float(constants.c * beta / w)}
+
+
+PROCEDURES["plane_wave_lossless"] = _fspec(
+    "Plane wave in a lossless medium: speed, wavelength and wave impedance", "electromagnetics / plane waves",
+    "The phase velocity, wavelength, intrinsic (wave) impedance, phase constant and refractive index of a uniform plane wave in a lossless medium.",
+    [_inp("f", "frequency", "frequency"), _inp("eps_r", "number", "relative permittivity"), _inp("mu_r", "number", "relative permeability")],
+    [_out("v", "speed", "phase velocity"), _out("wavelength", "length", "wavelength in the medium"), _out("eta", "resistance", "intrinsic impedance"),
+     _out("beta", "number", "phase constant in rad/m"), _out("n", "number", "refractive index sqrt(eps_r mu_r)")],
+    "wavelength", ["a lossless, linear, homogeneous medium (conductivity 0)", "eps_r, mu_r >= 1"],
+    "v = c/sqrt(eps_r mu_r); wavelength = v/f; eta = eta0 sqrt(mu_r/eps_r)", r"v = \frac{c}{\sqrt{\varepsilon_r\mu_r}},\quad \lambda = \frac{v}{f},\quad \eta = \sqrt{\frac{\mu}{\varepsilon}}",
+    plane_wave_lossless, _verify_wave, _reference_wave,
+    lambda f, eps_r, mu_r: (lambda v: {"v": v, "wavelength": v / f, "eta": _MU0 * _C0 * math.sqrt(mu_r / eps_r), "beta": _TWO_PI * f / v, "n": eps_r * mu_r})(
+        _C0 / (eps_r * mu_r)),                                                      # square root forgotten
+    lambda rng: {"f": float(rng.choice([1e6, 1e7, 1e8, 3e8, 1e9, 2.45e9, 1e10])), "eps_r": rng.choice([1.5, 2.1, 2.25, 4.0, 9.0, 81.0]),
+                 "mu_r": rng.choice([1.0, 1.0, 1.0, 2.0, 50.0])},
+    r"(?=.*\bplane wave\b)(?=.*\blossless\b)",
+    ["A plane wave in a lossless medium has f = 100 MHz, eps_r = 4, mu_r = 1. Find the wavelength and the wave impedance."],
+    [{"inputs": {"f": 1e8, "eps_r": 4, "mu_r": 1},
+      "outputs": {"v": 149896229.0, "wavelength": 1.49896229, "eta": 2e-7 * math.pi * 299792458.0, "beta": 2 * math.pi / 1.49896229, "n": 2.0}},
+     {"inputs": {"f": 2.45e9, "eps_r": 81, "mu_r": 1}, "outputs": {"v": 299792458.0 / 9, "wavelength": 299792458.0 / 9 / 2.45e9}}],
+    [{"q": "A plane wave in a lossless medium has f = 100 MHz, eps_r = 4, mu_r = 1. Find the wavelength and the wave impedance.",
+      "outputs": {"wavelength": 1.49896229, "eta": 2e-7 * math.pi * 299792458.0}},
+     {"q": "A plane wave in a lossless medium has f = 100 MHz, mu_r = 1. Find the wavelength.", "outcome": "NEEDS_INPUT"},
+     {"q": "A plane wave in a lossless medium has f = 100 MHz, eps_r = 0.5, mu_r = 1. Find the wavelength.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\bsigma\b|\bskin depth\b|\blossy\b|\bconducting\b")
+
+
+def plane_wave_lossy(f, eps_r, mu_r, sigma) -> dict:
+    _check_positive(f=f, sigma=sigma)
+    if not (math.isfinite(eps_r) and eps_r >= 1 and math.isfinite(mu_r) and mu_r >= 1):
+        raise ValueError("the relative permittivity and permeability must be at least 1")
+    w = _TWO_PI * f
+    eps = _EPS0 * eps_r
+    mu = _MU0 * mu_r
+    x = sigma / (w * eps)
+    s = math.hypot(1.0, x)
+    a0 = w * math.sqrt(mu * eps / 2.0)
+    alpha = a0 * x / math.sqrt(s + 1.0)          # = a0 sqrt(s - 1) without the cancellation of s - 1 for a small loss tangent
+    beta = a0 * math.sqrt(s + 1.0)
+    return {"alpha": alpha, "beta": beta, "skin_depth": 1.0 / alpha, "v": w / beta, "wavelength": _TWO_PI / beta,
+            "eta": math.sqrt(w * mu / math.hypot(sigma, w * eps)), "eta_angle_deg": 0.5 * math.degrees(math.atan2(sigma, w * eps)), "loss_tangent": x}
+
+
+def _verify_lossy(i, o):
+    """gamma = alpha + j beta must satisfy gamma^2 = jw mu (sigma + jw eps) (real and imaginary parts), eta^2 =
+    jw mu/(sigma + jw eps) in magnitude and angle, and the derived lengths and speeds."""
+    f, sg = i["f"], i["sigma"]
+    w = _TWO_PI * f
+    eps = _EPS0 * i["eps_r"]
+    mu = _MU0 * i["mu_r"]
+    a, b = o["alpha"], o["beta"]
+    return (abs(a * a - b * b + w * w * mu * eps) / (b * b) + abs(2 * a * b - w * mu * sg) / (w * mu * sg)
+            + _rel(o["skin_depth"] * a, 1.0) + _rel(o["v"] * b, w) + _rel(o["wavelength"] * b, _TWO_PI)
+            + _rel(o["eta"] ** 4 * (sg * sg + (w * eps) ** 2), (w * mu) ** 2) + abs(2 * math.radians(o["eta_angle_deg"]) - math.atan2(sg, w * eps)) / math.pi
+            + _rel(o["loss_tangent"] * w * eps, sg))
+
+
+def _reference_lossy(f, eps_r, mu_r, sigma):
+    """INDEPENDENT reference: gamma = sqrt(jw mu (sigma + jw eps)) and eta = sqrt(jw mu/(sigma + jw eps)) by numpy's
+    complex square root (principal branch), with c from scipy.constants and the stated mu0, eps0 = 1/(mu0 c^2)."""
+    import numpy as np
+    from scipy import constants
+    mu = 4e-7 * np.pi * mu_r
+    eps = eps_r / (4e-7 * np.pi * constants.c ** 2)
+    w = 2 * np.pi * f
+    g = complex(np.sqrt(complex(1j * w * mu) * complex(sigma + 1j * w * eps)))
+    eta = complex(np.sqrt(complex(1j * w * mu) / complex(sigma + 1j * w * eps)))
+    return {"alpha": g.real, "beta": g.imag, "skin_depth": 1 / g.real, "v": w / g.imag, "wavelength": 2 * np.pi / g.imag,
+            "eta": abs(eta), "eta_angle_deg": float(np.angle(eta, deg=True)), "loss_tangent": sigma / (w * eps)}
+
+
+def _hand_gamma(f, eps_r, mu_r, sigma):
+    """Worked-example route: gamma by Python's complex power (jw mu (sigma + jw eps)) ** 0.5."""
+    w = 2 * math.pi * f
+    return (1j * w * 4e-7 * math.pi * mu_r * (sigma + 1j * w * eps_r * 8.854187817620389e-12)) ** 0.5
+
+
+PROCEDURES["plane_wave_lossy"] = _fspec(
+    "Plane wave in a conducting (lossy) medium: attenuation, skin depth, speed and wave impedance", "electromagnetics / plane waves",
+    "The attenuation and phase constants, skin depth, phase velocity, wavelength, intrinsic impedance (magnitude and angle) and loss tangent of a uniform plane wave in a medium of conductivity sigma.",
+    [_inp("f", "frequency", "frequency"), _inp("eps_r", "number", "relative permittivity"), _inp("mu_r", "number", "relative permeability"),
+     _inp("sigma", "number", "conductivity in S/m", units="conductivity")],
+    [_out("alpha", "number", "attenuation constant in Np/m"), _out("beta", "number", "phase constant in rad/m"), _out("skin_depth", "length", "skin depth 1/alpha"),
+     _out("v", "speed", "phase velocity w/beta"), _out("wavelength", "length", "wavelength 2 pi/beta"), _out("eta", "resistance", "magnitude of the intrinsic impedance"),
+     _out("eta_angle_deg", "number", "angle of the intrinsic impedance in degrees (0 to 45)"), _out("loss_tangent", "number", "loss tangent sigma/(w eps)")],
+    "skin_depth", ["a linear, homogeneous medium", "sigma > 0 (a lossless medium: plane_wave_lossless)", "eps_r, mu_r >= 1"],
+    "gamma = alpha + j beta = sqrt(jw mu (sigma + jw eps)); delta = 1/alpha; eta = sqrt(jw mu/(sigma + jw eps))",
+    r"\gamma = \alpha + j\beta = \sqrt{j\omega\mu(\sigma + j\omega\varepsilon)},\quad \delta = \frac{1}{\alpha}",
+    plane_wave_lossy, _verify_lossy, _reference_lossy,
+    lambda f, eps_r, mu_r, sigma: plane_wave_lossy(f / _TWO_PI, eps_r, mu_r, sigma),   # f used as w
+    lambda rng: (lambda m: {"f": float(rng.choice([50, 60, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9])), "eps_r": m[0], "mu_r": m[1], "sigma": m[2]})(
+        rng.choice([(81.0, 1.0, 4.0), (1.0, 1.0, 5.8e7), (10.0, 1.0, 0.01), (1.0, 1.0, 3.5e7), (80.0, 1.0, 0.005), (15.0, 1.0, 0.05), (1.0, 200.0, 1e7)])),
+    r"\bskin depth\b|\b(?:lossy|conducting)\b",
+    ["Find the skin depth of a plane wave in a conducting medium with f = 1 MHz, eps_r = 1, mu_r = 1, sigma = 5.8e7 S/m."],
+    [{"inputs": {"f": 1e6, "eps_r": 1, "mu_r": 1, "sigma": 5.8e7},
+      "outputs": {"alpha": _hand_gamma(1e6, 1, 1, 5.8e7).real, "beta": _hand_gamma(1e6, 1, 1, 5.8e7).imag, "skin_depth": 1 / _hand_gamma(1e6, 1, 1, 5.8e7).real}},
+     {"inputs": {"f": 1e6, "eps_r": 10, "mu_r": 1, "sigma": 0.01},
+      "outputs": {"alpha": _hand_gamma(1e6, 10, 1, 0.01).real, "wavelength": 2 * math.pi / _hand_gamma(1e6, 10, 1, 0.01).imag}}],
+    [{"q": "Find the skin depth of a plane wave in a conducting medium with f = 1 MHz, eps_r = 1, mu_r = 1, sigma = 5.8e7 S/m.",
+      "outputs": {"skin_depth": 1 / _hand_gamma(1e6, 1, 1, 5.8e7).real}},
+     {"q": "Find the attenuation of a plane wave in a lossy medium with f = 1 MHz, eps_r = 10, mu_r = 1, sigma = 0.01 S/m.",
+      "outputs": {"alpha": _hand_gamma(1e6, 10, 1, 0.01).real}},
+     {"q": "Find the skin depth of a plane wave in a conducting medium with f = 1 MHz, eps_r = 1, mu_r = 1.", "outcome": "NEEDS_INPUT"},
+     {"q": "Find the skin depth of a plane wave in a conducting medium with f = 1 MHz, eps_r = 1, mu_r = 1, sigma = 0 S/m.", "outcome": "INVALID_INPUT"}],
+    forbid=r"\blossless\b")
+
+
+# ================================================================================ AC network analysis (core gap, 2026-11-12)
+# Phasor (sinusoidal steady-state) versions of the DC solvers above: mesh equations with complex impedances, node
+# voltages of an AC netlist, and the AC Thevenin and Norton equivalents. Conventions: phasors are rms (powers are
+# P + jQ = V I*); angles in degrees, in (-180, 180]; Z = R + jX (X > 0 inductive); an inductor's impedance is j w L and
+# a capacitor's 1/(j w C) with w = 2 pi f. Netlist: R<name> <node> <node> <ohms>, L<name> <node> <node> <henries>,
+# C<name> <node> <node> <farads>, V<name> <node+> <node-> <rms volts> [<angle deg>], I<name> <node> <node> <rms amperes>
+# [<angle deg>] (flowing from the first node through the source to the second); node 0 is ground. Complex division is
+# written out (the same bits on every Python version); results are rounded to 12 significant digits and parts below
+# 1e-12 of their group's largest magnitude are written as exactly 0 (an angle of a zero phasor is 0).
+_AC_FREQ = rf"\b(?:at|f\s*=|frequency\s*(?:of|=|is)?)\s*({_NUM_NB})\s*({_unit_alt('frequency')})(?![A-Za-z])"
+
+
+def _cdiv(a, b):
+    """a / b for complex numbers by the textbook formula."""
+    d = b.real * b.real + b.imag * b.imag
+    if d == 0:
+        raise ValueError("division by a zero impedance")
+    return complex((a.real * b.real + a.imag * b.imag) / d, (a.imag * b.real - a.real * b.imag) / d)
+
+
+def _cabs(z):
+    return math.hypot(z.real, z.imag)
+
+
+def _r12(x):
+    if x == 0 or not math.isfinite(x):
+        return 0.0 if x == 0 else x
+    return float(f"{x:.12g}") + 0.0
+
+
+def _rect_deg(m, deg):
+    """m at an angle in degrees, exact at multiples of 90 degrees."""
+    a = deg % 360.0
+    if a == 0:
+        return complex(m, 0.0)
+    if a == 90:
+        return complex(0.0, m)
+    if a == 180:
+        return complex(-m, 0.0)
+    if a == 270:
+        return complex(0.0, -m)
+    t = math.radians(a)
+    return complex(m * math.cos(t), m * math.sin(t))
+
+
+def _csnap(z, scale):
+    re_, im = z.real, z.imag
+    if abs(re_) <= 1e-12 * scale:
+        re_ = 0.0
+    if abs(im) <= 1e-12 * scale:
+        im = 0.0
+    return complex(re_ + 0.0, im + 0.0)
+
+
+def _phasor_parts(z, scale):
+    """(real, imag, magnitude, angle in degrees) of a phasor, parts below 1e-12 of `scale` snapped to 0."""
+    s = _csnap(z, scale)
+    m = math.hypot(s.real, s.imag)
+    ang = math.degrees(math.atan2(s.imag, s.real)) if m > 0 else 0.0
+    if ang == -180.0:
+        ang = 180.0
+    return _r12(s.real), _r12(s.imag), _r12(m), _r12(ang)
+
+
+def _cgauss(A, b):
+    """Solve A x = b for complex A and b by Gaussian elimination with partial pivoting (plain Python, the complex
+    division written out). A singular system is a ValueError."""
+    n = len(A)
+    M = []
+    for i in range(n):
+        row = []
+        for j in range(n):
+            row.append(complex(A[i][j]))
+        row.append(complex(b[i]))
+        M.append(row)
+    scale = 0.0
+    for i in range(n):
+        for j in range(n):
+            scale = max(scale, M[i][j].real * M[i][j].real + M[i][j].imag * M[i][j].imag)
+    if scale == 0:
+        raise ValueError("the system is singular: the equations do not determine every unknown")
+    for c in range(n):
+        p = c
+        best = M[c][c].real * M[c][c].real + M[c][c].imag * M[c][c].imag
+        for r in range(c + 1, n):
+            m2 = M[r][c].real * M[r][c].real + M[r][c].imag * M[r][c].imag
+            if m2 > best:
+                p = r
+                best = m2
+        if best <= 1e-24 * scale:
+            raise ValueError("the system is singular: the equations do not determine every unknown")
+        if p != c:
+            M[c], M[p] = M[p], M[c]
+        for r in range(c + 1, n):
+            f = _cdiv(M[r][c], M[c][c])
+            if f != 0:
+                for k in range(c, n + 1):
+                    M[r][k] = M[r][k] - f * M[c][k]
+    x = [complex(0.0, 0.0)] * n
+    for r in range(n - 1, -1, -1):
+        s = M[r][n]
+        for k in range(r + 1, n):
+            s = s - M[r][k] * x[k]
+        x[r] = _cdiv(s, M[r][r])
+    return x
+
+
+def _polar_err(o, p):
+    """|stated magnitude - |z|| and the angle difference (degrees / 180) of the outputs p_real, p_imag, p_mag, p_deg."""
+    z = complex(o[p + "_real"], o[p + "_imag"])
+    m = _cabs(z)
+    e = abs(o[p + "_mag"] - m) / max(1e-300, abs(o[p + "_mag"]), m)
+    if m > 0:
+        e += abs((o[p + "_deg"] - math.degrees(math.atan2(z.imag, z.real)) + 180.0) % 360.0 - 180.0) / 180.0
+    else:
+        e += abs(o[p + "_deg"]) / 180.0
+    return e
+
+
+# ------------------------------------------------------------------------------------------------ AC mesh equations
+def _ac_mesh_out(I):
+    scale = 0.0
+    for z in I:
+        scale = max(scale, _cabs(z))
+    re_, im, mag, deg = [], [], [], []
+    for z in I:
+        p = _phasor_parts(z, scale)
+        re_.append(p[0])
+        im.append(p[1])
+        mag.append(p[2])
+        deg.append(p[3])
+    return {"currents_real": re_, "currents_imag": im, "currents_mag": mag, "currents_deg": deg,
+            "first_mag": mag[0], "first_deg": deg[0]}
+
+
+def ac_mesh_currents(R, X, V_mag, V_deg) -> dict:
+    n = len(R)
+    if n == 0:
+        raise ValueError("give at least one mesh")
+    for row in R:
+        if len(row) != n:
+            raise ValueError("the resistance matrix must be square")
+    if len(X) != n:
+        raise ValueError("the reactance matrix must have the shape of the resistance matrix")
+    for row in X:
+        if len(row) != n:
+            raise ValueError("the reactance matrix must have the shape of the resistance matrix")
+    if len(V_mag) != n or len(V_deg) != n:
+        raise ValueError(f"give {n} source magnitudes and {n} source angles, one per mesh")
+    for k in range(n):
+        if not (math.isfinite(V_mag[k]) and math.isfinite(V_deg[k]) and V_mag[k] >= 0):
+            raise ValueError("source magnitudes must be zero or positive and the angles finite (write a sign as 180 degrees)")
+        for j in range(n):
+            if not (math.isfinite(R[k][j]) and math.isfinite(X[k][j])):
+                raise ValueError("the matrices must hold finite numbers")
+    Z = []
+    for i in range(n):
+        row = []
+        for j in range(n):
+            row.append(complex(R[i][j], X[i][j]))
+        Z.append(row)
+    V = []
+    for k in range(n):
+        V.append(_rect_deg(V_mag[k], V_deg[k]))
+    return _ac_mesh_out(_cgauss(Z, V))
+
+
+def _verify_ac_mesh(inputs, outputs):
+    """Kirchhoff's voltage law in phasor form: every row of Z I = V, with the stated currents; and each current's
+    magnitude and angle agree with its real and imaginary parts."""
+    R, X, Vm, Vd = inputs["R"], inputs["X"], inputs["V_mag"], inputs["V_deg"]
+    n = len(R)
+    for k in ("currents_real", "currents_imag", "currents_mag", "currents_deg"):
+        if k not in outputs or len(outputs[k]) != n:
+            return math.inf
+    I = []
+    for k in range(n):
+        I.append(complex(outputs["currents_real"][k], outputs["currents_imag"][k]))
+    worst = 0.0
+    for r in range(n):
+        acc = complex(0.0, 0.0)
+        sc = 0.0
+        for c in range(n):
+            t = complex(R[r][c], X[r][c]) * I[c]
+            acc = acc + t
+            sc += _cabs(t)
+        v = _rect_deg(Vm[r], Vd[r])
+        sc += _cabs(v)
+        if sc > 0:
+            worst = max(worst, _cabs(acc - v) / sc)
+    for k in range(n):
+        o = {"c_real": outputs["currents_real"][k], "c_imag": outputs["currents_imag"][k],
+             "c_mag": outputs["currents_mag"][k], "c_deg": outputs["currents_deg"][k]}
+        worst = max(worst, _polar_err(o, "c"))
+    return worst + _rel(outputs["first_mag"], outputs["currents_mag"][0]) + abs(outputs["first_deg"] - outputs["currents_deg"][0]) / 180.0
+
+
+def _reference_ac_mesh(R, X, V_mag, V_deg):
+    """INDEPENDENT reference: numpy.linalg.solve (LAPACK, complex128) of (R + jX) I = V with V = |V| e^{j theta}."""
+    import numpy as np
+    Z = np.array(R, float) + 1j * np.array(X, float)
+    V = np.array(V_mag, float) * np.exp(1j * np.deg2rad(np.array(V_deg, float)))
+    I = np.linalg.solve(Z, V)
+    return _ac_mesh_out([complex(z) for z in I])
+
+
+def _random_ac_mesh(rng):
+    m = _random_mesh(rng)
+    R = m["A"]
+    n = len(R)
+    X = [[0.0] * n for _ in range(n)]
+    for i in range(n):
+        X[i][i] += rng.choice([1, -1]) * _e12(rng, 0, 3)
+        for j in range(i + 1, n):
+            if rng.random() < 0.5:
+                s = rng.choice([1, -1]) * _e12(rng, 0, 2)
+                X[i][i] += s
+                X[j][j] += s
+                X[i][j] -= s
+                X[j][i] -= s
+    return {"R": R, "X": [[round(x, 9) for x in row] for row in X], "V_mag": [abs(v) for v in m["b"]],
+            "V_deg": [float(round(rng.uniform(-180, 180))) for _ in range(n)]}
+
+
+def parse_ac_mesh(question):
+    if not re.search(r"\bmesh\b", question, re.I) or not re.search(_AC_HINT, question, re.I):
+        return None
+    out, rest = {}, question
+    for key, words in (("R", ["resistance matrix"]), ("X", ["reactance matrix"]), ("V_mag", ["source magnitudes"]),
+                       ("V_deg", ["source angles"])):
+        t = _bracket_after(question, words)
+        if t is not None:
+            out[key] = t
+            rest = rest.replace(t, " ", 1)
+    if not out or re.search(r"\d", rest):
+        return None                                  # a number outside the four written lists is never guessed
+    return out
+
+
+_AC_MESH_Z = complex(10, 5) * complex(8, -3) - complex(-4, -2) ** 2      # 83 - 6j, the determinant of example 2
+
+PROCEDURES["ac_mesh_currents"] = {
+    "name": "AC mesh currents from the phasor mesh equations (complex impedances)", "topic": "AC circuits / AC network analysis",
+    "purpose": "Solve the mesh equations Z I = V of an AC circuit in phasor form: the mesh resistance and reactance matrices (Z = R + jX) and the source phasors give every mesh current's magnitude and angle.",
+    "inputs": [{"symbol": "R", "type": "matrix", "required": True,
+                "meaning": "mesh resistance matrix in ohms (real part of the mesh impedance matrix)"},
+               {"symbol": "X", "type": "matrix", "required": True,
+                "meaning": "mesh reactance matrix in ohms (imaginary part: + wL for an inductor, - 1/(wC) for a capacitor; shared terms with a minus sign)"},
+               {"symbol": "V_mag", "type": "vector", "min_length": 1, "max_length": 30, "required": True,
+                "meaning": "rms magnitude of the net source voltage around each mesh, in volts (in the mesh-current direction)"},
+               {"symbol": "V_deg", "type": "vector", "min_length": 1, "max_length": 30, "required": True,
+                "meaning": "angle of each mesh's net source voltage, in degrees"}],
+    "outputs": [{"symbol": "currents_mag", "kind": "number", "meaning": "rms magnitudes of the mesh currents in amperes, in row order"},
+                {"symbol": "currents_deg", "kind": "number", "meaning": "angles of the mesh currents in degrees"},
+                {"symbol": "currents_real", "kind": "number", "meaning": "real parts of the mesh currents in amperes"},
+                {"symbol": "currents_imag", "kind": "number", "meaning": "imaginary parts of the mesh currents in amperes"},
+                {"symbol": "first_mag", "kind": "current", "meaning": "magnitude of the first mesh current"},
+                {"symbol": "first_deg", "kind": "number", "meaning": "angle of the first mesh current in degrees"}],
+    "primary": "first_mag", "conditions": ["square matrices of one shape", "one source phasor per mesh (magnitude >= 0)",
+                                           "a non-singular impedance matrix", "sinusoidal steady state, one frequency"],
+    "method": "complex Gaussian elimination with partial pivoting on (R + jX) I = V",
+    "latex": r"(\mathbf{R} + j\mathbf{X})\,\mathbf{I} = \mathbf{V}",
+    "run": ac_mesh_currents, "verify": _verify_ac_mesh, "parse": parse_ac_mesh, "reference": _reference_ac_mesh,
+    "wrong": lambda R, X, V_mag, V_deg: ac_mesh_currents(R, [[-x for x in row] for row in X], V_mag, V_deg),   # j and -j confused
+    "random_inputs": _random_ac_mesh,
+    "templates": ["Solve the AC mesh equations with resistance matrix [[10, -4], [-4, 8]], reactance matrix [[5, -2], [-2, -3]], "
+                  "source magnitudes [10, 0] and source angles [0, 0].",
+                  "Find the AC mesh currents for resistance matrix [[3]], reactance matrix [[4]], source magnitudes [10] and source angles [0]."],
+    "examples": [{"inputs": {"R": [[3.0]], "X": [[4.0]], "V_mag": [10.0], "V_deg": [0.0]},
+                  "outputs": {"currents_real": [1.2], "currents_imag": [-1.6], "currents_mag": [2.0],
+                              "currents_deg": [math.degrees(math.atan2(-1.6, 1.2))], "first_mag": 2.0}},
+                 {"inputs": {"R": [[10.0, -4.0], [-4.0, 8.0]], "X": [[5.0, -2.0], [-2.0, -3.0]], "V_mag": [10.0, 0.0], "V_deg": [0.0, 0.0]},
+                  "outputs": {"currents_real": [6820 / 6925, 3200 / 6925], "currents_imag": [-2010 / 6925, 1900 / 6925],
+                              "first_mag": abs(complex(80, -30) / _AC_MESH_Z)}}],
+    "questions": [{"q": "Solve the AC mesh equations with resistance matrix [[10, -4], [-4, 8]], reactance matrix [[5, -2], [-2, -3]], "
+                        "source magnitudes [10, 0] and source angles [0, 0].",
+                   "outputs": {"currents_real": [6820 / 6925, 3200 / 6925], "currents_imag": [-2010 / 6925, 1900 / 6925]}},
+                  {"q": "Find the AC mesh currents for resistance matrix [[3]], reactance matrix [[4]], source magnitudes [10] and source angles [0].",
+                   "outputs": {"first_mag": 2.0, "first_deg": math.degrees(math.atan2(-1.6, 1.2))}},
+                  {"q": "Solve the AC mesh equations with resistance matrix [[1, 2], [2, 4]], reactance matrix [[0, 0], [0, 0]], "
+                        "source magnitudes [1, 1] and source angles [0, 0].", "outcome": "INVALID_INPUT"},
+                  {"q": "Solve the AC mesh equations with resistance matrix [[10, -4], [-4, 8]], reactance matrix [[5, -2], [-2, -3]] "
+                        "and source magnitudes [10, 0].", "outcome": "NEEDS_INPUT"}]}
+
+
+# ------------------------------------------------------------------------------------------------ AC netlists
+def _ac_netlist(text):
+    """'V1 1 0 10 30; R1 1 2 100; L1 2 0 0.1; C1 2 0 1e-6' -> (type, name, node, node, value, angle in degrees)."""
+    els, names = [], set()
+    for part in re.split(r"[;\n]+", text):
+        p = part.strip().rstrip(".").strip()
+        if not p:
+            continue
+        toks = p.split()
+        t = toks[0][0].upper()
+        if t not in "RLCVI":
+            raise ValueError(f"element '{toks[0]}': only R, L, C, voltage sources (V) and current sources (I)")
+        if (t in "RLC" and len(toks) != 4) or (t in "VI" and len(toks) not in (4, 5)):
+            raise ValueError(f"cannot read the element '{p}': write <name> <node> <node> <value> (sources: [<angle in degrees>])")
+        name, a, b = toks[0], toks[1], toks[2]
+        if name.upper() in names:
+            raise ValueError(f"element name '{name}' is used twice")
+        names.add(name.upper())
+        try:
+            val = float(toks[3])
+            ph = float(toks[4]) if len(toks) == 5 else 0.0
+        except ValueError:
+            raise ValueError(f"element '{name}': its value is not a number") from None
+        if not (math.isfinite(val) and math.isfinite(ph)):
+            raise ValueError(f"element '{name}': the value must be finite")
+        if t in "RLC" and val <= 0:
+            raise ValueError(f"element '{name}' must have a positive value")
+        if t in "VI" and val < 0:
+            raise ValueError(f"source '{name}': give a non-negative magnitude (a sign is an angle of 180 degrees)")
+        if a == b:
+            raise ValueError(f"element '{name}' connects node {a} to itself")
+        els.append((t, name, a, b, val, ph))
+    if not any(e[0] in "RLC" for e in els):
+        raise ValueError("the circuit needs at least one resistor, inductor or capacitor")
+    if not any("0" in (e[2], e[3]) for e in els):
+        raise ValueError("the circuit needs a ground node named 0")
+    return els
+
+
+def _ac_admittance(t, val, w):
+    if t == "R":
+        return complex(1.0 / val, 0.0)
+    if t == "L":
+        return complex(0.0, -1.0 / (w * val))
+    return complex(0.0, w * val)
+
+
+def _ac_mna(els, w):
+    """Modified nodal analysis with complex admittances: node voltage phasors and voltage-source current phasors
+    (positive from node+ through the source to node-)."""
+    nodes = sorted({n for e in els for n in (e[2], e[3]) if n != "0"}, key=_node_key)
+    idx = {n: i for i, n in enumerate(nodes)}
+    vs = [e for e in els if e[0] == "V"]
+    N = len(nodes) + len(vs)
+    A = [[complex(0.0, 0.0)] * N for _ in range(N)]
+    z = [complex(0.0, 0.0)] * N
+    for t, name, a, b, val, ph in els:
+        ia, ib = idx.get(a), idx.get(b)
+        if t in "RLC":
+            y = _ac_admittance(t, val, w)
+            for i, j, s in ((ia, ia, y), (ib, ib, y), (ia, ib, -y), (ib, ia, -y)):
+                if i is not None and j is not None:
+                    A[i][j] = A[i][j] + s
+        elif t == "I":
+            src = _rect_deg(val, ph)
+            if ia is not None:
+                z[ia] = z[ia] - src
+            if ib is not None:
+                z[ib] = z[ib] + src
+    for k, (t, name, a, b, val, ph) in enumerate(vs):
+        r = len(nodes) + k
+        ia, ib = idx.get(a), idx.get(b)
+        if ia is not None:
+            A[ia][r] = A[ia][r] + 1.0
+            A[r][ia] = A[r][ia] + 1.0
+        if ib is not None:
+            A[ib][r] = A[ib][r] - 1.0
+            A[r][ib] = A[r][ib] - 1.0
+        z[r] = _rect_deg(val, ph)
+    A0 = []
+    for row in A:
+        A0.append(list(row))
+    x = _cgauss(A0, z)
+    # one step of iterative refinement: near a resonance the system is ill-conditioned and a single elimination left
+    # ~6e-9 relative between two solves of the same circuit (box certification, 2026-11-12)
+    res = []
+    for i in range(N):
+        s = z[i]
+        for j in range(N):
+            s = s - A0[i][j] * x[j]
+        res.append(s)
+    d = _cgauss(A0, res)
+    for i in range(N):
+        x[i] = x[i] + d[i]
+    vmax = max((_cabs(x[idx[n]]) for n in nodes), default=0.0)
+    imax = max((_cabs(x[len(nodes) + k]) for k in range(len(vs))), default=0.0)
+    volts = {"0": complex(0.0, 0.0)}
+    for n in nodes:
+        volts[n] = _csnap(x[idx[n]], vmax)
+    cur = {}
+    for k, e in enumerate(vs):
+        cur[e[1]] = _csnap(x[len(nodes) + k], imax)
+    return volts, cur
+
+
+def _ac_source_power(els, volts, cur):
+    """Complex power delivered by the sources, sum of -V I* (voltage sources) and (V_b - V_a) I* (current sources)."""
+    s = complex(0.0, 0.0)
+    for t, name, a, b, val, ph in els:
+        if t == "V":
+            s = s - _rect_deg(val, ph) * cur[name].conjugate()
+        elif t == "I":
+            s = s + (volts[b] - volts[a]) * _rect_deg(val, ph).conjugate()
+    return s
+
+
+def _ac_absorbed_power(els, volts, w):
+    """Complex power taken by the passive elements: |V|^2/R, j |V|^2/(wL), -j wC |V|^2."""
+    p, q = 0.0, 0.0
+    for t, name, a, b, val, ph in els:
+        if t in "RLC":
+            dv = volts[a] - volts[b]
+            v2 = dv.real * dv.real + dv.imag * dv.imag
+            if t == "R":
+                p += v2 / val
+            elif t == "L":
+                q += v2 / (w * val)
+            else:
+                q -= v2 * w * val
+    return complex(p, q)
+
+
+def _ac_nodes_out(volts, cur, S):
+    vmax = 0.0
+    for v in volts.values():
+        vmax = max(vmax, _cabs(v))
+    imax = 0.0
+    for c in cur.values():
+        imax = max(imax, _cabs(c))
+    vr, vi, vm, vd, cr, ci = {}, {}, {}, {}, {}, {}
+    for n, v in volts.items():
+        if n != "0":
+            p = _phasor_parts(v, vmax)
+            vr[n], vi[n], vm[n], vd[n] = p[0], p[1], p[2], p[3]
+    for k, c in cur.items():
+        p = _phasor_parts(c, imax)
+        cr[k], ci[k] = p[0], p[1]
+    sc = max(abs(S.real), abs(S.imag))
+    P = 0.0 if abs(S.real) <= 1e-12 * sc else S.real
+    Q = 0.0 if abs(S.imag) <= 1e-12 * sc else S.imag
+    return {"node_voltages_mag": vm, "node_voltages_deg": vd, "node_voltages_real": vr, "node_voltages_imag": vi,
+            "source_currents_real": cr, "source_currents_imag": ci, "P_delivered": _r12(P), "Q_delivered": _r12(Q)}
+
+
+def ac_node_voltages(netlist, f) -> dict:
+    _check_positive(f=f)
+    els = _ac_netlist(netlist)
+    volts, cur = _ac_mna(els, _TWO_PI * f)
+    return _ac_nodes_out(volts, cur, _ac_source_power(els, volts, cur))
+
+
+def _verify_ac_nodes(inputs, outputs):
+    """The circuit solved again: every stated phasor (real, imaginary, magnitude, angle) within 1e-9 of its group's
+    scale, and the stated P and Q equal to the power the resistors, inductors and capacitors take (P = sum |V|^2/R,
+    Q = sum |V|^2/(wL) - sum wC |V|^2): conservation of complex power."""
+    els = _ac_netlist(inputs["netlist"])
+    w = _TWO_PI * inputs["f"]
+    volts, cur = _ac_mna(els, w)
+    for k in ("node_voltages_mag", "node_voltages_deg", "node_voltages_real", "node_voltages_imag",
+              "source_currents_real", "source_currents_imag", "P_delivered", "Q_delivered"):
+        if k not in outputs:
+            return math.inf
+    nodes = [n for n in volts if n != "0"]
+    if sorted(outputs["node_voltages_real"]) != sorted(nodes) or sorted(outputs["source_currents_real"]) != sorted(cur):
+        return math.inf
+    vmax = max([_cabs(v) for v in volts.values()] + [1e-300])
+    imax = max([_cabs(c) for c in cur.values()] + [1e-300])
+    worst = 0.0
+    for n in nodes:
+        v = volts[n]
+        o = {"v_real": outputs["node_voltages_real"][n], "v_imag": outputs["node_voltages_imag"][n],
+             "v_mag": outputs["node_voltages_mag"][n], "v_deg": outputs["node_voltages_deg"][n]}
+        worst = max(worst, (abs(o["v_real"] - v.real) + abs(o["v_imag"] - v.imag)) / vmax)
+        if _cabs(v) > 1e-9 * vmax:
+            worst = max(worst, _polar_err(o, "v"))
+    for k, c in cur.items():
+        worst = max(worst, (abs(outputs["source_currents_real"][k] - c.real) + abs(outputs["source_currents_imag"][k] - c.imag)) / imax)
+    S = _ac_absorbed_power(els, volts, w)
+    sc = max(abs(S.real), abs(S.imag), abs(outputs["P_delivered"]), abs(outputs["Q_delivered"]), 1e-300)
+    return worst + (abs(outputs["P_delivered"] - S.real) + abs(outputs["Q_delivered"] - S.imag)) / sc
+
+
+def _np_ac_solve(els, w, extra=()):
+    """INDEPENDENT reference solver: Kirchhoff's current law written node by node with each element's IMPEDANCE
+    (R, j w L, 1/(j w C)) and the voltage sources as constraint rows, solved by numpy.linalg.solve (LAPACK, complex128)."""
+    import numpy as np
+    els = list(els) + list(extra)
+    nodes = sorted({n for e in els for n in (e[2], e[3]) if n != "0"}, key=_node_key)
+    vsrc = [e for e in els if e[0] == "V"]
+    col = {u: k for k, u in enumerate(nodes + [e[1] for e in vsrc])}
+    rows, rhs = [], []
+    for n in nodes:
+        row = np.zeros(len(col), complex)
+        c = 0j
+        for t, name, a, b, val, ph in els:
+            if n not in (a, b):
+                continue
+            sgn = 1.0 if a == n else -1.0                # current leaving node n
+            if t in "RLC":
+                zel = val if t == "R" else (1j * w * val if t == "L" else 1.0 / (1j * w * val))
+                if a != "0":
+                    row[col[a]] += sgn / zel
+                if b != "0":
+                    row[col[b]] -= sgn / zel
+            elif t == "V":
+                row[col[name]] += sgn
+            else:
+                c -= sgn * val * np.exp(1j * np.deg2rad(ph))
+        rows.append(row)
+        rhs.append(c)
+    for t, name, a, b, val, ph in vsrc:
+        row = np.zeros(len(col), complex)
+        if a != "0":
+            row[col[a]] += 1.0
+        if b != "0":
+            row[col[b]] -= 1.0
+        rows.append(row)
+        rhs.append(val * np.exp(1j * np.deg2rad(ph)))
+    try:
+        x = np.linalg.solve(np.array(rows), np.array(rhs))
+    except np.linalg.LinAlgError as exc:
+        raise ValueError("the circuit equations have no unique solution") from exc
+    volts = {"0": 0j}
+    for n in nodes:
+        volts[n] = complex(x[col[n]])
+    return volts, {e[1]: complex(x[col[e[1]]]) for e in vsrc}
+
+
+def _reference_ac_nodes(netlist, f):
+    els = _ac_netlist(netlist)
+    w = 2 * math.pi * f
+    volts, cur = _np_ac_solve(els, w)
+    return _ac_nodes_out(volts, cur, _ac_absorbed_power(els, volts, w))
+
+
+def _wrong_ac_nodes(netlist, f):
+    """The frequency used as if it were the angular frequency (w = f)."""
+    els = _ac_netlist(netlist)
+    volts, cur = _ac_mna(els, f)
+    return _ac_nodes_out(volts, cur, _ac_source_power(els, volts, cur))
+
+
+def _random_ac_netlist(rng, port=False):
+    for _ in range(100):
+        f = rng.choice([50.0, 60.0, 400.0, 1000.0, 10000.0])
+        w = 2 * math.pi * f
+        n = rng.randint(2, 4)
+        nodes = [str(i) for i in range(n + 1)]
+        pairs = [(nodes[i], nodes[rng.randrange(0, i)]) for i in range(1, n + 1)]
+        for _ in range(rng.randint(0, n)):
+            pairs.append(tuple(rng.sample(nodes, 2)))
+        parts, counts = [], {"R": 0, "L": 0, "C": 0}
+        for k, (a, b) in enumerate(pairs):
+            t = "R" if k == 0 else ("L" if k == 1 else rng.choice("RLC"))
+            if k == 1 and rng.random() < 0.5:
+                t = "C"
+            Xv = _e12(rng, 1, 3)                        # 10 ohm .. 8.2 kohm
+            val = Xv if t == "R" else (Xv / w if t == "L" else 1.0 / (w * Xv))
+            counts[t] += 1
+            parts.append(f"{t}{counts[t]} {a} {b} {float(f'{val:.3g}'):g}")
+        a, b = rng.sample(nodes, 2)
+        parts.append(f"V1 {a} {b} {round(rng.uniform(1, 24), 1):g} {round(rng.uniform(-180, 180)):d}")
+        if rng.random() < 0.5:
+            c, d = rng.sample(nodes, 2)
+            parts.append(f"I1 {c} {d} {round(rng.uniform(0.001, 0.05), 4):g} {round(rng.uniform(-180, 180)):d}")
+        text = "; ".join(parts)
+        if not port:
+            return {"netlist": text, "f": f}
+        pa, pb = rng.sample(nodes, 2)
+        if {pa, pb} == {a, b}:                           # the source directly across the terminals: Zth = 0
+            continue
+        return {"netlist": text, "node_a": pa, "node_b": pb, "f": f}
+    raise ValueError("no admissible circuit drawn")
+
+
+def parse_ac_nodes(question):
+    if re.search(r"\b(thevenin|th[eé]venin|norton)\b", question, re.I) or not re.search(_AC_HINT, question, re.I):
+        return None
+    m = re.search(r"\b(?:node voltages|voltage at every node|nodal analysis)\b.*?\bcircuit\s*:\s*(.+?)\s*$", question, re.I | re.S)
+    if not m:
+        return None
+    head = question[:m.start(1)]
+    out = {"netlist": m.group(1)}
+    mf = re.search(_AC_FREQ, head)
+    if mf:
+        out["f"] = float(mf.group(1)) * _UNITS["frequency"][mf.group(2)]
+        head = head[:mf.start()] + " " + head[mf.end():]
+    if re.search(r"\d", head):
+        return None                                  # a number before the netlist that is not the frequency
+    return out
+
+
+_AC_NETLIST_IN = {"symbol": "netlist", "type": "text", "min_length": 5, "max_length": 2000, "required": True,
+                  "meaning": "elements separated by ';': R<name> <node> <node> <ohms>, L<name> <node> <node> <henries>, "
+                             "C<name> <node> <node> <farads>, V<name> <node+> <node-> <rms volts> [<angle deg>], "
+                             "I<name> <node> <node> <rms amperes> [<angle deg>] (flowing from the first node through the source "
+                             "to the second); node 0 is ground"}
+_AC_F_IN = {"symbol": "f", "kind": "frequency", "required": True, "meaning": "frequency of the sources"}
+_PI2 = math.pi ** 2
+
+PROCEDURES["ac_node_voltages"] = {
+    "name": "Node voltages of an AC circuit from its netlist (phasor nodal analysis)", "topic": "AC circuits / AC network analysis",
+    "purpose": "Every node-voltage phasor (magnitude, angle, real and imaginary parts), every voltage-source current and the real and reactive power delivered, for a circuit of R, L, C and independent sinusoidal sources of one frequency.",
+    "inputs": [_AC_NETLIST_IN, _AC_F_IN],
+    "outputs": [{"symbol": "node_voltages_mag", "kind": "number", "meaning": "rms magnitude of every node voltage relative to node 0, in volts"},
+                {"symbol": "node_voltages_deg", "kind": "number", "meaning": "angle of every node voltage, in degrees"},
+                {"symbol": "node_voltages_real", "kind": "number", "meaning": "real part of every node voltage, in volts"},
+                {"symbol": "node_voltages_imag", "kind": "number", "meaning": "imaginary part of every node voltage, in volts"},
+                {"symbol": "source_currents_real", "kind": "number", "meaning": "real part of the current through each voltage source from + to -, in amperes"},
+                {"symbol": "source_currents_imag", "kind": "number", "meaning": "imaginary part of that current, in amperes"},
+                {"symbol": "P_delivered", "kind": "power", "meaning": "real power delivered by the sources (W)"},
+                {"symbol": "Q_delivered", "kind": "number", "meaning": "reactive power delivered by the sources, in var (positive: taken by inductance)"}],
+    "primary": "P_delivered", "conditions": ["a ground node 0", "R, L, C positive", "f > 0, one frequency for every source",
+                                             "a unique solution (no floating node, no loop of voltage sources)"],
+    "method": "modified nodal analysis with complex admittances 1/R, 1/(j w L), j w C, solved by complex Gaussian elimination",
+    "latex": r"\mathbf{Y}(j\omega)\,\mathbf{V} = \mathbf{I}_s,\quad Y_L = \frac{1}{j\omega L},\ Y_C = j\omega C",
+    "run": ac_node_voltages, "verify": _verify_ac_nodes, "parse": parse_ac_nodes, "reference": _reference_ac_nodes,
+    "wrong": _wrong_ac_nodes, "random_inputs": lambda rng: _random_ac_netlist(rng),
+    "templates": ["Find the AC node voltages at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                  "Use AC nodal analysis at 1 kHz on the circuit: I1 0 1 0.1 90; R1 1 0 100; C1 1 0 1e-5."],
+    "examples": [{"inputs": {"netlist": "V1 1 0 10; R1 1 2 3; L1 2 0 0.01", "f": 50.0},
+                  "outputs": {"node_voltages_real": {"1": 10.0, "2": 10 * _PI2 / (9 + _PI2)},
+                              "node_voltages_imag": {"1": 0.0, "2": 30 * math.pi / (9 + _PI2)},
+                              "P_delivered": 300 / (9 + _PI2), "Q_delivered": 100 * math.pi / (9 + _PI2)}},
+                 {"inputs": {"netlist": "I1 0 1 0.1 90; R1 1 0 100; C1 1 0 1e-5", "f": 1000.0},
+                  "outputs": {"node_voltages_real": {"1": (0.1j / complex(0.01, 2 * math.pi * 1000 * 1e-5)).real},
+                              "node_voltages_imag": {"1": (0.1j / complex(0.01, 2 * math.pi * 1000 * 1e-5)).imag},
+                              "P_delivered": abs(0.1j / complex(0.01, 2 * math.pi * 1000 * 1e-5)) ** 2 / 100}}],
+    "questions": [{"q": "Find the AC node voltages at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                   "outputs": {"node_voltages_real": {"1": 10.0, "2": 10 * _PI2 / (9 + _PI2)}, "P_delivered": 300 / (9 + _PI2)}},
+                  {"q": "Use AC nodal analysis at 1 kHz on the circuit: I1 0 1 0.1 90; R1 1 0 100; C1 1 0 1e-5.",
+                   "outputs": {"P_delivered": abs(0.1j / complex(0.01, 2 * math.pi * 1000 * 1e-5)) ** 2 / 100}},
+                  {"q": "Find the AC node voltages at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 -0.01.", "outcome": "INVALID_INPUT"},
+                  {"q": "Find the AC node voltages of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.", "outcome": "NEEDS_INPUT"}]}
+
+
+# ------------------------------------------------------------------------------------------------ AC Thevenin and Norton
+def _ac_thevenin(netlist, node_a, node_b, f):
+    _check_positive(f=f)
+    els = _ac_netlist(netlist)
+    nodes = {n for e in els for n in (e[2], e[3])}
+    for n in (node_a, node_b):
+        if n not in nodes:
+            raise ValueError(f"node {n} is not in the circuit")
+    if node_a == node_b:
+        raise ValueError("the two terminals must be different nodes")
+    w = _TWO_PI * f
+    volts, _ = _ac_mna(els, w)
+    vmax = max(_cabs(v) for v in volts.values())
+    vth = _csnap(volts[node_a] - volts[node_b], vmax)
+    dead = [(t, n, a, b, 0.0, 0.0) for t, n, a, b, v, ph in els if t == "V"] + [e for e in els if e[0] in "RLC"]
+    dead.append(("I", "Itest", node_b, node_a, 1.0, 0.0))     # 1 A into node a, out of node b
+    v2, _ = _ac_mna(dead, w)
+    zmax = max(_cabs(v) for v in v2.values())
+    zth = _csnap(v2[node_a] - v2[node_b], zmax)
+    scale = 0.0
+    for e in els:
+        if e[0] in "RLC":
+            scale = max(scale, _cabs(_cdiv(complex(1.0, 0.0), _ac_admittance(e[0], e[4], w))))
+    if _cabs(zth) <= 1e-12 * scale:
+        raise ValueError("an ideal voltage source (or a short at this frequency) is across the terminals: the Thevenin impedance is 0")
+    return vth, zth
+
+
+def _ac_port_out(prefix_v, v, prefix_z, z):
+    pv = _phasor_parts(v, _cabs(v))
+    pz = _phasor_parts(z, _cabs(z))
+    return {prefix_v + "_real": pv[0], prefix_v + "_imag": pv[1], prefix_v + "_mag": pv[2], prefix_v + "_deg": pv[3],
+            prefix_z + "_real": pz[0], prefix_z + "_imag": pz[1], prefix_z + "_mag": pz[2], prefix_z + "_deg": pz[3]}
+
+
+def ac_thevenin_equivalent(netlist, node_a, node_b, f) -> dict:
+    vth, zth = _ac_thevenin(netlist, node_a, node_b, f)
+    return _ac_port_out("Vth", vth, "Zth", zth)
+
+
+def ac_norton_equivalent(netlist, node_a, node_b, f) -> dict:
+    vth, zth = _ac_thevenin(netlist, node_a, node_b, f)
+    return _ac_port_out("In", _cdiv(vth, zth), "Zn", zth)
+
+
+def _ac_port_residual(inputs, vth, zth):
+    """The full circuit solved twice: open, the terminal voltage must be Vth; with a 1 A test current driven into node
+    a and out of node b, it must rise by exactly Zth (superposition)."""
+    a, b = inputs["node_a"], inputs["node_b"]
+    els = _ac_netlist(inputs["netlist"])
+    w = _TWO_PI * inputs["f"]
+    v1, _ = _ac_mna(els, w)
+    v2, _ = _ac_mna(els + [("I", "Itest_check", b, a, 1.0, 0.0)], w)
+    vmax = max(_cabs(v) for v in v1.values())
+    # the open-circuit voltage snapped exactly as run snaps it (a value that is 0 by the circuit, e.g. through a
+    # dangling branch, comes out of the solve as ~1e-15 of the node voltages; box certification, 2026-11-12)
+    o1 = _csnap(v1[a] - v1[b], vmax)
+    dz = (v2[a] - v2[b]) - (v1[a] - v1[b])
+    return (_cabs(o1 - vth) / max(_cabs(o1), _cabs(vth), 1e-300)
+            + _cabs(dz - zth) / max(_cabs(dz), _cabs(zth), 1e-300))
+
+
+def _verify_ac_thevenin(inputs, outputs):
+    for k in ("Vth", "Zth"):
+        for s in ("_real", "_imag", "_mag", "_deg"):
+            if k + s not in outputs:
+                return math.inf
+    vth = complex(outputs["Vth_real"], outputs["Vth_imag"])
+    zth = complex(outputs["Zth_real"], outputs["Zth_imag"])
+    return _ac_port_residual(inputs, vth, zth) + _polar_err(outputs, "Vth") + _polar_err(outputs, "Zth")
+
+
+def _verify_ac_norton(inputs, outputs):
+    for k in ("In", "Zn"):
+        for s in ("_real", "_imag", "_mag", "_deg"):
+            if k + s not in outputs:
+                return math.inf
+    zn = complex(outputs["Zn_real"], outputs["Zn_imag"])
+    vth = complex(outputs["In_real"], outputs["In_imag"]) * zn
+    return _ac_port_residual(inputs, vth, zn) + _polar_err(outputs, "In") + _polar_err(outputs, "Zn")
+
+
+def _reference_ac_pair(netlist, node_a, node_b, f):
+    """INDEPENDENT reference (numpy, complex, impedance-form KCL): the open-circuit voltage of the full circuit, and the
+    impedance as 1 V divided by the current a 1 V TEST VOLTAGE SOURCE across the terminals draws with the independent
+    sources removed (voltage sources shorted, current sources opened) — a different test from the shipped 1 A current."""
+    els = _ac_netlist(netlist)
+    w = 2 * math.pi * f
+    volts, _ = _np_ac_solve(els, w)
+    voc = volts[node_a] - volts[node_b]
+    dead = [(t, n, a, b, 0.0, 0.0) for t, n, a, b, v, ph in els if t == "V"] + [e for e in els if e[0] in "RLC"]
+    _, c2 = _np_ac_solve(dead, w, [("V", "Vtest_ref", node_a, node_b, 1.0, 0.0)])
+    zth = 1.0 / (-c2["Vtest_ref"])                  # the source's current runs from + through it to -: the load current is -i
+    vmax = max(abs(v) for v in volts.values())
+    return _csnap(complex(voc), vmax), complex(zth)
+
+
+def _wrong_ac_pair(netlist, node_a, node_b, f):
+    """The frequency used as if it were the angular frequency (w = f)."""
+    return _ac_thevenin(netlist, node_a, node_b, f / _TWO_PI)
+
+
+def parse_ac_port(kind):
+    def parse(question):
+        if not re.search(rf"\b{kind}\b", question, re.I) or not re.search(_AC_HINT, question, re.I):
+            return None
+        mc = re.search(r"\bcircuit\s*:\s*(.+?)\s*$", question, re.I | re.S)
+        if not mc:
+            return None
+        head = question[:mc.start(1)]
+        out = {"netlist": mc.group(1)}
+        mn = re.search(r"\bbetween\s+nodes?\s+(\w+)\s+and\s+(\w+)\b", head, re.I)
+        if mn:
+            out["node_a"], out["node_b"] = mn.group(1), mn.group(2)
+            head = head[:mn.start()] + " " + head[mn.end():]
+        mf = re.search(_AC_FREQ, head)
+        if mf:
+            out["f"] = float(mf.group(1)) * _UNITS["frequency"][mf.group(2)]
+            head = head[:mf.start()] + " " + head[mf.end():]
+        if re.search(r"\d", head):
+            return None
+        return out
+    return parse
+
+
+_AC_PORT_INPUTS = [_AC_NETLIST_IN,
+                   {"symbol": "node_a", "type": "text", "min_length": 1, "max_length": 20, "required": True,
+                    "meaning": "the terminal node (the + side of the equivalent)"},
+                   {"symbol": "node_b", "type": "text", "min_length": 1, "max_length": 20, "required": True,
+                    "meaning": "the reference terminal node"},
+                   _AC_F_IN]
+
+
+def _port_outputs(v, z, vkind, vword):
+    return [{"symbol": v + "_mag", "kind": vkind, "meaning": f"rms magnitude of the {vword}"},
+            {"symbol": v + "_deg", "kind": "number", "meaning": f"angle of the {vword} in degrees"},
+            {"symbol": v + "_real", "kind": vkind, "meaning": f"real part of the {vword}"},
+            {"symbol": v + "_imag", "kind": vkind, "meaning": f"imaginary part of the {vword}"},
+            {"symbol": z + "_real", "kind": "resistance", "meaning": "resistance (real part of the equivalent impedance)"},
+            {"symbol": z + "_imag", "kind": "resistance", "meaning": "reactance (imaginary part of the equivalent impedance, + inductive)"},
+            {"symbol": z + "_mag", "kind": "resistance", "meaning": "magnitude of the equivalent impedance"},
+            {"symbol": z + "_deg", "kind": "number", "meaning": "angle of the equivalent impedance in degrees"}]
+
+
+_ZRL = complex(0.0, math.pi)                                     # j w L of the examples' 10 mH at 50 Hz (w L = pi ohm)
+_VRC = cmath.rect(5.0, math.radians(30.0)) / complex(1.0, 2 * math.pi)  # the RC example: w R C = 2 pi
+
+PROCEDURES["ac_thevenin_equivalent"] = {
+    "name": "Thevenin equivalent of an AC circuit between two nodes (phasors, complex impedance)",
+    "topic": "AC circuits / AC Thevenin and Norton equivalents",
+    "purpose": "The Thevenin voltage phasor and impedance Zth = R + jX seen between two nodes of an AC circuit of R, L, C and independent sinusoidal sources at one frequency.",
+    "inputs": _AC_PORT_INPUTS, "outputs": _port_outputs("Vth", "Zth", "voltage", "Thevenin (open-circuit) voltage, node a relative to node b"),
+    "primary": "Vth_mag", "conditions": ["both nodes in the circuit", "no ideal voltage source (or zero impedance) directly across the terminals",
+                                         "a unique solution (no floating node)", "f > 0"],
+    "method": "open-circuit voltage by phasor modified nodal analysis; impedance by a 1 A test current with the independent sources set to zero",
+    "latex": r"\mathbf{V}_{th} = \mathbf{V}_a - \mathbf{V}_b\big|_{open},\quad Z_{th} = \frac{\mathbf{V}_a - \mathbf{V}_b}{1\,\mathrm{A}}\big|_{sources\ off}",
+    "run": ac_thevenin_equivalent, "verify": _verify_ac_thevenin, "parse": parse_ac_port("thevenin"),
+    "reference": lambda netlist, node_a, node_b, f: (lambda vz: _ac_port_out("Vth", vz[0], "Zth", vz[1]))(_reference_ac_pair(netlist, node_a, node_b, f)),
+    "wrong": lambda netlist, node_a, node_b, f: (lambda vz: _ac_port_out("Vth", vz[0], "Zth", vz[1]))(_wrong_ac_pair(netlist, node_a, node_b, f)),
+    "random_inputs": lambda rng: _random_ac_netlist(rng, port=True),
+    "templates": ["Find the AC Thevenin equivalent between nodes 2 and 0 at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                  "Find the AC Thevenin equivalent between nodes 2 and 0 at 1 kHz of the circuit: V1 1 0 5 30; R1 1 2 1000; C1 2 0 1e-6."],
+    "examples": [{"inputs": {"netlist": "V1 1 0 10; R1 1 2 3; L1 2 0 0.01", "node_a": "2", "node_b": "0", "f": 50.0},
+                  "outputs": {"Vth_real": 10 * _PI2 / (9 + _PI2), "Vth_imag": 30 * math.pi / (9 + _PI2),
+                              "Zth_real": 3 * _PI2 / (9 + _PI2), "Zth_imag": 9 * math.pi / (9 + _PI2)}},
+                 {"inputs": {"netlist": "V1 1 0 5 30; R1 1 2 1000; C1 2 0 1e-6", "node_a": "2", "node_b": "0", "f": 1000.0},
+                  "outputs": {"Vth_real": _VRC.real, "Vth_imag": _VRC.imag, "Vth_mag": 5 / math.hypot(1, 2 * math.pi),
+                              "Zth_real": (1000 / complex(1.0, 2 * math.pi)).real, "Zth_imag": (1000 / complex(1.0, 2 * math.pi)).imag}}],
+    "questions": [{"q": "Find the AC Thevenin equivalent between nodes 2 and 0 at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                   "outputs": {"Vth_real": 10 * _PI2 / (9 + _PI2), "Zth_imag": 9 * math.pi / (9 + _PI2)}},
+                  {"q": "Find the AC Thevenin equivalent between nodes 2 and 0 at 1 kHz of the circuit: V1 1 0 5 30; R1 1 2 1000; C1 2 0 1e-6.",
+                   "outputs": {"Vth_mag": 5 / math.hypot(1, 2 * math.pi)}},
+                  {"q": "Find the AC Thevenin equivalent between nodes 1 and 0 at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                   "outcome": "INVALID_INPUT"},
+                  {"q": "Find the AC Thevenin equivalent between nodes 2 and 0 of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                   "outcome": "NEEDS_INPUT"}]}
+
+PROCEDURES["ac_norton_equivalent"] = {
+    "name": "Norton equivalent of an AC circuit between two nodes (phasors, complex impedance)",
+    "topic": "AC circuits / AC Thevenin and Norton equivalents",
+    "purpose": "The Norton current phasor and impedance seen between two nodes of an AC circuit of R, L, C and independent sinusoidal sources at one frequency.",
+    "inputs": _AC_PORT_INPUTS, "outputs": _port_outputs("In", "Zn", "current", "Norton (short-circuit) current from node a to node b"),
+    "primary": "In_mag", "conditions": ["both nodes in the circuit", "no ideal voltage source (or zero impedance) directly across the terminals",
+                                        "a unique solution (no floating node)", "f > 0"],
+    "method": "Thevenin voltage and impedance by phasor modified nodal analysis, then I_N = V_th / Z_th",
+    "latex": r"\mathbf{I}_N = \frac{\mathbf{V}_{th}}{Z_{th}},\quad Z_N = Z_{th}",
+    "run": ac_norton_equivalent, "verify": _verify_ac_norton, "parse": parse_ac_port("norton"),
+    "reference": lambda netlist, node_a, node_b, f: (lambda vz: _ac_port_out("In", vz[0] / vz[1], "Zn", vz[1]))(_reference_ac_pair(netlist, node_a, node_b, f)),
+    "wrong": lambda netlist, node_a, node_b, f: (lambda vz: _ac_port_out("In", _cdiv(vz[0], vz[1]), "Zn", vz[1]))(_wrong_ac_pair(netlist, node_a, node_b, f)),
+    "random_inputs": lambda rng: _random_ac_netlist(rng, port=True),
+    "templates": ["Find the AC Norton equivalent between nodes 2 and 0 at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01."],
+    "examples": [{"inputs": {"netlist": "V1 1 0 10; R1 1 2 3; L1 2 0 0.01", "node_a": "2", "node_b": "0", "f": 50.0},
+                  "outputs": {"In_real": 10 / 3, "In_imag": 0.0, "In_mag": 10 / 3,
+                              "Zn_real": 3 * _PI2 / (9 + _PI2), "Zn_imag": 9 * math.pi / (9 + _PI2)}},
+                 {"inputs": {"netlist": "V1 1 0 5 30; R1 1 2 1000; C1 2 0 1e-6", "node_a": "2", "node_b": "0", "f": 1000.0},
+                  "outputs": {"In_mag": 0.005, "In_deg": 30.0}}],
+    "questions": [{"q": "Find the AC Norton equivalent between nodes 2 and 0 at 50 Hz of the circuit: V1 1 0 10; R1 1 2 3; L1 2 0 0.01.",
+                   "outputs": {"In_mag": 10 / 3}},
+                  {"q": "Find the AC Norton equivalent between nodes 1 and 0 at 50 Hz of the circuit: V1 1 0 10; R1 1 0 3.",
+                   "outcome": "INVALID_INPUT"}]}
