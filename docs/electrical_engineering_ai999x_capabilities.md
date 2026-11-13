@@ -810,7 +810,7 @@ $$
 
 ![Ra (wye arm at terminal a) against Rab (delta resistance between terminals a and b) from 1 ohm to 100 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/delta-to-wye-curve)
 
-*Ra (wye arm at terminal a) against Rab (delta resistance between terminals a and b) from 1 ohm to 100 ohm on a logarithmic axis. One curve for each value of Rca (delta resistance between terminals c and a): 30 ohm, 15 ohm, 60 ohm. Other inputs as in the worked example: Rbc = 20 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rab = 10 ohm, Ra = 5 ohm.*
+*Ra (wye arm at terminal a) against Rab (delta resistance between terminals a and b) from 1 ohm to 100 ohm on a logarithmic axis. One curve for each value of Rca (delta resistance between terminals c and a): 30 ohm, 15 ohm, 60 ohm. Other inputs as in the worked example: Rbc = 20.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rab = 10 ohm, Ra = 5 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('delta_to_wye', Rab=10, Rbc=20, Rca=30)
@@ -862,7 +862,7 @@ $$
 
 ![Rab (delta resistance between a and b) against Rc (wye arm at terminal c) from 2 ohm to 200 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wye-to-delta-curve)
 
-*Rab (delta resistance between a and b) against Rc (wye arm at terminal c) from 2 ohm to 200 ohm on a logarithmic axis. One curve for each value of Rb (wye arm at terminal b): 10 ohm, 5 ohm, 20 ohm. Other inputs as in the worked example: Ra = 5 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rc = 20 ohm, Rab = 17.5 ohm.*
+*Rab (delta resistance between a and b) against Rc (wye arm at terminal c) from 2 ohm to 200 ohm on a logarithmic axis. One curve for each value of Rb (wye arm at terminal b): 10 ohm, 5 ohm, 20 ohm. Other inputs as in the worked example: Ra = 5.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rc = 20 ohm, Rab = 17.5 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('wye_to_delta', Ra=5, Rb=10, Rc=20)
@@ -1279,7 +1279,7 @@ $$
 
 ![impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-curve)
 
-*impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis. One curve for each value of L (inductance): 0.05 H, 0.025 H, 0.1 H. Other inputs as in the worked example: R = 100 ohm, C = 1e-05 F. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1000 Hz, impedance = 314.562 ohm.*
+*impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis. One curve for each value of L (inductance): 0.05 H, 0.025 H, 0.1 H. Other inputs as in the worked example: R = 100.0 ohm, C = 9.999999999999999e-06 F. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1000 Hz, impedance = 314.562 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('series_rlc_impedance', R=100, L=0.05, C=1e-05, f=1000)
@@ -1336,7 +1336,7 @@ $$
 
 ![impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-curve)
 
-*impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis. One curve for each value of L (inductance): 0.01 H, 0.005 H, 0.02 H. Other inputs as in the worked example: R = 1000 ohm, C = 1e-06 F. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1000 Hz, impedance = 103.262 ohm.*
+*impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis. One curve for each value of L (inductance): 0.01 H, 0.005 H, 0.02 H. Other inputs as in the worked example: R = 1000.0 ohm, C = 1e-06 F. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1000 Hz, impedance = 103.262 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_rlc_impedance', R=1000, L=0.01, C=1e-06, f=1000)
@@ -1542,11 +1542,11 @@ $$
 
 ![lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-decision)
 
-*lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells. Other inputs as in the worked example: V_phase = 0, I = 10 A. Marked: the worked example, I_phase = -30, V = 230 V → lagging.*
+*lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells. Other inputs as in the worked example: V_phase = 0.0, I = 10.0 A. Marked: the worked example, I_phase = -30, V = 230 V → lagging.*
 
 ![P (real (active) power in W) against I_phase (current phase angle in degrees) from -90 to 90](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-curve)
 
-*P (real (active) power in W) against I_phase (current phase angle in degrees) from -90 to 90. One curve for each value of V (rms voltage magnitude): 230 V, 115 V, 460 V. Other inputs as in the worked example: V_phase = 0, I = 10 A. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I_phase = -30, P = 1991.86 W.*
+*P (real (active) power in W) against I_phase (current phase angle in degrees) from -90 to 90. One curve for each value of V (rms voltage magnitude): 230 V, 115 V, 460 V. Other inputs as in the worked example: V_phase = 0.0, I = 10.0 A. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I_phase = -30, P = 1991.86 W.*
 
 ```python
 electrical_engineering_ai999x.solve('complex_power', V=230, V_phase=0, I=10, I_phase=-30)
@@ -1598,7 +1598,7 @@ $$
 
 ![C_uF (correction capacitance in microfarads) against pf_initial (present (lagging) power factor) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/power-factor-correction-curve)
 
-*C_uF (correction capacitance in microfarads) against pf_initial (present (lagging) power factor) from 0.02 to 0.98. One curve for each value of V (rms supply voltage across the capacitor): 230 V, 115 V, 460 V. Other inputs as in the worked example: P = 10000 W, f = 50 Hz, pf_target = 0.95. 39 points per curve computed by electrical-engineering-ai999x; marked: the worked example, pf_initial = 0.7, C_uF = 416.101.*
+*C_uF (correction capacitance in microfarads) against pf_initial (present (lagging) power factor) from 0.02 to 0.98. One curve for each value of V (rms supply voltage across the capacitor): 230 V, 115 V, 460 V. Other inputs as in the worked example: P = 10000.0 W, f = 50.0 Hz, pf_target = 0.95. 39 points per curve computed by electrical-engineering-ai999x; marked: the worked example, pf_initial = 0.7, C_uF = 416.101.*
 
 ```python
 electrical_engineering_ai999x.solve('power_factor_correction', P=10000, V=230, f=50, pf_initial=0.7, pf_target=0.95)
@@ -1655,7 +1655,7 @@ $$
 
 ![line_current (current in each line) against X (reactance per phase (positive inductive, negative capacitive)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-curve)
 
-*line_current (current in each line) against X (reactance per phase (positive inductive, negative capacitive)) from 0.6 ohm to 60 ohm on a logarithmic axis. One curve for each value of VL (rms line-to-line voltage): 400 V, 200 V, 800 V. Other inputs as in the worked example: R = 8 ohm, connection = wye. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, X = 6 ohm, line_current = 23.094 A.*
+*line_current (current in each line) against X (reactance per phase (positive inductive, negative capacitive)) from 0.6 ohm to 60 ohm on a logarithmic axis. One curve for each value of VL (rms line-to-line voltage): 400 V, 200 V, 800 V. Other inputs as in the worked example: R = 8.0 ohm, connection = wye. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, X = 6 ohm, line_current = 23.094 A.*
 
 ```python
 electrical_engineering_ai999x.solve('three_phase_load', VL=400, R=8, X=6, connection='wye')
@@ -1757,7 +1757,7 @@ $$
 
 ![Vout (output voltage) against R1 (input resistor to the inverting input) from 1000 ohm to 100000 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/difference-amplifier-curve)
 
-*Vout (output voltage) against R1 (input resistor to the inverting input) from 1000 ohm to 100000 ohm on a logarithmic axis. One curve for each value of V2 (voltage at the non-inverting side): 1.5 V, 0.75 V, 3 V. Other inputs as in the worked example: V1 = 1 V, R2 = 100000.0 ohm, R3 = 10000.0 ohm, R4 = 100000.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 10000 ohm, Vout = 5 V.*
+*Vout (output voltage) against R1 (input resistor to the inverting input) from 1000 ohm to 100000 ohm on a logarithmic axis. One curve for each value of V2 (voltage at the non-inverting side): 1.5 V, 0.75 V, 3 V. Other inputs as in the worked example: V1 = 1.0 V, R2 = 100000.0 ohm, R3 = 10000.0 ohm, R4 = 100000.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 10000 ohm, Vout = 5 V.*
 
 ```python
 electrical_engineering_ai999x.solve('difference_amplifier', V1=1, V2=1.5, R1=10000.0, R2=100000.0, R3=10000.0, R4=100000.0)
@@ -1817,7 +1817,7 @@ $$
 
 ![IC_mA (collector current in milliamperes) against RE (emitter resistor) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-curve)
 
-*IC_mA (collector current in milliamperes) against RE (emitter resistor) from 500 ohm to 1500 ohm. One curve for each value of VCC (supply voltage): 12 V, 6 V, 24 V. Other inputs as in the worked example: R1 = 10000.0 ohm, R2 = 2200 ohm, RC = 3600 ohm, beta = 100, VBE = 0.7 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, RE = 1000 ohm, IC_mA = 1.42402.*
+*IC_mA (collector current in milliamperes) against RE (emitter resistor) from 500 ohm to 1500 ohm. One curve for each value of VCC (supply voltage): 12 V, 6 V, 24 V. Other inputs as in the worked example: R1 = 10000.0 ohm, R2 = 2200.0 ohm, RC = 3600.0 ohm, beta = 100.0, VBE = 0.7 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, RE = 1000 ohm, IC_mA = 1.42402.*
 
 ```python
 electrical_engineering_ai999x.solve('bjt_divider_bias', VCC=12, R1=10000.0, R2=2200, RC=3600, RE=1000, beta=100, VBE=0.7)
@@ -1873,7 +1873,7 @@ $$
 
 ![IZ_mA (Zener current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/zener-regulator-curve)
 
-*IZ_mA (Zener current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm. One curve for each value of Vin (input voltage): 20 V, 40 V. Other inputs as in the worked example: Vz = 12 V, RL = 2000 ohm. 26 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, IZ_mA = 2.*
+*IZ_mA (Zener current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm. One curve for each value of Vin (input voltage): 20 V, 40 V. Other inputs as in the worked example: Vz = 12.0 V, RL = 2000.0 ohm. 26 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, IZ_mA = 2.*
 
 ```python
 electrical_engineering_ai999x.solve('zener_regulator', Vin=20, R=1000, Vz=12, RL=2000)
@@ -1935,7 +1935,7 @@ $$
 
 ![underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-decision)
 
-*underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0.01 H to 1 H (logarithmic axes): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, overdamped: 84 cells, underdamped: 567 cells. Other inputs as in the worked example: C = 0.0001 F, V = 12 V, t = 0.005 s. Marked: the worked example, R = 10 ohm, L = 0.1 H → underdamped.*
+*underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0.01 H to 1 H (logarithmic axes): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, overdamped: 84 cells, underdamped: 567 cells. Other inputs as in the worked example: C = 9.999999999999999e-05 F, V = 12.0 V, t = 0.005 s. Marked: the worked example, R = 10 ohm, L = 0.1 H → underdamped.*
 
 ```python
 electrical_engineering_ai999x.solve('series_rlc_step', R=10, L=0.1, C=0.0001, V=12, t=0.005)
@@ -2398,7 +2398,7 @@ $$
 
 ![Vout (output voltage across R2 (unloaded)) against Vin (input voltage) from 6 V to 18 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltage-divider-curve)
 
-*Vout (output voltage across R2 (unloaded)) against Vin (input voltage) from 6 V to 18 V. One curve for each value of R1 (top resistor (from the input to the output)): 1000 ohm, 500 ohm, 2000 ohm. Other inputs as in the worked example: R2 = 2000 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Vin = 12 V, Vout = 8 V.*
+*Vout (output voltage across R2 (unloaded)) against Vin (input voltage) from 6 V to 18 V. One curve for each value of R1 (top resistor (from the input to the output)): 1000 ohm, 500 ohm, 2000 ohm. Other inputs as in the worked example: R2 = 2000.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Vin = 12 V, Vout = 8 V.*
 
 ```python
 electrical_engineering_ai999x.solve('voltage_divider', Vin=12, R1=1000, R2=2000)
@@ -2450,7 +2450,7 @@ $$
 
 ![I1 (current through R1) against R1 (first branch resistor) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/current-divider-curve)
 
-*I1 (current through R1) against R1 (first branch resistor) from 0.4 ohm to 40 ohm on a logarithmic axis. One curve for each value of I (total current into the parallel pair): 6 A, 3 A, 12 A. Other inputs as in the worked example: R2 = 2 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 4 ohm, I1 = 2 A.*
+*I1 (current through R1) against R1 (first branch resistor) from 0.4 ohm to 40 ohm on a logarithmic axis. One curve for each value of I (total current into the parallel pair): 6 A, 3 A, 12 A. Other inputs as in the worked example: R2 = 2.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 4 ohm, I1 = 2 A.*
 
 ```python
 electrical_engineering_ai999x.solve('current_divider', I=6, R1=4, R2=2)
@@ -2553,7 +2553,7 @@ $$
 
 ![Vout (voltage of the left midpoint relative to the right midpoint) against R1 (left arm, top) from 10 ohm to 1000 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-curve)
 
-*Vout (voltage of the left midpoint relative to the right midpoint) against R1 (left arm, top) from 10 ohm to 1000 ohm on a logarithmic axis. One curve for each value of R3 (right arm, top): 150 ohm, 75 ohm, 300 ohm. Other inputs as in the worked example: Vs = 10 V, R2 = 200 ohm, R4 = 250 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 100 ohm, Vout = 0.416667 V.*
+*Vout (voltage of the left midpoint relative to the right midpoint) against R1 (left arm, top) from 10 ohm to 1000 ohm on a logarithmic axis. One curve for each value of R3 (right arm, top): 150 ohm, 75 ohm, 300 ohm. Other inputs as in the worked example: Vs = 10.0 V, R2 = 200.0 ohm, R4 = 250.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 100 ohm, Vout = 0.416667 V.*
 
 ```python
 electrical_engineering_ai999x.solve('wheatstone_bridge', Vs=10, R1=100, R2=200, R3=150, R4=250)
@@ -2606,7 +2606,7 @@ $$
 
 ![fc (cutoff (-3 dB) frequency) against R (resistance) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-curve)
 
-*fc (cutoff (-3 dB) frequency) against R (resistance) from 500 ohm to 1500 ohm. One curve for each value of C (capacitance): 1.0000e-07 F, 5.0000e-08 F, 2.0000e-07 F. Other inputs as in the worked example: f = 1591.5494309189535 Hz, filter = lowpass. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, fc = 1591.55 Hz.*
+*fc (cutoff (-3 dB) frequency) against R (resistance) from 500 ohm to 1500 ohm. One curve for each value of C (capacitance): 1.0000e-07 F, 5.0000e-08 F, 2.0000e-07 F. Other inputs as in the worked example: f = 2000.0 Hz, filter = lowpass. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, fc = 1591.55 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('rc_filter', R=1000, C=1e-07, f=1591.5494309189535, filter='lowpass')
@@ -2760,7 +2760,7 @@ $$
 
 ![v (value at time t) against tau (time constant (RC or L/R)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-transient-curve)
 
-*v (value at time t) against tau (time constant (RC or L/R)) from 0.0001 s to 0.01 s on a logarithmic axis. One curve for each value of Vf (final (steady-state) value): 10 V, 5 V, 20 V. Other inputs as in the worked example: V0 = 0 V, t = 0.002 s. 40 points per curve computed by electrical-engineering-ai999x; marked: the worked example, tau = 0.001 s, v = 8.64665 V.*
+*v (value at time t) against tau (time constant (RC or L/R)) from 0.0001 s to 0.01 s on a logarithmic axis. One curve for each value of Vf (final (steady-state) value): 10 V, 5 V, 20 V. Other inputs as in the worked example: V0 = 0.0 V, t = 0.002 s. 40 points per curve computed by electrical-engineering-ai999x; marked: the worked example, tau = 0.001 s, v = 8.64665 V.*
 
 ```python
 electrical_engineering_ai999x.solve('first_order_transient', V0=0, Vf=10, tau=0.001, t=0.002)
@@ -2962,7 +2962,7 @@ $$
 
 ![Vs (secondary voltage) against Np (primary turns) from 250 to 750](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/transformer-curve)
 
-*Vs (secondary voltage) against Np (primary turns) from 250 to 750. One curve for each value of Ns (secondary turns): 50, 25, 100. Other inputs as in the worked example: Vp = 230 V, RL = 10 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Np = 500, Vs = 23 V.*
+*Vs (secondary voltage) against Np (primary turns) from 250 to 750. One curve for each value of Ns (secondary turns): 50, 25, 100. Other inputs as in the worked example: Vp = 230.0 V, RL = 10.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Np = 500, Vs = 23 V.*
 
 ```python
 electrical_engineering_ai999x.solve('transformer', Np=500, Ns=50, Vp=230, RL=10)
@@ -3067,7 +3067,7 @@ $$
 
 ![I_mA (current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/diode-circuit-curve)
 
-*I_mA (current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm. One curve for each value of Vs (source voltage (forward)): 5 V, 2.5 V, 10 V. Other inputs as in the worked example: Is = 1e-14 A, n = 1, VT = 0.02585 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, I_mA = 4.30751.*
+*I_mA (current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm. One curve for each value of Vs (source voltage (forward)): 5 V, 2.5 V, 10 V. Other inputs as in the worked example: Is = 1e-14 A, n = 1.0, VT = 0.02585 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, I_mA = 4.30751.*
 
 ```python
 electrical_engineering_ai999x.solve('diode_circuit', Vs=5, R=1000, Is=1e-14, n=1, VT=0.02585)
@@ -3115,11 +3115,11 @@ $$
 
 ![rms (rms value including the offset) against offset (DC offset (average value); 0 when not given) from -1 V to 1 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-curve)
 
-*rms (rms value including the offset) against offset (DC offset (average value); 0 when not given) from -1 V to 1 V. One curve for each value of amplitude (peak amplitude about the average): 10 V, 5 V, 20 V. Other inputs as in the worked example: shape = sine. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, offset = 0 V, rms = 7.07107 V.*
+*rms (rms value including the offset) against offset (DC offset (average value); 0 when not given) from -1 V to 1 V. One curve for each value of amplitude (peak amplitude about the average): 5 V, 2.5 V, 10 V. Other inputs as in the worked example: shape = sine. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, offset = 0 V, rms = 3.53553 V.*
 
-![rms (rms value including the offset) over amplitude (peak amplitude about the average) from 5 V to 15 V and offset (DC offset (average value); 0 when not given) from -1 V to 1 V: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-field)
+![rms (rms value including the offset) over amplitude (peak amplitude about the average) from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-field)
 
-*rms (rms value including the offset) over amplitude (peak amplitude about the average) from 5 V to 15 V and offset (DC offset (average value); 0 when not given) from -1 V to 1 V: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 3.53553 V to dark 10.6536 V); iso-lines at rms = 4, 6, 8, 10 V. Other inputs as in the worked example: shape = sine. Marked: the worked example, amplitude = 10 V, offset = 0 V, rms = 7.07107 V.*
+*rms (rms value including the offset) over amplitude (peak amplitude about the average) from 2.5 V to 7.5 V and offset (DC offset (average value); 0 when not given) from -1 V to 1 V: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 1.76777 V to dark 5.39676 V); iso-lines at rms = 2, 3, 4, 5 V. Other inputs as in the worked example: shape = sine. Marked: the worked example, amplitude = 5 V, offset = 0 V, rms = 3.53553 V.*
 
 ```python
 electrical_engineering_ai999x.solve('rms_waveform', shape='sine', amplitude=10, offset=0)
@@ -3178,7 +3178,7 @@ $$
 
 ![code (output code) against bits (resolution in bits) from 1 to 16](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/adc-conversion-curve)
 
-*code (output code) against bits (resolution in bits) from 1 to 16. One curve for each value of Vin (input voltage (0 to Vref)): 1.2 V, 0.6 V, 2.4 V. Other inputs as in the worked example: Vref = 5 V. 16 points per curve computed by electrical-engineering-ai999x; marked: the worked example, bits = 8, code = 61.*
+*code (output code) against bits (resolution in bits) from 1 to 16. One curve for each value of Vin (input voltage (0 to Vref)): 1.2 V, 0.6 V, 2.4 V. Other inputs as in the worked example: Vref = 5.0 V. 16 points per curve computed by electrical-engineering-ai999x; marked: the worked example, bits = 8, code = 61.*
 
 ```python
 electrical_engineering_ai999x.solve('adc_conversion', Vin=1.2, Vref=5, bits=8)
@@ -3226,11 +3226,11 @@ $$
 
 ![numerator coefficients (highest power first, length n + 1) (num) returned by electrical-engineering-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (denominator coefficients det(sI - A), monic)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-series)
 
-*numerator coefficients (highest power first, length n + 1) (num) returned by electrical-engineering-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (denominator coefficients det(sI - A), monic). Inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0], D = 0.*
+*numerator coefficients (highest power first, length n + 1) (num) returned by electrical-engineering-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (denominator coefficients det(sI - A), monic). Inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0], D = 0.0.*
 
 ![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-matrix)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input). Returned with them by electrical-engineering-ai999x: order = 2. Other inputs: B = [0, 1], C = [1, 0], D = 0.*
+*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input). Returned with them by electrical-engineering-ai999x: order = 2. Other inputs: B = [0, 1], C = [1, 0], D = 0.0.*
 
 ```python
 electrical_engineering_ai999x.solve('state_space_to_tf', A='[[0, 1], [-2, -3]]', B='[0, 1]', C='[1, 0]', D=0)
@@ -3374,7 +3374,7 @@ $$
 
 ![t (time to reach v) against Vf (final value) from 5 V to 15 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-time-to-value-curve)
 
-*t (time to reach v) against Vf (final value) from 5 V to 15 V. One curve for each value of tau (time constant): 0.002 s, 0.001 s, 0.004 s. Other inputs as in the worked example: V0 = 0 V, v = 5 V. 30 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Vf = 10 V, t = 0.00138629 s.*
+*t (time to reach v) against Vf (final value) from 5 V to 15 V. One curve for each value of tau (time constant): 0.002 s, 0.001 s, 0.004 s. Other inputs as in the worked example: V0 = 0.0 V, v = 5.0 V. 30 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Vf = 10 V, t = 0.00138629 s.*
 
 ```python
 electrical_engineering_ai999x.solve('first_order_time_to_value', V0=0, Vf=10, tau=0.002, v=5)
@@ -3481,7 +3481,7 @@ $$
 
 ![speed (steady-state speed) against Ke (back-emf constant in V*s/rad) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-curve)
 
-*speed (steady-state speed) against Ke (back-emf constant in V*s/rad) from 0.025 to 0.075. One curve for each value of V (armature supply voltage): 12 V, 6 V, 24 V. Other inputs as in the worked example: R = 1 ohm, Kt = 0.05, T = 0.02 N*m, b = 0.0001. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Ke = 0.05, speed = 223.077 rad/s.*
+*speed (steady-state speed) against Ke (back-emf constant in V*s/rad) from 0.025 to 0.075. One curve for each value of V (armature supply voltage): 12 V, 6 V, 24 V. Other inputs as in the worked example: R = 1.0 ohm, Kt = 0.05, T = 0.02 N*m, b = 0.0001. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Ke = 0.05, speed = 223.077 rad/s.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_motor', V=12, R=1, Kt=0.05, Ke=0.05, T=0.02, b=0.0001)
@@ -3628,7 +3628,7 @@ $$
 
 ![alpha1 (temperature coefficient referred to T1, per K) against T1 (first temperature (degrees C accepted in questions)) from 29](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/temperature-coefficient-from-resistances-curve)
 
-*alpha1 (temperature coefficient referred to T1, per K) against T1 (first temperature (degrees C accepted in questions)) from 29.315 K to 328.92 K on a logarithmic axis. One curve for each value of R1 (resistance at T1): 100 ohm, 50 ohm, 200 ohm. Other inputs as in the worked example: R2 = 120 ohm, T2 = 343.15 K. 22 points per curve computed by electrical-engineering-ai999x; marked: the worked example, T1 = 293.15 K, alpha1 = 0.004.*
+*alpha1 (temperature coefficient referred to T1, per K) against T1 (first temperature (degrees C accepted in questions)) from 29.315 K to 328.92 K on a logarithmic axis. One curve for each value of R1 (resistance at T1): 100 ohm, 50 ohm, 200 ohm. Other inputs as in the worked example: R2 = 120.0 ohm, T2 = 343.15 K. 22 points per curve computed by electrical-engineering-ai999x; marked: the worked example, T1 = 293.15 K, alpha1 = 0.004.*
 
 ```python
 electrical_engineering_ai999x.solve('temperature_coefficient_from_resistances', R1=100, T1=293.15, R2=120, T2=343.15)
@@ -3682,7 +3682,7 @@ $$
 
 ![V_terminal (terminal voltage (across the load)) against n (number of identical cells) from 1 to 12](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/cell-battery-curve)
 
-*V_terminal (terminal voltage (across the load)) against n (number of identical cells) from 1 to 12. One curve for each value of E (emf of one cell): 1.5 V, 0.75 V, 3 V. Other inputs as in the worked example: r = 0.5 ohm, connection = series, RL = 10 ohm. 12 points per curve computed by electrical-engineering-ai999x; marked: the worked example, n = 4, V_terminal = 5 V.*
+*V_terminal (terminal voltage (across the load)) against n (number of identical cells) from 1 to 12. One curve for each value of E (emf of one cell): 1.5 V, 0.75 V, 3 V. Other inputs as in the worked example: r = 0.5 ohm, connection = series, RL = 10.0 ohm. 12 points per curve computed by electrical-engineering-ai999x; marked: the worked example, n = 4, V_terminal = 5 V.*
 
 ```python
 electrical_engineering_ai999x.solve('cell_battery', E=1.5, r=0.5, n=4, connection='series', RL=10)
@@ -3735,7 +3735,7 @@ $$
 
 ![C (capacitance) against d (separation of adjacent plates (dielectric thickness)) from 5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-plate-capacitor-curve)
 
-*C (capacitance) against d (separation of adjacent plates (dielectric thickness)) from 5.0000e-05 m to 0.00015 m. One curve for each value of n (number of plates (2 when not given)): 2, 4. Other inputs as in the worked example: V = 200 V, A = 0.0004 m^2, eps_r = 5. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, d = 0.0001 m, C = 1.7708e-10 F.*
+*C (capacitance) against d (separation of adjacent plates (dielectric thickness)) from 5.0000e-05 m to 0.00015 m. One curve for each value of n (number of plates (2 when not given)): 2, 4. Other inputs as in the worked example: V = 200.0 V, A = 0.0004 m^2, eps_r = 5.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, d = 0.0001 m, C = 1.7708e-10 F.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_plate_capacitor', V=200, d=0.0001, A=0.0004, eps_r=5, n=2)
@@ -3849,7 +3849,7 @@ $$
 
 ![L (self-inductance) against length (length of the flux path (coil length for an air-cored solenoid)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-inductance-curve)
 
-*L (self-inductance) against length (length of the flux path (coil length for an air-cored solenoid)) from 0.1 m to 0.3 m. One curve for each value of N (number of turns): 500, 250, 1000. Other inputs as in the worked example: area = 0.0004 m^2, mu_r = 1. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, length = 0.2 m, L = 0.000628319 H.*
+*L (self-inductance) against length (length of the flux path (coil length for an air-cored solenoid)) from 0.1 m to 0.3 m. One curve for each value of N (number of turns): 500, 250, 1000. Other inputs as in the worked example: area = 0.0004 m^2, mu_r = 1.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, length = 0.2 m, L = 0.000628319 H.*
 
 ```python
 electrical_engineering_ai999x.solve('coil_inductance', N=500, length=0.2, area=0.0004, mu_r=1)
@@ -4000,7 +4000,7 @@ $$
 
 ![M (mutual inductance) against L1 (self-inductance of coil 1) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mutual-inductance-curve)
 
-*M (mutual inductance) against L1 (self-inductance of coil 1) from 0.1 H to 0.3 H. One curve for each value of L2 (self-inductance of coil 2): 0.8 H, 0.4 H, 1.6 H. Other inputs as in the worked example: k = 0.5, dI1 = 4 A, dt = 0.02 s. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, L1 = 0.2 H, M = 0.2 H.*
+*M (mutual inductance) against L1 (self-inductance of coil 1) from 0.1 H to 0.3 H. One curve for each value of L2 (self-inductance of coil 2): 0.8 H, 0.4 H, 1.6 H. Other inputs as in the worked example: k = 0.5, dI1 = 4.0 A, dt = 0.02 s. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, L1 = 0.2 H, M = 0.2 H.*
 
 ```python
 electrical_engineering_ai999x.solve('mutual_inductance', L1=0.2, L2=0.8, k=0.5, dI1=4, dt=0.02)
@@ -4050,7 +4050,7 @@ $$
 
 ![Rsh (shunt resistance) against I (required full-scale reading of the ammeter) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ammeter-shunt-curve)
 
-*Rsh (shunt resistance) against I (required full-scale reading of the ammeter) from 0.5 A to 1.5 A. One curve for each value of Ifs (full-scale deflection current of the meter): 0.001 A, 0.0005 A, 0.002 A. Other inputs as in the worked example: Rm = 100 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I = 1 A, Rsh = 0.1001 ohm.*
+*Rsh (shunt resistance) against I (required full-scale reading of the ammeter) from 0.5 A to 1.5 A. One curve for each value of Ifs (full-scale deflection current of the meter): 0.001 A, 0.0005 A, 0.002 A. Other inputs as in the worked example: Rm = 100.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I = 1 A, Rsh = 0.1001 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('ammeter_shunt', Ifs=0.001, Rm=100, I=1)
@@ -4100,7 +4100,7 @@ $$
 
 ![Rmult (multiplier (series) resistance) against Ifs (full-scale deflection current of the meter) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltmeter-multiplier-curve)
 
-*Rmult (multiplier (series) resistance) against Ifs (full-scale deflection current of the meter) from 0.0005 A to 0.0015 A. One curve for each value of V (required full-scale reading of the voltmeter): 10 V, 5 V, 20 V. Other inputs as in the worked example: Rm = 100 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Ifs = 0.001 A, Rmult = 9900 ohm.*
+*Rmult (multiplier (series) resistance) against Ifs (full-scale deflection current of the meter) from 0.0005 A to 0.0015 A. One curve for each value of V (required full-scale reading of the voltmeter): 10 V, 5 V, 20 V. Other inputs as in the worked example: Rm = 100.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Ifs = 0.001 A, Rmult = 9900 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('voltmeter_multiplier', Ifs=0.001, Rm=100, V=10)
@@ -4157,11 +4157,11 @@ $$
 
 ![leads, lags or in phase (relative to Vm sin wt) (relation) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-decision)
 
-*leads, lags or in phase (relative to Vm sin wt) (relation) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708 and Vm (amplitude (peak value)) from 20 V to 2000 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, in phase: 21 cells, leads: 630 cells. Other inputs as in the worked example: w = 314.1592653589793 rad/s, t = 0.0025 s. Marked: the worked example, phi = 0, Vm = 200 V → in phase.*
+*leads, lags or in phase (relative to Vm sin wt) (relation) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708 and Vm (amplitude (peak value)) from 20 V to 2000 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, in phase: 21 cells, leads: 630 cells. Other inputs as in the worked example: w = 314.159 rad/s, t = 0.0025 s. Marked: the worked example, phi = 0, Vm = 200 V → in phase.*
 
 ![v (instantaneous value at t) against w (angular frequency omega) from 31](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-curve)
 
-*v (instantaneous value at t) against w (angular frequency omega) from 31.4159 rad/s to 3141.59 rad/s on a logarithmic axis. One curve for each value of Vm (amplitude (peak value)): 200 V, 100 V, 400 V. Other inputs as in the worked example: phi = 0, t = 0.0025 s. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, w = 314.159 rad/s, v = 141.421 V.*
+*v (instantaneous value at t) against w (angular frequency omega) from 31.4159 rad/s to 3141.59 rad/s on a logarithmic axis. One curve for each value of Vm (amplitude (peak value)): 200 V, 100 V, 400 V. Other inputs as in the worked example: phi = 0.0, t = 0.0025 s. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, w = 314.159 rad/s, v = 141.421 V.*
 
 ```python
 electrical_engineering_ai999x.solve('sinusoid_values', Vm=200, w=314.1592653589793, phi=0, t=0.0025)
@@ -4211,11 +4211,11 @@ $$
 
 ![rising, falling or peak at that time (direction) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-time-to-value-decision)
 
-*rising, falling or peak at that time (direction) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708 and Vm (amplitude (peak value)) from 10 V to 1000 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, falling: 324 cells, rising: 110 cells; blank cells: inputs the capability refuses. Other inputs as in the worked example: w = 314.1592653589793 rad/s, v = 50 V. Marked: the worked example, phi = 0, Vm = 100 V → rising.*
+*rising, falling or peak at that time (direction) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708 and Vm (amplitude (peak value)) from 10 V to 1000 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, falling: 324 cells, rising: 110 cells; blank cells: inputs the capability refuses. Other inputs as in the worked example: w = 314.159 rad/s, v = 50.0 V. Marked: the worked example, phi = 0, Vm = 100 V → rising.*
 
 ![t (first time at which v is reached) against phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-time-to-value-curve)
 
-*t (first time at which v is reached) against phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708. One curve for each value of w (angular frequency omega): 314.159 rad/s, 157.08 rad/s, 628.319 rad/s. Other inputs as in the worked example: Vm = 100 V, v = 50 V. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, phi = 0, t = 0.00166667 s.*
+*t (first time at which v is reached) against phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708. One curve for each value of w (angular frequency omega): 314.159 rad/s, 157.079 rad/s, 628.318 rad/s. Other inputs as in the worked example: Vm = 100.0 V, v = 50.0 V. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, phi = 0, t = 0.00166667 s.*
 
 ```python
 electrical_engineering_ai999x.solve('sinusoid_time_to_value', Vm=100, w=314.1592653589793, phi=0, v=50)
@@ -4274,9 +4274,9 @@ $$
 - **Assumes:** sinusoidal steady state, rms values; ideal L and C; $R > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![I (rms current) against R (resistance) from 3 ohm to 300 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-ac-supply-curve)
+![I (rms current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-ac-supply-curve)
 
-*I (rms current) against R (resistance) from 3 ohm to 300 ohm on a logarithmic axis. One curve for each value of V (rms supply voltage): 250 V, 125 V, 500 V. Other inputs as in the worked example: f = 50 Hz, circuit = RL, L = 0.12732395447351627 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 30 ohm, I = 5 A.*
+*I (rms current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis. One curve for each value of V (rms supply voltage): 240 V, 120 V, 480 V. Other inputs as in the worked example: R = 30.0 ohm, circuit = RL, L = 0.1 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, I = 5.52497 A.*
 
 ```python
 electrical_engineering_ai999x.solve('series_ac_supply', V=250, f=50, R=30, circuit='RL', L=0.12732395447351627)
@@ -4342,7 +4342,7 @@ $$
 
 ![I (supply current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-ac-supply-curve)
 
-*I (supply current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis. One curve for each value of V (rms supply voltage): 100 V, 50 V, 200 V. Other inputs as in the worked example: R = 25 ohm, circuit = RL, L = 0.1061032953945969 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, I = 5 A.*
+*I (supply current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis. One curve for each value of V (rms supply voltage): 100 V, 50 V, 200 V. Other inputs as in the worked example: R = 25.0 ohm, circuit = RL, L = 0.1 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, I = 5.11196 A.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_ac_supply', V=100, f=50, R=25, circuit='RL', L=0.1061032953945969)
@@ -4400,7 +4400,7 @@ $$
 
 ![f_r (resonant frequency) against R (resistance of the coil) from 1 ohm to 100 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-capacitor-parallel-curve)
 
-*f_r (resonant frequency) against R (resistance of the coil) from 1 ohm to 100 ohm on a logarithmic axis. One curve for each value of C (capacitance): 1.0000e-05 F, 5.0000e-06 F, 2.0000e-05 F. Other inputs as in the worked example: V = 100 V, f = 50 Hz, L = 0.1 H. 40 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 10 ohm, f_r = 158.357 Hz.*
+*f_r (resonant frequency) against R (resistance of the coil) from 1 ohm to 100 ohm on a logarithmic axis. One curve for each value of C (capacitance): 1.0000e-05 F, 5.0000e-06 F, 2.0000e-05 F. Other inputs as in the worked example: V = 100.0 V, f = 50.0 Hz, L = 0.1 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 10 ohm, f_r = 158.357 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('coil_capacitor_parallel', V=100, f=50, R=10, L=0.1, C=1e-05)
@@ -4509,7 +4509,7 @@ $$
 
 ![E (generated emf) against flux (useful flux per pole) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-machine-emf-curve)
 
-*E (generated emf) against flux (useful flux per pole) from 0.0125 Wb to 0.0375 Wb. One curve for each value of Z (number of armature conductors): 600, 300, 1200. Other inputs as in the worked example: poles = 4, n = 20, winding = lap. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, flux = 0.025 Wb, E = 300 V.*
+*E (generated emf) against flux (useful flux per pole) from 0.0125 Wb to 0.0375 Wb. One curve for each value of Z (number of armature conductors): 600, 300, 1200. Other inputs as in the worked example: poles = 4.0, n = 20.0, winding = lap. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, flux = 0.025 Wb, E = 300 V.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_machine_emf', poles=4, flux=0.025, Z=600, n=20, winding='lap')
@@ -4562,7 +4562,7 @@ $$
 
 ![E (generated emf V + Ia Ra) against Rf (shunt field resistance) from 12](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-generator-curve)
 
-*E (generated emf V + Ia Ra) against Rf (shunt field resistance) from 12.5 ohm to 1250 ohm on a logarithmic axis. One curve for each value of V (terminal voltage): 250 V, 125 V, 500 V. Other inputs as in the worked example: IL = 100 A, Ra = 0.1 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rf = 125 ohm, E = 260.2 V.*
+*E (generated emf V + Ia Ra) against Rf (shunt field resistance) from 12.5 ohm to 1250 ohm on a logarithmic axis. One curve for each value of V (terminal voltage): 250 V, 125 V, 500 V. Other inputs as in the worked example: IL = 100.0 A, Ra = 0.1 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rf = 125 ohm, E = 260.2 V.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_shunt_generator', V=250, IL=100, Ra=0.1, Rf=125)
@@ -4618,7 +4618,7 @@ $$
 
 ![E (back emf V - Ia Ra) against Rf (shunt field resistance) from 11 ohm to 1100 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-motor-curve)
 
-*E (back emf V - Ia Ra) against Rf (shunt field resistance) from 11 ohm to 1100 ohm on a logarithmic axis. One curve for each value of V (supply voltage): 220 V, 110 V, 440 V. Other inputs as in the worked example: I = 30 A, Ra = 0.4 ohm, n = 16.666666666666668, losses = 500 W. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rf = 110 ohm, E = 208.8 V.*
+*E (back emf V - Ia Ra) against Rf (shunt field resistance) from 11 ohm to 1100 ohm on a logarithmic axis. One curve for each value of V (supply voltage): 220 V, 110 V, 440 V. Other inputs as in the worked example: I = 30.0 A, Ra = 0.4 ohm, n = 16.666666666666668, losses = 500.0 W. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rf = 110 ohm, E = 208.8 V.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_shunt_motor', V=220, I=30, Ra=0.4, Rf=110, n=16.666666666666668, losses=500)
@@ -4672,7 +4672,7 @@ $$
 
 ![n2_rpm (new speed in rpm) against V (supply voltage across the armature) from 22 V to 2200 V on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-speed-change-curve)
 
-*n2_rpm (new speed in rpm) against V (supply voltage across the armature) from 22 V to 2200 V on a logarithmic axis. One curve for each value of n1 (first speed in rev/s (rpm accepted in questions)): 16.6667, 8.33333, 33.3333. Other inputs as in the worked example: Ra = 0.5 ohm, Ia1 = 20 A, Ia2 = 40 A. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, V = 220 V, n2_rpm = 952.381.*
+*n2_rpm (new speed in rpm) against V (supply voltage across the armature) from 22 V to 2200 V on a logarithmic axis. One curve for each value of n1 (first speed in rev/s (rpm accepted in questions)): 16.6667, 8.33333, 33.3333. Other inputs as in the worked example: Ra = 0.5 ohm, Ia1 = 20.0 A, Ia2 = 40.0 A. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, V = 220 V, n2_rpm = 952.381.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_motor_speed_change', V=220, Ra=0.5, Ia1=20, n1=16.666666666666668, Ia2=40)
@@ -4723,7 +4723,7 @@ $$
 
 ![wavelength (wavelength in the medium) against f (frequency) from 5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossless-curve)
 
-*wavelength (wavelength in the medium) against f (frequency) from 5.0000e+07 Hz to 1.5000e+08 Hz. One curve for each value of eps_r (relative permittivity): 4, 2, 8. Other inputs as in the worked example: mu_r = 1. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1.0000e+08 Hz, wavelength = 1.49896 m.*
+*wavelength (wavelength in the medium) against f (frequency) from 5.0000e+07 Hz to 1.5000e+08 Hz. One curve for each value of eps_r (relative permittivity): 4, 2, 8. Other inputs as in the worked example: mu_r = 1.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1.0000e+08 Hz, wavelength = 1.49896 m.*
 
 ```python
 electrical_engineering_ai999x.solve('plane_wave_lossless', f=100000000.0, eps_r=4, mu_r=1)
@@ -4777,7 +4777,7 @@ $$
 
 ![skin_depth (skin depth 1/alpha) against f (frequency) from 500000 Hz to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossy-curve)
 
-*skin_depth (skin depth 1/alpha) against f (frequency) from 500000 Hz to 1.5e+06 Hz. One curve for each value of sigma (conductivity in S/m): 5.8000e+07, 2.9000e+07, 1.1600e+08. Other inputs as in the worked example: eps_r = 1, mu_r = 1. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1e+06 Hz, skin_depth = 6.6085e-05 m.*
+*skin_depth (skin depth 1/alpha) against f (frequency) from 500000 Hz to 1.5e+06 Hz. One curve for each value of sigma (conductivity in S/m): 5.8000e+07, 2.9000e+07, 1.1600e+08. Other inputs as in the worked example: eps_r = 1.0, mu_r = 1.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1e+06 Hz, skin_depth = 6.6085e-05 m.*
 
 ```python
 electrical_engineering_ai999x.solve('plane_wave_lossy', f=1000000.0, eps_r=1, mu_r=1, sigma=58000000.0)
