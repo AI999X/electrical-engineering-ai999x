@@ -1273,9 +1273,9 @@ $$
 - **Assumes:** $R  \geq  0$, $L > 0$, $C > 0$, $f > 0$; sinusoidal steady state
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The series RLC circuit of the worked example (R = 100, L = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-schematic)
+![The series RLC circuit of the worked example (R = 100](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-schematic)
 
-*The series RLC circuit of the worked example (R = 100, L = 0.05, C = 1e-05, f = 1000), labelled with what the package returned: impedance = 314.562; phase_deg = 71.4639. Marked: impedance = 314.562.*
+*The series RLC circuit of the worked example (R = 100.0, L = 0.05, C = 9.999999999999999e-06, f = 1000.0), labelled with what the package returned: impedance = 314.562; phase_deg = 71.4639. Marked: impedance = 314.562.*
 
 ![impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-curve)
 
@@ -1330,9 +1330,9 @@ $$
 - **Assumes:** R, L, C, $f > 0$; sinusoidal steady state
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The parallel RLC circuit of the worked example (R = 1000, L = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-schematic)
+![The parallel RLC circuit of the worked example (R = 1000](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-schematic)
 
-*The parallel RLC circuit of the worked example (R = 1000, L = 0.01, C = 1e-06, f = 1000), labelled with what the package returned: impedance = 103.262; phase_deg = 84.0729. Marked: impedance = 103.262.*
+*The parallel RLC circuit of the worked example (R = 1000.0, L = 0.01, C = 1e-06, f = 1000.0), labelled with what the package returned: impedance = 103.262; phase_deg = 84.0729. Marked: impedance = 103.262.*
 
 ![impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-curve)
 
@@ -1929,9 +1929,9 @@ $$
 
 *Capacitor voltage of a series RLC circuit switched onto V = 12 V (L = 0.1 H, C = 0.0001 F) for three resistances, 121 instants each computed by the package: R = 10 Ω: ζ = 0.158114, underdamped; R = 63.2456 Ω: ζ = 1, critically damped; R = 150 Ω: ζ = 2.37171, overdamped. Marked: t = 0.005 s, vC = 10.4144 V (R = 10 Ω).*
 
-![The series RLC circuit of the worked example (R = 10, L = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-schematic)
+![The series RLC circuit of the worked example (R = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-schematic)
 
-*The series RLC circuit of the worked example (R = 10, L = 0.1, C = 0.0001, V = 12, t = 0.005), labelled with what the package returned: vC = 10.4144; i = 0.299285; zeta = 0.158114; response = underdamped. Marked: vC = 10.4144.*
+*The series RLC circuit of the worked example (R = 10.0, L = 0.1, C = 9.999999999999999e-05, V = 12.0, t = 0.005), labelled with what the package returned: vC = 10.4144; i = 0.299285; zeta = 0.158114; response = underdamped. Marked: vC = 10.4144.*
 
 ![underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-decision)
 
@@ -2600,9 +2600,9 @@ $$
 - **Assumes:** unloaded output; R, C, $f > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The RC filter circuit of the worked example (R = 1000, C = 1e-07, f = 1591](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-schematic)
+![The RC filter circuit of the worked example (R = 1000](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-schematic)
 
-*The RC filter circuit of the worked example (R = 1000, C = 1e-07, f = 1591.5494309189535, filter = lowpass), labelled with what the package returned: phase_deg = -45; fc = 1591.55; gain_db = -3.0103. Marked: phase_deg = -45.*
+*The RC filter circuit of the worked example (R = 1000.0, C = 1.0000000000000001e-07, f = 2000.0, filter = lowpass), labelled with what the package returned: phase_deg = -51.4881; fc = 1591.55; gain_db = -4.11474. Marked: phase_deg = -51.4881.*
 
 ![fc (cutoff (-3 dB) frequency) against R (resistance) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-curve)
 
@@ -2654,9 +2654,9 @@ $$
 - **Assumes:** ideal R, L, C
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The series RLC circuit of the worked example (R = 10, L = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-schematic)
+![The series RLC circuit of the worked example (R = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-schematic)
 
-*The series RLC circuit of the worked example (R = 10, L = 0.01, C = 1e-06), labelled with what the package returned: f0 = 1591.55; Q = 10; bandwidth = 159.155. Marked: f0 = 1591.55.*
+*The series RLC circuit of the worked example (R = 10.0, L = 0.01, C = 1e-06), labelled with what the package returned: f0 = 1591.55; Q = 10; bandwidth = 159.155. Marked: f0 = 1591.55.*
 
 ![Q (quality factor) against R (resistance) from 5 ohm to 15 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-curve)
 
@@ -2707,9 +2707,9 @@ $$
 - **Assumes:** ideal R, L, C
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The parallel RLC circuit of the worked example (R = 10, L = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-schematic)
+![The parallel RLC circuit of the worked example (R = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-schematic)
 
-*The parallel RLC circuit of the worked example (R = 10, L = 0.01, C = 1e-06), labelled with what the package returned: f0 = 1591.55; Q = 0.1; bandwidth = 15915.5. Marked: f0 = 1591.55.*
+*The parallel RLC circuit of the worked example (R = 10.0, L = 0.01, C = 1e-06), labelled with what the package returned: f0 = 1591.55; Q = 0.1; bandwidth = 15915.5. Marked: f0 = 1591.55.*
 
 ![Q (quality factor) against L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-curve)
 
