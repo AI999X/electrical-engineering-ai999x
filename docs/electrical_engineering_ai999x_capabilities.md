@@ -230,9 +230,17 @@ $$
 - **Assumes:** every value positive; at least two values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The 3 elements of the worked example connected in series: R1 = 10 Ω, R2 = 20 Ω, R3 = 30 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-resistance-schematic)
+![The 3 elements as given, connected in series between terminals a and b, labelled with the equivalent computed for them: 60 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-resistance-schematic)
 
-*The 3 elements of the worked example connected in series: R1 = 10 Ω, R2 = 20 Ω, R3 = 30 Ω. Labelled with the equivalent the package returned: 60 Ω. Marked: equivalent = 60 Ω.*
+*The 3 elements as given, connected in series between terminals a and b, labelled with the equivalent computed for them: 60 Ω. Your inputs: R = 10, 20, 30.*
+
+![Equivalent resistance as R[3] runs from 10 to 50, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-resistance-live-1)
+
+*Equivalent resistance as R[3] runs from 10 to 50, every other input as you entered it (41 solutions). Marked: your R[3] = 30 gives equivalent = 60. Your inputs: R = 10, 20, 30.*
+
+![Equivalent resistance as R[2] runs from 2 to 40, every other input as you entered it (20 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-resistance-live-2)
+
+*Equivalent resistance as R[2] runs from 2 to 40, every other input as you entered it (20 solutions). Marked: your R[2] = 20 gives equivalent = 60. Your inputs: R = 10, 20, 30.*
 
 ```python
 electrical_engineering_ai999x.solve('series_resistance', R='10, 20, 30')
@@ -276,9 +284,17 @@ $$
 - **Assumes:** every value positive; at least two values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The 2 elements of the worked example connected in parallel: R1 = 10 Ω, R2 = 40 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-resistance-schematic)
+![The 2 elements as given, connected in parallel between terminals a and b, labelled with the equivalent computed for them: 8 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-resistance-schematic)
 
-*The 2 elements of the worked example connected in parallel: R1 = 10 Ω, R2 = 40 Ω. Labelled with the equivalent the package returned: 8 Ω. Marked: equivalent = 8 Ω.*
+*The 2 elements as given, connected in parallel between terminals a and b, labelled with the equivalent computed for them: 8 Ω. Your inputs: R = 10, 40.*
+
+![Equivalent resistance as R[1] runs from 1 to 30, every other input as you entered it (30 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-resistance-live-1)
+
+*Equivalent resistance as R[1] runs from 1 to 30, every other input as you entered it (30 solutions). Marked: your R[1] = 10 gives equivalent = 8. Your inputs: R = 10, 40.*
+
+![Equivalent resistance as R[2] runs from 20 to 60, every other input as you entered it (21 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-resistance-live-2)
+
+*Equivalent resistance as R[2] runs from 20 to 60, every other input as you entered it (21 solutions). Marked: your R[2] = 40 gives equivalent = 8. Your inputs: R = 10, 40.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_resistance', R='10, 40')
@@ -324,9 +340,17 @@ $$
 - **Assumes:** every value positive; at least two values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The 2 elements of the worked example connected in series: C1 = 3 uF, C2 = 6 uF](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-capacitance-schematic)
+![The 2 elements as given, connected in series between terminals a and b, labelled with the equivalent computed for them: 2 µF](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-capacitance-schematic)
 
-*The 2 elements of the worked example connected in series: C1 = 3 uF, C2 = 6 uF. Labelled with the equivalent the package returned: 2 uF. Marked: equivalent = 2 uF.*
+*The 2 elements as given, connected in series between terminals a and b, labelled with the equivalent computed for them: 2 µF. Your inputs: C = 3, 6, unit = uF.*
+
+![Equivalent capacitance, in the unit of the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-capacitance-live-1)
+
+*Equivalent capacitance, in the unit of the... as C[1] runs from 1 to 7, every other input as you entered it (7 solutions). Marked: your C[1] = 3 gives equivalent = 2. Your inputs: C = 3, 6, unit = uF.*
+
+![Equivalent capacitance, in the unit of the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-capacitance-live-2)
+
+*Equivalent capacitance, in the unit of the... as C[2] runs from 1 to 11, every other input as you entered it (11 solutions). Marked: your C[2] = 6 gives equivalent = 2. Your inputs: C = 3, 6, unit = uF.*
 
 ```python
 electrical_engineering_ai999x.solve('series_capacitance', C='3, 6', unit='uF')
@@ -372,9 +396,17 @@ $$
 - **Assumes:** every value positive; at least two values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The 2 elements of the worked example connected in parallel: C1 = 3 uF, C2 = 6 uF](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-capacitance-schematic)
+![The 2 elements as given, connected in parallel between terminals a and b, labelled with the equivalent computed for them: 9 µF](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-capacitance-schematic)
 
-*The 2 elements of the worked example connected in parallel: C1 = 3 uF, C2 = 6 uF. Labelled with the equivalent the package returned: 9 uF. Marked: equivalent = 9 uF.*
+*The 2 elements as given, connected in parallel between terminals a and b, labelled with the equivalent computed for them: 9 µF. Your inputs: C = 3, 6, unit = uF.*
+
+![Equivalent capacitance, in the unit of the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-capacitance-live-1)
+
+*Equivalent capacitance, in the unit of the... as C[2] runs from 1 to 11, every other input as you entered it (11 solutions). Marked: your C[2] = 6 gives equivalent = 9. Your inputs: C = 3, 6, unit = uF.*
+
+![Equivalent capacitance, in the unit of the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-capacitance-live-2)
+
+*Equivalent capacitance, in the unit of the... as C[1] runs from 1 to 7, every other input as you entered it (7 solutions). Marked: your C[1] = 3 gives equivalent = 9. Your inputs: C = 3, 6, unit = uF.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_capacitance', C='3, 6', unit='uF')
@@ -418,9 +450,17 @@ $$
 - **Assumes:** every value positive; at least two values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The 2 elements of the worked example connected in series: L1 = 10 mH, L2 = 22 mH](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-inductance-schematic)
+![The 2 elements as given, connected in series between terminals a and b, labelled with the equivalent computed for them: 32 mH](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-inductance-schematic)
 
-*The 2 elements of the worked example connected in series: L1 = 10 mH, L2 = 22 mH. Labelled with the equivalent the package returned: 32 mH. Marked: equivalent = 32 mH.*
+*The 2 elements as given, connected in series between terminals a and b, labelled with the equivalent computed for them: 32 mH. Your inputs: L = 10, 22, unit = mH.*
+
+![Equivalent inductance, in the unit of the inputs as L[2] runs from 2 to 42, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-inductance-live-1)
+
+*Equivalent inductance, in the unit of the inputs as L[2] runs from 2 to 42, every other input as you entered it (41 solutions). Marked: your L[2] = 22 gives equivalent = 32. Your inputs: L = 10, 22, unit = mH.*
+
+![Equivalent inductance, in the unit of the inputs as L[1] runs from 2 to 30, every other input as you entered it (15 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-inductance-live-2)
+
+*Equivalent inductance, in the unit of the inputs as L[1] runs from 2 to 30, every other input as you entered it (15 solutions). Marked: your L[1] = 10 gives equivalent = 32. Your inputs: L = 10, 22, unit = mH.*
 
 ```python
 electrical_engineering_ai999x.solve('series_inductance', L='10, 22', unit='mH')
@@ -464,9 +504,17 @@ $$
 - **Assumes:** every value positive; at least two values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The 2 elements of the worked example connected in parallel: L1 = 10 mH, L2 = 40 mH](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-inductance-schematic)
+![The 2 elements as given, connected in parallel between terminals a and b, labelled with the equivalent computed for them: 8 mH](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-inductance-schematic)
 
-*The 2 elements of the worked example connected in parallel: L1 = 10 mH, L2 = 40 mH. Labelled with the equivalent the package returned: 8 mH. Marked: equivalent = 8 mH.*
+*The 2 elements as given, connected in parallel between terminals a and b, labelled with the equivalent computed for them: 8 mH. Your inputs: L = 10, 40, unit = mH.*
+
+![Equivalent inductance, in the unit of the inputs as L[1] runs from 1 to 30, every other input as you entered it (30 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-inductance-live-1)
+
+*Equivalent inductance, in the unit of the inputs as L[1] runs from 1 to 30, every other input as you entered it (30 solutions). Marked: your L[1] = 10 gives equivalent = 8. Your inputs: L = 10, 40, unit = mH.*
+
+![Equivalent inductance, in the unit of the inputs as L[2] runs from 20 to 60, every other input as you entered it (21 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-inductance-live-2)
+
+*Equivalent inductance, in the unit of the inputs as L[2] runs from 20 to 60, every other input as you entered it (21 solutions). Marked: your L[2] = 40 gives equivalent = 8. Your inputs: L = 10, 40, unit = mH.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_inductance', L='10, 40', unit='mH')
@@ -508,9 +556,17 @@ $$
 - **Assumes:** every resistance positive; at least two resistors; '||' binds tighter than '+'
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The resistor network written in the worked example, 10 + (20 || 30) (+ series, || parallel, resistances in ohms), drawn between terminals a and b](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistor-network-schematic)
+![The resistor network as written (10 + (20 || 30); + series, || parallel, resistances in ohms), drawn between terminals a and b and labelled with the equivalent resistance computed for it: 22 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistor-network-schematic)
 
-*The resistor network written in the worked example, 10 + (20 || 30) (+ series, || parallel, resistances in ohms), drawn between terminals a and b. Labelled with what the package returned: equivalent resistance 22 Ω over 3 resistors. Marked: R_eq = 22 Ω.*
+*The resistor network as written (10 + (20 || 30); + series, || parallel, resistances in ohms), drawn between terminals a and b and labelled with the equivalent resistance computed for it: 22 Ω. Your inputs: network = 10 + (20 || 30).*
+
+![Equivalent resistance as the number in network runs from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistor-network-live-1)
+
+*Equivalent resistance as the number in network runs from 2.5 to 17.5, every other input as you entered it (41 solutions). Marked: your the number in network = 10 gives equivalent = 22. Your inputs: network = 10 + (20 || 30).*
+
+![Equivalent resistance as the number in network runs from 5 to 35, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistor-network-live-2)
+
+*Equivalent resistance as the number in network runs from 5 to 35, every other input as you entered it (29 solutions). Marked: your the number in network = 20 gives equivalent = 22. Your inputs: network = 10 + (20 || 30).*
 
 ```python
 electrical_engineering_ai999x.solve('resistor_network', network='10 + (20 || 30)')
@@ -561,17 +617,29 @@ $$
 - **Assumes:** square matrix; one source voltage per mesh; a non-singular matrix
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R (self resistances on the diagonal, shared resistances negative off it) and the loop EMFs E are the stated circuit (R I = E); the mesh currents I are the solution returned by the package: I1 = 0](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/mesh-currents-heatmap.svg)
+![The coefficient matrix A as given, each cell shaded by its magnitude (negative values in the second colour); the solution computed: currents = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-matrix)
 
-*Mesh analysis of a three-loop circuit as matrices: the mesh-resistance matrix R (self resistances on the diagonal, shared resistances negative off it) and the loop EMFs E are the stated circuit (R I = E); the mesh currents I are the solution returned by the package: I1 = 0.864914 A, I2 = 0.320943 A, I3 = -0.157752 A (a negative current flows against the assumed direction). Each panel is shaded by its own largest magnitude; negative values in the second colour.*
+*The coefficient matrix A as given, each cell shaded by its magnitude (negative values in the second colour); the solution computed: currents = 1.5, 0.75. Your inputs: A = [[10, -4], [-4, 8]], b = [12, 0].*
 
-![The plane vectors of the worked example as arrows from the origin: input b = (12, 0); returned by electrical-engineering-ai999x: currents = (1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-vectors)
+![The coefficient matrix A as given, the right-hand side b and the solution, each cell shaded by its magnitude (negative values in the second colour); the solution computed: currents = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-heatmap)
 
-*The plane vectors of the worked example as arrows from the origin: input b = (12, 0); returned by electrical-engineering-ai999x: currents = (1.5, 0.75); also returned first = 1.5. Other inputs: A = [[10, -4], [-4, 8]]. Marked: the tip of each returned vector.*
+*The coefficient matrix A as given, the right-hand side b and the solution, each cell shaded by its magnitude (negative values in the second colour); the solution computed: currents = 1.5, 0.75. Your inputs: A = [[10, -4], [-4, 8]], b = [12, 0].*
 
-![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); currents (returned)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-matrix)
+![The right-hand side b = (12, 0) as given and the solution computed, currents = (1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-vectors)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); currents (returned). Returned with them by electrical-engineering-ai999x: first = 1.5 A. Other inputs: b = [12, 0].*
+*The right-hand side b = (12, 0) as given and the solution computed, currents = (1.5, 0.75), as arrows from the origin. Your inputs: A = [[10, -4], [-4, 8]], b = [12, 0].*
+
+![The first mesh current as b[1] runs from 0 to 32, every other input as you entered it (33 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-live-1)
+
+*The first mesh current as b[1] runs from 0 to 32, every other input as you entered it (33 solutions). Marked: your b[1] = 12 gives first = 1.5. Your inputs: A = [[10, -4], [-4, 8]], b = [12, 0].*
+
+![Every entry of currents as computed for your inputs (2 entries: 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-live-2)
+
+*Every entry of currents as computed for your inputs (2 entries: 1.5, 0.75). Your inputs: A = [[10, -4], [-4, 8]], b = [12, 0].*
+
+![The first mesh current as b[2] runs from 0 to 4, every other input as you entered it (5 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mesh-currents-live-3)
+
+*The first mesh current as b[2] runs from 0 to 4, every other input as you entered it (5 solutions). Marked: your b[2] = 0 gives first = 1.5. Your inputs: A = [[10, -4], [-4, 8]], b = [12, 0].*
 
 ```python
 electrical_engineering_ai999x.solve('mesh_currents', A='[[10, -4], [-4, 8]]', b='[12, 0]')
@@ -616,13 +684,25 @@ $$
 - **Assumes:** square matrix; one injected current per node; a non-singular matrix
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The plane vectors of the worked example as arrows from the origin: input b = (2, 0); returned by electrical-engineering-ai999x: voltages = (4](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-vectors)
+![The coefficient matrix A as given, the right-hand side b and the solution, each cell shaded by its magnitude (negative values in the second colour); the solution computed: voltages = 4](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-matrix)
 
-*The plane vectors of the worked example as arrows from the origin: input b = (2, 0); returned by electrical-engineering-ai999x: voltages = (4.8, 1.6); also returned first = 4.8. Other inputs: A = [[0.5, -0.25], [-0.25, 0.75]]. Marked: the tip of each returned vector.*
+*The coefficient matrix A as given, the right-hand side b and the solution, each cell shaded by its magnitude (negative values in the second colour); the solution computed: voltages = 4.8, 1.6. Your inputs: A = [[0.5, -0.25], [-0.25..., b = [2, 0].*
 
-![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); voltages (returned)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-matrix)
+![The right-hand side b = (2, 0) as given and the solution computed, voltages = (4](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-vectors)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input); voltages (returned). Returned with them by electrical-engineering-ai999x: first = 4.8 V. Other inputs: b = [2, 0].*
+*The right-hand side b = (2, 0) as given and the solution computed, voltages = (4.8, 1.6), as arrows from the origin. Your inputs: A = [[0.5, -0.25], [-0.25..., b = [2, 0].*
+
+![The first node voltage as b[1] runs from 0 to 6, every other input as you entered it (7 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-live-1)
+
+*The first node voltage as b[1] runs from 0 to 6, every other input as you entered it (7 solutions). Marked: your b[1] = 2 gives first = 4.8. Your inputs: A = [[0.5, -0.25], [-0.25..., b = [2, 0].*
+
+![Every entry of voltages as computed for your inputs (2 entries: 4](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-live-2)
+
+*Every entry of voltages as computed for your inputs (2 entries: 4.8, 1.6). Your inputs: A = [[0.5, -0.25], [-0.25..., b = [2, 0].*
+
+![The first node voltage as b[2] runs from 0 to 4, every other input as you entered it (5 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/nodal-voltages-live-3)
+
+*The first node voltage as b[2] runs from 0 to 4, every other input as you entered it (5 solutions). Marked: your b[2] = 0 gives first = 4.8. Your inputs: A = [[0.5, -0.25], [-0.25..., b = [2, 0].*
 
 ```python
 electrical_engineering_ai999x.solve('nodal_voltages', A='[[0.5, -0.25], [-0.25, 0.75]]', b='[2, 0]')
@@ -666,9 +746,21 @@ $$
 - **Assumes:** a ground node 0; every resistance positive; a unique solution (no floating node, no loop of voltage sources)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![voltage of every node relative to node 0, in volts (node_voltages) returned by electrical-engineering-ai999x for the worked example (netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000), one bar per entry: 1 = 12, 2 = 8](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-node-voltages-bars)
+![The voltage of every node relative to node 0 computed for this netlist, one bar per node: node 1 = 12 V, node 2 = 8 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-node-voltages-bars)
 
-*voltage of every node relative to node 0, in volts (node_voltages) returned by electrical-engineering-ai999x for the worked example (netlist = V1 1 0 12; R1 1 2 1000; R2 2 0 2000), one bar per entry: 1 = 12, 2 = 8.*
+*The voltage of every node relative to node 0 computed for this netlist, one bar per node: node 1 = 12 V, node 2 = 8 V. In SI units: power_delivered = 0.048 W. Your inputs: netlist = V1 1 0 12; R1 1 2 1000....*
+
+![Total power delivered by the sources (=](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-node-voltages-live-1)
+
+*Total power delivered by the sources (=... as the number in netlist runs from 3 to 21, every other input as you entered it (41 solutions). Marked: your the number in netlist = 12 gives power_delivered = 48 mW. Your inputs: netlist = V1 1 0 12; R1 1 2 1000....*
+
+![Voltage of every node relative to node 0, in](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-node-voltages-live-2)
+
+*Voltage of every node relative to node 0, in... for your inputs: 1 12, 2 8. Your inputs: netlist = V1 1 0 12; R1 1 2 1000....*
+
+![Total power delivered by the sources (=](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-node-voltages-live-3)
+
+*Total power delivered by the sources (=... as the number in netlist runs from 250 to 1750, every other input as you entered it (29 solutions). Marked: your the number in netlist = 1000 gives power_delivered = 48 mW. Your inputs: netlist = V1 1 0 12; R1 1 2 1000....*
 
 ```python
 electrical_engineering_ai999x.solve('dc_node_voltages', netlist='V1 1 0 12; R1 1 2 1000; R2 2 0 2000')
@@ -714,9 +806,17 @@ $$
 - **Assumes:** both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The Thévenin equivalent the package returned for the circuit V1 1 0 12; R1 1 2 1000; R2 2 0 2000 seen between nodes 2 (a) and 0 (b): a source Vth = 8 V in series with Rth = 666](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/thevenin-equivalent-schematic)
+![The Thévenin equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a source Vth = 8 V in series with Rth = 666](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/thevenin-equivalent-schematic.svg)
 
-*The Thévenin equivalent the package returned for the circuit V1 1 0 12; R1 1 2 1000; R2 2 0 2000 seen between nodes 2 (a) and 0 (b): a source Vth = 8 V in series with Rth = 666.667 Ω. Marked: Vth = 8 V, Rth = 666.667 Ω.*
+*The Thévenin equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a source Vth = 8 V in series with Rth = 666.7 Ω. Your inputs: netlist = V1 1 0 12; R1 1 2 1000..., node_a = 2, node_b = 0.*
+
+![Thevenin (open-circuit) voltage, node a](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/thevenin-equivalent-live-1)
+
+*Thevenin (open-circuit) voltage, node a... as the number in netlist runs from 3 to 21, every other input as you entered it (41 solutions). Marked: your the number in netlist = 12 gives Vth = 8. Your inputs: netlist = V1 1 0 12; R1 1 2 1000..., node_a = 2, node_b = 0.*
+
+![Thevenin (open-circuit) voltage, node a](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/thevenin-equivalent-live-2)
+
+*Thevenin (open-circuit) voltage, node a... as the number in netlist runs from 250 to 1750, every other input as you entered it (29 solutions). Marked: your the number in netlist = 1000 gives Vth = 8. Your inputs: netlist = V1 1 0 12; R1 1 2 1000..., node_a = 2, node_b = 0.*
 
 ```python
 electrical_engineering_ai999x.solve('thevenin_equivalent', netlist='V1 1 0 12; R1 1 2 1000; R2 2 0 2000', node_a='2', node_b='0')
@@ -762,9 +862,17 @@ $$
 - **Assumes:** both nodes in the circuit; no ideal voltage source directly across the terminals; a unique solution (no floating node)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The Norton equivalent the package returned for the circuit V1 1 0 12; R1 1 2 1000; R2 2 0 2000 seen between nodes 2 (a) and 0 (b): a current In = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/norton-equivalent-schematic)
+![The Norton equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a current In = 12 mA in parallel with Rn = 666](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/norton-equivalent-schematic)
 
-*The Norton equivalent the package returned for the circuit V1 1 0 12; R1 1 2 1000; R2 2 0 2000 seen between nodes 2 (a) and 0 (b): a current In = 0.012 A in parallel with Rn = 666.667 Ω. Marked: In = 0.012 A, Rn = 666.667 Ω.*
+*The Norton equivalent computed for this circuit seen between node 2 (a) and node 0 (b): a current In = 12 mA in parallel with Rn = 666.7 Ω. In SI units: In = 0.012 A. Your inputs: netlist = V1 1 0 12; R1 1 2 1000..., node_a = 2, node_b = 0.*
+
+![Norton (short-circuit) current from node a](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/norton-equivalent-live-1)
+
+*Norton (short-circuit) current from node a... as the number in netlist runs from 250 to 1750, every other input as you entered it (41 solutions). Marked: your the number in netlist = 1000 gives In = 12 mA. Your inputs: netlist = V1 1 0 12; R1 1 2 1000..., node_a = 2, node_b = 0.*
+
+![Norton (short-circuit) current from node a](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/norton-equivalent-live-2)
+
+*Norton (short-circuit) current from node a... as the number in netlist runs from 3 to 21, every other input as you entered it (29 solutions). Marked: your the number in netlist = 12 gives In = 12 mA. Your inputs: netlist = V1 1 0 12; R1 1 2 1000..., node_a = 2, node_b = 0.*
 
 ```python
 electrical_engineering_ai999x.solve('norton_equivalent', netlist='V1 1 0 12; R1 1 2 1000; R2 2 0 2000', node_a='2', node_b='0')
@@ -804,13 +912,17 @@ $$
 - **Assumes:** every resistance positive
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Delta network as stated (Rab = 10 Ω, Rbc = 20 Ω, Rca = 30 Ω) and the equivalent wye the package returned (Ra = 5 Ω, Rb = 3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/delta-to-wye-schematic)
+![The delta network as given (Rab, Rbc, Rca) and the equivalent wye computed for it: Ra = 5 Ω, Rb = 3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/delta-to-wye-schematic)
 
-*Delta network as stated (Rab = 10 Ω, Rbc = 20 Ω, Rca = 30 Ω) and the equivalent wye the package returned (Ra = 5 Ω, Rb = 3.33333 Ω, Rc = 10 Ω), seen between the same terminals a, b, c. Marked: Ra = 5 Ω, Rb = 3.33333 Ω, Rc = 10 Ω.*
+*The delta network as given (Rab, Rbc, Rca) and the equivalent wye computed for it: Ra = 5 Ω, Rb = 3.333 Ω, Rc = 10 Ω, seen between the same terminals a, b, c. Your inputs: Rab = 10 ohm, Rbc = 20 ohm, Rca = 30 ohm.*
 
-![Ra (wye arm at terminal a) against Rab (delta resistance between terminals a and b) from 1 ohm to 100 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/delta-to-wye-curve)
+![Wye arm at terminal a as Rab runs from 6 to 14 ohm, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/delta-to-wye-live-1)
 
-*Ra (wye arm at terminal a) against Rab (delta resistance between terminals a and b) from 1 ohm to 100 ohm on a logarithmic axis. One curve for each value of Rca (delta resistance between terminals c and a): 30 ohm, 15 ohm, 60 ohm. Other inputs as in the worked example: Rbc = 20.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rab = 10 ohm, Ra = 5 ohm.*
+*Wye arm at terminal a as Rab runs from 6 to 14 ohm, every other input as you entered it (41 solutions). Marked: your Rab = 10 ohm gives Ra = 5. Your inputs: Rab = 10 ohm, Rbc = 20 ohm, Rca = 30 ohm.*
+
+![Wye arm at terminal a as Rbc runs from 12 to 28 ohm, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/delta-to-wye-live-2)
+
+*Wye arm at terminal a as Rbc runs from 12 to 28 ohm, every other input as you entered it (29 solutions). Marked: your Rbc = 20 ohm gives Ra = 5. Your inputs: Rab = 10 ohm, Rbc = 20 ohm, Rca = 30 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('delta_to_wye', Rab=10, Rbc=20, Rca=30)
@@ -856,13 +968,17 @@ $$
 - **Assumes:** every resistance positive
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Wye network as stated (Ra = 5 Ω, Rb = 10 Ω, Rc = 20 Ω) and the equivalent delta the package returned (Rab = 17](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wye-to-delta-schematic)
+![The wye network as given (Ra, Rb, Rc) and the equivalent delta computed for it: Rab = 17](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wye-to-delta-schematic)
 
-*Wye network as stated (Ra = 5 Ω, Rb = 10 Ω, Rc = 20 Ω) and the equivalent delta the package returned (Rab = 17.5 Ω, Rbc = 70 Ω, Rca = 35 Ω), seen between the same terminals a, b, c. Marked: Rab = 17.5 Ω, Rbc = 70 Ω, Rca = 35 Ω.*
+*The wye network as given (Ra, Rb, Rc) and the equivalent delta computed for it: Rab = 17.5 Ω, Rbc = 70 Ω, Rca = 35 Ω, seen between the same terminals a, b, c. Your inputs: Ra = 5 ohm, Rb = 10 ohm, Rc = 20 ohm.*
 
-![Rab (delta resistance between a and b) against Rc (wye arm at terminal c) from 2 ohm to 200 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wye-to-delta-curve)
+![Delta resistance between a and b as Rc runs from 12 to 28 ohm, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wye-to-delta-live-1)
 
-*Rab (delta resistance between a and b) against Rc (wye arm at terminal c) from 2 ohm to 200 ohm on a logarithmic axis. One curve for each value of Rb (wye arm at terminal b): 10 ohm, 5 ohm, 20 ohm. Other inputs as in the worked example: Ra = 5.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rc = 20 ohm, Rab = 17.5 ohm.*
+*Delta resistance between a and b as Rc runs from 12 to 28 ohm, every other input as you entered it (41 solutions). Marked: your Rc = 20 ohm gives Rab = 17.5. Your inputs: Ra = 5 ohm, Rb = 10 ohm, Rc = 20 ohm.*
+
+![Delta resistance between a and b as Rb runs from 6 to 14 ohm, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wye-to-delta-live-2)
+
+*Delta resistance between a and b as Rb runs from 6 to 14 ohm, every other input as you entered it (29 solutions). Marked: your Rb = 10 ohm gives Rab = 17.5. Your inputs: Ra = 5 ohm, Rb = 10 ohm, Rc = 20 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('wye_to_delta', Ra=5, Rb=10, Rc=20)
@@ -906,9 +1022,17 @@ $$
 - **Assumes:** no zero in the first column of the Routh array (the special cases are not handled)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![First column of the Routh array the package returned for the characteristic polynomial with coefficients 1, 2, 3, 4, 5 (highest power first): 1, 2, 1, -6, 5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/routh-hurwitz-routh)
+![The first column of the Routh array computed for the characteristic polynomial with the coefficients given (highest power first): 1, 2, 1, -6, 5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/routh-hurwitz-routh)
 
-*First column of the Routh array the package returned for the characteristic polynomial with coefficients 1, 2, 3, 4, 5 (highest power first): 1, 2, 1, -6, 5. 2 sign change(s), so the package returned 2 root(s) in the right half-plane (unstable). Marked: each sign change.*
+*The first column of the Routh array computed for the characteristic polynomial with the coefficients given (highest power first): 1, 2, 1, -6, 5. 2 sign change(s) (highlighted), so 2 root(s) in the right half-plane. Your inputs: coefficients = 1, 2, 3, 4, 5.*
+
+![Number of roots with positive real part](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/routh-hurwitz-live-1)
+
+*Number of roots with positive real part... as coefficients[0] runs from 0 to 4, every other input as you entered it (4 solutions). Marked: your coefficients[0] = 1 gives rhp_roots = 2. Shaded by true when every root has a negative real part: yes, no. Your inputs: coefficients = 1, 2, 3, 4, 5.*
+
+![Every entry of first_column as computed for your inputs (5 entries: 1, 2, 1, -6, 5)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/routh-hurwitz-live-2)
+
+*Every entry of first_column as computed for your inputs (5 entries: 1, 2, 1, -6, 5). Your inputs: coefficients = 1, 2, 3, 4, 5.*
 
 ```python
 electrical_engineering_ai999x.solve('routh_hurwitz', coefficients='1, 2, 3, 4, 5')
@@ -961,9 +1085,21 @@ $$
 - **Assumes:** a proper G(s); unity negative feedback
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Closed-loop poles of K·G(s) with G(s) = (1) / (1, 3, 0) under unity feedback, for 61 gains K from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/closed-loop-poles-locus)
+![Closed-loop poles of K·G(s) under unity feedback for 41 gains K from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/closed-loop-poles-locus)
 
-*Closed-loop poles of K·G(s) with G(s) = (1) / (1, 3, 0) under unity feedback, for 61 gains K from 0.01 to 100 (logarithmic steps), each set the package returned. Marked: the poles at K = 1: -2.61803, -0.381966 (stable).*
+*Closed-loop poles of K·G(s) under unity feedback for 41 gains K from 0.01 to 100 (logarithmic steps), each set computed by the model. Marked: the poles at K = 1: -2.618, -0.382. Your inputs: num = 1, den = 1, 3, 0.*
+
+![Largest real part of the poles (negative](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/closed-loop-poles-live-1)
+
+*Largest real part of the poles (negative... as num[0] runs from 1 to 5, every other input as you entered it (5 solutions). Marked: your num[0] = 1 gives max_real_part = -0.382. Your inputs: num = 1, den = 1, 3, 0.*
+
+![Every entry of poles as computed for your inputs (2 entries: -2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/closed-loop-poles-live-2)
+
+*Every entry of poles as computed for your inputs (2 entries: -2.618, -0.382). Your inputs: num = 1, den = 1, 3, 0.*
+
+![Largest real part of the poles (negative](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/closed-loop-poles-live-3)
+
+*Largest real part of the poles (negative... as den[2] runs from 0 to 4, every other input as you entered it (5 solutions). Marked: your den[2] = 0 gives max_real_part = -0.382. Your inputs: num = 1, den = 1, 3, 0.*
 
 ```python
 electrical_engineering_ai999x.solve('closed_loop_poles', num='1', den='1, 3, 0')
@@ -1008,9 +1144,17 @@ $$
 - **Assumes:** a proper G(s); exactly one gain crossover
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (4) / (1, 2, 0) at 121 frequencies from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phase-margin-bode)
+![Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (4) / (s² + 2s) at 61 frequencies from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phase-margin-bode)
 
-*Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (4) / (1, 2, 0) at 121 frequencies from 0.01 to 100 rad/s, each a run of the package's frequency response. Marked: the gain crossover ω = 1.5723 rad/s and the phase margin the package returned, 51.8273°.*
+*Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (4) / (s² + 2s) at 61 frequencies from 0.01572 rad/s to 157.2 rad/s, each computed by the model's frequency response. Marked: the gain crossover ω = 1.572 rad/s and the phase margin computed, 51.83°. Your inputs: num = 4, den = 1, 2, 0.*
+
+![Phase margin in degrees as den[1] runs from 0 to 6, every other input as you entered it (7 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phase-margin-live-1)
+
+*Phase margin in degrees as den[1] runs from 0 to 6, every other input as you entered it (7 solutions). Marked: your den[1] = 2 gives phase_margin = 51.83. Your inputs: num = 4, den = 1, 2, 0.*
+
+![Phase margin in degrees as den[0] runs from 0 to 5, every other input as you entered it (5 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phase-margin-live-2)
+
+*Phase margin in degrees as den[0] runs from 0 to 5, every other input as you entered it (5 solutions). 1 value that would take too long to compute here is left out. Marked: your den[0] = 1 gives phase_margin = 51.83. Your inputs: num = 4, den = 1, 2, 0.*
 
 ```python
 electrical_engineering_ai999x.solve('phase_margin', num='4', den='1, 2, 0')
@@ -1055,9 +1199,17 @@ $$
 - **Assumes:** a proper G(s); exactly one phase crossover with G negative real
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (10) / (1, 6, 5, 0) at 121 frequencies from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/gain-margin-bode)
+![Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (10) / (s³ + 6s² + 5s) at 61 frequencies from 0](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/gain-margin-bode.svg)
 
-*Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (10) / (1, 6, 5, 0) at 121 frequencies from 0.01 to 100 rad/s, each a run of the package's frequency response. Marked: the phase crossover ω = 2.23607 rad/s and the gain margin the package returned, 9.54243 dB (factor 3).*
+*Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (10) / (s³ + 6s² + 5s) at 61 frequencies from 0.02236 rad/s to 223.6 rad/s, each computed by the model's frequency response. Marked: the phase crossover ω = 2.236 rad/s and the gain margin computed, 9.542 dB. Your inputs: num = 10, den = 1, 6, 5, 0.*
+
+![Gain margin as a ratio as den[0] runs from 1 to 5, every other input as you entered it (5 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/gain-margin-live-1)
+
+*Gain margin as a ratio as den[0] runs from 1 to 5, every other input as you entered it (5 solutions). Marked: your den[0] = 1 gives gain_margin = 3. Your inputs: num = 10, den = 1, 6, 5, 0.*
+
+![Gain margin as a ratio as den[2] runs from 1 to 9, every other input as you entered it (9 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/gain-margin-live-2)
+
+*Gain margin as a ratio as den[2] runs from 1 to 9, every other input as you entered it (9 solutions). Marked: your den[2] = 5 gives gain_margin = 3. Your inputs: num = 10, den = 1, 6, 5, 0.*
 
 ```python
 electrical_engineering_ai999x.solve('gain_margin', num='10', den='1, 6, 5, 0')
@@ -1105,13 +1257,17 @@ $$
 - **Assumes:** no pole of G on the imaginary axis at w; $w > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Bode magnitude of G(s) = 10 / (s^3 + 6s^2 + 5s), 101 frequencies from 0](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/bode-point-bode.svg)
+![Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (10) / (s + 1) at 61 frequencies from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bode-point-bode)
 
-*Bode magnitude of G(s) = 10 / (s^3 + 6s^2 + 5s), 101 frequencies from 0.01 to 100 rad/s computed by the package. At the phase crossover ω = 2.23607 rad/s the gain is -9.54243 dB, so the gain margin returned by the package is 9.54243 dB (a factor 3); marked: ω = 2.23607 rad/s, |G| = -9.54243 dB.*
+*Bode magnitude (top) and phase (bottom, unwrapped) of G(s) = (10) / (s + 1) at 61 frequencies from 0.01 rad/s to 100 rad/s, each computed by the model's frequency response. Marked: the point computed at ω = 1 rad/s. In SI units: magnitude_db = 16.99. Your inputs: num = 10, den = 1, 1, w = 1 rad/s.*
 
-![magnitude_db (20 log10 |G(jw)| in decibels) against w (angular frequency in rad/s) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bode-point-curve)
+![Magnitude db as den[0] runs from 0 to 5, every other input as you entered it (6 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bode-point-live-1)
 
-*magnitude_db (20 log10 |G(jw)| in decibels) against w (angular frequency in rad/s) from 0.1 rad/s to 10 rad/s on a logarithmic axis. Other inputs as in the worked example: num = 10, den = 1, 1. 41 points computed by electrical-engineering-ai999x; marked: the worked example, w = 1 rad/s, magnitude_db = 16.9897.*
+*Magnitude db as den[0] runs from 0 to 5, every other input as you entered it (6 solutions). Marked: your den[0] = 1 gives magnitude_db = 16.99. Your inputs: num = 10, den = 1, 1, w = 1 rad/s.*
+
+![Magnitude db as den[1] runs from 0 to 5, every other input as you entered it (6 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bode-point-live-2)
+
+*Magnitude db as den[1] runs from 0 to 5, every other input as you entered it (6 solutions). Marked: your den[1] = 1 gives magnitude_db = 16.99. Your inputs: num = 10, den = 1, 1, w = 1 rad/s.*
 
 ```python
 electrical_engineering_ai999x.solve('bode_point', num='10', den='1, 1', w=1)
@@ -1158,9 +1314,17 @@ $$
 - **Assumes:** a stable closed loop; unity negative feedback; unit-amplitude test input
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Unity-feedback loop with the stated open-loop G(s) = (10) / (1, 3, 2) and a step input](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/steady-state-error-block)
+![Unity-feedback loop with the open-loop G(s) = (10) / (s² + 3s + 2) as given and a step input](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/steady-state-error-block)
 
-*Unity-feedback loop with the stated open-loop G(s) = (10) / (1, 3, 2) and a step input. Labelled with what the package returned: steady-state error 0.166667, error constant 5, system type 0. Marked: e_ss = 0.166667.*
+*Unity-feedback loop with the open-loop G(s) = (10) / (s² + 3s + 2) as given and a step input. Labelled with what was computed: steady-state error 0.1667, error constant 5, type 0. Your inputs: num = 10, den = 1, 3, 2, input = step.*
+
+![Steady-state error as den[2] runs from 0 to 6, every other input as you entered it (7 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/steady-state-error-live-1)
+
+*Steady-state error as den[2] runs from 0 to 6, every other input as you entered it (7 solutions). Marked: your den[2] = 2 gives steady_state_error = 0.1667. Your inputs: num = 10, den = 1, 3, 2, input = step.*
+
+![Steady-state error as num[0] runs from 2 to 30, every other input as you entered it (15 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/steady-state-error-live-2)
+
+*Steady-state error as num[0] runs from 2 to 30, every other input as you entered it (15 solutions). Marked: your num[0] = 10 gives steady_state_error = 0.1667. Your inputs: num = 10, den = 1, 3, 2, input = step.*
 
 ```python
 electrical_engineering_ai999x.solve('steady_state_error', num='10', den='1, 3, 2', input='step')
@@ -1219,11 +1383,15 @@ $$
 
 ![Unit step response of a second-order system with ζ = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/second-order-step-step)
 
-*Unit step response of a second-order system with ζ = 0.5, ωn = 4 rad/s (as stated), computed as the capacitor voltage the package returned for a series RLC circuit with the same ζ and ωn (L = 1 H, C = 0.0625 F, R = 4 Ω, 1 V step), 161 instants. Marked from the metrics the package returned: overshoot 16.3034 % (peak 1.16303 at t = 0.9069 s), 2 % settling time 2.01909 s, rise time 0.409393 s.*
+*Unit step response of a second-order system with ζ = 0.5 and ωn = 4 rad/s, computed as the capacitor voltage of a series RLC circuit with the same ζ and ωn at 61 instants; marked from the metrics computed: overshoot 16.3 %, ts 2.019 s, tr 409.4 ms. Your inputs: zeta = 0.5, wn = 4 rad/s.*
 
-![settling_time (exact 2% settling time (last time the response leaves the band)) against zeta (damping ratio (0 < zeta < 1)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/second-order-step-curve)
+![Exact 2% settling time (last time the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/second-order-step-live-1)
 
-*settling_time (exact 2% settling time (last time the response leaves the band)) against zeta (damping ratio (0 < zeta < 1)) from 0.02 to 0.98. One curve for each value of wn (undamped natural frequency): 4 rad/s, 2 rad/s, 8 rad/s. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, zeta = 0.5, settling_time = 2.01909 s.*
+*Exact 2% settling time (last time the... as ζ runs from 0.125 to 0.875, every other input as you entered it (41 solutions). Marked: your ζ = 0.5 gives settling_time = 2.019. Your inputs: zeta = 0.5, wn = 4 rad/s.*
+
+![Exact 2% settling time (last time the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/second-order-step-live-2)
+
+*Exact 2% settling time (last time the... as wn runs from 2.4 to 5.6 rad/s, every other input as you entered it (29 solutions). Marked: your wn = 4 rad/s gives settling_time = 2.019. Your inputs: zeta = 0.5, wn = 4 rad/s.*
 
 ```python
 electrical_engineering_ai999x.solve('second_order_step', zeta=0.5, wn=4)
@@ -1273,13 +1441,17 @@ $$
 - **Assumes:** $R  \geq  0$, $L > 0$, $C > 0$, $f > 0$; sinusoidal steady state
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The series RLC circuit of the worked example (R = 100](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-schematic)
+![The series RLC circuit with R, L and C as given, labelled with what was computed for these inputs: |Z| = 314](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/series-rlc-impedance-schematic.svg)
 
-*The series RLC circuit of the worked example (R = 100.0, L = 0.05, C = 9.999999999999999e-06, f = 1000.0), labelled with what the package returned: impedance = 314.562; phase_deg = 71.4639. Marked: impedance = 314.562.*
+*The series RLC circuit with R, L and C as given, labelled with what was computed for these inputs: |Z| = 314.6 Ω; phase = 71.46°; XL = 314.2 Ω; XC = 15.92 Ω. Your inputs: R = 100 ohm, L = 0.05 H, C = 1e-05 F, f = 1000 Hz.*
 
-![impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-curve)
+![Impedance and imaginary part of Z as f runs from 600 to 1400 Hz, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-live-1)
 
-*impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis. One curve for each value of L (inductance): 0.05 H, 0.025 H, 0.1 H. Other inputs as in the worked example: R = 100.0 ohm, C = 9.999999999999999e-06 F. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1000 Hz, impedance = 314.562 ohm.*
+*Impedance and imaginary part of Z as f runs from 600 to 1400 Hz, every other input as you entered it (41 solutions). Marked: your f = 1000 Hz gives impedance = 314.6. Your inputs: R = 100 ohm, L = 0.05 H, C = 1e-05 F, f = 1000 Hz.*
+
+![Impedance and imaginary part of Z as L runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-impedance-live-2)
+
+*Impedance and imaginary part of Z as L runs from 0.03 to 0.07 H, every other input as you entered it (29 solutions). Marked: your L = 0.05 H gives impedance = 314.6. Your inputs: R = 100 ohm, L = 0.05 H, C = 1e-05 F, f = 1000 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('series_rlc_impedance', R=100, L=0.05, C=1e-05, f=1000)
@@ -1330,13 +1502,17 @@ $$
 - **Assumes:** R, L, C, $f > 0$; sinusoidal steady state
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The parallel RLC circuit of the worked example (R = 1000](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-schematic)
+![The parallel RLC circuit with R, L and C as given, labelled with what was computed for these inputs: |Z| = 103](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-schematic)
 
-*The parallel RLC circuit of the worked example (R = 1000.0, L = 0.01, C = 1e-06, f = 1000.0), labelled with what the package returned: impedance = 103.262; phase_deg = 84.0729. Marked: impedance = 103.262.*
+*The parallel RLC circuit with R, L and C as given, labelled with what was computed for these inputs: |Z| = 103.3 Ω; phase = 84.07°; XL = 62.83 Ω; XC = 159.2 Ω. Your inputs: R = 1000 ohm, L = 0.01 H, C = 1e-06 F, f = 1000 Hz.*
 
-![impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-curve)
+![Impedance, real part of Z and imaginary part of Z as f runs from 600 to 1400 Hz, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-live-1)
 
-*impedance (magnitude of the impedance |Z|) against f (frequency of the source in Hz) from 100 Hz to 10000 Hz on a logarithmic axis. One curve for each value of L (inductance): 0.01 H, 0.005 H, 0.02 H. Other inputs as in the worked example: R = 1000.0 ohm, C = 1e-06 F. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1000 Hz, impedance = 103.262 ohm.*
+*Impedance, real part of Z and imaginary part of Z as f runs from 600 to 1400 Hz, every other input as you entered it (41 solutions). Marked: your f = 1000 Hz gives impedance = 103.3. Your inputs: R = 1000 ohm, L = 0.01 H, C = 1e-06 F, f = 1000 Hz.*
+
+![Impedance, real part of Z and imaginary part of Z as L runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-impedance-live-2)
+
+*Impedance, real part of Z and imaginary part of Z as L runs from 0.006 to 0.014 H, every other input as you entered it (29 solutions). Marked: your L = 0.01 H gives impedance = 103.3. Your inputs: R = 1000 ohm, L = 0.01 H, C = 1e-06 F, f = 1000 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_rlc_impedance', R=1000, L=0.01, C=1e-06, f=1000)
@@ -1379,13 +1555,17 @@ $$
 - **Assumes:** magnitude >= 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![real (real part) against angle_deg (angle in degrees) from 0 to 90](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/polar-to-rectangular-curve)
+![real part (real) over magnitude from 5 to 15 and angle_deg from -30 to 90: each of the 143 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/polar-to-rectangular-field)
 
-*real (real part) against angle_deg (angle in degrees) from 0 to 90. One curve for each value of magnitude (magnitude (non-negative)): 10, 5, 20. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, angle_deg = 30, real = 8.66025.*
+*real part (real) over magnitude from 5 to 15 and angle_deg from -30 to 90: each of the 143 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses). Marked: the inputs given, real = 8.66. Your inputs: magnitude = 10, angle_deg = 30.*
 
-![real (real part) over magnitude (magnitude (non-negative)) from 5 to 15 and angle_deg (angle in degrees) from 0 to 90: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/polar-to-rectangular-field)
+![Real part as magnitude runs from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/polar-to-rectangular-live-1)
 
-*real (real part) over magnitude (magnitude (non-negative)) from 5 to 15 and angle_deg (angle in degrees) from 0 to 90: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 3.0616e-16 to dark 15); iso-lines at real = 2.5, 5, 7.5, 10, 12.5. Marked: the worked example, magnitude = 10, angle_deg = 30, real = 8.66025.*
+*Real part as magnitude runs from 2.5 to 17.5, every other input as you entered it (41 solutions). Marked: your magnitude = 10 gives real = 8.66. Your inputs: magnitude = 10, angle_deg = 30.*
+
+![Real part as angle_deg runs from 7](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/polar-to-rectangular-live-2)
+
+*Real part as angle_deg runs from 7.5 to 52.5, every other input as you entered it (29 solutions). Marked: your angle_deg = 30 gives real = 8.66. Your inputs: magnitude = 10, angle_deg = 30.*
 
 ```python
 electrical_engineering_ai999x.solve('polar_to_rectangular', magnitude=10, angle_deg=30)
@@ -1429,13 +1609,17 @@ $$
 - **Assumes:** not both parts zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![magnitude (magnitude) against real (real part) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rectangular-to-polar-curve)
+![magnitude (magnitude) over real from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rectangular-to-polar-field)
 
-*magnitude (magnitude) against real (real part) from 0.3 to 30 on a logarithmic axis. One curve for each value of imag (imaginary part): 4, 2, 8. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, real = 3, magnitude = 5.*
+*magnitude (magnitude) over real from 1.5 to 4.5 and imag from 2 to 6: each of the 143 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses). Marked: the inputs given, magnitude = 5. Your inputs: real = 3, imag = 4.*
 
-![magnitude (magnitude) over imag (imaginary part) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rectangular-to-polar-field)
+![Magnitude as imag runs from 1 to 7, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rectangular-to-polar-live-1)
 
-*magnitude (magnitude) over imag (imaginary part) from 0.4 to 40 and real (real part) from 0.3 to 30 (logarithmic axes): each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 0.5 to dark 50); iso-lines at magnitude = 10, 20, 30, 40. Marked: the worked example, imag = 4, real = 3, magnitude = 5.*
+*Magnitude as imag runs from 1 to 7, every other input as you entered it (41 solutions). Marked: your imag = 4 gives magnitude = 5. Your inputs: real = 3, imag = 4.*
+
+![Magnitude as real runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rectangular-to-polar-live-2)
+
+*Magnitude as real runs from 0.75 to 5.25, every other input as you entered it (29 solutions). Marked: your real = 3 gives magnitude = 5. Your inputs: real = 3, imag = 4.*
 
 ```python
 electrical_engineering_ai999x.solve('rectangular_to_polar', real=3, imag=4)
@@ -1481,13 +1665,13 @@ $$
 - **Assumes:** one phase per amplitude; one common frequency
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Three phasors 3∠0°, 4∠90° and 2∠210° on a polar chart (each converted to rectangular form by the package; rings every 1 unit of amplitude) and their sum returned by the package: 3](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/phasor-sum-phasor.svg)
+![The phasors given (3∠0°, 4∠90°), each converted to rectangular form by the model, and their sum computed: 5 ∠ 53](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phasor-sum-phasor)
 
-*Three phasors 3∠0°, 4∠90° and 2∠210° on a polar chart (each converted to rectangular form by the package; rings every 1 unit of amplitude) and their sum returned by the package: 3.25695 ∠ 67.0887° = 1.26795 + 3j. Marked: the tip of the sum, real = 1.26795, imaginary = 3.*
+*The phasors given (3∠0°, 4∠90°), each converted to rectangular form by the model, and their sum computed: 5 ∠ 53.13° = 3 + 4j. Your inputs: amplitudes = 3, 4, phases_deg = 0, 90.*
 
-![amplitude (amplitude of the sum) as value 2 of amplitudes (amplitudes (non-negative)) moves from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phasor-sum-sensitivity)
+![The amplitude of the sum as amplitude 2 moves from 2 to 6, the others as given; 31 computations of the model](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/phasor-sum-sensitivity)
 
-*amplitude (amplitude of the sum) as value 2 of amplitudes (amplitudes (non-negative)) moves from 2.5 to 4.5, the other values as given (3, 4); 41 runs of electrical-engineering-ai999x. Other inputs: phases_deg = 0, 90. Marked: the worked example, amplitudes[2] = 4, amplitude = 5.*
+*The amplitude of the sum as amplitude 2 moves from 2 to 6, the others as given; 31 computations of the model. Marked: the inputs given, amplitude = 5. Your inputs: amplitudes = 3, 4, phases_deg = 0, 90.*
 
 ```python
 electrical_engineering_ai999x.solve('phasor_sum', amplitudes='3, 4', phases_deg='0, 90')
@@ -1536,17 +1720,21 @@ $$
 - **Assumes:** rms phasors; sinusoidal steady state
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Power triangle of a load with V = 230 V ∠ 0° and I = 10 A ∠ -30°, from the complex power the package returned: real power P = 1991](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/complex-power-triangle.svg)
+![Power triangle of the load from the complex power computed for these inputs: real power P = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-triangle)
 
-*Power triangle of a load with V = 230 V ∠ 0° and I = 10 A ∠ -30°, from the complex power the package returned: real power P = 1991.86 W, reactive power Q = 1150 var (lagging), apparent power S = 2300 VA, power factor 0.866025. Marked: the tip of S.*
+*Power triangle of the load from the complex power computed for these inputs: real power P = 1.992 kW, reactive power Q = 1.15 kvar (lagging), apparent power S = 2.3 kVA, power factor 0.866. In SI units: P = 1992 W. Your inputs: V = 230 V, V_phase = 0, I = 10 A, I_phase = -30.*
 
-![lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-decision)
+![The nature of the load (lagging, leading or unity) over the current and voltage phase angles from -90° to 90°: each of the 169 cells is one computation of the model](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-decision)
 
-*lagging (inductive), leading (capacitive) or unity (nature) over I_phase (current phase angle in degrees) from -90 to 90 and V (rms voltage magnitude) from 23 V to 2300 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, lagging: 315 cells, leading: 315 cells, unity: 21 cells. Other inputs as in the worked example: V_phase = 0.0, I = 10.0 A. Marked: the worked example, I_phase = -30, V = 230 V → lagging.*
+*The nature of the load (lagging, leading or unity) over the current and voltage phase angles from -90° to 90°: each of the 169 cells is one computation of the model. Marked: the angles given. In SI units: P = 1992 W. Your inputs: V = 230 V, V_phase = 0, I = 10 A, I_phase = -30.*
 
-![P (real (active) power in W) against I_phase (current phase angle in degrees) from -90 to 90](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-curve)
+![Real (active) power in W as V runs from 138 to 322 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-live-1)
 
-*P (real (active) power in W) against I_phase (current phase angle in degrees) from -90 to 90. One curve for each value of V (rms voltage magnitude): 230 V, 115 V, 460 V. Other inputs as in the worked example: V_phase = 0.0, I = 10.0 A. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I_phase = -30, P = 1991.86 W.*
+*Real (active) power in W as V runs from 138 to 322 V, every other input as you entered it (41 solutions). Marked: your V = 230 V gives P = 1992. Your inputs: V = 230 V, V_phase = 0, I = 10 A, I_phase = -30.*
+
+![Real (active) power in W as I runs from 6 to 14 A, every other input as you entered it (27 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/complex-power-live-2)
+
+*Real (active) power in W as I runs from 6 to 14 A, every other input as you entered it (27 solutions). Marked: your I = 10 A gives P = 1992. Your inputs: V = 230 V, V_phase = 0, I = 10 A, I_phase = -30.*
 
 ```python
 electrical_engineering_ai999x.solve('complex_power', V=230, V_phase=0, I=10, I_phase=-30)
@@ -1596,9 +1784,13 @@ $$
 - **Assumes:** single-phase, sinusoidal; both power factors lagging; target > present
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![C_uF (correction capacitance in microfarads) against pf_initial (present (lagging) power factor) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/power-factor-correction-curve)
+![Correction capacitance in microfarads as V runs from 138 to 322 V, every other input as you entered it (41 solutions)](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/power-factor-correction-live-1.svg)
 
-*C_uF (correction capacitance in microfarads) against pf_initial (present (lagging) power factor) from 0.02 to 0.98. One curve for each value of V (rms supply voltage across the capacitor): 230 V, 115 V, 460 V. Other inputs as in the worked example: P = 10000.0 W, f = 50.0 Hz, pf_target = 0.95. 39 points per curve computed by electrical-engineering-ai999x; marked: the worked example, pf_initial = 0.7, C_uF = 416.101.*
+*Correction capacitance in microfarads as V runs from 138 to 322 V, every other input as you entered it (41 solutions). Marked: your V = 230 V gives C_uF = 416.1. Your inputs: P = 10000 W, V = 230 V, f = 50 Hz, pf_initial = 0.7, pf_target = 0.95.*
+
+![Correction capacitance in microfarads as pf_initial runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/power-factor-correction-live-2)
+
+*Correction capacitance in microfarads as pf_initial runs from 0.175 to 0.925, every other input as you entered it (21 solutions). Marked: your pf_initial = 0.7 gives C_uF = 416.1. Your inputs: P = 10000 W, V = 230 V, f = 50 Hz, pf_initial = 0.7, pf_target = 0.95.*
 
 ```python
 electrical_engineering_ai999x.solve('power_factor_correction', P=10000, V=230, f=50, pf_initial=0.7, pf_target=0.95)
@@ -1649,13 +1841,21 @@ $$
 - **Assumes:** balanced load and supply; $R  \geq  0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Balanced three-phase wye load as stated: line voltage VL = 400 V, each phase R = 8 Ω and X = 6 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-schematic)
+![Balanced three-phase wye load with line voltage VL and each phase R + jX as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-schematic)
 
-*Balanced three-phase wye load as stated: line voltage VL = 400 V, each phase R = 8 Ω and X = 6 Ω. Labelled with what the package returned: phase voltage 230.94 V; phase current 23.094 A; line current 23.094 A; P = 12.8 kW, Q = 9.6 kvar; S = 16 kVA, pf = 0.8. Marked: line current = 23.094 A.*
+*Balanced three-phase wye load with line voltage VL and each phase R + jX as given. Labelled with what was computed for these inputs: phase voltage = 230.9 V; phase current = 23.09 A; line current = 23.09 A; P = 12.8 kW; Q = 9.6 kvar; S = 16 kVA; power factor = 0.8. Your inputs: VL = 400 V, R = 8 ohm, X = 6 ohm, connection = wye.*
 
-![line_current (current in each line) against X (reactance per phase (positive inductive, negative capacitive)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-curve)
+![Current in each line and current in each phase of the load as VL runs from 240 to 560 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-live-1)
 
-*line_current (current in each line) against X (reactance per phase (positive inductive, negative capacitive)) from 0.6 ohm to 60 ohm on a logarithmic axis. One curve for each value of VL (rms line-to-line voltage): 400 V, 200 V, 800 V. Other inputs as in the worked example: R = 8.0 ohm, connection = wye. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, X = 6 ohm, line_current = 23.094 A.*
+*Current in each line and current in each phase of the load as VL runs from 240 to 560 V, every other input as you entered it (41 solutions). Marked: your VL = 400 V gives line_current = 23.09. Your inputs: VL = 400 V, R = 8 ohm, X = 6 ohm, connection = wye.*
+
+![Current in each line for every choice of connection, every other input as you entered it (highlighted: your choice)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-live-2)
+
+*Current in each line for every choice of connection, every other input as you entered it (highlighted: your choice). wye: 23.09; delta: 69.28. Your inputs: VL = 400 V, R = 8 ohm, X = 6 ohm, connection = wye.*
+
+![Current in each line and current in each phase of the load as R runs from 4](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/three-phase-load-live-3)
+
+*Current in each line and current in each phase of the load as R runs from 4.8 to 11.2 ohm, every other input as you entered it (29 solutions). Marked: your R = 8 ohm gives line_current = 23.09. Your inputs: VL = 400 V, R = 8 ohm, X = 6 ohm, connection = wye.*
 
 ```python
 electrical_engineering_ai999x.solve('three_phase_load', VL=400, R=8, X=6, connection='wye')
@@ -1700,9 +1900,17 @@ $$
 - **Assumes:** ideal op-amp (infinite gain, no saturation); non-inverting input grounded
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Inverting summing amplifier as stated: inputs V1 = 1 V through R1 = 10 kΩ, V2 = 2 V through R2 = 20 kΩ, V3 = -0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/summing-amplifier-schematic)
+![Inverting summing amplifier: each input Vi through its resistor Ri to the summing node, feedback Rf, as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/summing-amplifier-schematic)
 
-*Inverting summing amplifier as stated: inputs V1 = 1 V through R1 = 10 kΩ, V2 = 2 V through R2 = 20 kΩ, V3 = -0.5 V through R3 = 10 kΩ, feedback Rf = 100 kΩ. Labelled with what the package returned: the gain of each input (-10, -5, -10) and Vout = -15 V. Marked: Vout = -15 V.*
+*Inverting summing amplifier: each input Vi through its resistor Ri to the summing node, feedback Rf, as given. Labelled with what was computed for these inputs: the gain of each input and Vout = -15 V. Your inputs: V = 1, 2, -0.5, R = 10000, 20000, 10000, Rf = 100000 ohm.*
+
+![Output voltage as Rf runs from 6e+04 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/summing-amplifier-live-1)
+
+*Output voltage as Rf runs from 6e+04 to 1.4e+05 ohm, every other input as you entered it (41 solutions). Marked: your Rf = 1e+05 ohm gives Vout = -15. Your inputs: V = 1, 2, -0.5, R = 10000, 20000, 10000, Rf = 100000 ohm.*
+
+![Every entry of gains as computed for your inputs (3 entries: -10, -5, -10)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/summing-amplifier-live-2)
+
+*Every entry of gains as computed for your inputs (3 entries: -10, -5, -10). Your inputs: V = 1, 2, -0.5, R = 10000, 20000, 10000, Rf = 100000 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('summing_amplifier', V='1, 2, -0.5', R='10000, 20000, 10000', Rf=100000)
@@ -1751,13 +1959,17 @@ $$
 - **Assumes:** ideal op-amp (infinite gain, no saturation)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Difference amplifier as stated: V1 = 1 V through R1 = 10 kΩ to the − input with feedback R2 = 100 kΩ; V2 = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/difference-amplifier-schematic)
+![Difference amplifier: V1 through R1 to the − input with feedback R2; V2 through R3 to the + input with R4 to ground, as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/difference-amplifier-schematic)
 
-*Difference amplifier as stated: V1 = 1 V through R1 = 10 kΩ to the − input with feedback R2 = 100 kΩ; V2 = 1.5 V through R3 = 10 kΩ to the + input with R4 = 100 kΩ to ground. Labelled with what the package returned: Vout = 5 V (gains -10 and 10). Marked: Vout = 5 V.*
+*Difference amplifier: V1 through R1 to the − input with feedback R2; V2 through R3 to the + input with R4 to ground, as given. Labelled with the output computed for these inputs: Vout = 5 V. Your inputs: V1 = 1 V, V2 = 1.5 V, R1 = 10000 ohm, R2 = 100000 ohm, R3 = 10000 ohm, R4 = 100000 ohm.*
 
-![Vout (output voltage) against R1 (input resistor to the inverting input) from 1000 ohm to 100000 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/difference-amplifier-curve)
+![Output voltage as V2 runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/difference-amplifier-live-1)
 
-*Vout (output voltage) against R1 (input resistor to the inverting input) from 1000 ohm to 100000 ohm on a logarithmic axis. One curve for each value of V2 (voltage at the non-inverting side): 1.5 V, 0.75 V, 3 V. Other inputs as in the worked example: V1 = 1.0 V, R2 = 100000.0 ohm, R3 = 10000.0 ohm, R4 = 100000.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 10000 ohm, Vout = 5 V.*
+*Output voltage as V2 runs from 0.9 to 2.1 V, every other input as you entered it (41 solutions). Marked: your V2 = 1.5 V gives Vout = 5. Your inputs: V1 = 1 V, V2 = 1.5 V, R1 = 10000 ohm, R2 = 100000 ohm, R3 = 10000 ohm, R4 = 100000 ohm.*
+
+![Output voltage as V1 runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/difference-amplifier-live-2)
+
+*Output voltage as V1 runs from 0.6 to 1.4 V, every other input as you entered it (29 solutions). Marked: your V1 = 1 V gives Vout = 5. Your inputs: V1 = 1 V, V2 = 1.5 V, R1 = 10000 ohm, R2 = 100000 ohm, R3 = 10000 ohm, R4 = 100000 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('difference_amplifier', V1=1, V2=1.5, R1=10000.0, R2=100000.0, R3=10000.0, R4=100000.0)
@@ -1811,13 +2023,21 @@ $$
 - **Assumes:** NPN in the forward-active region (VCE >= 0.2 V); constant VBE and beta
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Voltage-divider bias of an npn transistor as stated: VCC = 12 V, R1 = 10 kΩ, R2 = 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-schematic)
+![Voltage-divider bias of an npn transistor, labelled with the operating point computed for these inputs: VB = 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-schematic)
 
-*Voltage-divider bias of an npn transistor as stated: VCC = 12 V, R1 = 10 kΩ, R2 = 2.2 kΩ, RC = 3.6 kΩ, RE = 1 kΩ, β = 100, VBE = 0.7 V. Labelled with the operating point the package returned: VB = 2.13826 V, VE = 1.43826 V, VC = 6.87354 V, IC = 0.00142402 A, VCE = 5.43529 V. Marked: IC = 1.42402 mA.*
+*Voltage-divider bias of an npn transistor, labelled with the operating point computed for these inputs: VB = 2.138 V, VE = 1.438 V, VC = 6.874 V, IC = 1.424 mA, VCE = 5.435 V. Your inputs: VCC = 12 V, R1 = 10000 ohm, R2 = 2200 ohm, RC = 3600 ohm, RE = 1000 ohm, beta = 100, VBE = 0.7 V.*
 
-![IC_mA (collector current in milliamperes) against RE (emitter resistor) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-curve)
+![IC against RE from 500 Ω to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-curve)
 
-*IC_mA (collector current in milliamperes) against RE (emitter resistor) from 500 ohm to 1500 ohm. One curve for each value of VCC (supply voltage): 12 V, 6 V, 24 V. Other inputs as in the worked example: R1 = 10000.0 ohm, R2 = 2200.0 ohm, RC = 3600.0 ohm, beta = 100.0, VBE = 0.7 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, RE = 1000 ohm, IC_mA = 1.42402.*
+*IC against RE from 500 Ω to 1.5 kΩ, one curve for each supply voltage (the one given, half and twice it), each point computed by the model; marked: the inputs given, IC = 1.424 mA. Your inputs: VCC = 12 V, R1 = 10000 ohm, R2 = 2200 ohm, RC = 3600 ohm, RE = 1000 ohm, beta = 100, VBE = 0.7 V.*
+
+![Collector current in milliamperes as R1 runs from 6000 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-live-1)
+
+*Collector current in milliamperes as R1 runs from 6000 to 1.4e+04 ohm, every other input as you entered it (41 solutions). Marked: your R1 = 1e+04 ohm gives IC_mA = 1.424. Your inputs: VCC = 12 V, R1 = 10000 ohm, R2 = 2200 ohm, RC = 3600 ohm, RE = 1000 ohm, beta = 100, VBE = 0.7 V.*
+
+![Collector current in milliamperes as RE runs from 600 to 1400 ohm, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/bjt-divider-bias-live-2)
+
+*Collector current in milliamperes as RE runs from 600 to 1400 ohm, every other input as you entered it (29 solutions). Marked: your RE = 1000 ohm gives IC_mA = 1.424. Your inputs: VCC = 12 V, R1 = 10000 ohm, R2 = 2200 ohm, RC = 3600 ohm, RE = 1000 ohm, beta = 100, VBE = 0.7 V.*
 
 ```python
 electrical_engineering_ai999x.solve('bjt_divider_bias', VCC=12, R1=10000.0, R2=2200, RC=3600, RE=1000, beta=100, VBE=0.7)
@@ -1867,13 +2087,17 @@ $$
 - **Assumes:** the Zener is in breakdown (ideal: constant Vz); positive values
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Zener shunt regulator as stated: Vin = 20 V, series R = 1 kΩ, Zener voltage Vz = 12 V, load RL = 2 kΩ](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/zener-regulator-schematic)
+![Zener shunt regulator: Vin through the series resistor R to the Zener diode in parallel with the load RL](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/zener-regulator-schematic)
 
-*Zener shunt regulator as stated: Vin = 20 V, series R = 1 kΩ, Zener voltage Vz = 12 V, load RL = 2 kΩ. Labelled with what the package returned: VL = 12 V, IR = 0.008 A, IZ = 0.002 A, IL = 0.006 A (Zener power 0.024 W). Marked: VL = 12 V.*
+*Zener shunt regulator: Vin through the series resistor R to the Zener diode in parallel with the load RL. Labelled with what was computed for these inputs: VL = 12 V, IR = 8 mA, IZ = 2 mA, IL = 6 mA. Your inputs: Vin = 20 V, R = 1000 ohm, Vz = 12 V, RL = 2000 ohm.*
 
-![IZ_mA (Zener current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/zener-regulator-curve)
+![Zener current in milliamperes as Vin runs from 18](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/zener-regulator-live-1)
 
-*IZ_mA (Zener current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm. One curve for each value of Vin (input voltage): 20 V, 40 V. Other inputs as in the worked example: Vz = 12.0 V, RL = 2000.0 ohm. 26 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, IZ_mA = 2.*
+*Zener current in milliamperes as Vin runs from 18.4 to 28 V, every other input as you entered it (25 solutions). Marked: your Vin = 20 V gives IZ_mA = 2. Your inputs: Vin = 20 V, R = 1000 ohm, Vz = 12 V, RL = 2000 ohm.*
+
+![Zener current in milliamperes as Vz runs from 7](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/zener-regulator-live-2)
+
+*Zener current in milliamperes as Vz runs from 7.2 to 13.03 V, every other input as you entered it (18 solutions). Marked: your Vz = 12 V gives IZ_mA = 2. Your inputs: Vin = 20 V, R = 1000 ohm, Vz = 12 V, RL = 2000 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('zener_regulator', Vin=20, R=1000, Vz=12, RL=2000)
@@ -1925,17 +2149,25 @@ $$
 - **Assumes:** circuit at rest before the step (vC = 0, i = 0); ideal components
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Capacitor voltage of a series RLC circuit switched onto V = 12 V (L = 0](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/series-rlc-step-response.svg)
+![The series RLC circuit with R, L and C as given, labelled with what was computed for these inputs: vC = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-schematic)
 
-*Capacitor voltage of a series RLC circuit switched onto V = 12 V (L = 0.1 H, C = 0.0001 F) for three resistances, 121 instants each computed by the package: R = 10 Ω: ζ = 0.158114, underdamped; R = 63.2456 Ω: ζ = 1, critically damped; R = 150 Ω: ζ = 2.37171, overdamped. Marked: t = 0.005 s, vC = 10.4144 V (R = 10 Ω).*
+*The series RLC circuit with R, L and C as given, labelled with what was computed for these inputs: vC = 10.41 V; i = 299.3 mA; ζ = 0.1581; underdamped. Your inputs: R = 10 ohm, L = 0.1 H, C = 0.0001 F, V = 12 V, t = 0.005 s.*
 
-![The series RLC circuit of the worked example (R = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-schematic)
+![Capacitor voltage of the series RLC circuit switched onto the source, for the resistance given and two others (10 Ω under; 63](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-response)
 
-*The series RLC circuit of the worked example (R = 10.0, L = 0.1, C = 9.999999999999999e-05, V = 12.0, t = 0.005), labelled with what the package returned: vC = 10.4144; i = 0.299285; zeta = 0.158114; response = underdamped. Marked: vC = 10.4144.*
+*Capacitor voltage of the series RLC circuit switched onto the source, for the resistance given and two others (10 Ω under; 63.25 Ω critically; 151.8 Ω over), 31 instants each computed by the model. Marked: t = 5 ms, vC = 10.41 V. Your inputs: R = 10 ohm, L = 0.1 H, C = 0.0001 F, V = 12 V, t = 0.005 s.*
 
-![underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-decision)
+![Underdamped, critically damped or overdamped over R from 4](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-decision)
 
-*underdamped, critically damped or overdamped (response) over R (resistance) from 1 ohm to 100 ohm and L (inductance) from 0.01 H to 1 H (logarithmic axes): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, overdamped: 84 cells, underdamped: 567 cells. Other inputs as in the worked example: C = 9.999999999999999e-05 F, V = 12.0 V, t = 0.005 s. Marked: the worked example, R = 10 ohm, L = 0.1 H → underdamped.*
+*Underdamped, critically damped or overdamped over R from 4.841 Ω to 193.6 Ω and L from 25 mH to 150 mH: each of the 99 cells is one computation of the model, coloured by the kind it returned. Marked: the inputs given. In SI units: vC = 10.41 V. Your inputs: R = 10 ohm, L = 0.1 H, C = 0.0001 F, V = 12 V, t = 0.005 s.*
+
+![Capacitor voltage at t as t runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-live-1)
+
+*Capacitor voltage at t as t runs from 0.003 to 0.007 s, every other input as you entered it (41 solutions). Marked: your t = 0.005 s gives vC = 10.41. Your inputs: R = 10 ohm, L = 0.1 H, C = 0.0001 F, V = 12 V, t = 0.005 s.*
+
+![Capacitor voltage at t as L runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-step-live-2)
+
+*Capacitor voltage at t as L runs from 0.06 to 0.14 H, every other input as you entered it (25 solutions). Marked: your L = 0.1 H gives vC = 10.41. Your inputs: R = 10 ohm, L = 0.1 H, C = 0.0001 F, V = 12 V, t = 0.005 s.*
 
 ```python
 electrical_engineering_ai999x.solve('series_rlc_step', R=10, L=0.1, C=0.0001, V=12, t=0.005)
@@ -1978,9 +2210,13 @@ $$
 - **Assumes:** every variable given 0 or 1; products written with an operator (A·B, not AB)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The expression A AND (B OR NOT C) drawn as gates, inputs as stated (A=1, B=0, C=0); the output is the value the package returned, 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/boolean-evaluate-gates)
+![The expression A AND (B OR NOT C) drawn as gates with the inputs given (A=1, B=0, C=0); the value on each gate's output is what the model computed for that part, and the output is 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/boolean-evaluate-gates)
 
-*The expression A AND (B OR NOT C) drawn as gates, inputs as stated (A=1, B=0, C=0); the output is the value the package returned, 1. Marked: output = 1.*
+*The expression A AND (B OR NOT C) drawn as gates with the inputs given (A=1, B=0, C=0); the value on each gate's output is what the model computed for that part, and the output is 1. Your inputs: expression = A AND (B OR NOT C), values = A=1, B=0, C=0.*
+
+![Value of the expression for each of the 8 assignments of 0 and 1 to A, B, C, each computed with that assignment as values and your other inputs as entered; 3 of 8 give a nonzero value](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/boolean-evaluate-live-1)
+
+*Value of the expression for each of the 8 assignments of 0 and 1 to A, B, C, each computed with that assignment as values and your other inputs as entered; 3 of 8 give a nonzero value. Ringed row: your values (A=1, B=0, C=0) gives value = 1. Your inputs: expression = A AND (B OR NOT C), values = A=1, B=0, C=0.*
 
 ```python
 electrical_engineering_ai999x.solve('boolean_evaluate', expression='A AND (B OR NOT C)', values='A=1, B=0, C=0')
@@ -2035,9 +2271,13 @@ $$
 - **Assumes:** 1 to 4 variables
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Karnaugh map of A·B + A·B' + A'·B over A, B (Gray-coded rows and columns, each cell numbered by its minterm): the minterms the package returned (1, 2, 3) are shaded and marked 1; each term of the returned minimal sum of products, A + B, outlines the cells it covers (one colour per term)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/truth-table-sop-kmap)
+![Karnaugh map over A, B (Gray-coded rows and columns): the minterms (1, 2, 3) marked 1; the minimal sum of products computed: A + B](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/truth-table-sop-kmap)
 
-*Karnaugh map of A·B + A·B' + A'·B over A, B (Gray-coded rows and columns, each cell numbered by its minterm): the minterms the package returned (1, 2, 3) are shaded and marked 1; each term of the returned minimal sum of products, A + B, outlines the cells it covers (one colour per term). Marked: 2 terms, 2 literals.*
+*Karnaugh map over A, B (Gray-coded rows and columns): the minterms (1, 2, 3) marked 1; the minimal sum of products computed: A + B. Your inputs: expression = A·B + A·B' + A'·B.*
+
+![Every entry of minterms as computed for your inputs (3 entries: 1, 2, 3)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/truth-table-sop-live-1)
+
+*Every entry of minterms as computed for your inputs (3 entries: 1, 2, 3). Your inputs: expression = A·B + A·B' + A'·B.*
 
 ```python
 electrical_engineering_ai999x.solve('truth_table_sop', expression="A·B + A·B' + A'·B")
@@ -2089,9 +2329,17 @@ $$
 - **Assumes:** 1 to 4 variables; minterms and don't-cares disjoint and in range
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Karnaugh map of the stated minterms 0, 1, 2, 5, 6, 7 over A, B, C: each term of the minimal sum of products the package returned, A'·B' + A·C + B·C', outlines the cells it covers (one colour per term)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/minterms-to-sop-kmap)
+![Karnaugh map over A, B, C (Gray-coded rows and columns): the minterms (0, 1, 2, 5, 6, 7) marked 1; the minimal sum of products computed: A'·B' + A·C + B·C'](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/minterms-to-sop-kmap.svg)
 
-*Karnaugh map of the stated minterms 0, 1, 2, 5, 6, 7 over A, B, C: each term of the minimal sum of products the package returned, A'·B' + A·C + B·C', outlines the cells it covers (one colour per term). Marked: 3 terms, 6 literals.*
+*Karnaugh map over A, B, C (Gray-coded rows and columns): the minterms (0, 1, 2, 5, 6, 7) marked 1; the minimal sum of products computed: A'·B' + A·C + B·C'. In SI units: terms = 3. Your inputs: minterms = 0, 1, 2, 5, 6, 7, variables = 3.*
+
+![Number of product terms as minterms[4] runs from 1 to 7, every other input as you entered it (7 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/minterms-to-sop-live-1)
+
+*Number of product terms as minterms[4] runs from 1 to 7, every other input as you entered it (7 solutions). Marked: your minterms[4] = 5 gives terms = 3. Your inputs: minterms = 0, 1, 2, 5, 6, 7, variables = 3.*
+
+![Number of product terms as minterms[6] runs from 1 to 7, every other input as you entered it (7 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/minterms-to-sop-live-2)
+
+*Number of product terms as minterms[6] runs from 1 to 7, every other input as you entered it (7 solutions). Marked: your minterms[6] = 7 gives terms = 3. Your inputs: minterms = 0, 1, 2, 5, 6, 7, variables = 3.*
 
 ```python
 electrical_engineering_ai999x.solve('minterms_to_sop', minterms='0, 1, 2, 5, 6, 7', variables=3)
@@ -2141,9 +2389,9 @@ $$
 - **Assumes:** at most 12 variables
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Truth table of expression 1, (A·B)', and expression 2, A' + B', over every assignment of A, B (rows numbered by the assignment as a binary number); each expression's column is the value boolean_evaluate of the package returned (4 × 2 runs)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/boolean-equivalence-truth)
+![Truth table of expression 1, (A·B)', and expression 2, A' + B', over every assignment of A, B (rows numbered by the assignment as a binary number); each entry is the value the model computed](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/boolean-equivalence-truth)
 
-*Truth table of expression 1, (A·B)', and expression 2, A' + B', over every assignment of A, B (rows numbered by the assignment as a binary number); each expression's column is the value boolean_evaluate of the package returned (4 × 2 runs). The two columns agree in 4 of 4 rows; the package returned equivalent = yes (counterexample: none). Marked: equivalent = yes.*
+*Truth table of expression 1, (A·B)', and expression 2, A' + B', over every assignment of A, B (rows numbered by the assignment as a binary number); each entry is the value the model computed. The columns agree in 4 of 4 rows; equivalent: yes. Your inputs: expression1 = (A·B)', expression2 = A' + B'.*
 
 ```python
 electrical_engineering_ai999x.solve('boolean_equivalence', expression1="(A·B)'", expression2="A' + B'")
@@ -2189,9 +2437,9 @@ $$
 - **Assumes:** a non-negative whole number below $2^{53}$; digits valid for the base
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The value 1011 written in base 2 (as stated), shown as the binary digits the package returned with the weight of each bit above it; the package returned decimal 11, octal 13, hexadecimal B](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/base-conversion-bits)
+![The value given, as the binary digits computed with the weight of each bit above it; computed: decimal 11 = octal 13 = hexadecimal B, binary 1011](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/base-conversion-bits)
 
-*The value 1011 written in base 2 (as stated), shown as the binary digits the package returned with the weight of each bit above it; the package returned decimal 11, octal 13, hexadecimal B. Marked: binary 1011.*
+*The value given, as the binary digits computed with the weight of each bit above it; computed: decimal 11 = octal 13 = hexadecimal B, binary 1011. Your inputs: value = 1011, base = 2.*
 
 ```python
 electrical_engineering_ai999x.solve('base_conversion', value='1011', base='2')
@@ -2244,9 +2492,17 @@ $$
 - **Assumes:** -2^(n-1) <= value < 2^(n-1)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The stated value -5 in 8 bits: the two's-complement pattern the package returned, 11111011, with each bit's weight above it; hexadecimal FB, read as unsigned 251](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/twos-complement-encode-bits)
+![The 8-bit pattern 11111011 with the two's-complement weight of each bit above it (the leading bit weighs negative); computed: -5 -> 11111011, hexadecimal FB, unsigned 251](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/twos-complement-encode-bits)
 
-*The stated value -5 in 8 bits: the two's-complement pattern the package returned, 11111011, with each bit's weight above it; hexadecimal FB, read as unsigned 251. Marked: 11111011.*
+*The 8-bit pattern 11111011 with the two's-complement weight of each bit above it (the leading bit weighs negative); computed: -5 -> 11111011, hexadecimal FB, unsigned 251. Your inputs: value = -5, bits = 8.*
+
+![The pattern read as an unsigned number as bits runs from 4 to 14, every other input as you entered it (11 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/twos-complement-encode-live-1)
+
+*The pattern read as an unsigned number as bits runs from 4 to 14, every other input as you entered it (11 solutions). Marked: your bits = 8 gives unsigned = 251. Your inputs: value = -5, bits = 8.*
+
+![The pattern read as an unsigned number as value runs from -9 to -1, every other input as you entered it (9 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/twos-complement-encode-live-2)
+
+*The pattern read as an unsigned number as value runs from -9 to -1, every other input as you entered it (9 solutions). Marked: your value = -5 gives unsigned = 251. Your inputs: value = -5, bits = 8.*
 
 ```python
 electrical_engineering_ai999x.solve('twos_complement_encode', value=-5, bits=8)
@@ -2294,9 +2550,9 @@ $$
 - **Assumes:** only 0 and 1; at most 64 bits
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The stated 8-bit pattern 11111011 with the two's-complement weight of each bit above it (the leading bit weighs -128); the package returned the value -5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/twos-complement-decode-bits)
+![The 8-bit pattern 11111011 with the two's-complement weight of each bit above it (the leading bit weighs negative); computed: value = -5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/twos-complement-decode-bits)
 
-*The stated 8-bit pattern 11111011 with the two's-complement weight of each bit above it (the leading bit weighs -128); the package returned the value -5. Marked: value = -5.*
+*The 8-bit pattern 11111011 with the two's-complement weight of each bit above it (the leading bit weighs negative); computed: value = -5. Your inputs: pattern = 11111011.*
 
 ```python
 electrical_engineering_ai999x.solve('twos_complement_decode', pattern='11111011')
@@ -2345,9 +2601,13 @@ $$
 - **Assumes:** 1 to 32 bits
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The stated bit pattern 1011 and the Gray code the package returned, 1110 (1 bits shaded); its value is 14](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/gray-code-bits)
+![The bit pattern given (1011) and the code computed, 1110 (1 bits shaded); decimal 14](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/gray-code-bits)
 
-*The stated bit pattern 1011 and the Gray code the package returned, 1110 (1 bits shaded); its value is 14. Marked: 1110.*
+*The bit pattern given (1011) and the code computed, 1110 (1 bits shaded); decimal 14. Your inputs: value = 1011, direction = to_gray.*
+
+![The result read as an unsigned number for every choice of direction, every other input as you entered it (highlighted: your choice)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/gray-code-live-1)
+
+*The result read as an unsigned number for every choice of direction, every other input as you entered it (highlighted: your choice). to_gray: 14; to_binary: 13. Your inputs: value = 1011, direction = to_gray.*
 
 ```python
 electrical_engineering_ai999x.solve('gray_code', value='1011', direction='to_gray')
@@ -2392,13 +2652,17 @@ $$
 - **Assumes:** no load on the output; R1, $R_{2} > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Voltage divider as stated: Vin = 12 V across R1 = 1 kΩ (top) and R2 = 2 kΩ (to ground), no load](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltage-divider-schematic)
+![Voltage divider: Vin across R1 (top) and R2 (to ground), no load](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltage-divider-schematic)
 
-*Voltage divider as stated: Vin = 12 V across R1 = 1 kΩ (top) and R2 = 2 kΩ (to ground), no load. Labelled with what the package returned: Vout = 8 V across R2, I = 4 mA through both. Marked: Vout = 8 V, I = 0.004 A.*
+*Voltage divider: Vin across R1 (top) and R2 (to ground), no load. Labelled with what was computed for these inputs: Vout = 8 V across R2, I = 4 mA through both. Your inputs: Vin = 12 V, R1 = 1000 ohm, R2 = 2000 ohm.*
 
-![Vout (output voltage across R2 (unloaded)) against Vin (input voltage) from 6 V to 18 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltage-divider-curve)
+![Output voltage across R2 (unloaded) as Vin runs from 7](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltage-divider-live-1)
 
-*Vout (output voltage across R2 (unloaded)) against Vin (input voltage) from 6 V to 18 V. One curve for each value of R1 (top resistor (from the input to the output)): 1000 ohm, 500 ohm, 2000 ohm. Other inputs as in the worked example: R2 = 2000.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Vin = 12 V, Vout = 8 V.*
+*Output voltage across R2 (unloaded) as Vin runs from 7.2 to 16.8 V, every other input as you entered it (41 solutions). Marked: your Vin = 12 V gives Vout = 8. Your inputs: Vin = 12 V, R1 = 1000 ohm, R2 = 2000 ohm.*
+
+![Output voltage across R2 (unloaded) as R2 runs from 1200 to 2800 ohm, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltage-divider-live-2)
+
+*Output voltage across R2 (unloaded) as R2 runs from 1200 to 2800 ohm, every other input as you entered it (29 solutions). Marked: your R2 = 2000 ohm gives Vout = 8. Your inputs: Vin = 12 V, R1 = 1000 ohm, R2 = 2000 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('voltage_divider', Vin=12, R1=1000, R2=2000)
@@ -2444,13 +2708,17 @@ $$
 - **Assumes:** R1, $R_{2} > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Current divider as stated: a source I = 6 A feeding R1 = 4 Ω in parallel with R2 = 2 Ω; the branch currents are those the package returned](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/current-divider-schematic)
+![A current source I feeding R1 in parallel with R2; the branch currents are those computed for these inputs: I1 = 2 A, I2 = 4 A](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/current-divider-schematic)
 
-*Current divider as stated: a source I = 6 A feeding R1 = 4 Ω in parallel with R2 = 2 Ω; the branch currents are those the package returned. Marked: I1 = 2 A, I2 = 4 A.*
+*A current source I feeding R1 in parallel with R2; the branch currents are those computed for these inputs: I1 = 2 A, I2 = 4 A. Your inputs: I = 6 A, R1 = 4 ohm, R2 = 2 ohm.*
 
-![I1 (current through R1) against R1 (first branch resistor) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/current-divider-curve)
+![Current through R1 and current through R2 as I runs from 3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/current-divider-live-1)
 
-*I1 (current through R1) against R1 (first branch resistor) from 0.4 ohm to 40 ohm on a logarithmic axis. One curve for each value of I (total current into the parallel pair): 6 A, 3 A, 12 A. Other inputs as in the worked example: R2 = 2.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 4 ohm, I1 = 2 A.*
+*Current through R1 and current through R2 as I runs from 3.6 to 8.4 A, every other input as you entered it (41 solutions). Marked: your I = 6 A gives I1 = 2. Your inputs: I = 6 A, R1 = 4 ohm, R2 = 2 ohm.*
+
+![Current through R1 and current through R2 as R2 runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/current-divider-live-2)
+
+*Current through R1 and current through R2 as R2 runs from 1.2 to 2.8 ohm, every other input as you entered it (29 solutions). Marked: your R2 = 2 ohm gives I1 = 2. Your inputs: I = 6 A, R1 = 4 ohm, R2 = 2 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('current_divider', I=6, R1=4, R2=2)
@@ -2494,13 +2762,17 @@ $$
 - **Assumes:** a resistive load; Rth > 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![A source Vth = 12 V with Rth = 6 Ω (as stated) and the load the package returned for maximum power, RL = 6 Ω, which then takes Pmax = 6 W at efficiency 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/max-power-transfer-schematic)
+![A source Vth with internal resistance Rth and the load computed for maximum power, RL = 6 Ω, which then takes Pmax = 6 W at efficiency 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/max-power-transfer-schematic)
 
-*A source Vth = 12 V with Rth = 6 Ω (as stated) and the load the package returned for maximum power, RL = 6 Ω, which then takes Pmax = 6 W at efficiency 0.5. Marked: RL = 6 Ω, Pmax = 6 W.*
+*A source Vth with internal resistance Rth and the load computed for maximum power, RL = 6 Ω, which then takes Pmax = 6 W at efficiency 0.5. Your inputs: Vth = 12 V, Rth = 6 ohm.*
 
-![Pmax (maximum power delivered to the load) against Rth (Thevenin resistance) from 3 ohm to 9 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/max-power-transfer-curve)
+![Maximum power delivered to the load as Vth runs from 7](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/max-power-transfer-live-1)
 
-*Pmax (maximum power delivered to the load) against Rth (Thevenin resistance) from 3 ohm to 9 ohm. One curve for each value of Vth (Thevenin (open-circuit) voltage): 12 V, 6 V, 24 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rth = 6 ohm, Pmax = 6 W.*
+*Maximum power delivered to the load as Vth runs from 7.2 to 16.8 V, every other input as you entered it (41 solutions). Marked: your Vth = 12 V gives Pmax = 6. Your inputs: Vth = 12 V, Rth = 6 ohm.*
+
+![Maximum power delivered to the load as Rth runs from 3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/max-power-transfer-live-2)
+
+*Maximum power delivered to the load as Rth runs from 3.6 to 8.4 ohm, every other input as you entered it (29 solutions). Marked: your Rth = 6 ohm gives Pmax = 6. Your inputs: Vth = 12 V, Rth = 6 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('max_power_transfer', Vth=12, Rth=6)
@@ -2547,13 +2819,21 @@ $$
 - **Assumes:** an unloaded output (ideal voltmeter)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Wheatstone bridge as stated: Vs = 10 V, R1 = 100 Ω, R2 = 200 Ω (left arm, top to bottom), R3 = 150 Ω, R4 = 250 Ω (right arm)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-schematic)
+![Wheatstone bridge: Vs across R1, R2 (left arm, top to bottom) and R3, R4 (right arm), as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-schematic)
 
-*Wheatstone bridge as stated: Vs = 10 V, R1 = 100 Ω, R2 = 200 Ω (left arm, top to bottom), R3 = 150 Ω, R4 = 250 Ω (right arm). Labelled with what the package returned: the voltage between the arm midpoints Vout = 0.416667 V, not balanced, balance at R4 = 300 Ω. Marked: Vout = 0.416667 V.*
+*Wheatstone bridge: Vs across R1, R2 (left arm, top to bottom) and R3, R4 (right arm), as given. Labelled with what was computed for these inputs: the voltage between the arm midpoints Vout = 416.7 mV, balanced: no; balance at R4 = 300 Ω. In SI units: Vout = 0.4167 V. Your inputs: Vs = 10 V, R1 = 100 ohm, R2 = 200 ohm, R3 = 150 ohm, R4 = 250 ohm.*
 
-![Vout (voltage of the left midpoint relative to the right midpoint) against R1 (left arm, top) from 10 ohm to 1000 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-curve)
+![Voltage of the left midpoint relative to the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-live-1)
 
-*Vout (voltage of the left midpoint relative to the right midpoint) against R1 (left arm, top) from 10 ohm to 1000 ohm on a logarithmic axis. One curve for each value of R3 (right arm, top): 150 ohm, 75 ohm, 300 ohm. Other inputs as in the worked example: Vs = 10.0 V, R2 = 200.0 ohm, R4 = 250.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 100 ohm, Vout = 0.416667 V.*
+*Voltage of the left midpoint relative to the... as R1 runs from 60 to 140 ohm, every other input as you entered it (41 solutions). Marked: your R1 = 100 ohm gives Vout = 0.4167. Shaded by true when R1 R4 = R2 R3: no, yes. Your inputs: Vs = 10 V, R1 = 100 ohm, R2 = 200 ohm, R3 = 150 ohm, R4 = 250 ohm.*
+
+![True when R1 R4 = R2 R3 for 25 5 x 5 combinations of R1 and R2 around your inputs (the other inputs as entered); the ring marks your inputs, which give no](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-live-2)
+
+*True when R1 R4 = R2 R3 for 25 5 x 5 combinations of R1 and R2 around your inputs (the other inputs as entered); the ring marks your inputs, which give no. Blank cells admit no answer. Your inputs: Vs = 10 V, R1 = 100 ohm, R2 = 200 ohm, R3 = 150 ohm, R4 = 250 ohm.*
+
+![Voltage of the left midpoint relative to the](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/wheatstone-bridge-live-3)
+
+*Voltage of the left midpoint relative to the... as R2 runs from 120 to 280 ohm, every other input as you entered it (25 solutions). Marked: your R2 = 200 ohm gives Vout = 0.4167. Shaded by true when R1 R4 = R2 R3: no, yes. Your inputs: Vs = 10 V, R1 = 100 ohm, R2 = 200 ohm, R3 = 150 ohm, R4 = 250 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('wheatstone_bridge', Vs=10, R1=100, R2=200, R3=150, R4=250)
@@ -2600,13 +2880,17 @@ $$
 - **Assumes:** unloaded output; R, C, $f > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The RC filter circuit of the worked example (R = 1000](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-schematic)
+![The low-pass RC filter with R and C as given, labelled with what was computed for these inputs: fc = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-schematic)
 
-*The RC filter circuit of the worked example (R = 1000.0, C = 1.0000000000000001e-07, f = 2000.0, filter = lowpass), labelled with what the package returned: phase_deg = -51.4881; fc = 1591.55; gain_db = -4.11474. Marked: phase_deg = -51.4881.*
+*The low-pass RC filter with R and C as given, labelled with what was computed for these inputs: fc = 1.592 kHz, gain -3.01 dB, phase -45°. In SI units: fc = 1592 Hz. Your inputs: R = 1000 ohm, C = 1e-07 F, f = 1591.5494309189535 Hz, filter = lowpass.*
 
-![fc (cutoff (-3 dB) frequency) against R (resistance) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-curve)
+![Cutoff (-3 dB) frequency as R runs from 600 to 1400 ohm, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-live-1)
 
-*fc (cutoff (-3 dB) frequency) against R (resistance) from 500 ohm to 1500 ohm. One curve for each value of C (capacitance): 1.0000e-07 F, 5.0000e-08 F, 2.0000e-07 F. Other inputs as in the worked example: f = 2000.0 Hz, filter = lowpass. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, fc = 1591.55 Hz.*
+*Cutoff (-3 dB) frequency as R runs from 600 to 1400 ohm, every other input as you entered it (41 solutions). Marked: your R = 1000 ohm gives fc = 1592. Your inputs: R = 1000 ohm, C = 1e-07 F, f = 1591.5494309189535 Hz, filter = lowpass.*
+
+![Cutoff (-3 dB) frequency as C runs from 6e-08 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rc-filter-live-2)
+
+*Cutoff (-3 dB) frequency as C runs from 6e-08 to 1.4e-07 F, every other input as you entered it (29 solutions). Marked: your C = 1e-07 F gives fc = 1592. Your inputs: R = 1000 ohm, C = 1e-07 F, f = 1591.5494309189535 Hz, filter = lowpass.*
 
 ```python
 electrical_engineering_ai999x.solve('rc_filter', R=1000, C=1e-07, f=1591.5494309189535, filter='lowpass')
@@ -2624,7 +2908,7 @@ electrical_engineering_ai999x.solve('rc_filter', R=1000, C=1e-06, f=159.15494309
 |---|---|---|
 | An RC low-pass filter has R = 1 kohm and C = 100 nF. Find the gain at f = 2 kHz. | SOLVED | fc = 1591.55 Hz, gain = 0.622677, gain_db = -4.11474, phase_deg = -51.4881 |
 | An RC high-pass filter has R = 10 kohm and C = 10 nF. Find its response at f = 100 Hz. | SOLVED | fc = 1591.55 Hz, gain = 0.0627082, gain_db = -24.0535, phase_deg = 86.4047 |
-| An RC low-pass filter has R = 1 kohm and C = 100 nF. Find the gain. | NEEDS_INPUT | rc_filter needs f (signal frequency). Example: solve('rc_filter', R='1000 ohm', C='1e-07 F', f='1591.55 Hz', filter='low |
+| An RC low-pass filter has R = 1 kohm and C = 100 nF. Find the gain. | NEEDS_INPUT | rc_filter needs f (signal frequency). Example: solve('rc_filter', R='1000 ohm', C='1e-07 F', f='1591.5494309189535 Hz',  |
 
 <a id="series_rlc_resonance"></a>
 
@@ -2654,13 +2938,17 @@ $$
 - **Assumes:** ideal R, L, C
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The series RLC circuit of the worked example (R = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-schematic)
+![The series RLC circuit with R, L and C as given, labelled with what was computed for these inputs: f0 = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-schematic)
 
-*The series RLC circuit of the worked example (R = 10.0, L = 0.01, C = 1e-06), labelled with what the package returned: f0 = 1591.55; Q = 10; bandwidth = 159.155. Marked: f0 = 1591.55.*
+*The series RLC circuit with R, L and C as given, labelled with what was computed for these inputs: f0 = 1.592 kHz; Q = 10; bandwidth = 159.2 Hz. Your inputs: R = 10 ohm, L = 0.01 H, C = 1e-06 F.*
 
-![Q (quality factor) against R (resistance) from 5 ohm to 15 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-curve)
+![Quality factor as L runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-live-1)
 
-*Q (quality factor) against R (resistance) from 5 ohm to 15 ohm. One curve for each value of L (inductance): 0.01 H, 0.005 H, 0.02 H. Other inputs as in the worked example: C = 1e-06 F. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 10 ohm, Q = 10.*
+*Quality factor as L runs from 0.006 to 0.014 H, every other input as you entered it (41 solutions). Marked: your L = 0.01 H gives Q = 10. Your inputs: R = 10 ohm, L = 0.01 H, C = 1e-06 F.*
+
+![Quality factor as R runs from 6 to 14 ohm, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-rlc-resonance-live-2)
+
+*Quality factor as R runs from 6 to 14 ohm, every other input as you entered it (29 solutions). Marked: your R = 10 ohm gives Q = 10. Your inputs: R = 10 ohm, L = 0.01 H, C = 1e-06 F.*
 
 ```python
 electrical_engineering_ai999x.solve('series_rlc_resonance', R=10, L=0.01, C=1e-06)
@@ -2707,13 +2995,17 @@ $$
 - **Assumes:** ideal R, L, C
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The parallel RLC circuit of the worked example (R = 10](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-schematic)
+![The parallel RLC circuit with R, L and C as given, labelled with what was computed for these inputs: f0 = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-schematic)
 
-*The parallel RLC circuit of the worked example (R = 10.0, L = 0.01, C = 1e-06), labelled with what the package returned: f0 = 1591.55; Q = 0.1; bandwidth = 15915.5. Marked: f0 = 1591.55.*
+*The parallel RLC circuit with R, L and C as given, labelled with what was computed for these inputs: f0 = 1.592 kHz; Q = 0.1; bandwidth = 15.92 kHz. Your inputs: R = 10 ohm, L = 0.01 H, C = 1e-06 F.*
 
-![Q (quality factor) against L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-curve)
+![Quality factor as R runs from 6 to 14 ohm, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-live-1)
 
-*Q (quality factor) against L (inductance) from 0.005 H to 0.015 H. One curve for each value of R (resistance): 10 ohm, 5 ohm, 20 ohm. Other inputs as in the worked example: C = 1e-06 F. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, L = 0.01 H, Q = 0.1.*
+*Quality factor as R runs from 6 to 14 ohm, every other input as you entered it (41 solutions). Marked: your R = 10 ohm gives Q = 0.1. Your inputs: R = 10 ohm, L = 0.01 H, C = 1e-06 F.*
+
+![Quality factor as C runs from 6e-07 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-rlc-resonance-live-2)
+
+*Quality factor as C runs from 6e-07 to 1.4e-06 F, every other input as you entered it (29 solutions). Marked: your C = 1e-06 F gives Q = 0.1. Your inputs: R = 10 ohm, L = 0.01 H, C = 1e-06 F.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_rlc_resonance', R=10, L=0.01, C=1e-06)
@@ -2758,9 +3050,13 @@ $$
 - **Assumes:** a single time constant; a step change at $t = 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![v (value at time t) against tau (time constant (RC or L/R)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-transient-curve)
+![Value at time t as Vf runs from 6 to 14 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-transient-live-1)
 
-*v (value at time t) against tau (time constant (RC or L/R)) from 0.0001 s to 0.01 s on a logarithmic axis. One curve for each value of Vf (final (steady-state) value): 10 V, 5 V, 20 V. Other inputs as in the worked example: V0 = 0.0 V, t = 0.002 s. 40 points per curve computed by electrical-engineering-ai999x; marked: the worked example, tau = 0.001 s, v = 8.64665 V.*
+*Value at time t as Vf runs from 6 to 14 V, every other input as you entered it (41 solutions). Marked: your Vf = 10 V gives v = 8.647. Your inputs: V0 = 0 V, Vf = 10 V, tau = 0.001 s, t = 0.002 s.*
+
+![Value at time t as t runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-transient-live-2)
+
+*Value at time t as t runs from 0.0012 to 0.0028 s, every other input as you entered it (29 solutions). Marked: your t = 0.002 s gives v = 8.647. Your inputs: V0 = 0 V, Vf = 10 V, tau = 0.001 s, t = 0.002 s.*
 
 ```python
 electrical_engineering_ai999x.solve('first_order_transient', V0=0, Vf=10, tau=0.001, t=0.002)
@@ -2804,13 +3100,17 @@ $$
 - **Assumes:** ideal op-amp, no saturation
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Inverting amplifier as stated: Rin = 10 kΩ, feedback Rf = 47 kΩ, input Vin = 500 mV, non-inverting input grounded](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inverting-amplifier-schematic)
+![Inverting amplifier with Rin, the feedback resistor Rf and the input Vin as given, the non-inverting input grounded](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inverting-amplifier-schematic)
 
-*Inverting amplifier as stated: Rin = 10 kΩ, feedback Rf = 47 kΩ, input Vin = 500 mV, non-inverting input grounded. Labelled with what the package returned: gain = -4.7, Vout = -2.35 V. Marked: Vout = -2.35 V.*
+*Inverting amplifier with Rin, the feedback resistor Rf and the input Vin as given, the non-inverting input grounded. Labelled with what was computed for these inputs: gain = -4.7, Vout = -2.35 V. Your inputs: Rin = 10000 ohm, Rf = 47000 ohm, Vin = 0.5 V.*
 
-![Vout (output voltage) against Rin (input resistor) from 1000 ohm to 100000 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inverting-amplifier-curve)
+![Output voltage as Rf runs from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inverting-amplifier-live-1)
 
-*Vout (output voltage) against Rin (input resistor) from 1000 ohm to 100000 ohm on a logarithmic axis. One curve for each value of Rf (feedback resistor): 47000 ohm, 23500 ohm, 94000 ohm. Other inputs as in the worked example: Vin = 0.5 V. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rin = 10000 ohm, Vout = -2.35 V.*
+*Output voltage as Rf runs from 2.82e+04 to 6.58e+04 ohm, every other input as you entered it (41 solutions). Marked: your Rf = 4.7e+04 ohm gives Vout = -2.35. Your inputs: Rin = 10000 ohm, Rf = 47000 ohm, Vin = 0.5 V.*
+
+![Output voltage as Vin runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inverting-amplifier-live-2)
+
+*Output voltage as Vin runs from 0.3 to 0.7 V, every other input as you entered it (29 solutions). Marked: your Vin = 0.5 V gives Vout = -2.35. Your inputs: Rin = 10000 ohm, Rf = 47000 ohm, Vin = 0.5 V.*
 
 ```python
 electrical_engineering_ai999x.solve('inverting_amplifier', Rin=10000.0, Rf=47000.0, Vin=0.5)
@@ -2854,13 +3154,17 @@ $$
 - **Assumes:** ideal op-amp, no saturation
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Non-inverting amplifier as stated: Rg = 10 kΩ to ground, feedback Rf = 90 kΩ, input Vin = 200 mV on the + input](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/noninverting-amplifier-schematic)
+![Non-inverting amplifier: Vin on the + input, Rg from the − input to ground and the feedback resistor Rf, as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/noninverting-amplifier-schematic)
 
-*Non-inverting amplifier as stated: Rg = 10 kΩ to ground, feedback Rf = 90 kΩ, input Vin = 200 mV on the + input. Labelled with what the package returned: gain = 10, Vout = 2 V. Marked: Vout = 2 V.*
+*Non-inverting amplifier: Vin on the + input, Rg from the − input to ground and the feedback resistor Rf, as given. Labelled with what was computed for these inputs: gain = 10, Vout = 2 V. Your inputs: Rg = 10000 ohm, Rf = 90000 ohm, Vin = 0.2 V.*
 
-![Vout (output voltage) against Rg (resistor from the inverting input to ground) from 1000 ohm to 100000 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/noninverting-amplifier-curve)
+![Output voltage as Vin runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/noninverting-amplifier-live-1)
 
-*Vout (output voltage) against Rg (resistor from the inverting input to ground) from 1000 ohm to 100000 ohm on a logarithmic axis. One curve for each value of Vin (input voltage (at the non-inverting input)): 0.2 V, 0.1 V, 0.4 V. Other inputs as in the worked example: Rf = 90000.0 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rg = 10000 ohm, Vout = 2 V.*
+*Output voltage as Vin runs from 0.12 to 0.28 V, every other input as you entered it (41 solutions). Marked: your Vin = 0.2 V gives Vout = 2. Your inputs: Rg = 10000 ohm, Rf = 90000 ohm, Vin = 0.2 V.*
+
+![Output voltage as Rg runs from 6000 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/noninverting-amplifier-live-2)
+
+*Output voltage as Rg runs from 6000 to 1.4e+04 ohm, every other input as you entered it (29 solutions). Marked: your Rg = 1e+04 ohm gives Vout = 2. Your inputs: Rg = 10000 ohm, Rf = 90000 ohm, Vin = 0.2 V.*
 
 ```python
 electrical_engineering_ai999x.solve('noninverting_amplifier', Rg=10000.0, Rf=90000.0, Vin=0.2)
@@ -2906,9 +3210,17 @@ $$
 - **Assumes:** ideal op-amp, no saturation; constant input
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Op-amp integrator as stated (R = 10 kΩ, C = 1 µF, constant input Vin = 500 mV, starting at V0 = 0 V) and, below, Vout computed by the package at 41 instants from 0 to 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/opamp-integrator-schematic)
+![Op-amp integrator with R, C and the constant input Vin as given and, below, Vout computed at 21 instants from 0 to 10 ms (marked: t = 5 ms, Vout = -250 mV)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/opamp-integrator-schematic)
 
-*Op-amp integrator as stated (R = 10 kΩ, C = 1 µF, constant input Vin = 500 mV, starting at V0 = 0 V) and, below, Vout computed by the package at 41 instants from 0 to 0.01 s (slope -50 V/s). Marked: t = 0.005 s, Vout = -0.25 V.*
+*Op-amp integrator with R, C and the constant input Vin as given and, below, Vout computed at 21 instants from 0 to 10 ms (marked: t = 5 ms, Vout = -250 mV). In SI units: Vout = -0.25 V. Your inputs: R = 10000 ohm, C = 1e-06 F, Vin = 0.5 V, t = 0.005 s, V0 = 0 V.*
+
+![Output voltage at t as V0 runs from -1 to 1 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/opamp-integrator-live-1)
+
+*Output voltage at t as V0 runs from -1 to 1 V, every other input as you entered it (41 solutions). Marked: your V0 = 0 V gives Vout = -0.25. Your inputs: R = 10000 ohm, C = 1e-06 F, Vin = 0.5 V, t = 0.005 s, V0 = 0 V.*
+
+![Output voltage at t as R runs from 6000 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/opamp-integrator-live-2)
+
+*Output voltage at t as R runs from 6000 to 1.4e+04 ohm, every other input as you entered it (29 solutions). Marked: your R = 1e+04 ohm gives Vout = -0.25. Your inputs: R = 10000 ohm, C = 1e-06 F, Vin = 0.5 V, t = 0.005 s, V0 = 0 V.*
 
 ```python
 electrical_engineering_ai999x.solve('opamp_integrator', R=10000.0, C=1e-06, Vin=0.5, t=0.005, V0=0)
@@ -2956,13 +3268,17 @@ $$
 - **Assumes:** ideal transformer (no losses, no magnetizing current)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Ideal transformer as stated: Np = 500, Ns = 50 turns, primary Vp = 230 V, load RL = 10 Ω](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/transformer-schematic)
+![Ideal transformer with Np, Ns, the primary voltage Vp and the load RL as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/transformer-schematic)
 
-*Ideal transformer as stated: Np = 500, Ns = 50 turns, primary Vp = 230 V, load RL = 10 Ω. Labelled with what the package returned: Vs = 23 V, Is = 2.3 A, Ip = 0.23 A, turns ratio 10, resistance seen from the primary 1000 Ω. Marked: Vs = 23 V.*
+*Ideal transformer with Np, Ns, the primary voltage Vp and the load RL as given. Labelled with what was computed for these inputs: Vs = 23 V, Is = 2.3 A, Ip = 230 mA, turns ratio 10, resistance seen from the primary 1 kΩ. Your inputs: Np = 500, Ns = 50, Vp = 230 V, RL = 10 ohm.*
 
-![Vs (secondary voltage) against Np (primary turns) from 250 to 750](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/transformer-curve)
+![Secondary voltage as Np runs from 125 to 875, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/transformer-live-1)
 
-*Vs (secondary voltage) against Np (primary turns) from 250 to 750. One curve for each value of Ns (secondary turns): 50, 25, 100. Other inputs as in the worked example: Vp = 230.0 V, RL = 10.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Np = 500, Vs = 23 V.*
+*Secondary voltage as Np runs from 125 to 875, every other input as you entered it (41 solutions). Marked: your Np = 500 gives Vs = 23. Your inputs: Np = 500, Ns = 50, Vp = 230 V, RL = 10 ohm.*
+
+![Secondary voltage as Ns runs from 12](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/transformer-live-2)
+
+*Secondary voltage as Ns runs from 12.5 to 87.5, every other input as you entered it (29 solutions). Marked: your Ns = 50 gives Vs = 23. Your inputs: Np = 500, Ns = 50, Vp = 230 V, RL = 10 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('transformer', Np=500, Ns=50, Vp=230, RL=10)
@@ -3010,9 +3326,17 @@ $$
 - **Assumes:** saturation: VGS > VTH and VDS >= VGS - VTH; no channel-length modulation
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Drain current in saturation against gate–source voltage, from VTH = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mosfet-saturation-transfer)
+![Drain current in saturation against the gate-source voltage from VTH = 700 mV to 3 V, each point computed by the model (points outside saturation are left out); marked: VGS = 2 V, ID = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mosfet-saturation-transfer)
 
-*Drain current in saturation against gate–source voltage, from VTH = 0.7 V to 6 V (kn = 0.0002 A/V², W/L = 10, VDS = 5 V as stated), 40 runs of the package. Marked: the worked example VGS = 2 V, ID = 1.69 mA (gm = 0.0026 S, overdrive 1.3 V).*
+*Drain current in saturation against the gate-source voltage from VTH = 700 mV to 3 V, each point computed by the model (points outside saturation are left out); marked: VGS = 2 V, ID = 1.69 mA. Your inputs: kn = 0.0002, WL = 10, VGS = 2 V, VTH = 0.7 V, VDS = 5 V.*
+
+![Drain current in milliamperes as VGS runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mosfet-saturation-live-1)
+
+*Drain current in milliamperes as VGS runs from 1.2 to 2.8 V, every other input as you entered it (39 solutions). Marked: your VGS = 2 V gives ID_mA = 1.69. Your inputs: kn = 0.0002, WL = 10, VGS = 2 V, VTH = 0.7 V, VDS = 5 V.*
+
+![Drain current in milliamperes as kn runs from 5e-05 to 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mosfet-saturation-live-2)
+
+*Drain current in milliamperes as kn runs from 5e-05 to 0.00035, every other input as you entered it (29 solutions). Marked: your kn = 0.0002 gives ID_mA = 1.69. Your inputs: kn = 0.0002, WL = 10, VGS = 2 V, VTH = 0.7 V, VDS = 5 V.*
 
 ```python
 electrical_engineering_ai999x.solve('mosfet_saturation', kn=0.0002, WL=10, VGS=2, VTH=0.7, VDS=5)
@@ -3061,13 +3385,17 @@ $$
 - **Assumes:** forward bias $(Vs > 0)$; the Shockley model without series resistance or breakdown
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![A diode in series with R = 1 kΩ across Vs = 5 V (saturation current Is = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/diode-circuit-schematic)
+![A diode in series with R across Vs](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/diode-circuit-schematic)
 
-*A diode in series with R = 1 kΩ across Vs = 5 V (saturation current Is = 1.0000e-14 A, ideality n = 1, VT = 0.02585 V, as stated). Labelled with the operating point the package returned: I = 0.00430751 A, diode voltage VD = 0.69249 V, VR = 4.30751 V. Marked: I = 4.30751 mA.*
+*A diode in series with R across Vs. Labelled with the operating point computed for these inputs: I = 4.308 mA, diode voltage VD = 692.5 mV, VR = 4.308 V. Your inputs: Vs = 5 V, R = 1000 ohm, Is = 1e-14 A, n = 1, VT = 0.02585 V.*
 
-![I_mA (current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/diode-circuit-curve)
+![Current in milliamperes as Vs runs from 3 to 7 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/diode-circuit-live-1)
 
-*I_mA (current in milliamperes) against R (series resistor) from 500 ohm to 1500 ohm. One curve for each value of Vs (source voltage (forward)): 5 V, 2.5 V, 10 V. Other inputs as in the worked example: Is = 1e-14 A, n = 1.0, VT = 0.02585 V. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 1000 ohm, I_mA = 4.30751.*
+*Current in milliamperes as Vs runs from 3 to 7 V, every other input as you entered it (41 solutions). Marked: your Vs = 5 V gives I_mA = 4.308. Your inputs: Vs = 5 V, R = 1000 ohm, Is = 1e-14 A, n = 1, VT = 0.02585 V.*
+
+![Current in milliamperes as n runs from 1 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/diode-circuit-live-2)
+
+*Current in milliamperes as n runs from 1 to 1.75, every other input as you entered it (29 solutions). Marked: your n = 1 gives I_mA = 4.308. Your inputs: Vs = 5 V, R = 1000 ohm, Is = 1e-14 A, n = 1, VT = 0.02585 V.*
 
 ```python
 electrical_engineering_ai999x.solve('diode_circuit', Vs=5, R=1000, Is=1e-14, n=1, VT=0.02585)
@@ -3113,13 +3441,17 @@ $$
 - **Assumes:** symmetric waveform of the stated shape about its offset
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![rms (rms value including the offset) against offset (DC offset (average value); 0 when not given) from -1 V to 1 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-curve)
+![rms value including the offset (rms) over amplitude from 5 to 15 and offset from -5 to 5: each of the 143 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-field)
 
-*rms (rms value including the offset) against offset (DC offset (average value); 0 when not given) from -1 V to 1 V. One curve for each value of amplitude (peak amplitude about the average): 5 V, 2.5 V, 10 V. Other inputs as in the worked example: shape = sine. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, offset = 0 V, rms = 3.53553 V.*
+*rms value including the offset (rms) over amplitude from 5 to 15 and offset from -5 to 5: each of the 143 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses). Marked: the inputs given, rms = 7.071. Your inputs: shape = sine, amplitude = 10 V, offset = 0 V.*
 
-![rms (rms value including the offset) over amplitude (peak amplitude about the average) from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-field)
+![Rms value including the offset and rms of the AC part as amplitude runs from 6 to 14 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-live-1)
 
-*rms (rms value including the offset) over amplitude (peak amplitude about the average) from 2.5 V to 7.5 V and offset (DC offset (average value); 0 when not given) from -1 V to 1 V: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 1.76777 V to dark 5.39676 V); iso-lines at rms = 2, 3, 4, 5 V. Other inputs as in the worked example: shape = sine. Marked: the worked example, amplitude = 5 V, offset = 0 V, rms = 3.53553 V.*
+*Rms value including the offset and rms of the AC part as amplitude runs from 6 to 14 V, every other input as you entered it (41 solutions). Marked: your amplitude = 10 V gives rms = 7.071. Your inputs: shape = sine, amplitude = 10 V, offset = 0 V.*
+
+![Rms value including the offset for every choice of shape, every other input as you entered it (highlighted: your choice)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/rms-waveform-live-2)
+
+*Rms value including the offset for every choice of shape, every other input as you entered it (highlighted: your choice). sine: 7.071; square: 10; triangle: 5.774; sawtooth: 5.774. Your inputs: shape = sine, amplitude = 10 V, offset = 0 V.*
 
 ```python
 electrical_engineering_ai999x.solve('rms_waveform', shape='sine', amplitude=10, offset=0)
@@ -3172,13 +3504,17 @@ $$
 - **Assumes:** 0 <= Vin <= Vref; truncating (floor) quantizer; Vref itself gives the top code
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Transfer staircase of an analogue-to-digital converter: the quantized level the package returned for 241 input voltages from 0 to Vref = 5 V, with a 3-bit converter (chosen so the steps are visible; the worked example uses 8 bits: Vin = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/adc-conversion-transfer)
+![Transfer staircase of the converter: the quantized level computed for 81 input voltages from 0 to Vref = 5 V, with the 8-bit resolution given and with 3 bits so the steps are visible; marked: Vin = 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/adc-conversion-transfer)
 
-*Transfer staircase of an analogue-to-digital converter: the quantized level the package returned for 241 input voltages from 0 to Vref = 5 V, with a 3-bit converter (chosen so the steps are visible; the worked example uses 8 bits: Vin = 1.2 V gives code 61 = 00111101, LSB 0.0195312 V, level 1.19141 V). The dashed line is Vin itself.*
+*Transfer staircase of the converter: the quantized level computed for 81 input voltages from 0 to Vref = 5 V, with the 8-bit resolution given and with 3 bits so the steps are visible; marked: Vin = 1.2 V, level 1.191 V. In SI units: code = 61. Your inputs: Vin = 1.2 V, Vref = 5 V, bits = 8.*
 
-![code (output code) against bits (resolution in bits) from 1 to 16](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/adc-conversion-curve)
+![Output code as bits runs from 2 to 14, every other input as you entered it (13 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/adc-conversion-live-1)
 
-*code (output code) against bits (resolution in bits) from 1 to 16. One curve for each value of Vin (input voltage (0 to Vref)): 1.2 V, 0.6 V, 2.4 V. Other inputs as in the worked example: Vref = 5.0 V. 16 points per curve computed by electrical-engineering-ai999x; marked: the worked example, bits = 8, code = 61.*
+*Output code as bits runs from 2 to 14, every other input as you entered it (13 solutions). Marked: your bits = 8 gives code = 61. Your inputs: Vin = 1.2 V, Vref = 5 V, bits = 8.*
+
+![Output code as Vin runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/adc-conversion-live-2)
+
+*Output code as Vin runs from 0.72 to 1.68 V, every other input as you entered it (29 solutions). Marked: your Vin = 1.2 V gives code = 61. Your inputs: Vin = 1.2 V, Vref = 5 V, bits = 8.*
 
 ```python
 electrical_engineering_ai999x.solve('adc_conversion', Vin=1.2, Vref=5, bits=8)
@@ -3224,13 +3560,17 @@ $$
 - **Assumes:** a square A with B and C of matching size; coefficients below $1e-12$ of the largest are written as 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![numerator coefficients (highest power first, length n + 1) (num) returned by electrical-engineering-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (denominator coefficients det(sI - A), monic)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-series)
+![A with B beside it, C and D below, as given, each cell shaded by its magnitude; the transfer function computed from them: G(s) = (1) / (s² + 3s + 2)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-matrix)
 
-*numerator coefficients (highest power first, length n + 1) (num) returned by electrical-engineering-ai999x for the worked example, one value for each position in the list (3 values, first 0, last 1, largest 1); with den (denominator coefficients det(sI - A), monic). Inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0], D = 0.0.*
+*A with B beside it, C and D below, as given, each cell shaded by its magnitude; the transfer function computed from them: G(s) = (1) / (s² + 3s + 2). Your inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0], D = 0.*
 
-![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-matrix)
+![The numerator and denominator coefficients computed from the state-space model, by power of s: G(s) = (1) / (s² + 3s + 2)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-series)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input). Returned with them by electrical-engineering-ai999x: order = 2. Other inputs: B = [0, 1], C = [1, 0], D = 0.0.*
+*The numerator and denominator coefficients computed from the state-space model, by power of s: G(s) = (1) / (s² + 3s + 2). Your inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0], D = 0.*
+
+![Every entry of num as computed for your inputs (3 entries: 0, 0, 1)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/state-space-to-tf-live-1)
+
+*Every entry of num as computed for your inputs (3 entries: 0, 0, 1). Your inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0], D = 0.*
 
 ```python
 electrical_engineering_ai999x.solve('state_space_to_tf', A='[[0, 1], [-2, -3]]', B='[0, 1]', C='[1, 0]', D=0)
@@ -3276,9 +3616,17 @@ $$
 - **Assumes:** small integer or well-scaled entries (rank decided at a relative tolerance of 1e-9)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/controllability-observability-matrix)
+![The state matrix A with the input vector B beside it and the output vector C below, as given, each cell shaded by its magnitude; computed: controllability rank 2, observability rank 2 (order 2)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/controllability-observability-matrix)
 
-*The matrices of the worked example as heatmaps (rows and columns numbered; each cell shaded by its magnitude, negative values in the second colour; each panel shaded by its own largest magnitude): A (input). Returned with them by electrical-engineering-ai999x: controllability_rank = 2, observability_rank = 2. Other inputs: B = [0, 1], C = [1, 0].*
+*The state matrix A with the input vector B beside it and the output vector C below, as given, each cell shaded by its magnitude; computed: controllability rank 2, observability rank 2 (order 2). Your inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0].*
+
+![Rank of the controllability matrix as B[2] runs from 0 to 5, every other input as you entered it (6 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/controllability-observability-live-1)
+
+*Rank of the controllability matrix as B[2] runs from 0 to 5, every other input as you entered it (6 solutions). Marked: your B[2] = 1 gives controllability_rank = 2. Shaded by full controllability rank: no, yes. Your inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0].*
+
+![Rank of the observability matrix as C[1] runs from 0 to 5, every other input as you entered it (6 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/controllability-observability-live-2)
+
+*Rank of the observability matrix as C[1] runs from 0 to 5, every other input as you entered it (6 solutions). Marked: your C[1] = 1 gives observability_rank = 2. Shaded by full observability rank: no, yes. Your inputs: A = [[0, 1], [-2, -3]], B = [0, 1], C = [1, 0].*
 
 ```python
 electrical_engineering_ai999x.solve('controllability_observability', A='[[0, 1], [-2, -3]]', B='[0, 1]', C='[1, 0]')
@@ -3321,13 +3669,17 @@ $$
 - **Assumes:** a linear inductor (no saturation)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![energy (stored energy) against I (current) from 1 A to 3 A](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inductor-energy-curve)
+![stored energy (energy) over I from 1 to 3 and L from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inductor-energy-field)
 
-*energy (stored energy) against I (current) from 1 A to 3 A. One curve for each value of L (inductance): 0.05 H, 0.025 H, 0.1 H. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I = 2 A, energy = 0.1 J.*
+*stored energy (energy) over I from 1 to 3 and L from 0.025 to 0.075: each of the 143 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses). Marked: the inputs given, energy = 0.1. Your inputs: L = 0.05 H, I = 2 A.*
 
-![energy (stored energy) over I (current) from 1 A to 3 A and L (inductance) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inductor-energy-field)
+![Stored energy as I runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inductor-energy-live-1)
 
-*energy (stored energy) over I (current) from 1 A to 3 A and L (inductance) from 0.025 H to 0.075 H: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 0.0125 J to dark 0.3375 J); iso-lines at energy = 0.1, 0.2, 0.3 J. Marked: the worked example, I = 2 A, L = 0.05 H, energy = 0.1 J.*
+*Stored energy as I runs from 1.2 to 2.8 A, every other input as you entered it (41 solutions). Marked: your I = 2 A gives energy = 0.1. Your inputs: L = 0.05 H, I = 2 A.*
+
+![Stored energy as L runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/inductor-energy-live-2)
+
+*Stored energy as L runs from 0.03 to 0.07 H, every other input as you entered it (29 solutions). Marked: your L = 0.05 H gives energy = 0.1. Your inputs: L = 0.05 H, I = 2 A.*
 
 ```python
 electrical_engineering_ai999x.solve('inductor_energy', L=0.05, I=2)
@@ -3372,9 +3724,13 @@ $$
 - **Assumes:** v between V0 and Vf
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![t (time to reach v) against Vf (final value) from 5 V to 15 V](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-time-to-value-curve)
+![Time to reach v as Vf runs from 6 to 14 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-time-to-value-live-1)
 
-*t (time to reach v) against Vf (final value) from 5 V to 15 V. One curve for each value of tau (time constant): 0.002 s, 0.001 s, 0.004 s. Other inputs as in the worked example: V0 = 0.0 V, v = 5.0 V. 30 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Vf = 10 V, t = 0.00138629 s.*
+*Time to reach v as Vf runs from 6 to 14 V, every other input as you entered it (41 solutions). Marked: your Vf = 10 V gives t = 1.386 ms. Your inputs: V0 = 0 V, Vf = 10 V, tau = 0.002 s, v = 5 V.*
+
+![Time to reach v as v runs from 3 to 7 V, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/first-order-time-to-value-live-2)
+
+*Time to reach v as v runs from 3 to 7 V, every other input as you entered it (29 solutions). Marked: your v = 5 V gives t = 1.386 ms. Your inputs: V0 = 0 V, Vf = 10 V, tau = 0.002 s, v = 5 V.*
 
 ```python
 electrical_engineering_ai999x.solve('first_order_time_to_value', V0=0, Vf=10, tau=0.002, v=5)
@@ -3418,13 +3774,17 @@ $$
 - **Assumes:** $p > z > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![phase_max_deg (maximum phase lead in degrees) against z (zero (corner) frequency) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/lead-compensator-curve)
+![maximum phase lead in degrees (phase_max_deg) over z from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/lead-compensator-field)
 
-*phase_max_deg (maximum phase lead in degrees) against z (zero (corner) frequency) from 0.1 rad/s to 10 rad/s on a logarithmic axis. One curve for each value of p (pole (corner) frequency, p > z): 10 rad/s, 5 rad/s, 20 rad/s. 40 points per curve computed by electrical-engineering-ai999x; marked: the worked example, z = 1 rad/s, phase_max_deg = 54.9032.*
+*maximum phase lead in degrees (phase_max_deg) over z from 0.1 to 10 and p from 1 to 100 (logarithmic axes): each of the 121 cells is one computation of the model, shaded by its value (darker is larger; a blank cell: inputs the model refuses). Marked: the inputs given, phase_max_deg = 54.9. Your inputs: z = 1 rad/s, p = 10 rad/s.*
 
-![phase_max_deg (maximum phase lead in degrees) over z (zero (corner) frequency) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/lead-compensator-field)
+![Maximum phase lead in degrees as z runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/lead-compensator-live-1)
 
-*phase_max_deg (maximum phase lead in degrees) over z (zero (corner) frequency) from 0.1 rad/s to 10 rad/s and p (pole (corner) frequency, p > z) from 1 rad/s to 100 rad/s (logarithmic axes): each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 0.942303 to dark 86.3775); iso-lines at phase_max_deg = 20, 40, 60, 80; blank cells: inputs the capability refuses. Marked: the worked example, z = 1 rad/s, p = 10 rad/s, phase_max_deg = 54.9032.*
+*Maximum phase lead in degrees as z runs from 0.6 to 1.4 rad/s, every other input as you entered it (41 solutions). Marked: your z = 1 rad/s gives phase_max_deg = 54.9. Your inputs: z = 1 rad/s, p = 10 rad/s.*
+
+![Maximum phase lead in degrees as p runs from 6 to 14 rad/s, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/lead-compensator-live-2)
+
+*Maximum phase lead in degrees as p runs from 6 to 14 rad/s, every other input as you entered it (29 solutions). Marked: your p = 10 rad/s gives phase_max_deg = 54.9. Your inputs: z = 1 rad/s, p = 10 rad/s.*
 
 ```python
 electrical_engineering_ai999x.solve('lead_compensator', z=1, p=10)
@@ -3475,13 +3835,17 @@ $$
 - **Assumes:** steady state; linear model (no saturation, constant parameters)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Permanent-magnet DC motor as stated: supply V = 12 V, armature R = 1 Ω, Kt = 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-schematic)
+![Permanent-magnet DC motor with supply V, armature resistance R and the load as given](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-schematic)
 
-*Permanent-magnet DC motor as stated: supply V = 12 V, armature R = 1 Ω, Kt = 0.05 N·m/A, Ke = 0.05 V·s/rad, load torque 0.02 N·m, friction b = 0.0001 N·m·s. Labelled with the steady state the package returned: current 0.846154 A, speed 223.077 rad/s, input 10.1538 W, output 4.46154 W, efficiency 0.439394. Marked: I = 0.846154 A.*
+*Permanent-magnet DC motor with supply V, armature resistance R and the load as given. Labelled with the steady state computed for these inputs: current 846.2 mA, speed = 223.1 rad/s, input = 10.15 W, output = 4.462 W, efficiency = 0.4394. Your inputs: V = 12 V, R = 1 ohm, Kt = 0.05, Ke = 0.05, T = 0.02 N*m, b = 0.0001.*
 
-![speed (steady-state speed) against Ke (back-emf constant in V*s/rad) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-curve)
+![Steady-state speed as V runs from 7](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-live-1)
 
-*speed (steady-state speed) against Ke (back-emf constant in V*s/rad) from 0.025 to 0.075. One curve for each value of V (armature supply voltage): 12 V, 6 V, 24 V. Other inputs as in the worked example: R = 1.0 ohm, Kt = 0.05, T = 0.02 N*m, b = 0.0001. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Ke = 0.05, speed = 223.077 rad/s.*
+*Steady-state speed as V runs from 7.2 to 16.8 V, every other input as you entered it (41 solutions). Marked: your V = 12 V gives speed = 223.1. Your inputs: V = 12 V, R = 1 ohm, Kt = 0.05, Ke = 0.05, T = 0.02 N*m, b = 0.0001.*
+
+![Steady-state speed as Kt runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-live-2)
+
+*Steady-state speed as Kt runs from 0.0125 to 0.0875, every other input as you entered it (29 solutions). Marked: your Kt = 0.05 gives speed = 223.1. Your inputs: V = 12 V, R = 1 ohm, Kt = 0.05, Ke = 0.05, T = 0.02 N*m, b = 0.0001.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_motor', V=12, R=1, Kt=0.05, Ke=0.05, T=0.02, b=0.0001)
@@ -3526,9 +3890,13 @@ $$
 - **Assumes:** constant power; $P > 0$, $t > 0$, tariff >= 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![cost (cost of the energy, in the tariff's currency) against P (power of the load) from 1000 W to 3000 W](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/electrical-energy-cost-curve)
+![Cost of the energy, in the tariff's currency as P runs from 1200 to 2800 W, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/electrical-energy-cost-live-1)
 
-*cost (cost of the energy, in the tariff's currency) against P (power of the load) from 1000 W to 3000 W. One curve for each value of t (running time (h and min accepted in questions)): 18000 s, 9000 s, 36000 s. Other inputs as in the worked example: tariff = 0.15. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, P = 2000 W, cost = 1.5.*
+*Cost of the energy, in the tariff's currency as P runs from 1200 to 2800 W, every other input as you entered it (41 solutions). Marked: your P = 2000 W gives cost = 1.5. Your inputs: P = 2000 W, t = 18000 s, tariff = 0.15.*
+
+![Cost of the energy, in the tariff's currency as t runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/electrical-energy-cost-live-2)
+
+*Cost of the energy, in the tariff's currency as t runs from 1.08e+04 to 2.52e+04 s, every other input as you entered it (29 solutions). Marked: your t = 1.8e+04 s gives cost = 1.5. Your inputs: P = 2000 W, t = 18000 s, tariff = 0.15.*
 
 ```python
 electrical_engineering_ai999x.solve('electrical_energy_cost', P=2000, t=18000, tariff=0.15)
@@ -3576,9 +3944,13 @@ $$
 - **Assumes:** a linear R(T) over the range; $R_{1} > 0$, temperatures above absolute zero
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![R2 (resistance at T2) against R1 (resistance at the reference temperature T1) from 25 ohm to 75 ohm](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistance-at-temperature-curve)
+![Resistance at T2 and change of resistance R2 - R1 as T1 runs from 253](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistance-at-temperature-live-1)
 
-*R2 (resistance at T2) against R1 (resistance at the reference temperature T1) from 25 ohm to 75 ohm. One curve for each value of alpha1 (temperature coefficient of resistance referred to T1, per K (= per degree C)): 0.004, 0.26, 0.74. Other inputs as in the worked example: T1 = 293.15 K, T2 = 353.15 K. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R1 = 50 ohm, R2 = 62 ohm.*
+*Resistance at T2 and change of resistance R2 - R1 as T1 runs from 253.1 to 333.1 K, every other input as you entered it (41 solutions). Marked: your T1 = 293.1 K gives R2 = 62. Your inputs: R1 = 50 ohm, alpha1 = 0.004, T1 = 293.15 K, T2 = 353.15 K.*
+
+![Resistance at T2 and change of resistance R2 - R1 as T2 runs from 313](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/resistance-at-temperature-live-2)
+
+*Resistance at T2 and change of resistance R2 - R1 as T2 runs from 313.1 to 393.1 K, every other input as you entered it (29 solutions). Marked: your T2 = 353.1 K gives R2 = 62. Your inputs: R1 = 50 ohm, alpha1 = 0.004, T1 = 293.15 K, T2 = 353.15 K.*
 
 ```python
 electrical_engineering_ai999x.solve('resistance_at_temperature', R1=50, alpha1=0.004, T1=293.15, T2=353.15)
@@ -3626,9 +3998,13 @@ $$
 - **Assumes:** a linear R(T) between the readings; $T_{1}  \neq  T_{2}$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![alpha1 (temperature coefficient referred to T1, per K) against T1 (first temperature (degrees C accepted in questions)) from 29](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/temperature-coefficient-from-resistances-curve)
+![Temperature coefficient referred to T1, per K as R1 runs from 60 to 140 ohm, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/temperature-coefficient-from-resistances-live-1)
 
-*alpha1 (temperature coefficient referred to T1, per K) against T1 (first temperature (degrees C accepted in questions)) from 29.315 K to 328.92 K on a logarithmic axis. One curve for each value of R1 (resistance at T1): 100 ohm, 50 ohm, 200 ohm. Other inputs as in the worked example: R2 = 120.0 ohm, T2 = 343.15 K. 22 points per curve computed by electrical-engineering-ai999x; marked: the worked example, T1 = 293.15 K, alpha1 = 0.004.*
+*Temperature coefficient referred to T1, per K as R1 runs from 60 to 140 ohm, every other input as you entered it (41 solutions). Marked: your R1 = 100 ohm gives α1 = 0.004. Your inputs: R1 = 100 ohm, T1 = 293.15 K, R2 = 120 ohm, T2 = 343.15 K.*
+
+![Temperature coefficient referred to T1, per K as T1 runs from 253](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/temperature-coefficient-from-resistances-live-2)
+
+*Temperature coefficient referred to T1, per K as T1 runs from 253.1 to 333.1 K, every other input as you entered it (29 solutions). Marked: your T1 = 293.1 K gives α1 = 0.004. Your inputs: R1 = 100 ohm, T1 = 293.15 K, R2 = 120 ohm, T2 = 343.15 K.*
 
 ```python
 electrical_engineering_ai999x.solve('temperature_coefficient_from_resistances', R1=100, T1=293.15, R2=120, T2=343.15)
@@ -3680,9 +4056,17 @@ $$
 - **Assumes:** identical cells; E, r, $RL > 0$; n a whole number
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![V_terminal (terminal voltage (across the load)) against n (number of identical cells) from 1 to 12](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/cell-battery-curve)
+![Terminal voltage (across the load) as n runs from 1 to 8, every other input as you entered it (8 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/cell-battery-live-1)
 
-*V_terminal (terminal voltage (across the load)) against n (number of identical cells) from 1 to 12. One curve for each value of E (emf of one cell): 1.5 V, 0.75 V, 3 V. Other inputs as in the worked example: r = 0.5 ohm, connection = series, RL = 10.0 ohm. 12 points per curve computed by electrical-engineering-ai999x; marked: the worked example, n = 4, V_terminal = 5 V.*
+*Terminal voltage (across the load) as n runs from 1 to 8, every other input as you entered it (8 solutions). Marked: your n = 4 gives V_terminal = 5. Your inputs: E = 1.5 V, r = 0.5 ohm, n = 4, connection = series, RL = 10 ohm.*
+
+![Terminal voltage (across the load) for every choice of connection, every other input as you entered it (highlighted: your choice)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/cell-battery-live-2)
+
+*Terminal voltage (across the load) for every choice of connection, every other input as you entered it (highlighted: your choice). series: 5; parallel: 1.481. Your inputs: E = 1.5 V, r = 0.5 ohm, n = 4, connection = series, RL = 10 ohm.*
+
+![Terminal voltage (across the load) as E runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/cell-battery-live-3)
+
+*Terminal voltage (across the load) as E runs from 0.9 to 2.1 V, every other input as you entered it (29 solutions). Marked: your E = 1.5 V gives V_terminal = 5. Your inputs: E = 1.5 V, r = 0.5 ohm, n = 4, connection = series, RL = 10 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('cell_battery', E=1.5, r=0.5, n=4, connection='series', RL=10)
@@ -3733,9 +4117,13 @@ $$
 - **Assumes:** uniform field (plate size much larger than d); eps_r >= 1, $n  \geq  2$ plates
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![C (capacitance) against d (separation of adjacent plates (dielectric thickness)) from 5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-plate-capacitor-curve)
+![Stored energy as V runs from 120 to 280 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-plate-capacitor-live-1)
 
-*C (capacitance) against d (separation of adjacent plates (dielectric thickness)) from 5.0000e-05 m to 0.00015 m. One curve for each value of n (number of plates (2 when not given)): 2, 4. Other inputs as in the worked example: V = 200.0 V, A = 0.0004 m^2, eps_r = 5.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, d = 0.0001 m, C = 1.7708e-10 F.*
+*Stored energy as V runs from 120 to 280 V, every other input as you entered it (41 solutions). Marked: your V = 200 V gives energy = 3.542e-06. Your inputs: V = 200 V, d = 0.0001 m, A = 0.0004 m^2, eps_r = 5, n = 2.*
+
+![Capacitance as n runs from 2 to 6, every other input as you entered it (5 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-plate-capacitor-live-2)
+
+*Capacitance as n runs from 2 to 6, every other input as you entered it (5 solutions). Marked: your n = 2 gives C = 0.1771 nF. Your inputs: V = 200 V, d = 0.0001 m, A = 0.0004 m^2, eps_r = 5, n = 2.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_plate_capacitor', V=200, d=0.0001, A=0.0004, eps_r=5, n=2)
@@ -3788,13 +4176,13 @@ $$
 - **Assumes:** linear materials: a constant relative permeability in each section (no B-H curve); no leakage or fringing; exactly one of the flux and the current
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![current (coil current) against N (number of turns of the magnetising coil) from 250 to 750](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/magnetic-circuit-curve)
+![Coil current as lengths[1] runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/magnetic-circuit-live-1)
 
-*current (coil current) against N (number of turns of the magnetising coil) from 250 to 750. One curve for each value of flux (flux to produce (give this or the current)): 0.0006 Wb, 0.0003 Wb, 0.0012 Wb. Other inputs as in the worked example: lengths = [0.4], areas = [0.0005], mu_r = [800]. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, N = 500, current = 0.95493 A.*
+*Coil current as lengths[1] runs from 0.1 to 0.7, every other input as you entered it (41 solutions). Marked: your lengths[1] = 0.4 gives current = 0.9549. Your inputs: N = 500, lengths = 0.4, areas = 0.0005, mu_r = 800, flux = 0.0006 Wb.*
 
-![current (coil current) over N (number of turns of the magnetising coil) from 250 to 750 and flux (flux to produce (give this or the current)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/magnetic-circuit-field)
+![Coil current as areas[1] runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/magnetic-circuit-live-2)
 
-*current (coil current) over N (number of turns of the magnetising coil) from 250 to 750 and flux (flux to produce (give this or the current)) from 0.0003 Wb to 0.0009 Wb: each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 0.31831 A to dark 2.86479 A); iso-lines at current = 0.5, 1, 1.5, 2, 2.5 A. Other inputs as in the worked example: lengths = [0.4], areas = [0.0005], mu_r = [800]. Marked: the worked example, N = 500, flux = 0.0006 Wb, current = 0.95493 A.*
+*Coil current as areas[1] runs from 0.000125 to 0.000875, every other input as you entered it (29 solutions). Marked: your areas[1] = 0.0005 gives current = 0.9549. Your inputs: N = 500, lengths = 0.4, areas = 0.0005, mu_r = 800, flux = 0.0006 Wb.*
 
 ```python
 electrical_engineering_ai999x.solve('magnetic_circuit', N=500, lengths=[0.4], areas=[0.0005], mu_r=[800], flux=0.0006)
@@ -3847,9 +4235,13 @@ $$
 - **Assumes:** uniform field along the path, no leakage (a long coil or a closed core); linear core
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![L (self-inductance) against length (length of the flux path (coil length for an air-cored solenoid)) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-inductance-curve)
+![Self-inductance as area runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-inductance-live-1)
 
-*L (self-inductance) against length (length of the flux path (coil length for an air-cored solenoid)) from 0.1 m to 0.3 m. One curve for each value of N (number of turns): 500, 250, 1000. Other inputs as in the worked example: area = 0.0004 m^2, mu_r = 1.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, length = 0.2 m, L = 0.000628319 H.*
+*Self-inductance as area runs from 0.00024 to 0.00056 m^2, every other input as you entered it (41 solutions). Marked: your area = 0.0004 m^2 gives L = 0.6283 mH. Your inputs: N = 500, length = 0.2 m, area = 0.0004 m^2, mu_r = 1.*
+
+![Self-inductance as length runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-inductance-live-2)
+
+*Self-inductance as length runs from 0.12 to 0.28 m, every other input as you entered it (29 solutions). Marked: your length = 0.2 m gives L = 0.6283 mH. Your inputs: N = 500, length = 0.2 m, area = 0.0004 m^2, mu_r = 1.*
 
 ```python
 electrical_engineering_ai999x.solve('coil_inductance', N=500, length=0.2, area=0.0004, mu_r=1)
@@ -3895,9 +4287,13 @@ $$
 - **Assumes:** the flux links every turn; a linear core (flux proportional to the current)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![L (self-inductance) against I (coil current) from 1 A to 3 A](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/self-inductance-curve)
+![Self-inductance as flux runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/self-inductance-live-1)
 
-*L (self-inductance) against I (coil current) from 1 A to 3 A. One curve for each value of N (number of turns): 200, 100, 400. Other inputs as in the worked example: flux = 0.005 Wb. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I = 2 A, L = 0.5 H.*
+*Self-inductance as flux runs from 0.003 to 0.007 Wb, every other input as you entered it (41 solutions). Marked: your flux = 0.005 Wb gives L = 0.5. Your inputs: N = 200, flux = 0.005 Wb, I = 2 A.*
+
+![Self-inductance as I runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/self-inductance-live-2)
+
+*Self-inductance as I runs from 1.2 to 2.8 A, every other input as you entered it (29 solutions). Marked: your I = 2 A gives L = 0.5. Your inputs: N = 200, flux = 0.005 Wb, I = 2 A.*
 
 ```python
 electrical_engineering_ai999x.solve('self_inductance', N=200, flux=0.005, I=2)
@@ -3945,9 +4341,13 @@ $$
 - **Assumes:** a uniform rate of change (the result is the average emf); the flux links every turn
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![emf (magnitude of the average induced emf) against dt (time taken by the change) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/faraday-emf-curve)
+![Magnitude of the average induced emf as dt runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/faraday-emf-live-1)
 
-*emf (magnitude of the average induced emf) against dt (time taken by the change) from 0.025 s to 0.075 s. One curve for each value of N (number of turns): 200, 100, 400. Other inputs as in the worked example: dPhi = 0.025 Wb. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, dt = 0.05 s, emf = 100 V.*
+*Magnitude of the average induced emf as dt runs from 0.03 to 0.07 s, every other input as you entered it (41 solutions). Marked: your dt = 0.05 s gives emf = 100. Your inputs: N = 200, dPhi = 0.025 Wb, dt = 0.05 s.*
+
+![Magnitude of the average induced emf as dPhi runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/faraday-emf-live-2)
+
+*Magnitude of the average induced emf as dPhi runs from 0.015 to 0.035 Wb, every other input as you entered it (29 solutions). Marked: your dPhi = 0.025 Wb gives emf = 100. Your inputs: N = 200, dPhi = 0.025 Wb, dt = 0.05 s.*
 
 ```python
 electrical_engineering_ai999x.solve('faraday_emf', N=200, dPhi=0.025, dt=0.05)
@@ -3998,9 +4398,13 @@ $$
 - **Assumes:** linear coils; a uniform rate of change of current (average emfs); $0  \leq  k  \leq  1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![M (mutual inductance) against L1 (self-inductance of coil 1) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mutual-inductance-curve)
+![Mutual inductance as k runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mutual-inductance-live-1)
 
-*M (mutual inductance) against L1 (self-inductance of coil 1) from 0.1 H to 0.3 H. One curve for each value of L2 (self-inductance of coil 2): 0.8 H, 0.4 H, 1.6 H. Other inputs as in the worked example: k = 0.5, dI1 = 4.0 A, dt = 0.02 s. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, L1 = 0.2 H, M = 0.2 H.*
+*Mutual inductance as k runs from 0.125 to 0.875, every other input as you entered it (41 solutions). Marked: your k = 0.5 gives M = 0.2. Your inputs: L1 = 0.2 H, L2 = 0.8 H, k = 0.5, dI1 = 4 A, dt = 0.02 s.*
+
+![Magnitude of the emf induced in coil 2 as dt runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/mutual-inductance-live-2)
+
+*Magnitude of the emf induced in coil 2 as dt runs from 0.012 to 0.028 s, every other input as you entered it (29 solutions). Marked: your dt = 0.02 s gives E2 = 40. Your inputs: L1 = 0.2 H, L2 = 0.8 H, k = 0.5, dI1 = 4 A, dt = 0.02 s.*
 
 ```python
 electrical_engineering_ai999x.solve('mutual_inductance', L1=0.2, L2=0.8, k=0.5, dI1=4, dt=0.02)
@@ -4048,9 +4452,13 @@ $$
 - **Assumes:** I > Ifs; the meter's resistance constant
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Rsh (shunt resistance) against I (required full-scale reading of the ammeter) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ammeter-shunt-curve)
+![Shunt resistance and resistance of the extended ammeter as I runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ammeter-shunt-live-1)
 
-*Rsh (shunt resistance) against I (required full-scale reading of the ammeter) from 0.5 A to 1.5 A. One curve for each value of Ifs (full-scale deflection current of the meter): 0.001 A, 0.0005 A, 0.002 A. Other inputs as in the worked example: Rm = 100.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, I = 1 A, Rsh = 0.1001 ohm.*
+*Shunt resistance and resistance of the extended ammeter as I runs from 0.6 to 1.4 A, every other input as you entered it (41 solutions). Marked: your I = 1 A gives Rsh = 0.1001. Your inputs: Ifs = 0.001 A, Rm = 100 ohm, I = 1 A.*
+
+![Shunt resistance and resistance of the extended ammeter as Ifs runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ammeter-shunt-live-2)
+
+*Shunt resistance and resistance of the extended ammeter as Ifs runs from 0.0006 to 0.0014 A, every other input as you entered it (29 solutions). Marked: your Ifs = 0.001 A gives Rsh = 0.1001. Your inputs: Ifs = 0.001 A, Rm = 100 ohm, I = 1 A.*
 
 ```python
 electrical_engineering_ai999x.solve('ammeter_shunt', Ifs=0.001, Rm=100, I=1)
@@ -4098,9 +4506,13 @@ $$
 - **Assumes:** V > Ifs Rm
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Rmult (multiplier (series) resistance) against Ifs (full-scale deflection current of the meter) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltmeter-multiplier-curve)
+![Multiplier (series) resistance as V runs from 6 to 14 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltmeter-multiplier-live-1)
 
-*Rmult (multiplier (series) resistance) against Ifs (full-scale deflection current of the meter) from 0.0005 A to 0.0015 A. One curve for each value of V (required full-scale reading of the voltmeter): 10 V, 5 V, 20 V. Other inputs as in the worked example: Rm = 100.0 ohm. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Ifs = 0.001 A, Rmult = 9900 ohm.*
+*Multiplier (series) resistance as V runs from 6 to 14 V, every other input as you entered it (41 solutions). Marked: your V = 10 V gives Rmult = 9900. Your inputs: Ifs = 0.001 A, Rm = 100 ohm, V = 10 V.*
+
+![Multiplier (series) resistance as Ifs runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/voltmeter-multiplier-live-2)
+
+*Multiplier (series) resistance as Ifs runs from 0.0006 to 0.0014 A, every other input as you entered it (29 solutions). Marked: your Ifs = 0.001 A gives Rmult = 9900. Your inputs: Ifs = 0.001 A, Rm = 100 ohm, V = 10 V.*
 
 ```python
 electrical_engineering_ai999x.solve('voltmeter_multiplier', Ifs=0.001, Rm=100, V=10)
@@ -4155,13 +4567,17 @@ $$
 - **Assumes:** a pure sinusoid; |phi| <= 2 pi rad
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![leads, lags or in phase (relative to Vm sin wt) (relation) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-decision)
+![Instantaneous value at t as φ runs from -1 to 1, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-live-1)
 
-*leads, lags or in phase (relative to Vm sin wt) (relation) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708 and Vm (amplitude (peak value)) from 20 V to 2000 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, in phase: 21 cells, leads: 630 cells. Other inputs as in the worked example: w = 314.159 rad/s, t = 0.0025 s. Marked: the worked example, phi = 0, Vm = 200 V → in phase.*
+*Instantaneous value at t as φ runs from -1 to 1, every other input as you entered it (41 solutions). Marked: your φ = 0 gives v = 141.4. Shaded by leads, lags or in phase (relative to Vm sin wt): lags, in phase, leads. Your inputs: Vm = 200 V, w = 314.1592653589793 rad/s, phi = 0, t = 0.0025 s.*
 
-![v (instantaneous value at t) against w (angular frequency omega) from 31](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-curve)
+![Leads, lags or in phase (relative to Vm sin wt) for 25 5 x 5 combinations of φ and Vm around your inputs (the other inputs as entered); the ring marks your inputs, which give in phase](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-live-2)
 
-*v (instantaneous value at t) against w (angular frequency omega) from 31.4159 rad/s to 3141.59 rad/s on a logarithmic axis. One curve for each value of Vm (amplitude (peak value)): 200 V, 100 V, 400 V. Other inputs as in the worked example: phi = 0.0, t = 0.0025 s. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, w = 314.159 rad/s, v = 141.421 V.*
+*Leads, lags or in phase (relative to Vm sin wt) for 25 5 x 5 combinations of φ and Vm around your inputs (the other inputs as entered); the ring marks your inputs, which give in phase. Blank cells admit no answer. Your inputs: Vm = 200 V, w = 314.1592653589793 rad/s, phi = 0, t = 0.0025 s.*
+
+![Instantaneous value at t as Vm runs from 120 to 280 V, every other input as you entered it (27 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-values-live-3)
+
+*Instantaneous value at t as Vm runs from 120 to 280 V, every other input as you entered it (27 solutions). Marked: your Vm = 200 V gives v = 141.4. Your inputs: Vm = 200 V, w = 314.1592653589793 rad/s, phi = 0, t = 0.0025 s.*
 
 ```python
 electrical_engineering_ai999x.solve('sinusoid_values', Vm=200, w=314.1592653589793, phi=0, t=0.0025)
@@ -4209,13 +4625,17 @@ $$
 - **Assumes:** |v| <= Vm; |phi| <= 2 pi rad; t counted from 0
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![rising, falling or peak at that time (direction) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-time-to-value-decision)
+![First time at which v is reached as φ runs from -1 to 1, every other input as you entered it (41 solutions)](https://huggingface.co/AI999X/electrical-engineering-ai999x/resolve/main/figures/sinusoid-time-to-value-live-1.svg)
 
-*rising, falling or peak at that time (direction) over phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708 and Vm (amplitude (peak value)) from 10 V to 1000 V (logarithmic vertical axis): each of the 31 × 21 cells is one run of electrical-engineering-ai999x, coloured by the verdict it returned, falling: 324 cells, rising: 110 cells; blank cells: inputs the capability refuses. Other inputs as in the worked example: w = 314.159 rad/s, v = 50.0 V. Marked: the worked example, phi = 0, Vm = 100 V → rising.*
+*First time at which v is reached as φ runs from -1 to 1, every other input as you entered it (41 solutions). Marked: your φ = 0 gives t = 1.667 ms. Shaded by rising, falling or peak at that time: rising, falling. Your inputs: Vm = 100 V, w = 314.1592653589793 rad/s, phi = 0, v = 50 V.*
 
-![t (first time at which v is reached) against phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-time-to-value-curve)
+![Rising, falling or peak at that time for 25 5 x 5 combinations of φ and Vm around your inputs (the other inputs as entered); the ring marks your inputs, which give rising](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-time-to-value-live-2)
 
-*t (first time at which v is reached) against phi (phase angle in radians (positive: leads Vm sin wt)) from 0 to 1.5708. One curve for each value of w (angular frequency omega): 314.159 rad/s, 157.079 rad/s, 628.318 rad/s. Other inputs as in the worked example: Vm = 100.0 V, v = 50.0 V. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, phi = 0, t = 0.00166667 s.*
+*Rising, falling or peak at that time for 25 5 x 5 combinations of φ and Vm around your inputs (the other inputs as entered); the ring marks your inputs, which give rising. Blank cells admit no answer. Your inputs: Vm = 100 V, w = 314.1592653589793 rad/s, phi = 0, v = 50 V.*
+
+![First time at which v is reached as Vm runs from 60 to 140 V, every other input as you entered it (25 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/sinusoid-time-to-value-live-3)
+
+*First time at which v is reached as Vm runs from 60 to 140 V, every other input as you entered it (25 solutions). Marked: your Vm = 100 V gives t = 1.667 ms. Your inputs: Vm = 100 V, w = 314.1592653589793 rad/s, phi = 0, v = 50 V.*
 
 ```python
 electrical_engineering_ai999x.solve('sinusoid_time_to_value', Vm=100, w=314.1592653589793, phi=0, v=50)
@@ -4274,9 +4694,13 @@ $$
 - **Assumes:** sinusoidal steady state, rms values; ideal L and C; $R > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![I (rms current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-ac-supply-curve)
+![Rms current as V runs from 150 to 350 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-ac-supply-live-1)
 
-*I (rms current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis. One curve for each value of V (rms supply voltage): 240 V, 120 V, 480 V. Other inputs as in the worked example: R = 30.0 ohm, circuit = RL, L = 0.1 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, I = 5.52497 A.*
+*Rms current as V runs from 150 to 350 V, every other input as you entered it (41 solutions). Marked: your V = 250 V gives I = 5. Your inputs: V = 250 V, f = 50 Hz, R = 30 ohm, circuit = RL, L = 0.12732395447351627 H.*
+
+![Rms current as f runs from 30 to 70 Hz, every other input as you entered it (25 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/series-ac-supply-live-2)
+
+*Rms current as f runs from 30 to 70 Hz, every other input as you entered it (25 solutions). Marked: your f = 50 Hz gives I = 5. Your inputs: V = 250 V, f = 50 Hz, R = 30 ohm, circuit = RL, L = 0.12732395447351627 H.*
 
 ```python
 electrical_engineering_ai999x.solve('series_ac_supply', V=250, f=50, R=30, circuit='RL', L=0.12732395447351627)
@@ -4340,9 +4764,13 @@ $$
 - **Assumes:** sinusoidal steady state, rms values; ideal L and C (a coil with resistance: use coil_capacitor_parallel); $R > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![I (supply current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-ac-supply-curve)
+![Supply current, current in R and current in L as V runs from 60 to 140 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-ac-supply-live-1)
 
-*I (supply current) against f (supply frequency) from 5 Hz to 500 Hz on a logarithmic axis. One curve for each value of V (rms supply voltage): 100 V, 50 V, 200 V. Other inputs as in the worked example: R = 25.0 ohm, circuit = RL, L = 0.1 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, I = 5.11196 A.*
+*Supply current, current in R and current in L as V runs from 60 to 140 V, every other input as you entered it (41 solutions). Marked: your V = 100 V gives I = 5. Your inputs: V = 100 V, f = 50 Hz, R = 25 ohm, circuit = RL, L = 0.1061032953945969 H.*
+
+![Supply current and current in R as R runs from 15 to 35 ohm, every other input as you entered it (25 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/parallel-ac-supply-live-2)
+
+*Supply current and current in R as R runs from 15 to 35 ohm, every other input as you entered it (25 solutions). Marked: your R = 25 ohm gives I = 5. Your inputs: V = 100 V, f = 50 Hz, R = 25 ohm, circuit = RL, L = 0.1061032953945969 H.*
 
 ```python
 electrical_engineering_ai999x.solve('parallel_ac_supply', V=100, f=50, R=25, circuit='RL', L=0.1061032953945969)
@@ -4398,9 +4826,13 @@ $$
 - **Assumes:** $R^{2} < L/C$ (a resonance exists); sinusoidal steady state, ideal capacitor
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![f_r (resonant frequency) against R (resistance of the coil) from 1 ohm to 100 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-capacitor-parallel-curve)
+![Real power (dissipated in the coil's resistance) as V runs from 60 to 140 V, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-capacitor-parallel-live-1)
 
-*f_r (resonant frequency) against R (resistance of the coil) from 1 ohm to 100 ohm on a logarithmic axis. One curve for each value of C (capacitance): 1.0000e-05 F, 5.0000e-06 F, 2.0000e-05 F. Other inputs as in the worked example: V = 100.0 V, f = 50.0 Hz, L = 0.1 H. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, R = 10 ohm, f_r = 158.357 Hz.*
+*Real power (dissipated in the coil's resistance) as V runs from 60 to 140 V, every other input as you entered it (41 solutions). Marked: your V = 100 V gives P = 92. Your inputs: V = 100 V, f = 50 Hz, R = 10 ohm, L = 0.1 H, C = 1e-05 F.*
+
+![Real power (dissipated in the coil's resistance) as f runs from 30 to 70 Hz, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/coil-capacitor-parallel-live-2)
+
+*Real power (dissipated in the coil's resistance) as f runs from 30 to 70 Hz, every other input as you entered it (29 solutions). Marked: your f = 50 Hz gives P = 92. Your inputs: V = 100 V, f = 50 Hz, R = 10 ohm, L = 0.1 H, C = 1e-05 F.*
 
 ```python
 electrical_engineering_ai999x.solve('coil_capacitor_parallel', V=100, f=50, R=10, L=0.1, C=1e-05)
@@ -4447,13 +4879,13 @@ $$
 - **Assumes:** a balanced load and a symmetrical supply; $W_{1} + W_{2} > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![power_factor (power factor of the load) against W1 (reading of the first wattmeter (negative if it reads backwards)) from 300 W to 30000 W on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/two-wattmeter-curve)
+![Power factor of the load as W1 runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/two-wattmeter-live-1)
 
-*power_factor (power factor of the load) against W1 (reading of the first wattmeter (negative if it reads backwards)) from 300 W to 30000 W on a logarithmic axis. One curve for each value of W2 (reading of the second wattmeter): 1000 W, 500 W, 2000 W. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, W1 = 3000 W, power_factor = 0.755929.*
+*Power factor of the load as W1 runs from 1.8 to 4.2 kW, every other input as you entered it (41 solutions). Marked: your W1 = 3 kW gives power_factor = 0.7559. Your inputs: W1 = 3 kW, W2 = 1 kW.*
 
-![power_factor (power factor of the load) over W1 (reading of the first wattmeter (negative if it reads backwards)) from 300 W to 30000 W and W2 (reading of the second wattmeter) from 100 W to 10000 W (logarithmic axes): each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/two-wattmeter-field)
+![Power factor of the load as W2 runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/two-wattmeter-live-2)
 
-*power_factor (power factor of the load) over W1 (reading of the first wattmeter (negative if it reads backwards)) from 300 W to 30000 W and W2 (reading of the second wattmeter) from 100 W to 10000 W (logarithmic axes): each of the 21 × 15 cells is one run of electrical-engineering-ai999x, shaded by its value (light 0.502502 to dark 0.999936); iso-lines at power_factor = 0.6, 0.7, 0.8, 0.9. Marked: the worked example, W1 = 3000 W, W2 = 1000 W, power_factor = 0.755929.*
+*Power factor of the load as W2 runs from 0.6 to 1.4 kW, every other input as you entered it (29 solutions). Marked: your W2 = 1 kW gives power_factor = 0.7559. Your inputs: W1 = 3 kW, W2 = 1 kW.*
 
 ```python
 electrical_engineering_ai999x.solve('two_wattmeter', W1=3000, W2=1000)
@@ -4507,9 +4939,17 @@ $$
 - **Assumes:** an even number of poles; speed in rev/s; simplex windings
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![E (generated emf) against flux (useful flux per pole) from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-machine-emf-curve)
+![Average emf of one conductor, poles x flux x n as poles runs from 2 to 20, every other input as you entered it (10 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-machine-emf-live-1)
 
-*E (generated emf) against flux (useful flux per pole) from 0.0125 Wb to 0.0375 Wb. One curve for each value of Z (number of armature conductors): 600, 300, 1200. Other inputs as in the worked example: poles = 4.0, n = 20.0, winding = lap. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, flux = 0.025 Wb, E = 300 V.*
+*Average emf of one conductor, poles x flux x n as poles runs from 2 to 20, every other input as you entered it (10 solutions). Marked: your poles = 4 gives conductor_emf = 2. Your inputs: poles = 4, flux = 0.025 Wb, Z = 600, n = 20, winding = lap.*
+
+![Generated emf for every choice of winding, every other input as you entered it (highlighted: your choice)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-machine-emf-live-2)
+
+*Generated emf for every choice of winding, every other input as you entered it (highlighted: your choice). lap: 300; wave: 600. Your inputs: poles = 4, flux = 0.025 Wb, Z = 600, n = 20, winding = lap.*
+
+![Generated emf as flux runs from 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-machine-emf-live-3)
+
+*Generated emf as flux runs from 0.015 to 0.035 Wb, every other input as you entered it (29 solutions). Marked: your flux = 0.025 Wb gives E = 300. Your inputs: poles = 4, flux = 0.025 Wb, Z = 600, n = 20, winding = lap.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_machine_emf', poles=4, flux=0.025, Z=600, n=20, winding='lap')
@@ -4560,9 +5000,13 @@ $$
 - **Assumes:** steady state; brush drop neglected (or included in Ra)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![E (generated emf V + Ia Ra) against Rf (shunt field resistance) from 12](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-generator-curve)
+![Generated emf V + Ia Ra as IL runs from 60 to 140 A, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-generator-live-1)
 
-*E (generated emf V + Ia Ra) against Rf (shunt field resistance) from 12.5 ohm to 1250 ohm on a logarithmic axis. One curve for each value of V (terminal voltage): 250 V, 125 V, 500 V. Other inputs as in the worked example: IL = 100.0 A, Ra = 0.1 ohm. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rf = 125 ohm, E = 260.2 V.*
+*Generated emf V + Ia Ra as IL runs from 60 to 140 A, every other input as you entered it (41 solutions). Marked: your IL = 100 A gives E = 260.2. Your inputs: V = 250 V, IL = 100 A, Ra = 0.1 ohm, Rf = 125 ohm.*
+
+![Generated emf V + Ia Ra as V runs from 150 to 350 V, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-generator-live-2)
+
+*Generated emf V + Ia Ra as V runs from 150 to 350 V, every other input as you entered it (29 solutions). Marked: your V = 250 V gives E = 260.2. Your inputs: V = 250 V, IL = 100 A, Ra = 0.1 ohm, Rf = 125 ohm.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_shunt_generator', V=250, IL=100, Ra=0.1, Rf=125)
@@ -4616,9 +5060,13 @@ $$
 - **Assumes:** steady state; brush drop neglected (or included in Ra)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![E (back emf V - Ia Ra) against Rf (shunt field resistance) from 11 ohm to 1100 ohm on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-motor-curve)
+![Back emf V - Ia Ra as I runs from 18 to 42 A, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-motor-live-1)
 
-*E (back emf V - Ia Ra) against Rf (shunt field resistance) from 11 ohm to 1100 ohm on a logarithmic axis. One curve for each value of V (supply voltage): 220 V, 110 V, 440 V. Other inputs as in the worked example: I = 30.0 A, Ra = 0.4 ohm, n = 16.666666666666668, losses = 500.0 W. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, Rf = 110 ohm, E = 208.8 V.*
+*Back emf V - Ia Ra as I runs from 18 to 42 A, every other input as you entered it (41 solutions). Marked: your I = 30 A gives E = 208.8. Your inputs: V = 220 V, I = 30 A, Ra = 0.4 ohm, Rf = 110 ohm, n = 16.666666666666668, losses = 500 W.*
+
+![Back emf V - Ia Ra as V runs from 132 to 308 V, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-shunt-motor-live-2)
+
+*Back emf V - Ia Ra as V runs from 132 to 308 V, every other input as you entered it (29 solutions). Marked: your V = 220 V gives E = 208.8. Your inputs: V = 220 V, I = 30 A, Ra = 0.4 ohm, Rf = 110 ohm, n = 16.666666666666668, losses = 500 W.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_shunt_motor', V=220, I=30, Ra=0.4, Rf=110, n=16.666666666666668, losses=500)
@@ -4670,9 +5118,13 @@ $$
 - **Assumes:** a constant supply voltage across the armature; brush drop neglected
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![n2_rpm (new speed in rpm) against V (supply voltage across the armature) from 22 V to 2200 V on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-speed-change-curve)
+![New speed in rpm as Ia2 runs from 24 to 56 A, every other input as you entered it (41 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-speed-change-live-1)
 
-*n2_rpm (new speed in rpm) against V (supply voltage across the armature) from 22 V to 2200 V on a logarithmic axis. One curve for each value of n1 (first speed in rev/s (rpm accepted in questions)): 16.6667, 8.33333, 33.3333. Other inputs as in the worked example: Ra = 0.5 ohm, Ia1 = 20.0 A, Ia2 = 40.0 A. 41 points per curve computed by electrical-engineering-ai999x; marked: the worked example, V = 220 V, n2_rpm = 952.381.*
+*New speed in rpm as Ia2 runs from 24 to 56 A, every other input as you entered it (41 solutions). Marked: your Ia2 = 40 A gives n2_rpm = 952.4. Your inputs: V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 16.666666666666668, Ia2 = 40 A.*
+
+![New speed in rpm as V runs from 132 to 308 V, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/dc-motor-speed-change-live-2)
+
+*New speed in rpm as V runs from 132 to 308 V, every other input as you entered it (29 solutions). Marked: your V = 220 V gives n2_rpm = 952.4. Your inputs: V = 220 V, Ra = 0.5 ohm, Ia1 = 20 A, n1 = 16.666666666666668, Ia2 = 40 A.*
 
 ```python
 electrical_engineering_ai999x.solve('dc_motor_speed_change', V=220, Ra=0.5, Ia1=20, n1=16.666666666666668, Ia2=40)
@@ -4721,9 +5173,13 @@ $$
 - **Assumes:** a lossless, linear, homogeneous medium (conductivity 0); eps_r, $mu_r  \geq  1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![wavelength (wavelength in the medium) against f (frequency) from 5](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossless-curve)
+![Wavelength in the medium as f runs from 6e+07 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossless-live-1)
 
-*wavelength (wavelength in the medium) against f (frequency) from 5.0000e+07 Hz to 1.5000e+08 Hz. One curve for each value of eps_r (relative permittivity): 4, 2, 8. Other inputs as in the worked example: mu_r = 1.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1.0000e+08 Hz, wavelength = 1.49896 m.*
+*Wavelength in the medium as f runs from 6e+07 to 1.4e+08 Hz, every other input as you entered it (41 solutions). Marked: your f = 1e+08 Hz gives wavelength = 1.499. Your inputs: f = 100000000 Hz, eps_r = 4, mu_r = 1.*
+
+![Wavelength in the medium as ε_r runs from 1 to 7, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossless-live-2)
+
+*Wavelength in the medium as ε_r runs from 1 to 7, every other input as you entered it (29 solutions). Marked: your ε_r = 4 gives wavelength = 1.499. Your inputs: f = 100000000 Hz, eps_r = 4, mu_r = 1.*
 
 ```python
 electrical_engineering_ai999x.solve('plane_wave_lossless', f=100000000.0, eps_r=4, mu_r=1)
@@ -4775,9 +5231,13 @@ $$
 - **Assumes:** a linear, homogeneous medium; $\sigma > 0$ (a lossless medium: plane_wave_lossless); eps_r, $mu_r  \geq  1$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![skin_depth (skin depth 1/alpha) against f (frequency) from 500000 Hz to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossy-curve)
+![Skin depth 1/alpha and wavelength 2 pi/beta as f runs from 6e+05 to 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossy-live-1)
 
-*skin_depth (skin depth 1/alpha) against f (frequency) from 500000 Hz to 1.5e+06 Hz. One curve for each value of sigma (conductivity in S/m): 5.8000e+07, 2.9000e+07, 1.1600e+08. Other inputs as in the worked example: eps_r = 1.0, mu_r = 1.0. 31 points per curve computed by electrical-engineering-ai999x; marked: the worked example, f = 1e+06 Hz, skin_depth = 6.6085e-05 m.*
+*Skin depth 1/alpha and wavelength 2 pi/beta as f runs from 6e+05 to 1.4e+06 Hz, every other input as you entered it (41 solutions). Marked: your f = 1e+06 Hz gives skin_depth = 0.06609 mm. Your inputs: f = 1000000 Hz, eps_r = 1, mu_r = 1, sigma = 58000000.*
+
+![Skin depth 1/alpha and wavelength 2 pi/beta as σ runs from 1](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/plane-wave-lossy-live-2)
+
+*Skin depth 1/alpha and wavelength 2 pi/beta as σ runs from 1.45e+07 to 1.015e+08, every other input as you entered it (29 solutions). Marked: your σ = 5.8e+07 gives skin_depth = 0.06609 mm. Your inputs: f = 1000000 Hz, eps_r = 1, mu_r = 1, sigma = 58000000.*
 
 ```python
 electrical_engineering_ai999x.solve('plane_wave_lossy', f=1000000.0, eps_r=1, mu_r=1, sigma=58000000.0)
@@ -4828,9 +5288,13 @@ $$
 - **Assumes:** square matrices of one shape; one source phasor per mesh (magnitude >= 0); a non-singular impedance matrix; sinusoidal steady state, one frequency
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The worked example of AC mesh currents from the phasor mesh equations (complex impedances) as inputs and results: stated R = [[3](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-mesh-currents-io)
+![Magnitude of the first mesh current as V_mag[1] runs from 0 to 30, every other input as you entered it (31 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-mesh-currents-live-1)
 
-*The worked example of AC mesh currents from the phasor mesh equations (complex impedances) as inputs and results: stated R = [[3.0]], X = [[4.0]], V_mag = [10.0], V_deg = [0.0]; returned by electrical-engineering-ai999x: currents_real = [1.2], currents_imag = [-1.6], currents_mag = [2.0], currents_deg = [-53.1301023542], first_mag = 2, first_deg = -53.1301.*
+*Magnitude of the first mesh current as V_mag[1] runs from 0 to 30, every other input as you entered it (31 solutions). Marked: your V_mag[1] = 10 gives first_mag = 2. Your inputs: R = 3, X = 4, V_mag = 10, V_deg = 0.*
+
+![Angle of the first mesh current in degrees as V_deg[1] runs from 0 to 4, every other input as you entered it (5 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-mesh-currents-live-2)
+
+*Angle of the first mesh current in degrees as V_deg[1] runs from 0 to 4, every other input as you entered it (5 solutions). Marked: your V_deg[1] = 0 gives first_deg = -53.13. Your inputs: R = 3, X = 4, V_mag = 10, V_deg = 0.*
 
 ```python
 electrical_engineering_ai999x.solve('ac_mesh_currents', R=[[3.0]], X=[[4.0]], V_mag=[10.0], V_deg=[0.0])
@@ -4881,13 +5345,17 @@ $$
 - **Assumes:** a ground node 0; R, L, C positive; $f > 0$, one frequency for every source; a unique solution (no floating node, no loop of voltage sources)
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![rms magnitude of every node voltage relative to node 0, in volts (node_voltages_mag) returned by electrical-engineering-ai999x for the worked example (netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-node-voltages-bars)
+![Real power delivered by the sources as the number in netlist runs from 2](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-node-voltages-live-1)
 
-*rms magnitude of every node voltage relative to node 0, in volts (node_voltages_mag) returned by electrical-engineering-ai999x for the worked example (netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01, f = 50.0 Hz), one bar per entry: 1 = 10, 2 = 7.23217.*
+*Real power delivered by the sources as the number in netlist runs from 2.5 to 17.5, every other input as you entered it (41 solutions). Marked: your the number in netlist = 10 gives P_delivered = 15.9. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., f = 50 Hz.*
 
-![P_delivered (real power delivered by the sources (W)) against f (frequency of the sources) from 5 Hz to 500 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-node-voltages-curve)
+![Rms magnitude of every node voltage relative](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-node-voltages-live-2)
 
-*P_delivered (real power delivered by the sources (W)) against f (frequency of the sources) from 5 Hz to 500 Hz on a logarithmic axis. Other inputs as in the worked example: netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01. 41 points computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, P_delivered = 15.8986 W.*
+*Rms magnitude of every node voltage relative... for your inputs: 1 10, 2 7.232. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., f = 50 Hz.*
+
+![Real power delivered by the sources as f runs from 30 to 70 Hz, every other input as you entered it (29 solutions)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-node-voltages-live-3)
+
+*Real power delivered by the sources as f runs from 30 to 70 Hz, every other input as you entered it (29 solutions). Marked: your f = 50 Hz gives P_delivered = 15.9. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., f = 50 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('ac_node_voltages', netlist='V1 1 0 10; R1 1 2 3; L1 2 0 0.01', f=50.0)
@@ -4940,9 +5408,13 @@ $$
 - **Assumes:** both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); $f > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![Vth_mag (rms magnitude of the Thevenin (open-circuit) voltage, node a relative to node b) against f (frequency of the sources) from 5 Hz to 500 Hz on a logarithmic axis](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-thevenin-equivalent-curve)
+![Rms magnitude of the Thevenin (open-circuit)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-thevenin-equivalent-live-1)
 
-*Vth_mag (rms magnitude of the Thevenin (open-circuit) voltage, node a relative to node b) against f (frequency of the sources) from 5 Hz to 500 Hz on a logarithmic axis. Outputs with the same unit drawn together: Vth_real (real part of the Thevenin (open-circuit) voltage, node a relative to node b), Vth_imag (imaginary part of the Thevenin (open-circuit) voltage, node a relative to node b). Other inputs as in the worked example: netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01, node_a = 2, node_b = 0. 41 points computed by electrical-engineering-ai999x; marked: the worked example, f = 50 Hz, Vth_mag = 7.23217 V.*
+*Rms magnitude of the Thevenin (open-circuit)... as the number in netlist runs from 0.75 to 5.25, every other input as you entered it (41 solutions). Marked: your the number in netlist = 3 gives Vth_mag = 7.232. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., node_a = 2, node_b = 0, f = 50 Hz.*
+
+![Rms magnitude of the Thevenin (open-circuit)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-thevenin-equivalent-live-2)
+
+*Rms magnitude of the Thevenin (open-circuit)... as f runs from 30 to 70 Hz, every other input as you entered it (29 solutions). Marked: your f = 50 Hz gives Vth_mag = 7.232. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., node_a = 2, node_b = 0, f = 50 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('ac_thevenin_equivalent', netlist='V1 1 0 10; R1 1 2 3; L1 2 0 0.01', node_a='2', node_b='0', f=50.0)
@@ -4995,9 +5467,13 @@ $$
 - **Assumes:** both nodes in the circuit; no ideal voltage source (or zero impedance) directly across the terminals; a unique solution (no floating node); $f > 0$
 - **Evidence:** certified procedure (gates: conditions, control, examples, fast_enough, questions, reference, sensitivity, templates)
 
-![The worked example of Norton equivalent of an AC circuit between two nodes (phasors, complex impedance) as inputs and results: stated netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-norton-equivalent-io)
+![Rms magnitude of the Norton (short-circuit)](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-norton-equivalent-live-1)
 
-*The worked example of Norton equivalent of an AC circuit between two nodes (phasors, complex impedance) as inputs and results: stated netlist = V1 1 0 10; R1 1 2 3; L1 2 0 0.01, node_a = 2, node_b = 0, f = 50; returned by electrical-engineering-ai999x: In_real = 3.33333, In_imag = 0, In_mag = 3.33333, In_deg = 0, Zn_real = 1.56913, Zn_imag = 1.49841.*
+*Rms magnitude of the Norton (short-circuit)... as the number in netlist runs from 0.75 to 5.25, every other input as you entered it (41 solutions). Marked: your the number in netlist = 3 gives In_mag = 3.333. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., node_a = 2, node_b = 0, f = 50 Hz.*
+
+![Resistance (real part of the equivalent](https://www.ai999x.com/?ax_fig=electrical-engineering-ai999x/ac-norton-equivalent-live-2)
+
+*Resistance (real part of the equivalent... as f runs from 30 to 70 Hz, every other input as you entered it (29 solutions). Marked: your f = 50 Hz gives Zn_real = 1.569. Your inputs: netlist = V1 1 0 10; R1 1 2 3; L1..., node_a = 2, node_b = 0, f = 50 Hz.*
 
 ```python
 electrical_engineering_ai999x.solve('ac_norton_equivalent', netlist='V1 1 0 10; R1 1 2 3; L1 2 0 0.01', node_a='2', node_b='0', f=50.0)
