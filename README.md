@@ -10,8 +10,8 @@ Electrical Engineering covers DC and AC circuits, transients, phasors and power,
 
 | | |
 |---|---|
-| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-electrical-engineering-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-electrical-engineering-1.6.6-linux-x86_64.tar.gz) |
-| **Command line** `electrical-engineering` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-linux-x86_64.tar.gz) |
+| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.7/ai999x-electrical-engineering-1.6.7-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.7/ai999x-electrical-engineering-1.6.7-linux-x86_64.tar.gz) |
+| **Command line** `electrical-engineering` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.7/ai999x-cli-1.6.7-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.7/ai999x-cli-1.6.7-linux-x86_64.tar.gz) |
 | **Browser** (any device) | [Try it on the model page](https://www.ai999x.com/models/electrical-engineering-ai999x/#capabilities) |
 | **Python** 3.10+ | `pip install electrical-engineering-ai999x`: on Windows and Linux (x86-64) `pip` installs the same compiled engine; on other systems (macOS, ARM) it installs a pure-Python build that gives the same answers |
 
@@ -144,117 +144,6 @@ print(a.outcome, a.values)
 # SOLVED {'value': 1.0}
 ```
 
-## Command line: 15 examples
-
-Each command below was run with `electrical-engineering` of this release; the lines under it are the answer it printed (the full answer goes on with the method, every input in SI units and the conditions it assumes).
-
-```text
-$ electrical-engineering solve ac_mesh_currents "R=[[10, -4], [-4, 8]]" "X=[[5, -2], [-2, -3]]" "V_mag=[10, 0]" "V_deg=[0, 0]"
-currents_real = [0.984837545126,0.462093862816]
-currents_imag = [-0.290252707581,0.274368231047]
-currents_mag = [1.02671886344,0.5374092149]
-currents_deg = [-16.4213738458,30.6997225508]
-first_mag = 1.026718863 A
-first_deg = -16.42137385
-
-$ electrical-engineering solve sinusoid_values "Vm=200 V" "w=314.159 rad/s" phi=0 "t=0.0025 s"
-v = 141.4212624 V
-f = 49.99995777 Hz
-T = 0.02000001689 s
-phase_deg = 0
-relation = in phase
-time_shift = 0 s
-
-$ electrical-engineering solve cell_battery "E=1.5 V" "r=0.5 ohm" n=4 "RL=10 ohm" connection=series
-emf_total = 6 V
-r_total = 2 ohm
-I = 0.5 A
-V_terminal = 5 V
-lost_volts = 1 V
-P_load = 2.5 W
-
-$ electrical-engineering solve parallel_plate_capacitor "V=200 V" "d=0.0001 m" "A=0.0004 m^2" eps_r=5
-C = 1.770837564e-10 F
-Q = 3.541675127e-08 C
-E = 2000000 N/C
-D = 8.854187818e-05
-energy = 3.541675127e-06 J
-
-$ electrical-engineering solve closed_loop_poles "num=[2]" "den=[1, 3, 0]"
-poles = [-2.0,-1.0000000000000002]
-max_real_part = -1
-stable = true
-characteristic = [1.0,3.0,2.0]
-
-$ electrical-engineering solve dc_shunt_generator "V=250 V" "IL=100 A" "Ra=0.1 ohm" "Rf=125 ohm"
-If = 2 A
-Ia = 102 A
-E = 260.2 V
-P_out = 25000 W
-P_generated = 26540.4 W
-copper_loss = 1540.4 W
-
-$ electrical-engineering solve current_divider "I=6 A" "R1=4 ohm" "R2=2 ohm"
-I1 = 2 A
-I2 = 4 A
-
-$ electrical-engineering solve adc_conversion "Vin=1.2 V" "Vref=5 V" bits=8
-code = 61
-binary = 00111101
-lsb = 0.01953125 V
-lsb_mV = 19.53125
-quantized = 1.19140625 V
-
-$ electrical-engineering solve bjt_divider_bias "VCC=12 V" "VBE=0.7 V" "R1=10000 ohm" "R2=2200 ohm" "RC=3600 ohm" "RE=1000 ohm" beta=100
-IC = 0.001424015309 A
-IC_mA = 1.424015309
-IB = 1.424015309e-05 A
-IE = 0.001438255462 A
-VB = 2.138255462 V
-VE = 1.438255462 V
-
-$ electrical-engineering solve faraday_emf N=200 "dPhi=0.025 Wb" "dt=0.05 s"
-emf = 100 V
-emf_signed = -100 V
-flux_rate = 0.5
-linkage_change = 5
-
-$ electrical-engineering solve plane_wave_lossy "f=1000000 Hz" eps_r=1 mu_r=1 sigma=58000000
-alpha = 15131.91403
-beta = 15131.91403
-skin_depth = 6.60854931e-05 m
-v = 415.2273993 m/s
-wavelength = 0.0004152273993 m
-eta = 0.0003689613455 ohm
-
-$ electrical-engineering solve magnetic_circuit N=500 "flux=0.0006 Wb" "lengths=[0.4, 0.001]" "areas=[0.0005, 0.0005]" "mu_r=[800, 1]"
-reluctance = 2387324.146
-mmf = 1432.394488
-current = 2.864788976 A
-flux = 0.0006 Wb
-B = [1.2,1.2]
-H = [1193.6620731892149,954929.658551372]
-
-$ electrical-engineering solve ammeter_shunt "Ifs=0.001 A" "Rm=100 ohm" "I=1 A"
-Rsh = 0.1001001001 ohm
-multiplying_factor = 1000
-V_fs = 0.1 V
-R_total = 0.1 ohm
-
-$ electrical-engineering solve difference_amplifier "R1=10000 ohm" "R2=100000 ohm" "R3=10000 ohm" "R4=100000 ohm" "V1=1 V" "V2=1.5 V"
-Vout = 5 V
-gain_inverting = -10
-gain_noninverting = 10
-
-$ electrical-engineering solve coil_capacitor_parallel "R=10 ohm" "L=0.1 H" "C=1e-05 F" "V=100 V" "f=50 Hz"
-I_coil = 3.033144711 A
-I_C = 0.3141592654 A
-I = 2.735445524 A
-Z = 36.55711624 ohm
-phase_deg = 70.34691454
-P = 91.99966835 W
-```
-
 ## Guides
 
 - Desktop app guide: the window, every calculation, scenes and charts: [PDF](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_desktop_guide.pdf) · [HTML](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_desktop_guide.html) · [Markdown](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_desktop_guide.md)
@@ -263,13 +152,13 @@ P = 91.99966835 W
 
 Every calculation, with its formula, a worked example and its figures: **[Electrical Engineering on ai999x.com](https://www.ai999x.com/models/electrical-engineering-ai999x/)**. Install guides for the app and the command line: [https://www.ai999x.com/desktop-cli/](https://www.ai999x.com/desktop-cli/).
 
-Version 1.6.6 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
+Version 1.6.7 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
 
 *The Future Is Self-Improving.*
 
 ## Source and releases
 
-This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/electrical-engineering-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.6`; the [GitHub release](https://github.com/AI999X/electrical-engineering-ai999x/releases/tag/v1.6.6) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
+This repository holds the installable source of each release, exactly as published on [PyPI](https://pypi.org/project/electrical-engineering-ai999x/) (`pip install .` builds it). Releases are tagged `v1.6.7`; the [GitHub release](https://github.com/AI999X/electrical-engineering-ai999x/releases/tag/v1.6.7) carries the wheel, the desktop app and the command-line program for Windows and Linux, and their checksums.
 
 ## Build the program from source
 
