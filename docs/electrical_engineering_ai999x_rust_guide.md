@@ -1,6 +1,6 @@
 # electrical-engineering: the Electrical Engineering program, user guide
 
-**electrical-engineering-ai999x 1.6.4**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
+**electrical-engineering-ai999x 1.6.6**, Rust build: command line, desktop app and browser. **Creator / engineer:** Ibnul Jaif Farabi · **Company:** AI999X · support@ai999x.com
 
 Electrical Engineering covers DC and AC circuits, transients, phasors and power, operational amplifiers, diodes and transistors, digital logic, and control systems (transfer functions, stability, Bode). This guide is about `electrical-engineering`, the model as a self-contained program for Windows and Linux: 92 capabilities in 17 topics, answered on your own computer with no network, no Python and nothing else to install. The same compiled model runs in the AI999X desktop app and in the browser on the model's page (https://www.ai999x.com/models/electrical-engineering-ai999x/); the Python package (`pip install electrical-engineering-ai999x`) has its own guide. Every command output printed here is what the program printed.
 
@@ -96,7 +96,7 @@ Prints the model, its version and that this is the Rust build.
 
 ```shell
 $ electrical-engineering --version
-electrical-engineering-ai999x 1.6.4 (Rust build, ax-engine 1.6.4)
+electrical-engineering-ai999x 1.6.6 (Rust build, ax-engine 1.6.6)
 ```
 
 ### 2.2 Ask in words
