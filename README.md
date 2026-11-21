@@ -10,8 +10,8 @@ Electrical Engineering covers DC and AC circuits, transients, phasors and power,
 
 | | |
 |---|---|
-| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.5/ai999x-electrical-engineering-1.6.5-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.5/ai999x-electrical-engineering-1.6.5-linux-x86_64.tar.gz) |
-| **Command line** `electrical-engineering` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.4/ai999x-cli-1.6.4-linux-x86_64.tar.gz) |
+| **Desktop app** (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-electrical-engineering-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-electrical-engineering-1.6.6-linux-x86_64.tar.gz) |
+| **Command line** `electrical-engineering` (Windows, Linux) | [Windows](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-windows-x86_64.zip) · [Linux](https://github.com/AI999X/ai999x-desktop/releases/download/v1.6.6/ai999x-cli-1.6.6-linux-x86_64.tar.gz) |
 | **Browser** (any device) | [Try it on the model page](https://www.ai999x.com/models/electrical-engineering-ai999x/#capabilities) |
 | **Python** 3.10+ | `pip install electrical-engineering-ai999x`: on Windows and Linux (x86-64) `pip` installs the same compiled engine; on other systems (macOS, ARM) it installs a pure-Python build that gives the same answers |
 
@@ -255,144 +255,6 @@ phase_deg = 70.34691454
 P = 91.99966835 W
 ```
 
-## Rust library: 15 examples
-
-The crate `electrical-engineering-ai999x` (in `rust/` of the GitHub repository) answers a JSON request with `electrical_engineering_ai999x::solve_json`. Each call below was compiled and run on this release; the comment under it is what it printed. The whole program is `rust/electrical-engineering/examples/readme.rs`: `cd rust && cargo run --release --example readme -p electrical-engineering-ai999x`.
-
-```rust
-use serde_json::{json, Value};
-
-fn show(request: Value) {
-    let answer: Value = serde_json::from_str(&electrical_engineering_ai999x::solve_json(&request.to_string())).unwrap();
-    println!("{}", answer["outcome"].as_str().unwrap_or(""));
-    for v in answer["values"].as_array().into_iter().flatten() {
-        let unit = v[2].as_str().unwrap_or("");
-        let unit = if unit.is_empty() || unit == "1" { String::new() } else { format!(" {unit}") };
-        println!("{} = {}{}", v[0].as_str().unwrap_or(""), v[1], unit);
-    }
-}
-
-show(json!({"key": "ac_mesh_currents", "inputs": {"R": [[10, -4], [-4, 8]], "X": [[5, -2], [-2, -3]], "V_mag": [10, 0], "V_deg": [0, 0]}}));
-// SOLVED
-// currents_real = [0.984837545126,0.462093862816]
-// currents_imag = [-0.290252707581,0.274368231047]
-// currents_mag = [1.02671886344,0.5374092149]
-// currents_deg = [-16.4213738458,30.6997225508]
-// first_mag = 1.02671886344 A
-// first_deg = -16.4213738458
-
-show(json!({"key": "sinusoid_values", "inputs": {"Vm": "200 V", "w": "314.159 rad/s", "phi": "0", "t": "0.0025 s"}}));
-// SOLVED
-// v = 141.4212624187115 V
-// f = 49.999957766806745 Hz
-// T = 0.02000001689329157 s
-// phase_deg = 0.0
-// relation = "in phase"
-// time_shift = 0.0 s
-
-show(json!({"key": "cell_battery", "inputs": {"E": "1.5 V", "r": "0.5 ohm", "n": "4", "RL": "10 ohm", "connection": "series"}}));
-// SOLVED
-// emf_total = 6.0 V
-// r_total = 2.0 ohm
-// I = 0.5 A
-// V_terminal = 5.0 V
-// lost_volts = 1.0 V
-// P_load = 2.5 W
-
-show(json!({"key": "parallel_plate_capacitor", "inputs": {"V": "200 V", "d": "0.0001 m", "A": "0.0004 m^2", "eps_r": "5"}}));
-// SOLVED
-// C = 1.7708375635240778e-10 F
-// Q = 3.541675127048156e-8 C
-// E = 2000000.0 N/C
-// D = 0.0000885418781762039
-// energy = 3.541675127048156e-6 J
-
-show(json!({"key": "closed_loop_poles", "inputs": {"num": [2], "den": [1, 3, 0]}}));
-// SOLVED
-// poles = [-2.0,-1.0000000000000002]
-// max_real_part = -1.0000000000000002
-// stable = true
-// characteristic = [1.0,3.0,2.0]
-
-show(json!({"key": "dc_shunt_generator", "inputs": {"V": "250 V", "IL": "100 A", "Ra": "0.1 ohm", "Rf": "125 ohm"}}));
-// SOLVED
-// If = 2.0 A
-// Ia = 102.0 A
-// E = 260.2 V
-// P_out = 25000.0 W
-// P_generated = 26540.399999999998 W
-// copper_loss = 1540.4 W
-
-show(json!({"key": "current_divider", "inputs": {"I": "6 A", "R1": "4 ohm", "R2": "2 ohm"}}));
-// SOLVED
-// I1 = 2.0 A
-// I2 = 4.0 A
-
-show(json!({"key": "adc_conversion", "inputs": {"Vin": "1.2 V", "Vref": "5 V", "bits": "8"}}));
-// SOLVED
-// code = 61.0
-// binary = "00111101"
-// lsb = 0.01953125 V
-// lsb_mV = 19.53125
-// quantized = 1.19140625 V
-
-show(json!({"key": "bjt_divider_bias", "inputs": {"VCC": "12 V", "VBE": "0.7 V", "R1": "10000 ohm", "R2": "2200 ohm", "RC": "3600 ohm", "RE": "1000 ohm", "beta": "100"}}));
-// SOLVED
-// IC = 0.0014240153085632277 A
-// IC_mA = 1.4240153085632277
-// IB = 0.000014240153085632277 A
-// IE = 0.00143825546164886 A
-// VB = 2.13825546164886 V
-// VE = 1.43825546164886 V
-
-show(json!({"key": "faraday_emf", "inputs": {"N": "200", "dPhi": "0.025 Wb", "dt": "0.05 s"}}));
-// SOLVED
-// emf = 100.0 V
-// emf_signed = -100.0 V
-// flux_rate = 0.5
-// linkage_change = 5.0
-
-show(json!({"key": "plane_wave_lossy", "inputs": {"f": "1000000 Hz", "eps_r": "1", "mu_r": "1", "sigma": "58000000"}}));
-// SOLVED
-// alpha = 15131.914026488967
-// beta = 15131.91402650348
-// skin_depth = 0.00006608549310083732 m
-// v = 415.2273992685007 m/s
-// wavelength = 0.0004152273992685007 m
-// eta = 0.0003689613455333556 ohm
-
-show(json!({"key": "magnetic_circuit", "inputs": {"N": "500", "flux": "0.0006 Wb", "lengths": [0.4, 0.001], "areas": [0.0005, 0.0005], "mu_r": [800, 1]}}));
-// SOLVED
-// reluctance = 2387324.14637843
-// mmf = 1432.394487827058
-// current = 2.8647889756541156 A
-// flux = 0.0006 Wb
-// B = [1.2,1.2]
-// H = [1193.6620731892149,954929.658551372]
-
-show(json!({"key": "ammeter_shunt", "inputs": {"Ifs": "0.001 A", "Rm": "100 ohm", "I": "1 A"}}));
-// SOLVED
-// Rsh = 0.1001001001001001 ohm
-// multiplying_factor = 1000.0
-// V_fs = 0.1 V
-// R_total = 0.1 ohm
-
-show(json!({"key": "difference_amplifier", "inputs": {"R1": "10000 ohm", "R2": "100000 ohm", "R3": "10000 ohm", "R4": "100000 ohm", "V1": "1 V", "V2": "1.5 V"}}));
-// SOLVED
-// Vout = 5.0 V
-// gain_inverting = -10.0
-// gain_noninverting = 10.0
-
-show(json!({"key": "coil_capacitor_parallel", "inputs": {"R": "10 ohm", "L": "0.1 H", "C": "1e-05 F", "V": "100 V", "f": "50 Hz"}}));
-// SOLVED
-// I_coil = 3.0331447105335285 A
-// I_C = 0.3141592653589793 A
-// I = 2.735445524178679 A
-// Z = 36.55711624161301 ohm
-// phase_deg = 70.34691453987996
-// P = 91.99966835037522 W
-```
-
 ## Guides
 
 - Desktop app guide: the window, every calculation, scenes and charts: [PDF](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_desktop_guide.pdf) · [HTML](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_desktop_guide.html) · [Markdown](https://huggingface.co/AI999X/electrical-engineering-ai999x/blob/main/docs/electrical_engineering_ai999x_desktop_guide.md)
@@ -401,7 +263,7 @@ show(json!({"key": "coil_capacitor_parallel", "inputs": {"R": "10 ohm", "L": "0.
 
 Every calculation, with its formula, a worked example and its figures: **[Electrical Engineering on ai999x.com](https://www.ai999x.com/models/electrical-engineering-ai999x/)**. Install guides for the app and the command line: [https://www.ai999x.com/desktop-cli/](https://www.ai999x.com/desktop-cli/).
 
-Version 1.6.4 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
+Version 1.6.6 · License: Apache-2.0 · Author: Ibnul Jaif Farabi · Organization: AI999X · Contact: support@ai999x.com · [Support the project](https://buymeacoffee.com/ibnuljaiffarabi)
 
 *The Future Is Self-Improving.*
 
